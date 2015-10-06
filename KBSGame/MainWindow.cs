@@ -6,17 +6,19 @@ namespace KBSGame
 {
 	public class MainWindow : Form
 	{
+		private static World world;
 		private static DrawEngine renderer;
 
 		public MainWindow ()
+
 		{
 			Text = "MainWindow";
 			Height = 500;
 			Width = 500;
 
-			//this.DoubleBuffered = true;
+			world = new World (100, 100);
 
-			renderer = new DrawEngine (this.CreateGraphics(), Height, Width);
+			renderer = new DrawEngine (world, this.CreateGraphics(), Height, Width);
 		}
 
 		protected override void OnPaint(PaintEventArgs e) 
