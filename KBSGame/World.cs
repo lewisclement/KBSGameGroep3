@@ -64,7 +64,7 @@ namespace KBSGame
 			//Fill world with water
 			for (int i = 0; i < width * height; i++) {
 				terrainTiles.Add (TileTypes [(int)TERRAIN.grass]);
-			}
+            }
 
 			//Place 10 rectangles
 			Random rand = new Random ((int)DateTime.Now.Ticks);
