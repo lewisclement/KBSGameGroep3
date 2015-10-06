@@ -15,5 +15,16 @@ namespace KBSGame
             this.location = location;
             this.setSprite((int) SPRITES.player);
         }
+
+		public override void move(World sender, Point relativeLocation)
+		{
+			int moveLocationX = location.X + relativeLocation.X;
+			int moveLocationY = location.Y + relativeLocation.Y;
+			if (sender.getTerraintile(new Point(moveLocationX, moveLocationY)).IsWalkable)
+			{
+				location.X += relativeLocation.X;
+				location.Y += relativeLocation.Y;
+			}
+		}
     }
 }
