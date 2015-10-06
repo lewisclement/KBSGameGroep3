@@ -9,8 +9,6 @@ namespace KBSGame
 		private static DrawEngine renderer;
 
 		public MainWindow ()
-            //test
-            //testen Edward
 
 		{
 			Text = "MainWindow";
