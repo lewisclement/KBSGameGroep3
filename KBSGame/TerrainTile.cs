@@ -7,10 +7,12 @@ namespace KBSGame
 	{
 		private int ID;
 		private int spriteID;
+        public bool IsWalkable { get; private set; }
 
-		public TerrainTile (int ID)
+		public TerrainTile (int ID, bool IsWalkable = true)
 		{
 			this.ID = ID;
+		    this.IsWalkable = IsWalkable;
 		}
 
 		public int getID()

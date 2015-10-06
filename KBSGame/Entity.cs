@@ -5,10 +5,10 @@ namespace KBSGame
 {
 	public class Entity
 	{
-		private int ID;
-		private int spriteID;
-		private Point location;
-		private bool solid;
+		protected int ID;
+		protected int spriteID;
+		protected Point location;
+		protected bool solid;
 
 		public Entity (int ID, Point location)
 		{
@@ -36,7 +36,7 @@ namespace KBSGame
 			return spriteID;
 		}
 
-		public void setSolid(bool solid)
+	    public void setSolid(bool solid)
 		{
 			this.solid = solid;
 		}
@@ -56,8 +56,9 @@ namespace KBSGame
 			//Entity checks
 
 			//Have world move the entity
-			location.X += relativeLocation.X;
-			location.Y += relativeLocation.Y;
+
+	        location.X += relativeLocation.X;
+	        location.Y += relativeLocation.Y;
 		}
 
 		public virtual void collisionCheck()

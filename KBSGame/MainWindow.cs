@@ -6,6 +6,7 @@ namespace KBSGame
 {
 	public class MainWindow : Form
 	{
+		private static World world;
 		private static DrawEngine renderer;
 
 		public MainWindow ()
@@ -15,9 +16,9 @@ namespace KBSGame
 			Height = 500;
 			Width = 500;
 
-			//this.DoubleBuffered = true;
+			world = new World (100, 100);
 
-			renderer = new DrawEngine (this.CreateGraphics(), Height, Width);
+			renderer = new DrawEngine (world, this.CreateGraphics(), Height, Width);
 		}
 
 		protected override void OnPaint(PaintEventArgs e) 
@@ -38,6 +39,40 @@ namespace KBSGame
 		{
 			Invalidate();
 		}
-	}
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // MainWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "MainWindow";
+            this.ResumeLayout(false);
+
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    world.getEntity(0).move(world, new Point(0, -1));
+                    break;
+                case Keys.Down:
+                    world.getEntity(0).move(world, new Point(0, 1));
+                    break;
+                case Keys.Left:
+                    world.getEntity(0).move(world, new Point(-1, 0));
+                    break;
+                case Keys.Right:
+                    world.getEntity(0).move(world, new Point(1, 0));
+                    break;
+                default:
+                    return;
+            }
+            Invalidate();
+        }
+    }
 }
 
