@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{65872672-5274-4A12-88EC-F257192D894B}</ProjectGuid>
+    <ProjectGuid>{E5B71419-25E8-4370-9811-E21E4D302E07}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>KBSGame</RootNamespace>
     <AssemblyName>KBSGame</AssemblyName>
@@ -33,7 +33,10 @@
   <ItemGroup>
     <Compile Include="DrawEngine.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="MainWindow.cs" />
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="StaticVariables.cs" />
@@ -53,5 +56,10 @@
     <None Include="bin\Release\grass_top.png" />
     <None Include="bin\Release\sand.png" />
     <None Include="bin\Release\water_still.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

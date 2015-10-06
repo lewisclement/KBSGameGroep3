@@ -37,6 +37,27 @@ namespace KBSGame
 		{
 			Invalidate();
 		}
-	}
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // MainWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "MainWindow";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
+            this.ResumeLayout(false);
+
+        }
+
+        private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A)
+            {
+                
+            }
+        }
+    }
 }
 

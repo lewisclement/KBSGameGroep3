@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace KBSGame
 {
@@ -15,12 +16,18 @@ namespace KBSGame
 		private int width, height;
 		private List<Entity> objects;
 		private Entity focusEntity;
+	    private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
 
 		private int entityCount = 0;
 
 		public World (int width, int height)
 		{
-			TileTypes = new TerrainTile[(int)TERRAIN.count];
+            // TEMPORARY
+		    player = new Player(entityCount, new Point(width/2, height/2));
+		    entityCount++;
+
+
+            TileTypes = new TerrainTile[(int)TERRAIN.count];
 			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass);
 			TileTypes [(int)TERRAIN.grass].setSpriteID ((int)SPRITES.grass);
 			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water);
@@ -56,7 +63,7 @@ namespace KBSGame
 			objects [entityCount].setSprite ((int)SPRITES.player);
 			entityCount++;
 
-			setFocusEntity (objects [0]);
+			setFocusEntity (objects [0]); // TEMPORARY PLAYER
 		}
 
 		private void temporaryWorldGenerator()
@@ -100,7 +107,12 @@ namespace KBSGame
 
 		}
 
-		//Stub
+	    public Entity getEntity(int entityID)
+	    {
+	        return objects.FirstOrDefault(obj => obj.getID() == entityID);
+	    }
+
+	    //Stub
 		public TerrainTile[] getTilesView(int viewWidth, int viewHeight)
 		{
 			if (viewWidth > width)
