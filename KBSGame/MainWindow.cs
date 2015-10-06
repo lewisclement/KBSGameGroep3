@@ -9,6 +9,8 @@ namespace KBSGame
 		private static DrawEngine renderer;
 
 		public MainWindow ()
+            //test
+
 		{
 			Text = "MainWindow";
 			Height = 500;
