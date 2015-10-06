@@ -22,47 +22,28 @@ namespace KBSGame
 
 		public World (int width, int height)
 		{
+            objects = new List<Entity>();
+            terrainTiles = new List<TerrainTile>();
+
             // TEMPORARY
-		    player = new Player(entityCount, new Point(width/2, height/2));
+            player = new Player(entityCount, new Point(width/2, height/2));
+		    objects.Add(player);
 		    entityCount++;
 
 
             TileTypes = new TerrainTile[(int)TERRAIN.count];
 			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass);
 			TileTypes [(int)TERRAIN.grass].setSpriteID ((int)SPRITES.grass);
-			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water);
+			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water, false);
 			TileTypes [(int)TERRAIN.water].setSpriteID ((int)SPRITES.water);
 			TileTypes [(int)TERRAIN.sand] = new TerrainTile ((int)TERRAIN.sand);
 			TileTypes [(int)TERRAIN.sand].setSpriteID ((int)SPRITES.sand);
-
-			terrainTiles = new List<TerrainTile> ();
-			objects = new List<Entity> ();
 
 			this.width = Math.Max(minS, Math.Min(width, maxS));
 			this.height = Math.Max(minS, Math.Min(height, maxS));
 
 			temporaryWorldGenerator ();
-
-			objects.Add (new Entity (entityCount, new Point (width / 2, height / 2)));
-			objects [entityCount].setSprite ((int)SPRITES.player);
-			entityCount++;
-
-			objects.Add (new Entity (entityCount, new Point (width / 2 + 5, height / 2)));
-			objects [entityCount].setSprite ((int)SPRITES.player);
-			entityCount++;
-			objects.Add (new Entity (entityCount, new Point (width / 2 -3, height / 2 - 1)));
-			objects [entityCount].setSprite ((int)SPRITES.player);
-			entityCount++;
-			objects.Add (new Entity (entityCount, new Point (width / 2 + 4, height / 2 + 6)));
-			objects [entityCount].setSprite ((int)SPRITES.player);
-			entityCount++;
-			objects.Add (new Entity (entityCount, new Point (width / 2 - 7, height / 2 + 2)));
-			objects [entityCount].setSprite ((int)SPRITES.player);
-			entityCount++;
-			objects.Add (new Entity (entityCount, new Point (width / 2 + 4, height / 2 - 5)));
-			objects [entityCount].setSprite ((int)SPRITES.player);
-			entityCount++;
-
+            
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
 		}
 
@@ -110,6 +91,11 @@ namespace KBSGame
 	    public Entity getEntity(int entityID)
 	    {
 	        return objects.FirstOrDefault(obj => obj.getID() == entityID);
+	    }
+
+	    public TerrainTile getTerraintile(Point point)
+	    {
+	        return terrainTiles[point.X*height + point.Y];
 	    }
 
 	    //Stub

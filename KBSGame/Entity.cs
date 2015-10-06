@@ -56,8 +56,14 @@ namespace KBSGame
 			//Entity checks
 
 			//Have world move the entity
-			location.X += relativeLocation.X;
-			location.Y += relativeLocation.Y;
+
+		    int moveLocationX = location.X + relativeLocation.X;
+            int moveLocationY = location.Y + relativeLocation.Y;
+		    if (sender.getTerraintile(new Point(moveLocationX, moveLocationY)).IsWalkable)
+		    {
+		        location.X += relativeLocation.X;
+		        location.Y += relativeLocation.Y;
+		    }
 		}
 
 		public virtual void collisionCheck()
