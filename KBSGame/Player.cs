@@ -20,10 +20,14 @@ namespace KBSGame
 		{
 			int moveLocationX = location.X + relativeLocation.X;
 			int moveLocationY = location.Y + relativeLocation.Y;
+
+			if (moveLocationX < 0 || moveLocationY < 0)
+				return;
+
 			if (sender.getTerraintile(new Point(moveLocationX, moveLocationY)).IsWalkable)
 			{
-				location.X += relativeLocation.X;
-				location.Y += relativeLocation.Y;
+				location.X = moveLocationX;
+				location.Y = moveLocationY;
 			}
 		}
     }

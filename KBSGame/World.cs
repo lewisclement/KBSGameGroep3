@@ -52,7 +52,7 @@ namespace KBSGame
 			//Fill world with water
 			for (int i = 0; i < width * height; i++) {
 				terrainTiles.Add (TileTypes [(int)TERRAIN.grass]);
-            }
+			}
 
 			//Place 10 rectangles
 			Random rand = new Random ((int)DateTime.Now.Ticks);
@@ -109,14 +109,11 @@ namespace KBSGame
 			TerrainTile[] returnTiles = new TerrainTile[viewWidth * viewHeight];
 
 			//Get viewport
-			int startX = focusEntity.getLocation ().X - (int)viewWidth / 2;
-			int startY = focusEntity.getLocation ().Y - (int)viewHeight / 2;
-			int endX = startX + viewWidth;
-			int endY = startY + viewHeight;
+			Rectangle view = getView (viewWidth, viewHeight);
 
 			int index = 0;
-			for (int i = startX; i < endX; i++) {
-				for (int j = startY; j < endY; j++) {
+			for (int i = view.Left; i < view.Right; i++) {
+				for (int j = view.Top; j < view.Bottom; j++) {
 					returnTiles [index++] = terrainTiles[i * height + j];
 				}
 			}
@@ -126,22 +123,14 @@ namespace KBSGame
 
 		public Entity[] getEntitiesView(int viewWidth, int viewHeight)
 		{
-			if (viewWidth > width)
-				viewWidth = width;
-			if (viewHeight > height)
-				viewHeight = height;
-
 			List<Entity> returnEntities = new List<Entity> ();
 
 			//Get viewport
-			int startX = focusEntity.getLocation ().X - (int)viewWidth / 2;
-			int startY = focusEntity.getLocation ().Y - (int)viewHeight / 2;
-			int endX = startX + viewWidth;
-			int endY = startY + viewHeight;
+			Rectangle view = getView (viewWidth, viewHeight);
 
 			for (int i = 0; i < objects.Count; i++) {
 				Point p = objects [i].getLocation ();
-				if (p.X >= startX && p.X <= endX && p.Y >= startY && p.Y <= endY) {
+				if (p.X >= view.Left && p.X <= view.Right && p.Y >= view.Top && p.Y <= view.Bottom) {
 					returnEntities.Add (objects [i]);
 				}
 			}
@@ -157,6 +146,39 @@ namespace KBSGame
 		public void setFocusEntity(Entity entity)
 		{
 			focusEntity = entity;
+		}
+
+		public Rectangle getView(int viewWidth, int viewHeight)
+		{
+			if (viewWidth > width)
+				viewWidth = width;
+			if (viewHeight > height)
+				viewHeight = height;
+
+			//Get viewport
+			int startX = focusEntity.getLocation ().X - (int)viewWidth / 2;
+			int startY = focusEntity.getLocation ().Y - (int)viewHeight / 2;
+			int endX = startX + viewWidth;
+			int endY = startY + viewHeight;
+
+			if (startX < 0) {
+				startX = 0;
+				endX = viewWidth;
+			}
+			if (startY < 0) {
+				startY = 0;
+				endY = viewHeight;
+			}
+			if (endX > width - 1) {
+				endX = width;
+				startX = width - viewWidth;
+			}
+			if (endY > height - 1) {
+				endY = height;
+				startY = height - viewHeight;
+			}
+			
+			return new Rectangle (startX, startY, viewWidth, viewHeight);
 		}
 
 

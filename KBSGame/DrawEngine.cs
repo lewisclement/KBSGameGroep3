@@ -59,13 +59,11 @@ namespace KBSGame
 		public void drawEntities(Graphics area)
 		{
 			Entity[] entities = world.getEntitiesView (viewWidth, viewHeight);
-			Point p = world.getFocusCoordinates();
-			int startX = p.X - viewWidth / 2;
-			int startY = p.Y - viewHeight / 2;
+			Rectangle view = world.getView (viewWidth, viewHeight);
 
 			for (int i = 0; i < entities.Length; i++) {
-				int x = (entities [i].getLocation ().X - startX) * StaticVariables.tileSize;
-				int y = (entities [i].getLocation ().Y - startY) * StaticVariables.tileSize;
+				int x = (entities [i].getLocation ().X - view.Left) * StaticVariables.tileSize;
+				int y = (entities [i].getLocation ().Y - view.Top) * StaticVariables.tileSize;
 				area.DrawImage (sprites [entities [i].getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
