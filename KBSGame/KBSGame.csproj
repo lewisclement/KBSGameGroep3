@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{E5B71419-25E8-4370-9811-E21E4D302E07}</ProjectGuid>
+    <ProjectGuid>{65872672-5274-4A12-88EC-F257192D894B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>KBSGame</RootNamespace>
     <AssemblyName>KBSGame</AssemblyName>

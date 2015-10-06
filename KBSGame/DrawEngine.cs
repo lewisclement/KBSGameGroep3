@@ -52,7 +52,7 @@ namespace KBSGame
 			for (int i = 0; i < tiles.Length; i++) {
 				int x = (i / viewHeight) * StaticVariables.tileSize;
 				int y = (i % viewHeight) * StaticVariables.tileSize;
-				area.DrawImage (sprites [tiles [i].getSpriteID ()].getBitmap(), x, y);
+				area.DrawImage (sprites [tiles [i].getSpriteID ()].getBitmap(), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
 
@@ -66,7 +66,7 @@ namespace KBSGame
 			for (int i = 0; i < entities.Length; i++) {
 				int x = (entities [i].getLocation ().X - startX) * StaticVariables.tileSize;
 				int y = (entities [i].getLocation ().Y - startY) * StaticVariables.tileSize;
-				area.DrawImage (sprites [entities [i].getSpriteID ()].getBitmap (), x, y);
+				area.DrawImage (sprites [entities [i].getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
 
