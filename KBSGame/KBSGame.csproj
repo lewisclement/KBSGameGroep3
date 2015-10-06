@@ -45,4 +45,13 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\grass_top.png" />
+    <None Include="bin\Debug\player.png" />
+    <None Include="bin\Debug\sand.png" />
+    <None Include="bin\Debug\water_still.png" />
+    <None Include="bin\Release\grass_top.png" />
+    <None Include="bin\Release\sand.png" />
+    <None Include="bin\Release\water_still.png" />
+  </ItemGroup>
 </Project>
