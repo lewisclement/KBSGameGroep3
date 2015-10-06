@@ -10,6 +10,7 @@ namespace KBSGame
 
 		public MainWindow ()
             //test
+            //testen Edward
 
 		{
 			Text = "MainWindow";
