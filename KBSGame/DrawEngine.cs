@@ -12,7 +12,7 @@ namespace KBSGame
 		private int xRes, yRes;
 		private int viewWidth, viewHeight;
 
-		public DrawEngine (Graphics drawingArea, int xResolution, int yResolution)
+		public DrawEngine (World world, Graphics drawingArea, int xResolution, int yResolution)
 		{
 			this.drawingArea = drawingArea;
 
@@ -22,7 +22,7 @@ namespace KBSGame
 			setView(xRes / StaticVariables.tileSize, yRes / StaticVariables.tileSize);
 
 			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
-			world = new World (100, 100);
+			this.world = world;
 
 
 			//Temporary static solution
