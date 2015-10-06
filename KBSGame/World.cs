@@ -95,6 +95,9 @@ namespace KBSGame
 
 	    public TerrainTile getTerraintile(Point point)
 	    {
+			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
+				return null;
+
 	        return terrainTiles[point.X*height + point.Y];
 	    }
 
