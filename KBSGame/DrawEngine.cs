@@ -70,13 +70,14 @@ namespace KBSGame
 
 		public void resize(Graphics drawingArea, int xResolution, int yResolution)
 		{
-			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
 			this.drawingArea = drawingArea;
 
 			xRes = xResolution;
 			yRes = yResolution;
 
 			setView(xRes / StaticVariables.tileSize, yRes / StaticVariables.tileSize);
+
+			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
 		}
 
 		private void setView(int Width, int Height) 
