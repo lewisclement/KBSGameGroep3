@@ -38,6 +38,8 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.water].setSpriteID ((int)SPRITES.water);
 			TileTypes [(int)TERRAIN.sand] = new TerrainTile ((int)TERRAIN.sand);
 			TileTypes [(int)TERRAIN.sand].setSpriteID ((int)SPRITES.sand);
+			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
+			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 			this.width = Math.Max(minS, Math.Min(width, maxS));
 			this.height = Math.Max(minS, Math.Min(height, maxS));
@@ -50,12 +52,14 @@ namespace KBSGame
 		private void temporaryWorldGenerator()
 		{
 			//Fill world with water
-			for (int i = 0; i < width * height; i++) {
+			for (int i = 0; i < width * height; i++) 
+			{
 				terrainTiles.Add (TileTypes [(int)TERRAIN.grass]);
 			}
 
 			//Place 10 rectangles
 			Random rand = new Random ((int)DateTime.Now.Ticks);
+			/*
 			for (int i = 0; i < width * 4; i++) {
 				int size = rand.Next (3, 5);
 				int xTop = rand.Next (0, width - size);
@@ -67,9 +71,11 @@ namespace KBSGame
 						terrainTiles [index] = TileTypes [(int)TERRAIN.sand];
 					}
 				}
-			}
+			}*/
 
-			for (int i = 0; i < width * 10; i++) {
+
+			/*
+			for (int i = 0; i < width * 5; i++) {
 				int size = rand.Next (2, 4);
 				int xTop = rand.Next (0, width - size);
 				int yTop = rand.Next (0, height - size);
@@ -77,11 +83,116 @@ namespace KBSGame
 				for (int x = xTop; x < xTop + size; x++) {
 					for (int y = yTop; y < yTop + size; y++) {
 						int index = x * height + y;
-						terrainTiles [index] = TileTypes [(int)TERRAIN.water];
+						terrainTiles [index] = TileTypes [(int)TERRAIN.dirt];
+					}
+				}
+			}*/
+
+			//Amount of dirt patches
+			for (int i = 0; i < width / 5; i++) {
+				int size = rand.Next (2, 4);
+				Point p = new Point (rand.Next (0, width), rand.Next (0, height));
+
+				for (int j = 0; j < 50; j++) {
+					int xOffset = rand.Next (-10, 10), yOffset = rand.Next (-10, 10);
+					if (p.X + xOffset < (int)Math.Ceiling((double)size / 2) || p.X + xOffset >= width - (int)Math.Ceiling((double)size / 2) ||
+						p.Y + yOffset < (int)Math.Ceiling((double)size / 2) || p.Y + yOffset >= height - (int)Math.Ceiling((double)size / 2))
+						continue;
+
+					for (int x = 0; x < size; x++) {
+						for (int y = 0; y < size; y++) {
+							terrainTiles [(p.X + xOffset + x) * height + p.Y + y + yOffset] = TileTypes [(int)TERRAIN.dirt];
+						}
+					}
+				}
+			}
+
+			//Amount of lakes
+			for (int i = 0; i < width / 5; i++) {
+				int size = rand.Next (2, 4);
+				Point p = new Point (rand.Next (0, width), rand.Next (0, height));
+
+				for (int j = 0; j < 10; j++) {
+					int xOffset = rand.Next (-5, 5), yOffset = rand.Next (-5, 5);
+					if (p.X + xOffset < (int)Math.Ceiling((double)size / 2) || p.X + xOffset >= width - (int)Math.Ceiling((double)size / 2) ||
+						p.Y + yOffset < (int)Math.Ceiling((double)size / 2) || p.Y + yOffset >= height - (int)Math.Ceiling((double)size / 2))
+						continue;
+
+					for (int x = 0; x < size; x++) {
+						for (int y = 0; y < size; y++) {
+							terrainTiles [(p.X + xOffset + x) * height + p.Y + y + yOffset] = TileTypes [(int)TERRAIN.water];
+						}
+					}
+				}
+			}
+
+			//Amount of rivers
+			for (int i = 0; i < 4; i++) 
+			{
+				int size = rand.Next (2, 4);
+				int x = 0;
+				int y = rand.Next (0, height - size);
+
+				bool reached = false;
+				Point relative = new Point (1, 0);
+				while (!reached) {
+					relative.Y += rand.Next (0, 3) - 1;
+					if (relative.Y > 2)
+						relative.Y = 2;
+					if (relative.Y < -2)
+						relative.Y = -2;
+					y += relative.Y;
+
+					if (y < 0 || y == height)
+						break;
+
+					for (int X = 0; X < size; X++) {
+						for (int Y = 0; Y < size; Y++) {
+							if((x + X) * height + y + Y < terrainTiles.Count)
+								terrainTiles [(x + X) * height + y + Y] = TileTypes [(int)TERRAIN.water];
+						}
+					}
+
+					x++;
+					if (x == width)
+						reached = true;
+				}
+			}
+
+			for (int x = 1; x < width-1; x++) 
+			{
+				for (int y = 1; y < height-1; y++) {
+					int tileIndex = x * height + y;
+					if (terrainTiles[tileIndex].getID() == (int)TERRAIN.water) {
+						if (terrainTiles [tileIndex - 1].IsWalkable) {
+							terrainTiles [tileIndex - 1] = TileTypes [(int)TERRAIN.sand];
+						}
+						if (terrainTiles [(x-1) * height + y].IsWalkable) {
+							terrainTiles [(x-1) * height + y] = TileTypes [(int)TERRAIN.sand];
+						}
+						if (terrainTiles [tileIndex + 1].IsWalkable) {
+							terrainTiles [tileIndex + 1] = TileTypes [(int)TERRAIN.sand];
+						}
+						if (terrainTiles [(x+1) * height + y].IsWalkable) {
+							terrainTiles [(x+1) * height + y] = TileTypes [(int)TERRAIN.sand];
+						}
+						if (terrainTiles [(x-1) * height + y - 1].IsWalkable) {
+							terrainTiles [(x-1) * height + y - 1] = TileTypes [(int)TERRAIN.sand];
+						}
+						if (terrainTiles [(x-1) * height + y + 1].IsWalkable) {
+							terrainTiles [(x-1) * height + y + 1] = TileTypes [(int)TERRAIN.sand];
+						}
+						if (terrainTiles [(x+1) * height + y - 1].IsWalkable) {
+							terrainTiles [(x+1) * height + y - 1] = TileTypes [(int)TERRAIN.sand];
+						}
+						if (terrainTiles [(x+1) * height + y + 1].IsWalkable) {
+							terrainTiles [(x+1) * height + y + 1] = TileTypes [(int)TERRAIN.sand];
+						}
 					}
 				}
 			}
 		}
+
 
 		public void moveObject(int entityID, Point relativeLocation)
 		{

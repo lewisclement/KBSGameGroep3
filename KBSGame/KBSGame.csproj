@@ -60,6 +60,9 @@
     <None Include="bin\Release\grass_top.png" />
     <None Include="bin\Release\sand.png" />
     <None Include="bin\Release\water_still.png" />
+    <None Include="bin\Debug\dirt.png" />
+    <None Include="bin\Release\player.png" />
+    <None Include="bin\Release\dirt.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
