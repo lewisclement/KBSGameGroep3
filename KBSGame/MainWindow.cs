@@ -15,9 +15,9 @@ namespace KBSGame
 			Text = "MainWindow";
 			Height = 500;
 			Width = 500;
-          
- 
-    
+
+
+            Menu menu = new Menu(500, 500);
             world = new World (100, 100);
 
 			renderer = new DrawEngine (world, this.CreateGraphics(), Height, Width);

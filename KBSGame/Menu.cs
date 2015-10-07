@@ -1,47 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using System.Drawing;
 using System.Windows.Forms;
-using System.Drawing.Imaging;
-using System.IO;
 
 namespace KBSGame
-{ 
-    public class Menu : Panel
-    {    
-        private Panel p;
-
-        public Menu(MainWindow f)
+{
+    public class Menu : Form
+    {
+        public Menu(int x, int y)
         {
-            p = new Panel();
-            p.Height = 200;
-            p.Width = 200;
-            p.Visible = true;
-            p.Location = new Point(
-            f.ClientSize.Width / 2 - p.Size.Width / 2,
-            f.ClientSize.Height / 2 - p.Size.Height / 2);
-            p.Anchor = AnchorStyles.None;
-            f.Controls.Add(p);
-            Button b1 = new Button();
-            b1.Text = "hoi";
-            b1.Visible = true;
-            p.Controls.Add(b1);
-
+            Width = x;
+            Height = y;
+            
         }
-        public void transparent(Boolean t)
+        protected override void OnPaint(PaintEventArgs e)
         {
-            if (t == true)
-            {
-              //  this.
-            }
-            if (t == false)
-            {
-                this.SetStyle(ControlStyles.SupportsTransparentBackColor, false);
-            }
+            base.OnPaint(e);
+
+            Graphics dc = e.Graphics;
+            Pen p = new Pen(Color.Black, 1);
+            dc.DrawLine(p, 10, 10, 100, 100);
+            Pen thickBluePen = new Pen(Color.Blue, 10);
+            dc.DrawEllipse(thickBluePen, 100, 100, 200, 200);
+            Pen thickRedPen = new Pen(Color.Red, 10);
+            dc.DrawRectangle(thickRedPen, 100, 100, 200, 200);
         }
+
     }
+
 }
