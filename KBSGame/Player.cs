@@ -29,8 +29,6 @@ namespace KBSGame
 				location.X = moveLocationX;
 				location.Y = moveLocationY;
 			}
-
-			Console.WriteLine (moveLocationX + ":" + moveLocationY);
 		}
     }
 }
