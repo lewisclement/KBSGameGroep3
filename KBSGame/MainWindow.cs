@@ -20,7 +20,7 @@ namespace KBSGame
     
             world = new World (100, 100);
 
-			renderer = new DrawEngine (world, this.CreateGraphics(), Height, Width);
+			renderer = new DrawEngine (world, this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
 		}
 
 		protected override void OnPaint(PaintEventArgs e) 
@@ -58,21 +58,24 @@ namespace KBSGame
         {
             switch (e.KeyCode)
             {
-                case Keys.Up:
-                    world.getEntity(0).move(world, new Point(0, -1));
-                    break;
-                case Keys.Down:
-                    world.getEntity(0).move(world, new Point(0, 1));
-                    break;
-                case Keys.Left:
-                    world.getEntity(0).move(world, new Point(-1, 0));
-                    break;
-                case Keys.Right:
-                    world.getEntity(0).move(world, new Point(1, 0));
-                    break;
-                
-                default:
-                    return;
+            case Keys.Up:
+                world.getEntity(0).move(world, new Point(0, -1));
+                break;
+            case Keys.Down:
+                world.getEntity(0).move(world, new Point(0, 1));
+                break;
+            case Keys.Left:
+                world.getEntity(0).move(world, new Point(-1, 0));
+                break;
+            case Keys.Right:
+                world.getEntity(0).move(world, new Point(1, 0));
+                break;
+			case Keys.Escape:
+				renderer.getGui ((int)GUI.def).switchActive ();
+				break;
+
+            default:
+                return;
             }
 			renderer.render ();
         }
