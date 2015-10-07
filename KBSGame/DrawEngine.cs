@@ -31,11 +31,12 @@ namespace KBSGame
 			this.world = world;
 
 			Interfaces = new List<Gui>();
-			Gui gui = new Gui ((int)GUI.def, xRes, yRes);	//Temporary static Gui
-			Interfaces.Add (gui);
+			//Gui gui = new Gui ((int)GUI.def, xRes, yRes);	//Temporary static Gui
+            Gui menu = new Menu((int)GUI.def, xRes, yRes);
+            Interfaces.Add (menu);
 
-			//Temporary static solution
-			sprites = new Sprite[(int)SPRITES.count];
+            //Temporary static solution
+            sprites = new Sprite[(int)SPRITES.count];
 			sprites [(int)SPRITES.water] = new Sprite ((int)SPRITES.water, StaticVariables.execFolder + "/water_still.png");
 			sprites [(int)SPRITES.grass] = new Sprite ((int)SPRITES.grass, StaticVariables.execFolder + "/grass_top.png");
 			sprites [(int)SPRITES.sand] = new Sprite ((int)SPRITES.sand, StaticVariables.execFolder + "/sand.png");
@@ -96,7 +97,7 @@ namespace KBSGame
 
 			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
 
-			foreach (Gui gui in Interfaces) {
+			foreach (Gui gui in Interfaces) { 
 				gui.resize (xRes, yRes);
 			}
 		}

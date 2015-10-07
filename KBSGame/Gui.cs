@@ -28,13 +28,13 @@ namespace KBSGame
 
 		public virtual Bitmap getRender()
         {
-			var g = Graphics.FromImage (buffer);
+            //var g = Graphics.FromImage(buffer);
 
-			g.FillRectangle (new SolidBrush(Color.White), 20, 20, xRes - 40, yRes - 40); //To do: Figure out why -40 is nessecary to have the same margin
-			g.DrawString("Pause", new Font("Arial", 16), new SolidBrush(Color.Black), 30, 30);
+            //g.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), 0, 0, xRes, yRes); //To do: Figure out why -40 is nessecary to have the same margin
+            //g.DrawString("Pause", new Font("Arial", 16), new SolidBrush(Color.White), 30, 30);
 
             return this.buffer;
-        }
+       }
 
 		public virtual void setInput(Point mousePos)
         {

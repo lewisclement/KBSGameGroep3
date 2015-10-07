@@ -32,9 +32,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Gui.cs" />
-    <Compile Include="Menu.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Menu.cs" />
     <Compile Include="DrawEngine.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="MainWindow.cs">
