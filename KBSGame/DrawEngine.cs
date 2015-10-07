@@ -7,10 +7,11 @@ namespace KBSGame
 	{
 		private Sprite[] sprites;
 		private World world;
-        private Bitmap buffer;
-		private Graphics drawingArea;
+		private Bitmap buffer;
 		private int xRes, yRes;
 		private int viewWidth, viewHeight;
+
+		private Graphics drawingArea; //Store in RAM to minimize createGraphics() calls
 
 		public DrawEngine (World world, Graphics drawingArea, int xResolution, int yResolution)
 		{
@@ -34,7 +35,7 @@ namespace KBSGame
 			//Temporary
 		}
 
-        public void render()
+		public void render()
 		{
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
