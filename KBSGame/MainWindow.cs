@@ -8,7 +8,6 @@ namespace KBSGame
 	{
 		private static World world;
 		private static DrawEngine renderer;
-        private static Menu menu;
 
 		public MainWindow ()
 
@@ -16,8 +15,10 @@ namespace KBSGame
 			Text = "MainWindow";
 			Height = 500;
 			Width = 500;
-
-			world = new World (100, 100);
+          
+ 
+    
+            world = new World (100, 100);
 
 			renderer = new DrawEngine (world, this.CreateGraphics(), Height, Width);
 		}
@@ -69,6 +70,7 @@ namespace KBSGame
                 case Keys.Right:
                     world.getEntity(0).move(world, new Point(1, 0));
                     break;
+                
                 default:
                     return;
             }
