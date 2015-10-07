@@ -52,7 +52,7 @@ namespace KBSGame
 
         }
 
-		public void resize(int ScreenresX, int ScreenresY)
+		public virtual void resize(int ScreenresX, int ScreenresY)
 		{
 			xRes = ScreenresX;
 			yRes = ScreenresY;

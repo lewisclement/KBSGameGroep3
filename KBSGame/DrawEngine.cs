@@ -44,7 +44,7 @@ namespace KBSGame
 		}
 
 		public void render()
-		{
+        { 
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
 
