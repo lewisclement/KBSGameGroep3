@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Collections.Generic;
 
 namespace KBSGame
 {
@@ -7,10 +8,15 @@ namespace KBSGame
 	{
 		private Sprite[] sprites;
 		private World world;
-        private Bitmap buffer;
-		private Graphics drawingArea;
+		private Bitmap buffer;
+
 		private int xRes, yRes;
 		private int viewWidth, viewHeight;
+
+		private List<Gui> Interfaces;
+		private Gui blockingGui;			//Modal interface, blocking all other input/output
+
+		private Graphics drawingArea; //Store in RAM to minimize createGraphics() calls
 
 		public DrawEngine (World world, Graphics drawingArea, int xResolution, int yResolution)
 		{
@@ -24,6 +30,9 @@ namespace KBSGame
 			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
 			this.world = world;
 
+			Interfaces = new List<Gui>();
+			Gui gui = new Gui ((int)GUI.def, xRes, yRes);	//Temporary static Gui
+			Interfaces.Add (gui);
 
 			//Temporary static solution
 			sprites = new Sprite[(int)SPRITES.count];
@@ -34,7 +43,7 @@ namespace KBSGame
 			//Temporary
 		}
 
-        public void render()
+		public void render()
 		{
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
@@ -43,6 +52,14 @@ namespace KBSGame
 			drawEntities (g);
 
 			drawingArea.DrawImage (buffer, 0, 0, xRes, yRes);
+
+			foreach (Gui gui in Interfaces) {
+				if (!gui.isActive ())
+					continue;
+
+				Bitmap render = gui.getRender ();
+				drawingArea.DrawImage (render, 0, 0, render.Width, render.Height);
+			}
 		}
 
 		public void drawTerrain(Graphics area)
@@ -78,6 +95,10 @@ namespace KBSGame
 			setView(xRes / StaticVariables.tileSize, yRes / StaticVariables.tileSize);
 
 			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
+
+			foreach (Gui gui in Interfaces) {
+				gui.resize (xRes, yRes);
+			}
 		}
 
 		private void setView(int Width, int Height) 
@@ -85,5 +106,11 @@ namespace KBSGame
 			viewWidth = Math.Max(1, Width);
 			viewHeight = Math.Max(1, Height);
 		}
+
+		public Gui getGui(int ID)
+		{
+			return Interfaces [ID];
+		}
 	}
 }
+
