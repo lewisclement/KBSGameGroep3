@@ -9,11 +9,13 @@ namespace KBSGame
 		protected int spriteID;
 		protected Point location;
 		protected bool solid;
+		protected Byte drawOrder;
 
-		public Entity (int ID, Point location, bool solid = false)
+		public Entity (int ID, Point location, bool solid = false, Byte drawOrder = 8)
 		{
 			this.ID = ID;
 			this.location = location;
+			this.drawOrder = drawOrder;
 		}
 
 		public int getID()
@@ -49,6 +51,19 @@ namespace KBSGame
 		public void setSprite(Sprite sprite)
 		{
 			this.spriteID = sprite.getID ();
+		}
+
+		public Byte getDrawOrder()
+		{
+			return this.drawOrder;
+		}
+
+		protected void setDrawOrder(Byte drawOrder)
+		{
+			if (drawOrder >= StaticVariables.drawOrderSize)
+				this.drawOrder = StaticVariables.drawOrderSize-1;
+			else
+				this.drawOrder = drawOrder;
 		}
 
 		public virtual void move(World sender, Point relativeLocation)

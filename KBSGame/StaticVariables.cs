@@ -12,6 +12,7 @@ namespace KBSGame
 		public const int minWorldSize = 20;
 		public const int maxWorldSize = 1000;
 		public static String execFolder = null;
+		public const Byte drawOrderSize = 16;
 	}
 }
 

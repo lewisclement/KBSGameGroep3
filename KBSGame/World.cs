@@ -194,17 +194,17 @@ namespace KBSGame
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
 						if(rand.Next(0, 5) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling1));
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling1, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling2));
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling2, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.tallgrass));
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.tallgrass, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
@@ -226,10 +226,10 @@ namespace KBSGame
 	        return objects.FirstOrDefault(obj => obj.getID() == entityID);
 	    }
 
-        public Entity getEntityOnTerrainTile(Point point)
-        {
-            return objects.FirstOrDefault(obj => obj.getLocation() == point);
-        }
+		public Entity getEntityOnTerrainTile(Point point)
+		{
+			return objects.FirstOrDefault(obj => obj.getLocation() == point);
+		}
 
 	    public TerrainTile getTerraintile(Point point)
 	    {
@@ -238,7 +238,7 @@ namespace KBSGame
 
 	        return terrainTiles[point.X*height + point.Y];
 	    }
-        
+
 	    //Stub
 		public TerrainTile[] getTilesView(int viewWidth, int viewHeight)
 		{
@@ -269,13 +269,18 @@ namespace KBSGame
 			//Get viewport
 			Rectangle view = getView (viewWidth, viewHeight);
 
+			int[] drawOrderIndex = new int[StaticVariables.drawOrderSize];
+			for (int i = 0; i < drawOrderIndex.Length; i++) {
+				drawOrderIndex[i] = 0;
+			}
+
 			for (int i = 0; i < objects.Count; i++) {
 				Point p = objects [i].getLocation ();
 				if (p.X >= view.Left && p.X <= view.Right && p.Y >= view.Top && p.Y <= view.Bottom) {
-					if(objects [i].getSolid())
-						returnEntities.Add (objects [i]);
-					else
-						returnEntities.Insert (0, objects [i]);
+					returnEntities.Insert (drawOrderIndex[objects[i].getDrawOrder()], objects [i]);
+
+					for (int j = objects [i].getDrawOrder () + 1; j < StaticVariables.drawOrderSize; j++)
+						drawOrderIndex [j]++;
 				}
 			}
 
