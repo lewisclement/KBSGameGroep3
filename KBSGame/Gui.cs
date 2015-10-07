@@ -11,8 +11,8 @@ namespace KBSGame
     {
         private int ID;
 		private Boolean active;
-        private Bitmap buffer;
-		private int xRes, yRes;
+		protected Bitmap buffer;
+		protected int xRes, yRes;
 
 		public Gui(int ID, int ScreenresX, int ScreenresY)
         {
@@ -28,13 +28,18 @@ namespace KBSGame
 
 		public virtual Bitmap getRender()
         {
-            //var g = Graphics.FromImage(buffer);
+			var g = Graphics.FromImage (buffer);
+			g.Clear (Color.FromArgb (0));
 
-            //g.FillRectangle(new SolidBrush(Color.FromArgb(50, 0, 0, 0)), 0, 0, xRes, yRes); //To do: Figure out why -40 is nessecary to have the same margin
-            //g.DrawString("Pause", new Font("Arial", 16), new SolidBrush(Color.White), 30, 30);
+			Pen boldPen = new Pen (Color.Black, 5);
+			g.FillRectangle (new SolidBrush(Color.FromArgb(140, Color.Black)), 25, 25, xRes - 35, yRes - 35);
+			g.FillRectangle (new SolidBrush(Color.FromArgb(200, Color.White)), 20, 20, xRes - 40, yRes - 40); //To do: Figure out why -40 is nessecary to achieve the same margin
+			g.DrawLine (boldPen, 20, 20, xRes - 20, yRes - 20);
+			g.DrawLine (boldPen, xRes - 20, 20, 20, yRes - 20);
+			g.DrawString("Placeholder Gui\n\rPlease extend class", new Font("Arial", 16), new SolidBrush(Color.Red), 30, 30);
 
             return this.buffer;
-       }
+        }
 
 		public virtual void setInput(Point mousePos)
         {
