@@ -41,6 +41,10 @@ namespace KBSGame
 			sprites [(int)SPRITES.sand] = new Sprite ((int)SPRITES.sand, StaticVariables.execFolder + "/sand.png");
 			sprites [(int)SPRITES.player] = new Sprite ((int)SPRITES.player, StaticVariables.execFolder + "/player.png");
 			sprites [(int)SPRITES.dirt] = new Sprite ((int)SPRITES.dirt, StaticVariables.execFolder + "/dirt.png");
+			sprites [(int)SPRITES.sapling1] = new Sprite ((int)SPRITES.sapling1, StaticVariables.execFolder + "/sapling1.png");
+			sprites [(int)SPRITES.sapling2] = new Sprite ((int)SPRITES.sapling2, StaticVariables.execFolder + "/sapling2.png");
+			sprites [(int)SPRITES.tallgrass] = new Sprite ((int)SPRITES.tallgrass, StaticVariables.execFolder + "/tallgrass.png");
+			sprites [(int)SPRITES.waterlily] = new Sprite ((int)SPRITES.waterlily, StaticVariables.execFolder + "/waterlily.png");
 			//Temporary
 		}
 

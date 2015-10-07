@@ -18,17 +18,14 @@ namespace KBSGame
 		private Entity focusEntity;
 	    private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
 
-		private int entityCount = 0;
-
 		public World (int width, int height)
 		{
             objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
 
             // TEMPORARY
-            player = new Player(entityCount, new Point(width/2, height/2));
+			player = new Player(objects.Count, new Point(width/2, height/2));
 		    objects.Add(player);
-		    entityCount++;
 
 
             TileTypes = new TerrainTile[(int)TERRAIN.count];
@@ -188,6 +185,30 @@ namespace KBSGame
 						if (terrainTiles [(x+1) * height + y + 1].IsWalkable) {
 							terrainTiles [(x+1) * height + y + 1] = TileTypes [(int)TERRAIN.sand];
 						}
+					}
+				}
+			}
+
+			for(int x = 0; x < width; x++) {
+				for (int y = 0; y < height; y++) {
+					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
+						if(rand.Next(0, 5) == 0)
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling1));
+					}
+
+					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
+						if(rand.Next(0, 100) == 0)
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling2));
+					}
+
+					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
+						if(rand.Next(0, 50) == 0)
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.tallgrass));
+					}
+
+					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
+						if(rand.Next(0, 60) == 0)
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.waterlily));
 					}
 				}
 			}
