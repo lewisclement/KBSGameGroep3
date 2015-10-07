@@ -20,11 +20,14 @@ namespace KBSGame
 
 		public World (int width, int height)
 		{
+			this.width = Math.Max(minS, Math.Min(width, maxS));
+			this.height = Math.Max(minS, Math.Min(height, maxS));
+
             objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
 
             // TEMPORARY
-			player = new Player(objects.Count, new Point(width/2, height/2));
+			player = new Player(objects.Count, new Point(this.width/2, this.height/2));
 		    objects.Add(player);
 
 
@@ -38,8 +41,6 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
-			this.width = Math.Max(minS, Math.Min(width, maxS));
-			this.height = Math.Max(minS, Math.Min(height, maxS));
 
 			temporaryWorldGenerator ();
             
@@ -86,7 +87,7 @@ namespace KBSGame
 			}*/
 
 			//Amount of dirt patches
-			for (int i = 0; i < width / 5; i++) {
+			for (int i = 0; i < width*height / 500; i++) {
 				int size = rand.Next (2, 4);
 				Point p = new Point (rand.Next (0, width), rand.Next (0, height));
 
@@ -105,7 +106,7 @@ namespace KBSGame
 			}
 
 			//Amount of lakes
-			for (int i = 0; i < width / 5; i++) {
+			for (int i = 0; i < width*height / 500; i++) {
 				int size = rand.Next (2, 4);
 				Point p = new Point (rand.Next (0, width), rand.Next (0, height));
 
@@ -124,7 +125,7 @@ namespace KBSGame
 			}
 
 			//Amount of rivers
-			for (int i = 0; i < 4; i++) 
+			for (int i = 0; i < Math.Ceiling((double)width*height/30000); i++) 
 			{
 				int size = rand.Next (2, 4);
 				int x = 0;
@@ -271,7 +272,10 @@ namespace KBSGame
 			for (int i = 0; i < objects.Count; i++) {
 				Point p = objects [i].getLocation ();
 				if (p.X >= view.Left && p.X <= view.Right && p.Y >= view.Top && p.Y <= view.Bottom) {
-					returnEntities.Add (objects [i]);
+					if(objects [i].getSolid())
+						returnEntities.Add (objects [i]);
+					else
+						returnEntities.Insert (0, objects [i]);
 				}
 			}
 

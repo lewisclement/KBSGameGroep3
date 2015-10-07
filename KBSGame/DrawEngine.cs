@@ -50,6 +50,7 @@ namespace KBSGame
 
 		public void render()
         { 
+			long startTick = System.DateTime.UtcNow.Millisecond;
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
 
@@ -65,6 +66,10 @@ namespace KBSGame
 				Bitmap render = gui.getRender ();
 				drawingArea.DrawImage (render, 0, 0, render.Width, render.Height);
 			}
+
+			g.Dispose ();
+
+			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
 		}
 
 		public void drawTerrain(Graphics area)

@@ -9,7 +9,7 @@ namespace KBSGame
 {
     class Player : Entity
     {
-        public Player(int ID, Point location) : base(ID, location)
+		public Player(int ID, Point location) : base(ID, location, true)
         {
             this.ID = ID;
             this.location = location;

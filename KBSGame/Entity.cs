@@ -10,7 +10,7 @@ namespace KBSGame
 		protected Point location;
 		protected bool solid;
 
-		public Entity (int ID, Point location)
+		public Entity (int ID, Point location, bool solid = false)
 		{
 			this.ID = ID;
 			this.location = location;

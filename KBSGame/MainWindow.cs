@@ -13,12 +13,12 @@ namespace KBSGame
 
 		{
 			Text = "MainWindow";
-			Height = 500;
-			Width = 500;
+			Height = 1920;
+			Width = 1080;
           
  
     
-            world = new World (100, 100);
+			world = new World (100, 100);
 
 			renderer = new DrawEngine (world, this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
 		}
