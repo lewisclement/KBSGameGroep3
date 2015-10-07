@@ -10,8 +10,6 @@ namespace KBSGame
 {
     public class Menu : Gui
     {
-        private int xRes, yRes;
-        private Bitmap buffer;
         public Menu(int ID, int ScreenresX, int ScreenresY) : base(ID, ScreenresX, ScreenresY)
         {
             new Gui(ID, ScreenresX, ScreenresY);
