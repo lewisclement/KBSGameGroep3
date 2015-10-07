@@ -31,6 +31,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Menu.cs" />
     <Compile Include="DrawEngine.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="MainWindow.cs">

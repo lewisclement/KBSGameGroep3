@@ -7,7 +7,8 @@ namespace KBSGame
 	public class MainWindow : Form
 	{
 		private static World world;
-		private static DrawEngine renderer;
+        private static DrawEngine renderer;
+        private static Menu menu;
 
 		public MainWindow ()
 
@@ -15,8 +16,8 @@ namespace KBSGame
 			Text = "MainWindow";
 			Height = 500;
 			Width = 500;
-
-			world = new World (100, 100);
+            world = new World(100,100);
+            menu = new Menu(100, 100);
 
 			renderer = new DrawEngine (world, this.CreateGraphics(), Height, Width);
 		}

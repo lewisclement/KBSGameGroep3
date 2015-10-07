@@ -7,7 +7,7 @@ namespace KBSGame
 	{
 		private Sprite[] sprites;
 		private World world;
-		private Bitmap buffer;
+        private Bitmap buffer;
 		private Graphics drawingArea;
 		private int xRes, yRes;
 		private int viewWidth, viewHeight;
@@ -34,7 +34,7 @@ namespace KBSGame
 			//Temporary
 		}
 
-		public void render()
+        public void render()
 		{
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
