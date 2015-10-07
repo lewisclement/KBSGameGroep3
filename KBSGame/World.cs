@@ -225,6 +225,11 @@ namespace KBSGame
 	        return objects.FirstOrDefault(obj => obj.getID() == entityID);
 	    }
 
+        public Entity getEntityOnTerrainTile(Point point)
+        {
+            return objects.FirstOrDefault(obj => obj.getLocation() == point);
+        }
+
 	    public TerrainTile getTerraintile(Point point)
 	    {
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
@@ -232,7 +237,7 @@ namespace KBSGame
 
 	        return terrainTiles[point.X*height + point.Y];
 	    }
-
+        
 	    //Stub
 		public TerrainTile[] getTilesView(int viewWidth, int viewHeight)
 		{
