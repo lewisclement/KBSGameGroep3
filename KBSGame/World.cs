@@ -194,22 +194,22 @@ namespace KBSGame
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
 						if(rand.Next(0, 5) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling1, 12));
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling1, true, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling2, 12));
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling2, true, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.tallgrass, 12));
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.tallgrass, false, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
 						if(rand.Next(0, 60) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.waterlily));
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.waterlily, false));
 					}
 				}
 			}

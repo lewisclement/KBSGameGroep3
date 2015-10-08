@@ -16,6 +16,7 @@ namespace KBSGame
 			this.ID = ID;
 			this.location = location;
 			this.drawOrder = drawOrder;
+            
 		}
 
 		public int getID()
@@ -78,6 +79,8 @@ namespace KBSGame
 
 		public virtual void collisionCheck()
 		{
+
+            
 
 		}
 	}
