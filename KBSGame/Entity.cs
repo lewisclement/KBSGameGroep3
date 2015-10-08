@@ -10,13 +10,14 @@ namespace KBSGame
 		protected Point location;
 		protected bool solid;
 		protected Byte drawOrder;
+	    protected int drawPrecision;
 
-		public Entity (int ID, Point location, bool solid = false, Byte drawOrder = 8)
+	    public Entity(int ID, Point location, bool solid = false, Byte drawOrder = 8, int drawPrecision = 10)
 		{
 			this.ID = ID;
 			this.location = location;
 			this.drawOrder = drawOrder;
-            
+		    this.drawPrecision = drawPrecision;
 		}
 
 		public int getID()
@@ -38,6 +39,11 @@ namespace KBSGame
 		{
 			return spriteID;
 		}
+
+	    public int getDrawPrecision()
+	    {
+            return drawPrecision;
+	    }
 
 	    public void setSolid(bool solid)
 		{

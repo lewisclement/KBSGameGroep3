@@ -69,7 +69,7 @@ namespace KBSGame
 
 			g.Dispose ();
 
-			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
+			//Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
 		}
 
 		public void drawTerrain(Graphics area)
@@ -88,10 +88,11 @@ namespace KBSGame
 			Entity[] entities = world.getEntitiesView (viewWidth, viewHeight);
 			Rectangle view = world.getView (viewWidth, viewHeight);
 
-			for (int i = 0; i < entities.Length; i++) {
-				int x = (entities [i].getLocation ().X - view.Left) * StaticVariables.tileSize;
-				int y = (entities [i].getLocation ().Y - view.Top) * StaticVariables.tileSize;
-				area.DrawImage (sprites [entities [i].getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			foreach (Entity t in entities)
+			{
+			    int x = (t.getLocation ().X - view.Left) * StaticVariables.tileSize;
+			    int y = (t.getLocation().Y - view.Top)*StaticVariables.tileSize - t.getDrawPrecision();
+			    area.DrawImage (sprites [t.getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
 

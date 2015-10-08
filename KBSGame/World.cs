@@ -209,7 +209,7 @@ namespace KBSGame
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
 						if(rand.Next(0, 60) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.waterlily, false));
+							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.waterlily, false, 0, 0));
 					}
 				}
 			}
