@@ -31,7 +31,7 @@ namespace KBSGame
 			this.world = world;
 
 			Interfaces = new List<Gui>();
-			Menu menu = new Menu ((int)GUI.def, xRes, yRes);	//Temporary static Gui
+			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
             Settings settings = new Settings((int)GUI.def, xRes, yRes);
             Interfaces.Add(settings);
