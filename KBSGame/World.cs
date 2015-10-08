@@ -13,6 +13,8 @@ namespace KBSGame
 
 		private TerrainTile[] TileTypes;
 		private List<TerrainTile> terrainTiles;
+		private List<Byte> heightData;
+
 		private int width, height;
 		private List<Entity> objects;
 		private Entity focusEntity;
@@ -25,9 +27,11 @@ namespace KBSGame
 
             objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
+			heightData = new List<Byte> ();
 
             // TEMPORARY
-			player = new Player(objects.Count, new Point(this.width/2, this.height/2));
+			player = new Player(new Point(this.width/2, this.height/2), 50);
+			player.setHeight (50);
 		    objects.Add(player);
 
 
@@ -53,6 +57,7 @@ namespace KBSGame
 			for (int i = 0; i < width * height; i++) 
 			{
 				terrainTiles.Add (TileTypes [(int)TERRAIN.grass]);
+				heightData.Add (50);
 			}
 
 			//Place 10 rectangles
@@ -100,6 +105,7 @@ namespace KBSGame
 					for (int x = 0; x < size; x++) {
 						for (int y = 0; y < size; y++) {
 							terrainTiles [(p.X + xOffset + x) * height + p.Y + y + yOffset] = TileTypes [(int)TERRAIN.dirt];
+							heightData[(p.X + xOffset + x) * height + p.Y + y + yOffset] = 52;
 						}
 					}
 				}
@@ -194,22 +200,24 @@ namespace KBSGame
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
 						if(rand.Next(0, 5) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling1, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling1, 50, true));
+						if(rand.Next(0, 50) == 0)
+							objects.Add (new Entity(new Point(x, y), (int)SPRITES.banana, false, 50, 9));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling2, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling2, 50, true));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.tallgrass, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 50, false));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
 						if(rand.Next(0, 60) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.waterlily));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.waterlily, 50, false, 0, 0));
 					}
 				}
 			}
@@ -226,6 +234,11 @@ namespace KBSGame
 	        return objects.FirstOrDefault(obj => obj.getID() == entityID);
 	    }
 
+		public List<Entity> getEntities()
+		{
+			return objects;
+		} 
+
 		public Entity getEntityOnTerrainTile(Point point)
 		{
 			return objects.FirstOrDefault(obj => obj.getLocation() == point);
@@ -238,6 +251,14 @@ namespace KBSGame
 
 	        return terrainTiles[point.X*height + point.Y];
 	    }
+
+		public Byte getTerrainHeight(Point point)
+		{
+			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
+				return 0;
+
+			return heightData[point.X*height + point.Y];
+		}
 
 	    //Stub
 		public TerrainTile[] getTilesView(int viewWidth, int viewHeight)

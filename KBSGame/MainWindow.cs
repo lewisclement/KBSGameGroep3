@@ -19,7 +19,7 @@ namespace KBSGame
           
  
     
-			world = new World (100, 100);
+			world = new World (300, 300);
 
 			renderer = new DrawEngine (world, this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
 		}
@@ -71,16 +71,16 @@ namespace KBSGame
             switch (e.KeyCode)
             {
             case Keys.Up:
-                world.getEntity(0).move(world, new Point(0, -1));
+                world.getEntities()[0].move(world, new Point(0, -1));
                 break;
             case Keys.Down:
-                world.getEntity(0).move(world, new Point(0, 1));
+                world.getEntities()[0].move(world, new Point(0, 1));
                 break;
             case Keys.Left:
-                world.getEntity(0).move(world, new Point(-1, 0));
+                world.getEntities()[0].move(world, new Point(-1, 0));
                 break;
             case Keys.Right:
-                world.getEntity(0).move(world, new Point(1, 0));
+                world.getEntities()[0].move(world, new Point(1, 0));
                 break;
 			case Keys.Escape:
 				renderer.getGui ((int)GUI.def).switchActive ();

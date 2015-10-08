@@ -5,17 +5,23 @@ namespace KBSGame
 {
 	public class Entity
 	{
-		protected int ID;
+	    protected static int ID = 0;
 		protected int spriteID;
 		protected Point location;
 		protected bool solid;
 		protected Byte drawOrder;
+	    protected int drawPrecision;
+		protected Byte height;
 
-		public Entity (int ID, Point location, bool solid = false, Byte drawOrder = 8)
+		public Entity(Point location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
 		{
-			this.ID = ID;
 			this.location = location;
+			this.height = height;
 			this.drawOrder = drawOrder;
+		    this.drawPrecision = drawPrecision;
+			this.spriteID = spriteID;
+			this.solid = solid;
+	        ID++;
 		}
 
 		public int getID()
@@ -38,6 +44,11 @@ namespace KBSGame
 			return spriteID;
 		}
 
+	    public int getDrawPrecision()
+	    {
+            return drawPrecision;
+	    }
+
 	    public void setSolid(bool solid)
 		{
 			this.solid = solid;
@@ -56,6 +67,16 @@ namespace KBSGame
 		public Byte getDrawOrder()
 		{
 			return this.drawOrder;
+		}
+
+		public Byte getHeight()
+		{
+			return this.height;
+		}
+
+		public void setHeight(Byte height)
+		{
+			this.height = height;
 		}
 
 		protected void setDrawOrder(Byte drawOrder)
@@ -78,6 +99,8 @@ namespace KBSGame
 
 		public virtual void collisionCheck()
 		{
+
+            
 
 		}
 	}

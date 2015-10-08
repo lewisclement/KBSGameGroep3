@@ -9,11 +9,8 @@ namespace KBSGame
 {
     class Player : Entity
     {
-		public Player(int ID, Point location) : base(ID, location, true, 10)
+		public Player(Point location, Byte height) : base(location, (int)SPRITES.player, true, height, 10)
         {
-            this.ID = ID;
-            this.location = location;
-            this.setSprite((int) SPRITES.player);
         }
 
 		public override void move(World sender, Point relativeLocation)
@@ -23,18 +20,23 @@ namespace KBSGame
 
 		    Point targetPoint = new Point(moveLocationX, moveLocationY);
             TerrainTile targetTile = sender.getTerraintile (targetPoint);
+            Entity targetEntity = sender.getEntityOnTerrainTile(targetPoint);
+           
             // Get the entity on the tile.
             // Assign SpriteID if entity exists, otherwise -1.
 		    int targetEntityID = sender.getEntityOnTerrainTile(targetPoint)?.getSpriteID() ?? -1;
 
 			if (targetTile == null)
 				return;
+            if (targetEntity != null && targetEntity.getSolid())
+                return;
             // If terrain is walkable or stepping on a waterlily
-			if (targetTile.IsWalkable || targetEntityID == (int) SPRITES.waterlily)
+            if (targetTile.IsWalkable || targetEntityID == (int) SPRITES.waterlily)
 			{
 				location.X = moveLocationX;
 				location.Y = moveLocationY;
 			}
+            
 		}
     }
 }

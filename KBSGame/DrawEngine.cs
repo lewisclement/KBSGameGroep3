@@ -6,7 +6,7 @@ namespace KBSGame
 {
 	public class DrawEngine
 	{
-		private Sprite[] sprites;
+	    private Sprite[] sprites;
 		private World world;
 		private Bitmap buffer;
 
@@ -34,18 +34,8 @@ namespace KBSGame
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes);	//Temporary static Gui
 			Interfaces.Add (menu);
 
-			//Temporary static solution
-			sprites = new Sprite[(int)SPRITES.count];
-			sprites [(int)SPRITES.water] = new Sprite ((int)SPRITES.water, StaticVariables.execFolder + "/water_still.png");
-			sprites [(int)SPRITES.grass] = new Sprite ((int)SPRITES.grass, StaticVariables.execFolder + "/grass_top.png");
-			sprites [(int)SPRITES.sand] = new Sprite ((int)SPRITES.sand, StaticVariables.execFolder + "/sand.png");
-			sprites [(int)SPRITES.player] = new Sprite ((int)SPRITES.player, StaticVariables.execFolder + "/player.png");
-			sprites [(int)SPRITES.dirt] = new Sprite ((int)SPRITES.dirt, StaticVariables.execFolder + "/dirt.png");
-			sprites [(int)SPRITES.sapling1] = new Sprite ((int)SPRITES.sapling1, StaticVariables.execFolder + "/sapling1.png");
-			sprites [(int)SPRITES.sapling2] = new Sprite ((int)SPRITES.sapling2, StaticVariables.execFolder + "/sapling2.png");
-			sprites [(int)SPRITES.tallgrass] = new Sprite ((int)SPRITES.tallgrass, StaticVariables.execFolder + "/tallgrass.png");
-			sprites [(int)SPRITES.waterlily] = new Sprite ((int)SPRITES.waterlily, StaticVariables.execFolder + "/waterlily.png");
-			//Temporary
+			// Load sprites
+		    sprites = getSprites();
 		}
 
 		public void render()
@@ -88,10 +78,11 @@ namespace KBSGame
 			Entity[] entities = world.getEntitiesView (viewWidth, viewHeight);
 			Rectangle view = world.getView (viewWidth, viewHeight);
 
-			for (int i = 0; i < entities.Length; i++) {
-				int x = (entities [i].getLocation ().X - view.Left) * StaticVariables.tileSize;
-				int y = (entities [i].getLocation ().Y - view.Top) * StaticVariables.tileSize;
-				area.DrawImage (sprites [entities [i].getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			foreach (Entity t in entities)
+			{
+			    int x = (t.getLocation ().X - view.Left) * StaticVariables.tileSize;
+			    int y = (t.getLocation().Y - view.Top)*StaticVariables.tileSize - t.getDrawPrecision();
+			    area.DrawImage (sprites [t.getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
 
@@ -121,6 +112,22 @@ namespace KBSGame
 		{
 			return Interfaces [ID];
 		}
+
+	    private Sprite[] getSprites()
+	    {
+            Sprite[] sprites = new Sprite[(int)SPRITES.count];
+            sprites[(int)SPRITES.water] = new Sprite((int)SPRITES.water, StaticVariables.execFolder + "/water_still.png");
+            sprites[(int)SPRITES.grass] = new Sprite((int)SPRITES.grass, StaticVariables.execFolder + "/grass_top.png");
+            sprites[(int)SPRITES.sand] = new Sprite((int)SPRITES.sand, StaticVariables.execFolder + "/sand.png");
+            sprites[(int)SPRITES.player] = new Sprite((int)SPRITES.player, StaticVariables.execFolder + "/player.png");
+            sprites[(int)SPRITES.dirt] = new Sprite((int)SPRITES.dirt, StaticVariables.execFolder + "/dirt.png");
+            sprites[(int)SPRITES.sapling1] = new Sprite((int)SPRITES.sapling1, StaticVariables.execFolder + "/sapling1.png");
+            sprites[(int)SPRITES.sapling2] = new Sprite((int)SPRITES.sapling2, StaticVariables.execFolder + "/sapling2.png");
+            sprites[(int)SPRITES.tallgrass] = new Sprite((int)SPRITES.tallgrass, StaticVariables.execFolder + "/tallgrass.png");
+            sprites[(int)SPRITES.waterlily] = new Sprite((int)SPRITES.waterlily, StaticVariables.execFolder + "/waterlily.png");
+			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.execFolder + "/banana.png");
+	        return sprites;
+	    }
 	}
 }
 
