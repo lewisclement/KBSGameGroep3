@@ -69,7 +69,7 @@ namespace KBSGame
 
 			g.Dispose ();
 
-			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
+			//Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
 		}
 
 		public void drawTerrain(Graphics area)
@@ -90,8 +90,8 @@ namespace KBSGame
 
 			for (int i = 0; i < entities.Length; i++) {
 				int x = (entities [i].getLocation ().X - view.Left) * StaticVariables.tileSize;
-				int y = (entities [i].getLocation ().Y - view.Top) * StaticVariables.tileSize;
-				area.DrawImage (sprites [entities [i].getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			    int y = (entities[i].getLocation().Y - view.Top)*StaticVariables.tileSize - 10;
+			    area.DrawImage (sprites [entities [i].getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
 
