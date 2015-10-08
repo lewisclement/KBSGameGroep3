@@ -85,7 +85,9 @@ namespace KBSGame
 			case Keys.Escape:
 				renderer.getGui ((int)GUI.def).switchActive ();
 				break;
-
+            case Keys.E:
+                world.getPlayer().DropItem(world);
+                break;
             default:
                 return;
             }
