@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace KBSGame
 {
-    class Key : Entity
+    class Key : Item
     {
-        public Key(Point location, int spriteID, bool solid = false, byte height = 50, byte drawOrder = 8, int drawPrecision = 10)
-			: base(location, (int)SPRITES.key, solid, height, drawOrder, drawPrecision)
+        public Key(Point location, int spriteID, bool solid = false, bool CanPickup = true, byte height = 50, byte drawOrder = 8, int drawPrecision = 10)
+			: base(location, (int)SPRITES.key, solid, CanPickup, height, drawOrder, drawPrecision)
         {
 
         }

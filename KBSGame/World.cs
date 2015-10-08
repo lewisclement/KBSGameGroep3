@@ -223,6 +223,8 @@ namespace KBSGame
 			}
             // Test Key
             objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
+            objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
+            objects.Add(new Key(new Point(156, 150), (int)SPRITES.key, false, false));
             //objects.Add(new Plant(new Point(155, 150), (int)SPRITES.sapling1, 50, true));
         }
 
@@ -257,6 +259,12 @@ namespace KBSGame
             // Return list with entities on given tile
 		    return objects.Where(e => e.getLocation() == point).ToList();
 		}
+
+	    public List<Item> getItemsOnTerrainTile(Point point)
+	    {
+	        // Return list with items on given tile
+	        return objects.Where(e => e.getLocation() == point).Where(e => e is Item).Cast<Item>().ToList();
+	    }
 
 	    public TerrainTile getTerraintile(Point point)
 	    {
