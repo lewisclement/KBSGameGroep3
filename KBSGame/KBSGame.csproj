@@ -73,6 +73,8 @@
     <None Include="bin\Release\waterlily.png" />
     <None Include="bin\Release\tallgrass.png" />
     <None Include="bin\Release\sapling2.png" />
+    <None Include="bin\Debug\banana.png" />
+    <None Include="bin\Release\banana.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
