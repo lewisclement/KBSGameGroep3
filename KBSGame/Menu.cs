@@ -11,22 +11,27 @@ namespace KBSGame
 {
     public class Menu : Gui 
     {
-        private ArrayList StringList = new ArrayList();
-        private Rectangle rect;
+        private ArrayList StringList { get; }
         public Menu(int ID, int ScreenresX, int ScreenresY) : base(ID, ScreenresX, ScreenresY)
         {
             new Gui(ID, ScreenresX, ScreenresY);
             xRes = ScreenresX;
             yRes = ScreenresY;
             buffer = new Bitmap(xRes, yRes);
+            StringList = new ArrayList();
             StringList.Add("Resume");
             StringList.Add("Settings");
+            StringList.Add("Quit");
 
         }
         public override void setInput(Point mousePos)
         {
-            if (new Rectangle(xRes / 3, 60, xRes / 2, 25).Contains(mousePos)){
-                Console.WriteLine("Het werk");
+            for (int i = 0; i < StringList.Count; i++)
+            {
+                Rectangle rect = new Rectangle(0,60+i*60, this.yRes, 60);
+                if (rect.Contains(mousePos))
+                {
+                }
             }
         }
         public ArrayList MenuButtons()
@@ -49,9 +54,9 @@ namespace KBSGame
             }
             // g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.White)), xRes / 3, 60, xRes / 2, 25);
             //  g.DrawString("Resume", new Font("Arial", 16), new SolidBrush(Color.White), 0, 60);
-            Pen boldPen = new Pen(Color.White, 5);
-            g.DrawLine(boldPen, xRes - 70, 30, xRes - 30, 70);
-            g.DrawLine(boldPen, xRes - 70, 70, xRes - 30, 30);
+            //Pen boldPen = new Pen(Color.White, 5);
+            //g.DrawLine(boldPen, xRes - 70, 30, xRes - 30, 70);
+            //g.DrawLine(boldPen, xRes - 70, 70, xRes - 30, 30);
             return this.buffer;
         }
     }
