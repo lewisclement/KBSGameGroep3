@@ -27,7 +27,7 @@ namespace KBSGame
             terrainTiles = new List<TerrainTile>();
 
             // TEMPORARY
-			player = new Player(objects.Count, new Point(this.width/2, this.height/2));
+			player = new Player(new Point(this.width/2, this.height/2));
 		    objects.Add(player);
 
 
@@ -45,6 +45,7 @@ namespace KBSGame
 			temporaryWorldGenerator ();
             
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
+		    Console.WriteLine(objects[0].getID());
 		}
 
 		private void temporaryWorldGenerator()
@@ -194,22 +195,22 @@ namespace KBSGame
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
 						if(rand.Next(0, 5) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling1, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling1, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.sapling2, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling2, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.tallgrass, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 12));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
 						if(rand.Next(0, 60) == 0)
-							objects.Add (new Plant(objects.Count, new Point(x, y), (int)SPRITES.waterlily, 0, 0));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.waterlily, 0, 0));
 					}
 				}
 			}
@@ -230,6 +231,11 @@ namespace KBSGame
 		{
 			return objects.FirstOrDefault(obj => obj.getLocation() == point);
 		}
+
+	    public List<Entity> getEntities()
+	    {
+	        return objects;
+	    } 
 
 	    public TerrainTile getTerraintile(Point point)
 	    {

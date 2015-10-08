@@ -5,8 +5,8 @@ namespace KBSGame
 {
 	public class Plant : Entity
 	{
-		public Plant (int ID, Point location, int spriteID, Byte depth = 8, int drawPrecision = 10)
-            : base(ID, location, false, depth, drawPrecision)
+		public Plant (Point location, int spriteID, Byte depth = 8, int drawPrecision = 10)
+            : base(location, false, depth, drawPrecision)
 		{
 			this.spriteID = spriteID;
 		}

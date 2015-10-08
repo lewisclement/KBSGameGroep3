@@ -9,9 +9,8 @@ namespace KBSGame
 {
     class Player : Entity
     {
-		public Player(int ID, Point location) : base(ID, location, true, 10)
+		public Player(Point location) : base(location, true, 10)
         {
-            this.ID = ID;
             this.location = location;
             this.setSprite((int) SPRITES.player);
         }
