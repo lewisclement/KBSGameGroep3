@@ -27,6 +27,7 @@ namespace KBSGame
 
             objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
+			heightData = new List<Byte> ();
 
             // TEMPORARY
 			player = new Player(new Point(this.width/2, this.height/2), 50);
