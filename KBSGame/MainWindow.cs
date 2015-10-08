@@ -105,8 +105,10 @@ namespace KBSGame
                         renderer.getGui(1).setActive(false);
                     }
 
-                    break;
-
+				break;
+            case Keys.E:
+                world.getPlayer().DropItem(world);
+                break;
             default:
                 return;
             }

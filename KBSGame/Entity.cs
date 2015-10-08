@@ -79,7 +79,12 @@ namespace KBSGame
 			this.height = height;
 		}
 
-		protected void setDrawOrder(Byte drawOrder)
+        public void setLocation(Point point)
+        {
+            this.location = point;
+        }
+
+	    protected void setDrawOrder(Byte drawOrder)
 		{
 			if (drawOrder >= StaticVariables.drawOrderSize)
 				this.drawOrder = StaticVariables.drawOrderSize-1;

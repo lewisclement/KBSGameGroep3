@@ -221,13 +221,26 @@ namespace KBSGame
 					}
 				}
 			}
-		}
+            // Test Key
+            objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
+            //objects.Add(new Plant(new Point(155, 150), (int)SPRITES.sapling1, 50, true));
+        }
 
 
 		public void moveObject(int entityID, Point relativeLocation)
 		{
 
 		}
+
+	    public Player getPlayer()
+	    {
+	        return player;
+	    }
+
+	    public void RemoveItem(Entity e)
+	    {
+	        objects.Remove(e);
+	    }
 
 	    public Entity getEntity(int entityID)
 	    {
@@ -239,9 +252,10 @@ namespace KBSGame
 			return objects;
 		} 
 
-		public Entity getEntityOnTerrainTile(Point point)
+		public List<Entity> getEntitiesOnTerrainTile(Point point)
 		{
-			return objects.FirstOrDefault(obj => obj.getLocation() == point);
+            // Return list with entities on given tile
+		    return objects.Where(e => e.getLocation() == point).ToList();
 		}
 
 	    public TerrainTile getTerraintile(Point point)

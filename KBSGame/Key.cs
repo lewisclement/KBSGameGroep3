@@ -9,7 +9,7 @@ namespace KBSGame
 {
     class Key : Entity
     {
-        public Key(Point location, bool solid = false, byte height = 50, byte drawOrder = 8, int drawPrecision = 10)
+        public Key(Point location, int spriteID, bool solid = false, byte height = 50, byte drawOrder = 8, int drawPrecision = 10)
 			: base(location, (int)SPRITES.key, solid, height, drawOrder, drawPrecision)
         {
 

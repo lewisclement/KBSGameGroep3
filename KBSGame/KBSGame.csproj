@@ -82,4 +82,7 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\gold_key.png" />
+  </ItemGroup>
 </Project>
