@@ -8,6 +8,7 @@ namespace KBSGame
 	{
 		private static World world;
 		private static DrawEngine renderer;
+        private Point mouseOnClick;
 
 		public MainWindow ()
 
@@ -40,7 +41,18 @@ namespace KBSGame
 		protected override void OnClick(EventArgs e)
 		{
 			renderer.render ();
-		}
+            Rectangle recRes = new Rectangle(0, 60, 1200, 60);
+            Rectangle RecSettings = new Rectangle(0, 120, 1200, 60);
+            Point mousepoint = (Cursor.Position);
+                if (recRes.Contains(mousepoint))
+            {
+                renderer.getGui((int)GUI.def).setActive(false);
+            }
+            else if (RecSettings.Contains(mousepoint))
+            {
+                System.Windows.Forms.MessageBox.Show("It should open an settingsmenu");
+            }
+        }
 
         private void InitializeComponent()
         {
