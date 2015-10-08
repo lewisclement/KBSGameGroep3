@@ -231,6 +231,11 @@ namespace KBSGame
 	        return objects.FirstOrDefault(obj => obj.getID() == entityID);
 	    }
 
+		public List<Entity> getEntities()
+		{
+			return objects;
+		} 
+
 		public Entity getEntityOnTerrainTile(Point point)
 		{
 			return objects.FirstOrDefault(obj => obj.getLocation() == point);

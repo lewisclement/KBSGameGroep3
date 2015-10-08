@@ -18,7 +18,7 @@ namespace KBSGame
           
  
     
-			world = new World (100, 100);
+			world = new World (300, 300);
 
 			renderer = new DrawEngine (world, this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
 		}
