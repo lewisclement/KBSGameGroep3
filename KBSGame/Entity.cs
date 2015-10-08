@@ -86,6 +86,8 @@ namespace KBSGame
 		public virtual void collisionCheck()
 		{
 
+            
+
 		}
 	}
 }

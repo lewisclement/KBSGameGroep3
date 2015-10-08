@@ -22,18 +22,23 @@ namespace KBSGame
 
 		    Point targetPoint = new Point(moveLocationX, moveLocationY);
             TerrainTile targetTile = sender.getTerraintile (targetPoint);
+            Entity targetEntity = sender.getEntityOnTerrainTile(targetPoint);
+           
             // Get the entity on the tile.
             // Assign SpriteID if entity exists, otherwise -1.
 		    int targetEntityID = sender.getEntityOnTerrainTile(targetPoint)?.getSpriteID() ?? -1;
 
 			if (targetTile == null)
 				return;
+            if (targetEntity != null && targetEntity.getSolid())
+                return;
             // If terrain is walkable or stepping on a waterlily
-			if (targetTile.IsWalkable || targetEntityID == (int) SPRITES.waterlily)
+            if (targetTile.IsWalkable || targetEntityID == (int) SPRITES.waterlily)
 			{
 				location.X = moveLocationX;
 				location.Y = moveLocationY;
 			}
+            
 		}
     }
 }
