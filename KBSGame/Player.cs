@@ -9,10 +9,8 @@ namespace KBSGame
 {
     class Player : Entity
     {
-		public Player(Point location, Byte height) : base(location, true, height, 10)
+		public Player(Point location, Byte height) : base(location, (int)SPRITES.player, true, height, 10)
         {
-            this.location = location;
-            this.setSprite((int) SPRITES.player);
         }
 
 		public override void move(World sender, Point relativeLocation)

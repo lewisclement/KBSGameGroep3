@@ -200,17 +200,19 @@ namespace KBSGame
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
 						if(rand.Next(0, 5) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling1, 50, true, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling1, 50, true));
+						if(rand.Next(0, 50) == 0)
+							objects.Add (new Entity(new Point(x, y), (int)SPRITES.banana, false, 50, 9));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling2, 50, true, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling2, 50, true));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 50, false, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 50, false));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
