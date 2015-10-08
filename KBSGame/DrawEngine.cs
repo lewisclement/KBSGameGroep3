@@ -33,7 +33,8 @@ namespace KBSGame
 			Interfaces = new List<Gui>();
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes);	//Temporary static Gui
 			Interfaces.Add (menu);
-
+            Settings settings = new Settings((int)GUI.def, xRes, yRes);
+            Interfaces.Add(settings);
 			// Load sprites
 		    sprites = getSprites();
 		}

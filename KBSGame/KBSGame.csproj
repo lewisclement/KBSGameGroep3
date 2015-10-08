@@ -41,6 +41,7 @@
     </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="StaticVariables.cs" />
     <Compile Include="TerrainTile.cs" />
