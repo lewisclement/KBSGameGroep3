@@ -11,10 +11,12 @@ namespace KBSGame
 		protected bool solid;
 		protected Byte drawOrder;
 	    protected int drawPrecision;
+		protected Byte height;
 
-	    public Entity(Point location, bool solid = false, Byte drawOrder = 8, int drawPrecision = 10)
+		public Entity(Point location, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
 		{
 			this.location = location;
+			this.height = height;
 			this.drawOrder = drawOrder;
 		    this.drawPrecision = drawPrecision;
 	        ID++;
@@ -63,6 +65,16 @@ namespace KBSGame
 		public Byte getDrawOrder()
 		{
 			return this.drawOrder;
+		}
+
+		public Byte getHeight()
+		{
+			return this.height;
+		}
+
+		public void setHeight(Byte height)
+		{
+			this.height = height;
 		}
 
 		protected void setDrawOrder(Byte drawOrder)

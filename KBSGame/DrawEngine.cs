@@ -59,7 +59,7 @@ namespace KBSGame
 
 			g.Dispose ();
 
-			//Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
+			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
 		}
 
 		public void drawTerrain(Graphics area)

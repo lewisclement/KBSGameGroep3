@@ -9,7 +9,7 @@ namespace KBSGame
 {
     class Player : Entity
     {
-		public Player(Point location) : base(location, true, 10)
+		public Player(Point location, Byte height) : base(location, true, height, 10)
         {
             this.location = location;
             this.setSprite((int) SPRITES.player);
