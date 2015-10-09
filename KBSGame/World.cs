@@ -200,17 +200,19 @@ namespace KBSGame
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
 						if(rand.Next(0, 5) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling1, 50, true, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling1, 50, true));
+						if(rand.Next(0, 50) == 0)
+							objects.Add (new Entity(new Point(x, y), (int)SPRITES.banana, false, 50, 9));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling2, 50, true, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling2, 50, true));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 50, false, 12));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 50, false, 11));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
@@ -219,13 +221,28 @@ namespace KBSGame
 					}
 				}
 			}
-		}
+            // Test Key
+            objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
+            objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
+            objects.Add(new Key(new Point(156, 150), (int)SPRITES.key, false, false));
+            //objects.Add(new Plant(new Point(155, 150), (int)SPRITES.sapling1, 50, true));
+        }
 
 
 		public void moveObject(int entityID, Point relativeLocation)
 		{
 
 		}
+
+	    public Player getPlayer()
+	    {
+	        return player;
+	    }
+
+	    public void RemoveItem(Entity e)
+	    {
+	        objects.Remove(e);
+	    }
 
 	    public Entity getEntity(int entityID)
 	    {
@@ -237,10 +254,17 @@ namespace KBSGame
 			return objects;
 		} 
 
-		public Entity getEntityOnTerrainTile(Point point)
+		public List<Entity> getEntitiesOnTerrainTile(Point point)
 		{
-			return objects.FirstOrDefault(obj => obj.getLocation() == point);
+            // Return list with entities on given tile
+		    return objects.Where(e => e.getLocation() == point).ToList();
 		}
+
+	    public List<Item> getItemsOnTerrainTile(Point point)
+	    {
+	        // Return list with items on given tile
+	        return objects.Where(e => e.getLocation() == point).Where(e => e is Item).Cast<Item>().ToList();
+	    }
 
 	    public TerrainTile getTerraintile(Point point)
 	    {

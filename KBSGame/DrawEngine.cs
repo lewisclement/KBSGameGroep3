@@ -31,9 +31,10 @@ namespace KBSGame
 			this.world = world;
 
 			Interfaces = new List<Gui>();
-			Menu menu = new Menu ((int)GUI.def, xRes, yRes);	//Temporary static Gui
+			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
-
+            Settings settings = new Settings((int)GUI.def, xRes, yRes);
+            Interfaces.Add(settings);
 			// Load sprites
 		    sprites = getSprites();
 		}
@@ -125,7 +126,9 @@ namespace KBSGame
             sprites[(int)SPRITES.sapling2] = new Sprite((int)SPRITES.sapling2, StaticVariables.execFolder + "/sapling2.png");
             sprites[(int)SPRITES.tallgrass] = new Sprite((int)SPRITES.tallgrass, StaticVariables.execFolder + "/tallgrass.png");
             sprites[(int)SPRITES.waterlily] = new Sprite((int)SPRITES.waterlily, StaticVariables.execFolder + "/waterlily.png");
-	        return sprites;
+			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.execFolder + "/banana.png");
+            sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.execFolder + "/gold_key.png");
+            return sprites;
 	    }
 	}
 }

@@ -1,6 +1,6 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
+# Visual Studio 2012
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KBSGame", "KBSGame\KBSGame.csproj", "{65872672-5274-4A12-88EC-F257192D894B}"
@@ -16,10 +16,10 @@ Global
 		{65872672-5274-4A12-88EC-F257192D894B}.Release|x86.ActiveCfg = Release|x86
 		{65872672-5274-4A12-88EC-F257192D894B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = KBSGame\KBSGame.csproj
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

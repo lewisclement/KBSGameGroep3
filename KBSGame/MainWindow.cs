@@ -8,6 +8,9 @@ namespace KBSGame
 	{
 		private static World world;
 		private static DrawEngine renderer;
+        private Point mouseOnClick;
+        private int ScreenY;
+        private int ScreenX;
 
 		public MainWindow ()
 
@@ -39,8 +42,30 @@ namespace KBSGame
 
 		protected override void OnClick(EventArgs e)
 		{
-			renderer.render ();
-		}
+            this.ScreenY=this.ClientSize.Width;
+            if (renderer.getGui((int)GUI.def).isActive()) {
+                Rectangle recRes = new Rectangle(0, 60, this.ScreenY, 60);
+                Rectangle RecSettings = new Rectangle(0, 120, this.ScreenY, 60);
+
+                Rectangle RecQuit = new Rectangle(0, 180, this.ScreenY, 60);
+                Point mousepoint = (Cursor.Position);
+                if (recRes.Contains(mousepoint))
+                {
+                    renderer.getGui((int)GUI.def).setActive(false);
+                }
+                else if (RecSettings.Contains(mousepoint))
+                {
+                    renderer.getGui(1).switchActive();
+                    renderer.getGui((int)GUI.def).switchActive();
+                }
+                else if (RecQuit.Contains(mousepoint))
+                {
+                    Application.Exit();
+                }
+            }
+
+            renderer.render();
+        }
 
         private void InitializeComponent()
         {
@@ -71,9 +96,21 @@ namespace KBSGame
                 world.getEntities()[0].move(world, new Point(1, 0));
                 break;
 			case Keys.Escape:
-				renderer.getGui ((int)GUI.def).switchActive ();
-				break;
+                    //temporary solution for escape if settings is active
+                    if (!renderer.getGui(1).isActive() &&!renderer.getGui((int)GUI.def).isActive() || renderer.getGui((int)GUI.def).isActive())
+                    {
+                        renderer.getGui((int)GUI.def).switchActive();
+                    }
+                    else if (renderer.getGui(1).isActive())
+                    {
+                        renderer.getGui((int)GUI.def).setActive(false);
+                        renderer.getGui(1).setActive(false);
+                    }
 
+				break;
+            case Keys.E:
+                world.getPlayer().DropItem(world);
+                break;
             default:
                 return;
             }

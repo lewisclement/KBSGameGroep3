@@ -32,6 +32,7 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Gui.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="DrawEngine.cs" />
@@ -41,6 +42,7 @@
     </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="StaticVariables.cs" />
     <Compile Include="TerrainTile.cs" />
@@ -73,10 +75,15 @@
     <None Include="bin\Release\waterlily.png" />
     <None Include="bin\Release\tallgrass.png" />
     <None Include="bin\Release\sapling2.png" />
+    <None Include="bin\Debug\banana.png" />
+    <None Include="bin\Release\banana.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\gold_key.png" />
   </ItemGroup>
 </Project>
