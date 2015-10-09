@@ -59,7 +59,6 @@ namespace KBSGame
             for (int i = 0; i < width * height; i++)
             {
                 terrainTiles.Add(TileTypes[(int)TERRAIN.grass]);
-                heightData.Add(50);
             }
         }
 
@@ -297,7 +296,12 @@ namespace KBSGame
 
 	    public void setTerraintile(Point point, int terrainID)
 	    {
-	        terrainTiles[point.X*height + point.Y] = TileTypes[terrainID];
+	        TerrainTile tile = TileTypes[terrainID];
+            if (terrainID == (int)SPRITES.water)
+            {
+                tile.IsWalkable = false;
+            }
+            terrainTiles[point.X*height + point.Y] = tile;
 	    }
 
 	    public Byte getTerrainHeight(Point point)

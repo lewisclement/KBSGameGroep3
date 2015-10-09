@@ -6,10 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PlayerMovementTest
 {
     [TestClass]
-    public class UnitTest1
+    public class PlayerMove
     {
         [TestMethod]
-        public void PlayerMove()
+        public void MovePlayer()
         {
             MainWindow mw = new MainWindow();
 
@@ -24,28 +24,15 @@ namespace PlayerMovementTest
 
             // Move right
             p.move(w, new Point(1, 0));
-            Assert.AreEqual(new Point(0, 1), p.getLocation());
+            Assert.AreEqual(new Point(1, 1), p.getLocation());
 
             // Move down
             p.move(w, new Point(0, 1));
-            Assert.AreEqual(new Point(0, 1), p.getLocation());
+            Assert.AreEqual(new Point(1, 2), p.getLocation());
 
             // Move up
             p.move(w, new Point(0, -1));
-            Assert.AreEqual(new Point(0, 1), p.getLocation());
-        }
-
-        [TestMethod]
-        public void PlayerMoveToWater()
-        {
-            World w = new World(5, 5);
-            
-            Player p = w.getPlayer();
-            p.setLocation(new Point(1, 1));
-
-            // Move is relative to current position
-            p.move(w, new Point(-1, 0));
-            Assert.AreEqual(new Point(0, 1), p.getLocation());
+            Assert.AreEqual(new Point(1, 1), p.getLocation());
         }
     }
 }
