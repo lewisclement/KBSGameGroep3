@@ -48,6 +48,7 @@
     <Compile Include="TerrainTile.cs" />
     <Compile Include="World.cs" />
     <Compile Include="Plant.cs" />
+    <Compile Include="EntitiesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -55,6 +56,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="nunit.framework" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\grass_top.png" />

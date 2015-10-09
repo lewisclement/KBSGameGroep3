@@ -249,6 +249,11 @@ namespace KBSGame
 	        return objects.FirstOrDefault(obj => obj.getID() == entityID);
 	    }
 
+		public void addEntity(Entity entity)
+		{
+			objects.Add (entity);
+		}
+
 		public List<Entity> getEntities()
 		{
 			return objects;
