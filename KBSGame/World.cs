@@ -48,12 +48,22 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-			temporaryWorldGenerator ();
+			//temporaryWorldGenerator ();
+            fillWithGrass();
             
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
 		}
 
-		/// <summary>
+	    private void fillWithGrass()
+	    {
+            for (int i = 0; i < width * height; i++)
+            {
+                terrainTiles.Add(TileTypes[(int)TERRAIN.grass]);
+                heightData.Add(50);
+            }
+        }
+
+	    /// <summary>
 		/// This is a temporary world generator for as long as there isn't a wordl loader
 		/// </summary>
 		private void temporaryWorldGenerator()
@@ -285,7 +295,12 @@ namespace KBSGame
 	        return terrainTiles[point.X*height + point.Y];
 	    }
 
-		public Byte getTerrainHeight(Point point)
+	    public void setTerraintile(Point point, int terrainID)
+	    {
+	        terrainTiles[point.X*height + point.Y] = TileTypes[terrainID];
+	    }
+
+	    public Byte getTerrainHeight(Point point)
 		{
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
 				return 0;
