@@ -48,7 +48,6 @@
     <Compile Include="TerrainTile.cs" />
     <Compile Include="World.cs" />
     <Compile Include="Plant.cs" />
-    <Compile Include="EntitiesTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

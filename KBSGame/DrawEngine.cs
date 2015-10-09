@@ -80,9 +80,11 @@ namespace KBSGame
 		/// <param name="area">Area.</param>
 		public void drawTerrain(Graphics area)
 		{
-			//Quick'n'dirty terrain drawing
+			//Get array of tiles that are within view
 			TerrainTile[] tiles = world.getTilesView (viewWidth, viewHeight);
+
 			for (int i = 0; i < tiles.Length; i++) {
+				//Retreive coordinate based on index
 				int x = (i / viewHeight) * StaticVariables.tileSize;
 				int y = (i % viewHeight) * StaticVariables.tileSize;
 				area.DrawImage (sprites [tiles [i].getSpriteID ()].getBitmap(), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
@@ -95,6 +97,7 @@ namespace KBSGame
 		/// <param name="area">Area.</param>
 		public void drawEntities(Graphics area)
 		{
+			//Get array of entities that are within view
 			Entity[] entities = world.getEntitiesView (viewWidth, viewHeight);
 			Rectangle view = world.getView (viewWidth, viewHeight);
 
@@ -106,6 +109,12 @@ namespace KBSGame
 			}
 		}
 
+		/// <summary>
+		/// Resize the specified drawingArea, xResolution and yResolution.
+		/// </summary>
+		/// <param name="drawingArea">Drawing area.</param>
+		/// <param name="xResolution">X resolution.</param>
+		/// <param name="yResolution">Y resolution.</param>
 		public void resize(Graphics drawingArea, int xResolution, int yResolution)
 		{
 			this.drawingArea = drawingArea;
@@ -122,17 +131,31 @@ namespace KBSGame
 			}
 		}
 
+		/// <summary>
+		/// Sets the view.
+		/// </summary>
+		/// <param name="Width">Width.</param>
+		/// <param name="Height">Height.</param>
 		private void setView(int Width, int Height) 
 		{
 			viewWidth = Math.Max(1, Width);
 			viewHeight = Math.Max(1, Height);
 		}
 
+		/// <summary>
+		/// Gets the GUI.
+		/// </summary>
+		/// <returns>The GUI.</returns>
+		/// <param name="ID">I.</param>
 		public Gui getGui(int ID)
 		{
 			return Interfaces [ID];
 		}
 
+		/// <summary>
+		/// Gets the sprites.
+		/// </summary>
+		/// <returns>The sprites.</returns>
 	    private Sprite[] getSprites()
 	    {
             Sprite[] sprites = new Sprite[(int)SPRITES.count];
