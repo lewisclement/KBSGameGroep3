@@ -13,7 +13,6 @@ namespace KBSGame
             : base(location, solid, height, drawOrder, drawPrecision)
         {
 
-
         }
     }
 }
