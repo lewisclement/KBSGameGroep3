@@ -1,4 +1,8 @@
-﻿using NUnit.Framework;
+﻿#if MSTEST
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+#else
+using NUnit.Framework;
+#endif
 using System;
 
 namespace KBSGame

@@ -6,18 +6,26 @@ namespace KBSGame
 {
 	public class DrawEngine
 	{
-	    private Sprite[] sprites;
+		private Sprite[] sprites; 				//List of existing Sprites in game
 		private World world;
-		private Bitmap buffer;
+		private Bitmap buffer; 					//Back buffer to which the view is drawn
 
-		private int xRes, yRes;
-		private int viewWidth, viewHeight;
+		private int xRes, yRes; 				//Resolution of buffer
+		private int viewWidth, viewHeight;		//Size of view in tiles
 
-		private List<Gui> Interfaces;
-		private Gui blockingGui;			//Modal interface, blocking all other input/output
+		private List<Gui> Interfaces;			//List of GUI
+		private Gui blockingGui;				//Modal interface, blocking all other input/output
 
-		private Graphics drawingArea; //Store in RAM to minimize createGraphics() calls
+		private Graphics drawingArea; 			//Store in RAM to minimize createGraphics() calls
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="KBSGame.DrawEngine"/> class.
+		/// Runs all necessary code to draw a world to the screen.
+		/// </summary>
+		/// <param name="world">World.</param>
+		/// <param name="drawingArea">Drawing area.</param>
+		/// <param name="xResolution">X resolution.</param>
+		/// <param name="yResolution">Y resolution.</param>
 		public DrawEngine (World world, Graphics drawingArea, int xResolution, int yResolution)
 		{
 			this.drawingArea = drawingArea;
@@ -39,6 +47,9 @@ namespace KBSGame
 		    sprites = getSprites();
 		}
 
+		/// <summary>
+		/// Render de view naar scherm
+		/// </summary>
 		public void render()
         { 
 			long startTick = System.DateTime.UtcNow.Millisecond;
@@ -63,6 +74,10 @@ namespace KBSGame
 			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
 		}
 
+		/// <summary>
+		/// Draws the terrain.
+		/// </summary>
+		/// <param name="area">Area.</param>
 		public void drawTerrain(Graphics area)
 		{
 			//Quick'n'dirty terrain drawing
@@ -74,6 +89,10 @@ namespace KBSGame
 			}
 		}
 
+		/// <summary>
+		/// Draws the entities.
+		/// </summary>
+		/// <param name="area">Area.</param>
 		public void drawEntities(Graphics area)
 		{
 			Entity[] entities = world.getEntitiesView (viewWidth, viewHeight);
