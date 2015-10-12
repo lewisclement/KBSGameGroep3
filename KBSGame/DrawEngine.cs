@@ -38,7 +38,7 @@ namespace KBSGame
 			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
 			this.world = world;
 
-			Interfaces = new List<Gui>();
+            Interfaces = new List<Gui>();
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
             Settings settings = new Settings((int)GUI.def, xRes, yRes);

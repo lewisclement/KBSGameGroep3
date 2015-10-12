@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Drawing;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace KBSGame
 {
-	public class Entity
+    public class Entity        
 	{
-	    protected static int ID = 0;
-		protected int spriteID;
-		protected Point location;
-		protected bool solid;
-		protected Byte drawOrder;
-	    protected int drawPrecision;
-		protected Byte height;
+        protected int ID = 0;
+        protected int spriteID;
+        protected Point location;
+        protected bool solid;
+        protected Byte drawOrder;
+        protected int drawPrecision;
+        protected Byte height;
 
 		public Entity(Point location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
 		{
@@ -23,8 +26,18 @@ namespace KBSGame
 			this.solid = solid;
 	        ID++;
 		}
+        public Entity(int ID, Point location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
+        {
+            this.location = location;
+            this.height = height;
+            this.drawOrder = drawOrder;
+            this.drawPrecision = drawPrecision;
+            this.spriteID = spriteID;
+            this.solid = solid;
+            this.ID = ID;
+        }
 
-		public int getID()
+        public int getID()
 		{
 			return ID;
 		}
@@ -108,6 +121,21 @@ namespace KBSGame
             
 
 		}
-	}
+
+        public XmlSchema GetSchema()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 

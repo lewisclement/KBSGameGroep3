@@ -42,12 +42,14 @@
     </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Serialize.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="StaticVariables.cs" />
     <Compile Include="TerrainTile.cs" />
     <Compile Include="World.cs" />
     <Compile Include="Plant.cs" />
+    <Compile Include="xmlReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

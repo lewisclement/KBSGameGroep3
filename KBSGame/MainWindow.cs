@@ -18,13 +18,13 @@ namespace KBSGame
 			Text = "MainWindow";
 			Height = 1920;
 			Width = 1080;
-          
- 
+            
     
 			world = new World (300, 300);
 
 			renderer = new DrawEngine (world, this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
-		}
+
+        }
 
 		protected override void OnPaint(PaintEventArgs e) 
 		{
@@ -77,6 +77,7 @@ namespace KBSGame
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "MainWindow";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
 
         }
@@ -123,6 +124,11 @@ namespace KBSGame
 	    {
 	        return world;
 	    }
-	}
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
 
