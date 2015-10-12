@@ -53,10 +53,19 @@ namespace KBSGame
 		/// Sets the input.
 		/// </summary>
 		/// <param name="mousePos">Mouse position.</param>
-		public virtual void setInput(Point mousePos)
+		public virtual void setMouseClick(Point mousePos)
         {
 
         }
+
+		/// <summary>
+		/// Sets the mouse hover.
+		/// </summary>
+		/// <param name="mousePos">Mouse position.</param>
+		public virtual void setMouseHover(Point mousePos)
+		{
+
+		}
 
         /// <summary>
         /// Sets the input.
