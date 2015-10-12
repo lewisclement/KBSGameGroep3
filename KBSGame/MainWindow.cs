@@ -43,27 +43,29 @@ namespace KBSGame
 		protected override void OnClick(EventArgs e)
 		{
             this.ScreenY=this.ClientSize.Width;
-            if (renderer.getGui((int)GUI.def).isActive()) {
-                Rectangle recRes = new Rectangle(0, 60, this.ScreenY, 60);
-                Rectangle RecSettings = new Rectangle(0, 120, this.ScreenY, 60);
 
-                Rectangle RecQuit = new Rectangle(0, 180, this.ScreenY, 60);
-                Point mousepoint = (Cursor.Position);
-                if (recRes.Contains(mousepoint))
-                {
-                    renderer.getGui((int)GUI.def).setActive(false);
-                }
-                else if (RecSettings.Contains(mousepoint))
-                {
-                    renderer.getGui(1).switchActive();
-                    renderer.getGui((int)GUI.def).switchActive();
-                }
-                else if (RecQuit.Contains(mousepoint))
-                {
-                    Application.Exit();
-                }
-            }
+            Point mousepoint = (Cursor.Position);
+            //if (renderer.getGui((int)GUI.def).isActive()) {
+            //    Rectangle recRes = new Rectangle(0, 60, this.ScreenY, 60);
+            //    Rectangle RecSettings = new Rectangle(0, 120, this.ScreenY, 60);
 
+            //    Rectangle RecQuit = new Rectangle(0, 180, this.ScreenY, 60);
+            //    if (recRes.Contains(mousepoint))
+            //    {
+            //        renderer.getGui((int)GUI.def).setActive(false);
+            //    }
+            //    else if (RecSettings.Contains(mousepoint))
+            //    {
+            //        renderer.getGui(1).switchActive();
+            //        renderer.getGui((int)GUI.def).switchActive();
+            //    }
+            //    else if (RecQuit.Contains(mousepoint))
+            //    {
+            //        Application.Exit();
+            //    }
+            //}
+
+            renderer.getGui((int)GUI.def).setInput(mousepoint);
             renderer.render();
         }
 

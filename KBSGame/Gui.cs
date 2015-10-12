@@ -13,7 +13,12 @@ namespace KBSGame
 		private Boolean active;
 		protected Bitmap buffer;
 		protected int xRes, yRes;
-
+		/// <summary>
+		/// Initializes a new instance of the <see cref="KBSGame.Gui"/> class.
+		/// </summary>
+		/// <param name="ID">I.</param>
+		/// <param name="ScreenresX">Screenres x.</param>
+		/// <param name="ScreenresY">Screenres y.</param>
 		public Gui(int ID, int ScreenresX, int ScreenresY)
         {
 			this.ID = ID;
@@ -25,7 +30,10 @@ namespace KBSGame
 
 			this.active = false;
         }
-
+		/// <summary>
+		/// Gets the render.
+		/// </summary>
+		/// <returns>The render.</returns>
 		public virtual Bitmap getRender()
         {
 			var g = Graphics.FromImage (buffer);
@@ -40,18 +48,28 @@ namespace KBSGame
 
             return this.buffer;
         }
-
+		/// <summary>
+		/// Sets the input.
+		/// </summary>
+		/// <param name="mousePos">Mouse position.</param>
 		public virtual void setInput(Point mousePos)
         {
 
         }
 
-        // processes keyboard input
+        /// <summary>
+        /// Sets the input.
+        /// </summary>
+        /// <param name="key">Key.</param>
 		public virtual void setInput(System.Windows.Forms.Keys key)
         {
 
         }
-
+		/// <summary>
+		/// Resize the specified ScreenresX and ScreenresY.
+		/// </summary>
+		/// <param name="ScreenresX">Screenres x.</param>
+		/// <param name="ScreenresY">Screenres y.</param>
 		public virtual void resize(int ScreenresX, int ScreenresY)
 		{
 			xRes = ScreenresX;
@@ -59,17 +77,25 @@ namespace KBSGame
 
 			buffer = new Bitmap (xRes, yRes);
 		}
-
+		/// <summary>
+		/// Sets the active.
+		/// </summary>
+		/// <param name="active">If set to <c>true</c> active.</param>
 		public void setActive(bool active)
 		{
 			this.active = active;
 		}
-
+		/// <summary>
+		/// Ises the active.
+		/// </summary>
+		/// <returns><c>true</c>, if active was ised, <c>false</c> otherwise.</returns>
 		public bool isActive()
 		{
 			return active;
 		}
-
+		/// <summary>
+		/// Switchs the active.
+		/// </summary>
 		public void switchActive()
 		{
 			active = !active;
