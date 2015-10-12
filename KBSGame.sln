@@ -8,9 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerMovementTest", "PlayerMovementTest\PlayerMovementTest.csproj", "{636D0988-CF1A-45BE-B1E7-A80676C5BE29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{49389105-99B9-4344-B3C4-05B2A72385DD}"
-	ProjectSection(SolutionItems) = preProject
-		KBSGame\bin\Debug\Game.xml = KBSGame\bin\Debug\Game.xml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

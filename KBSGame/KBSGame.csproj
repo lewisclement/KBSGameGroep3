@@ -87,6 +87,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Game.xml" />
     <Content Include="bin\Debug\gold_key.png" />
   </ItemGroup>
 </Project>
