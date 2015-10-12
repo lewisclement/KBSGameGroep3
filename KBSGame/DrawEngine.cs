@@ -14,7 +14,7 @@ namespace KBSGame
 		private int viewWidth, viewHeight;		//Size of view in tiles
 
 		private List<Gui> Interfaces;			//List of GUI
-		private Gui blockingGui;				//Modal interface, blocking all other input/output
+		private Gui modalGui;				//Modal interface, blocking all other input/output
 
 		private Graphics drawingArea; 			//Store in RAM to minimize createGraphics() calls
 
@@ -143,13 +143,22 @@ namespace KBSGame
 		}
 
 		/// <summary>
-		/// Gets the GUI.
+		/// Gets the GUI based on ID.
 		/// </summary>
 		/// <returns>The GUI.</returns>
 		/// <param name="ID">I.</param>
 		public Gui getGui(int ID)
 		{
 			return Interfaces [ID];
+		}
+
+		/// <summary>
+		/// Gets the GUI count.
+		/// </summary>
+		/// <returns>The GUI count.</returns>
+		public int getGuiCount()
+		{
+			return Interfaces.Count;
 		}
 
 		/// <summary>

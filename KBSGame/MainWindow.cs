@@ -8,7 +8,6 @@ namespace KBSGame
 	{
 		private static World world;
 		private static DrawEngine renderer;
-        private Point mouseOnClick;
         private int ScreenY;
         private int ScreenX;
 
@@ -18,13 +17,15 @@ namespace KBSGame
 			Text = "MainWindow";
 			Height = 1920;
 			Width = 1080;
-            
-    
+          
+ 
 			world = new World (300, 300);
 
-			renderer = new DrawEngine (world, this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
+			Graphics g = this.CreateGraphics ();
+			StaticVariables.dpi = (int)g.DpiX;
 
-        }
+			renderer = new DrawEngine (world, g, this.ClientSize.Width, this.ClientSize.Height);
+		}
 
 		protected override void OnPaint(PaintEventArgs e) 
 		{
@@ -42,30 +43,21 @@ namespace KBSGame
 
 		protected override void OnClick(EventArgs e)
 		{
-            this.ScreenY=this.ClientSize.Width;
+			for (int i = 0; i < renderer.getGuiCount (); i++) {
+				if (renderer.getGui (i).isActive ())
+					renderer.getGui (i).setMouseClick(PointToClient(Cursor.Position));
+			}
 
-            Point mousepoint = (Cursor.Position);
-            //if (renderer.getGui((int)GUI.def).isActive()) {
-            //    Rectangle recRes = new Rectangle(0, 60, this.ScreenY, 60);
-            //    Rectangle RecSettings = new Rectangle(0, 120, this.ScreenY, 60);
+            renderer.render();
+        }
 
-            //    Rectangle RecQuit = new Rectangle(0, 180, this.ScreenY, 60);
-            //    if (recRes.Contains(mousepoint))
-            //    {
-            //        renderer.getGui((int)GUI.def).setActive(false);
-            //    }
-            //    else if (RecSettings.Contains(mousepoint))
-            //    {
-            //        renderer.getGui(1).switchActive();
-            //        renderer.getGui((int)GUI.def).switchActive();
-            //    }
-            //    else if (RecQuit.Contains(mousepoint))
-            //    {
-            //        Application.Exit();
-            //    }
-            //}
+		protected override void OnMouseMove(MouseEventArgs e)
+		{
+			for (int i = 0; i < renderer.getGuiCount (); i++) {
+				if (renderer.getGui (i).isActive ())
+					renderer.getGui (i).setMouseHover(PointToClient(Cursor.Position));
+			}
 
-            renderer.getGui((int)GUI.def).setInput(mousepoint);
             renderer.render();
         }
 
@@ -77,7 +69,6 @@ namespace KBSGame
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "MainWindow";
-            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
 
         }
@@ -124,11 +115,6 @@ namespace KBSGame
 	    {
 	        return world;
 	    }
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-    }
+	}
 }
 
