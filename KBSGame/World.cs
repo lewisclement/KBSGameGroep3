@@ -30,8 +30,8 @@ namespace KBSGame
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-            xmlReader x = new xmlReader("game.xml", "game");
-            objects = x.getObjects();
+            LevelReader level = new LevelReader("Game.xml", "Game");
+            objects = level.getObjects();
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
 

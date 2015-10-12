@@ -49,7 +49,7 @@
     <Compile Include="TerrainTile.cs" />
     <Compile Include="World.cs" />
     <Compile Include="Plant.cs" />
-    <Compile Include="xmlReader.cs" />
+    <Compile Include="LevelReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

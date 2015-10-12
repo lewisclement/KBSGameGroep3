@@ -8,10 +8,10 @@ using System.Xml;
 
 namespace KBSGame
 {
-    class xmlReader
+    class LevelReader
     {
         private List<Entity> objects;
-        public xmlReader(String File, String FileName)
+        public LevelReader(String File, String FileName)
         {
             this.objects = new List<Entity>();
 

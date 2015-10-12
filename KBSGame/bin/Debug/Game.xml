@@ -34,7 +34,7 @@
    <spriteID>10</spriteID>
 	<X>49</X>
 	<Y>40</Y>
-	<solid>true</solid>
+	<solid>false</solid>
 	<drawOrder>8</drawOrder>
 	<drawPrecision>10</drawPrecision>
 	<height>50</height>
