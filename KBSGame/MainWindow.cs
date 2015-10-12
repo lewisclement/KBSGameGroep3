@@ -118,6 +118,11 @@ namespace KBSGame
             }
 			renderer.render ();
         }
-    }
+
+	    public World getWorld()
+	    {
+	        return world;
+	    }
+	}
 }
 

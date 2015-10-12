@@ -7,7 +7,7 @@ namespace KBSGame
 	{
 		private int ID;
 		private int spriteID;
-        public bool IsWalkable { get; private set; }
+        public bool IsWalkable { get; set; }
 
 		public TerrainTile (int ID, bool IsWalkable = true)
 		{

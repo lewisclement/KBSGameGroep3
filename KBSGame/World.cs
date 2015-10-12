@@ -8,9 +8,6 @@ namespace KBSGame
 {
 	public class World
 	{
-		static int minS = StaticVariables.minWorldSize;
-		static int maxS = StaticVariables.maxWorldSize;
-
 		private TerrainTile[] TileTypes;
 		private List<TerrainTile> terrainTiles;
 		private List<Byte> heightData;
@@ -20,10 +17,15 @@ namespace KBSGame
 		private Entity focusEntity;
 	    private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="KBSGame.World"/> class.
+		/// </summary>
+		/// <param name="width">Width.</param>
+		/// <param name="height">Height.</param>
 		public World (int width, int height)
 		{
-			this.width = Math.Max(minS, Math.Min(width, maxS));
-			this.height = Math.Max(minS, Math.Min(height, maxS));
+			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
+			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
             objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
@@ -46,11 +48,23 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-			temporaryWorldGenerator ();
+			//temporaryWorldGenerator ();
+            fillWithGrass();
             
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
 		}
 
+	    private void fillWithGrass()
+	    {
+            for (int i = 0; i < width * height; i++)
+            {
+                terrainTiles.Add(TileTypes[(int)TERRAIN.grass]);
+            }
+        }
+
+	    /// <summary>
+		/// This is a temporary world generator for as long as there isn't a wordl loader
+		/// </summary>
 		private void temporaryWorldGenerator()
 		{
 			//Fill world with water
@@ -59,37 +73,8 @@ namespace KBSGame
 				terrainTiles.Add (TileTypes [(int)TERRAIN.grass]);
 				heightData.Add (50);
 			}
-
-			//Place 10 rectangles
+				
 			Random rand = new Random ((int)DateTime.Now.Ticks);
-			/*
-			for (int i = 0; i < width * 4; i++) {
-				int size = rand.Next (3, 5);
-				int xTop = rand.Next (0, width - size);
-				int yTop = rand.Next (0, height - size);
-
-				for (int x = xTop; x < xTop + size; x++) {
-					for (int y = yTop; y < yTop + size; y++) {
-						int index = x * height + y;
-						terrainTiles [index] = TileTypes [(int)TERRAIN.sand];
-					}
-				}
-			}*/
-
-
-			/*
-			for (int i = 0; i < width * 5; i++) {
-				int size = rand.Next (2, 4);
-				int xTop = rand.Next (0, width - size);
-				int yTop = rand.Next (0, height - size);
-
-				for (int x = xTop; x < xTop + size; x++) {
-					for (int y = yTop; y < yTop + size; y++) {
-						int index = x * height + y;
-						terrainTiles [index] = TileTypes [(int)TERRAIN.dirt];
-					}
-				}
-			}*/
 
 			//Amount of dirt patches
 			for (int i = 0; i < width*height / 500; i++) {
@@ -212,7 +197,7 @@ namespace KBSGame
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 50, false));
+							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 50, false, 11));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
@@ -228,32 +213,67 @@ namespace KBSGame
             //objects.Add(new Plant(new Point(155, 150), (int)SPRITES.sapling1, 50, true));
         }
 
-
+		/// <summary>
+		/// Moves the object.
+		/// </summary>
+		/// <param name="entityID">Entity I.</param>
+		/// <param name="relativeLocation">Relative location.</param>
 		public void moveObject(int entityID, Point relativeLocation)
 		{
 
 		}
 
+		/// <summary>
+		/// Gets the player.
+		/// </summary>
+		/// <returns>The player.</returns>
 	    public Player getPlayer()
 	    {
 	        return player;
 	    }
 
+		/// <summary>
+		/// Removes the item.
+		/// </summary>
+		/// <param name="e">E.</param>
 	    public void RemoveItem(Entity e)
 	    {
 	        objects.Remove(e);
 	    }
 
+		/// <summary>
+		/// Gets the entity.
+		/// </summary>
+		/// <returns>The entity.</returns>
+		/// <param name="entityID">Entity I.</param>
 	    public Entity getEntity(int entityID)
 	    {
 	        return objects.FirstOrDefault(obj => obj.getID() == entityID);
 	    }
 
+		/// <summary>
+		/// Adds the entity.
+		/// </summary>
+		/// <param name="entity">Entity.</param>
+		public void addEntity(Entity entity)
+		{
+			objects.Add (entity);
+		}
+
+		/// <summary>
+		/// Gets the entities.
+		/// </summary>
+		/// <returns>The entities.</returns>
 		public List<Entity> getEntities()
 		{
 			return objects;
 		} 
 
+		/// <summary>
+		/// Gets the entities on terrain tile based on position.
+		/// </summary>
+		/// <returns>The entities on terrain tile.</returns>
+		/// <param name="point">Point.</param>
 		public List<Entity> getEntitiesOnTerrainTile(Point point)
 		{
             // Return list with entities on given tile
@@ -274,7 +294,17 @@ namespace KBSGame
 	        return terrainTiles[point.X*height + point.Y];
 	    }
 
-		public Byte getTerrainHeight(Point point)
+	    public void setTerraintile(Point point, int terrainID)
+	    {
+	        TerrainTile tile = TileTypes[terrainID];
+            if (terrainID == (int)SPRITES.water)
+            {
+                tile.IsWalkable = false;
+            }
+            terrainTiles[point.X*height + point.Y] = tile;
+	    }
+
+	    public Byte getTerrainHeight(Point point)
 		{
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
 				return 0;
@@ -379,12 +409,12 @@ namespace KBSGame
 		{
 			bool allowedSize = false;
 
-			if (width + x >= minS && width + x <= maxS) {
+			if (width + x >= StaticVariables.minWorldSize && width + x <= StaticVariables.maxWorldSize) {
 				allowedSize = true;
 			} else
 				allowedSize = false;
 
-			if (height + y >= minS && height + y <= maxS) {
+			if (height + y >= StaticVariables.minWorldSize && height + y <= StaticVariables.maxWorldSize) {
 				allowedSize = true;
 			} else
 				allowedSize = false;

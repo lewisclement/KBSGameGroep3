@@ -6,18 +6,26 @@ namespace KBSGame
 {
 	public class DrawEngine
 	{
-	    private Sprite[] sprites;
+		private Sprite[] sprites; 				//List of existing Sprites in game
 		private World world;
-		private Bitmap buffer;
+		private Bitmap buffer; 					//Back buffer to which the view is drawn
 
-		private int xRes, yRes;
-		private int viewWidth, viewHeight;
+		private int xRes, yRes; 				//Resolution of buffer
+		private int viewWidth, viewHeight;		//Size of view in tiles
 
-		private List<Gui> Interfaces;
-		private Gui blockingGui;			//Modal interface, blocking all other input/output
+		private List<Gui> Interfaces;			//List of GUI
+		private Gui blockingGui;				//Modal interface, blocking all other input/output
 
-		private Graphics drawingArea; //Store in RAM to minimize createGraphics() calls
+		private Graphics drawingArea; 			//Store in RAM to minimize createGraphics() calls
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="KBSGame.DrawEngine"/> class.
+		/// Runs all necessary code to draw a world to the screen.
+		/// </summary>
+		/// <param name="world">World.</param>
+		/// <param name="drawingArea">Drawing area.</param>
+		/// <param name="xResolution">X resolution.</param>
+		/// <param name="yResolution">Y resolution.</param>
 		public DrawEngine (World world, Graphics drawingArea, int xResolution, int yResolution)
 		{
 			this.drawingArea = drawingArea;
@@ -39,6 +47,9 @@ namespace KBSGame
 		    sprites = getSprites();
 		}
 
+		/// <summary>
+		/// Render de view naar scherm
+		/// </summary>
 		public void render()
         { 
 			long startTick = System.DateTime.UtcNow.Millisecond;
@@ -63,19 +74,30 @@ namespace KBSGame
 			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
 		}
 
+		/// <summary>
+		/// Draws the terrain.
+		/// </summary>
+		/// <param name="area">Area.</param>
 		public void drawTerrain(Graphics area)
 		{
-			//Quick'n'dirty terrain drawing
+			//Get array of tiles that are within view
 			TerrainTile[] tiles = world.getTilesView (viewWidth, viewHeight);
+
 			for (int i = 0; i < tiles.Length; i++) {
+				//Retreive coordinate based on index
 				int x = (i / viewHeight) * StaticVariables.tileSize;
 				int y = (i % viewHeight) * StaticVariables.tileSize;
 				area.DrawImage (sprites [tiles [i].getSpriteID ()].getBitmap(), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
 
+		/// <summary>
+		/// Draws the entities.
+		/// </summary>
+		/// <param name="area">Area.</param>
 		public void drawEntities(Graphics area)
 		{
+			//Get array of entities that are within view
 			Entity[] entities = world.getEntitiesView (viewWidth, viewHeight);
 			Rectangle view = world.getView (viewWidth, viewHeight);
 
@@ -87,6 +109,12 @@ namespace KBSGame
 			}
 		}
 
+		/// <summary>
+		/// Resize the specified drawingArea, xResolution and yResolution.
+		/// </summary>
+		/// <param name="drawingArea">Drawing area.</param>
+		/// <param name="xResolution">X resolution.</param>
+		/// <param name="yResolution">Y resolution.</param>
 		public void resize(Graphics drawingArea, int xResolution, int yResolution)
 		{
 			this.drawingArea = drawingArea;
@@ -103,17 +131,31 @@ namespace KBSGame
 			}
 		}
 
+		/// <summary>
+		/// Sets the view.
+		/// </summary>
+		/// <param name="Width">Width.</param>
+		/// <param name="Height">Height.</param>
 		private void setView(int Width, int Height) 
 		{
 			viewWidth = Math.Max(1, Width);
 			viewHeight = Math.Max(1, Height);
 		}
 
+		/// <summary>
+		/// Gets the GUI.
+		/// </summary>
+		/// <returns>The GUI.</returns>
+		/// <param name="ID">I.</param>
 		public Gui getGui(int ID)
 		{
 			return Interfaces [ID];
 		}
 
+		/// <summary>
+		/// Gets the sprites.
+		/// </summary>
+		/// <returns>The sprites.</returns>
 	    private Sprite[] getSprites()
 	    {
             Sprite[] sprites = new Sprite[(int)SPRITES.count];
