@@ -48,6 +48,7 @@ namespace KBSGame
 
             return this.buffer;
         }
+
 		/// <summary>
 		/// Sets the input.
 		/// </summary>
@@ -65,6 +66,7 @@ namespace KBSGame
         {
 
         }
+
 		/// <summary>
 		/// Resize the specified ScreenresX and ScreenresY.
 		/// </summary>
@@ -77,24 +79,27 @@ namespace KBSGame
 
 			buffer = new Bitmap (xRes, yRes);
 		}
+
 		/// <summary>
-		/// Sets the active.
+		/// Sets whether Gui is active.
 		/// </summary>
 		/// <param name="active">If set to <c>true</c> active.</param>
 		public void setActive(bool active)
 		{
 			this.active = active;
 		}
+
 		/// <summary>
-		/// Ises the active.
+		/// Returns whether Gui is active.
 		/// </summary>
 		/// <returns><c>true</c>, if active was ised, <c>false</c> otherwise.</returns>
 		public bool isActive()
 		{
 			return active;
 		}
+
 		/// <summary>
-		/// Switchs the active.
+		/// Inverts the boolean active.
 		/// </summary>
 		public void switchActive()
 		{
