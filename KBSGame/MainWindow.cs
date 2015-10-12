@@ -8,7 +8,6 @@ namespace KBSGame
 	{
 		private static World world;
 		private static DrawEngine renderer;
-        private Point mouseOnClick;
         private int ScreenY;
         private int ScreenX;
 
@@ -23,7 +22,10 @@ namespace KBSGame
     
 			world = new World (300, 300);
 
-			renderer = new DrawEngine (world, this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
+			Graphics g = this.CreateGraphics ();
+			StaticVariables.dpi = (int)g.DpiX;
+
+			renderer = new DrawEngine (world, g, this.ClientSize.Width, this.ClientSize.Height);
 		}
 
 		protected override void OnPaint(PaintEventArgs e) 

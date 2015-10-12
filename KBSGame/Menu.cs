@@ -42,7 +42,7 @@ namespace KBSGame
 
 		public override void setMouseClick(Point mousePos)
         {
-			clickPos = mousePos.Y / 60;
+			clickPos = mousePos.Y / StaticVariables.dpi;
 
 			switch (clickPos) {
 			case 0:
@@ -58,7 +58,7 @@ namespace KBSGame
 
 		public override void setMouseHover(Point mousePos)
 		{
-			hoverPos = mousePos.Y / 60;
+			hoverPos = mousePos.Y / StaticVariables.dpi;
 		}
 
 		public void addMenuItem(String text)
@@ -81,15 +81,23 @@ namespace KBSGame
             var g = Graphics.FromImage(buffer);
             g.Clear(Color.FromArgb(0));
 
-			int width = xRes / 5;
+			int width = StaticVariables.dpi * 4;
+
+			StringFormat style = new StringFormat ();
+			style.Alignment = StringAlignment.Center;
+			Font font = new Font ("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
 
 			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, 0, width, yRes);
-            g.DrawString(this.menu, new Font("Arial", 20, FontStyle.Bold), new SolidBrush(Color.White), xRes / 2, 20);
-			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverPos * 60, width, 60);
+			g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
+			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverPos * StaticVariables.dpi, width, StaticVariables.dpi);
 
 			for (int i = 0; i < buttonList.Count; i++)
             {
-				g.DrawString(buttonList[i].text, new Font("Arial", 20), new SolidBrush(Color.White), 0, i * 60);
+				float fontSize = StaticVariables.dpi / 3;
+				float x = StaticVariables.dpi / 4;
+				float y = StaticVariables.dpi * i + fontSize / 2;
+
+				g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y);
             }
 
             return this.buffer;
