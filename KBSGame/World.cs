@@ -48,23 +48,33 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-			//temporaryWorldGenerator ();
+            //temporaryWorldGenerator ();
             
-            fillWithGrass();
+            LevelReader level = new LevelReader("Game.xml");
+            FillWorld(level.getdefaultbackground());
+            this.objects = level.getObjects();
+            List<Terrain> terrain;
+            terrain = level.getTerrainTiles();
+
+            foreach (Terrain t in terrain)
+            {
+                setTerraintile(t.getP(),t.geti());
+            }
             objects.Add(new Finish(new Point(55, 55), (int)SPRITES.fisnish));
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
+           
+
         }
         private void LevelLoader(String File)
         {
-            LevelReader level = new LevelReader(File);
-            this.objects = level.getObjects();
+
         }
 
-	    private void fillWithGrass()
+	    private void FillWorld(int SPrite)
 	    {
             for (int i = 0; i < width * height; i++)
             {
-                terrainTiles.Add(TileTypes[(int)TERRAIN.grass]);
+                terrainTiles.Add(TileTypes[SPrite]);
             }
         }
 

@@ -39,12 +39,32 @@
 	<drawPrecision>10</drawPrecision>
 	<height>50</height>
   </Entity>
+       <Entity>
+   <type>DefaultTerrain</type>
+       <Walkable>true</Walkable>
+       <SpriteID>3</SpriteID>
+  </Entity>
      <Entity>
    <type>Terrain</type>
    <ID>99</ID>
-       <X>80</X>
-       <Y>80</Y>
-       <Walkable>true</Walkable>
-       <TileType>water</TileType>
+       <X>59</X>
+       <Y>59</Y>
+       <Walkable>false</Walkable>
+       <SpriteID>0</SpriteID>
+  </Entity>
+    <Entity>
+   <type>Terrain</type>
+   <ID>99</ID>
+       <X>59</X>
+       <Y>60</Y>
+       <Walkable>false</Walkable>
+       <SpriteID>0</SpriteID>
+  </Entity>    <Entity>
+   <type>Terrain</type>
+   <ID>99</ID>
+       <X>59</X>
+       <Y>61</Y>
+       <Walkable>false</Walkable>
+       <SpriteID>0</SpriteID>
   </Entity>
 </ArrayOfEntity>
