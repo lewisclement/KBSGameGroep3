@@ -48,7 +48,7 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-            //temporaryWorldGenerator ();
+			//temporaryWorldGenerator ();
             
             LevelReader level = new LevelReader("Game.xml");
             FillWorld(level.getdefaultbackground());
