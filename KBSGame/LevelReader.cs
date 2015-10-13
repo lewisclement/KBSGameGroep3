@@ -36,6 +36,7 @@ namespace KBSGame
                     }
                     catch (Exception ex)
                     {
+                        Console.WriteLine("Fout bij de eerste catch");
                     }
                 }
                 
@@ -51,11 +52,11 @@ namespace KBSGame
                         this.objects.Add(p);
                         p = null;
                         Console.WriteLine("player");
-                        Console.WriteLine(node["ID"].InnerText);
+                        //Console.WriteLine(node["ID"].InnerText);
                     }
                     catch (Exception ex)
                     {
-
+                        Console.WriteLine("Fout bij de tweede catch");
                     }
 
                 }
