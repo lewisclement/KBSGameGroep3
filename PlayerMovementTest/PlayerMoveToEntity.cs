@@ -6,12 +6,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace PlayerMovementTest
 {
     [TestClass]
-    public class PlayerMoveToWater
+    public class PlayerMoveToEntity
     {
         private World w;
         private Player p;
 
-        public PlayerMoveToWater()
+        public PlayerMoveToEntity()
         {
             w = new World(3, 3);
             SetupWorld();
@@ -35,28 +35,45 @@ namespace PlayerMovementTest
                 }
                 w.setTerraintile(new Point(i, 2), (int)SPRITES.water);
             }
-            p.setLocation(new Point(0, 1));
         }
 
         [TestMethod]
         public void MoveToWater()
         {
-            // Move is relative to current position
-            // Move one grid down to grass tile
-            p.move(w, new Point(0, 0));
-            Assert.AreEqual(new Point(0, 1), p.getLocation());
-
+            // Set Player location
+            p.setLocation(new Point(0, 1));
             // Try to move one grid down to water tile
             p.move(w, new Point(0, 1));
             // Check if player didn't move
             Assert.AreEqual(new Point(0, 1), p.getLocation());
+        }
 
-            // Add lilypad on location 0,2
+        [TestMethod]
+        public void MoveToNonSolidOnNonWalkable()
+        {
+            // Set Player location
+            p.setLocation(new Point(0, 1));
+            // Add lilypad (walkable Entity) on location 0,2 (NonWalkable tile)
             Entity lilypad = new Plant(new Point(0, 2), (int)SPRITES.waterlily, 50, false, 0, 0);
             w.addEntity(lilypad);
             // Try to move one grid down to water tile with lilypad
             p.move(w, new Point(0, 1));
+            // Check if player moved
             Assert.AreEqual(new Point(0, 2), p.getLocation());
+        }
+
+        [TestMethod]
+        public void MoveToSolid()
+        {
+            // Set Player location
+            p.setLocation(new Point(0, 1));
+            // Add solid entity (tree) on location 1,1
+            Entity tree = new Plant(new Point(1, 1), (int)SPRITES.sapling1, 50);
+            w.addEntity(tree);
+            // Try to move one grid to the right to tile with solid entity
+            p.move(w, new Point(1, 1));
+            // Check if player didn't move
+            Assert.AreEqual(new Point(0, 1), p.getLocation());
         }
     }
 }
