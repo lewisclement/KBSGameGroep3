@@ -30,8 +30,7 @@ namespace KBSGame
 
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-            LevelReader level = new LevelReader("Game.xml");
-                this.objects = level.getObjects();
+            LevelLoader("Game.xml");
             // TEMPORARY
 	//		player = new Player(new Point(this.width/2, this.height/2), 50);
 		//	player.setHeight (50);
@@ -54,6 +53,11 @@ namespace KBSGame
             fillWithGrass();
             objects.Add(new Finish(new Point(55, 55), (int)SPRITES.fisnish));
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
+        }
+        private void LevelLoader(String File)
+        {
+            LevelReader level = new LevelReader(File);
+            this.objects = level.getObjects();
         }
 
 	    private void fillWithGrass()
