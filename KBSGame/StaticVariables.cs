@@ -2,7 +2,7 @@
 
 namespace KBSGame
 {
-    public enum SPRITES : int {water=0, grass, sand, player, dirt, sapling1, sapling2, tallgrass, waterlily, key, banana, fisnish, count};
+    public enum SPRITES : int {water=0, grass, sand, player, dirt, sapling1, sapling2, tallgrass, waterlily, key, banana, finish, count};
 	enum TERRAIN : int {water=0, grass, sand, dirt, count}
 	enum GUI : int {def=0, gameover, count};
     

@@ -21,7 +21,7 @@ namespace KBSGame
 
         public void LevelDone()
         {
-
+			System.Windows.Forms.Application.Exit();
         }
 
     }

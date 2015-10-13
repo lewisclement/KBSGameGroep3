@@ -51,7 +51,7 @@ namespace KBSGame
 			//temporaryWorldGenerator ();
             
             fillWithGrass();
-            objects.Add(new Finish(new Point(55, 55), (int)SPRITES.fisnish));
+			objects.Add(new Finish(new Point(55, 55), (int)SPRITES.finish));
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
         }
         private void LevelLoader(String File)
