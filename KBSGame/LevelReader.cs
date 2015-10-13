@@ -12,7 +12,7 @@ namespace KBSGame
     {
         private List<Entity> objects;
         private List<TerrainTile> TerrainTiles;
-        public LevelReader(String File, String FileName)
+        public LevelReader(String File)
         {
             this.objects = new List<Entity>();
 
