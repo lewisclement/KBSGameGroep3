@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<ArrayOfEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Entity>
+	<type>Player</type>
+	<X>40</X>	
+	<Y>40</Y>
+	<height>50</height>
+  </Entity>
+  <Entity>
+   <type>null</type>
+   <ID>1</ID>
+   <spriteID>0</spriteID>
+	<X>50</X>
+	<Y>50</Y>
+	<solid>true</solid>
+	<drawOrder>8</drawOrder>
+	<drawPrecision>10</drawPrecision>
+	<height>50</height>
+  </Entity>
+   <Entity>
+   <type>null</type>
+   <ID>2</ID>
+   <spriteID>0</spriteID>
+	<X>51</X>
+	<Y>50</Y>
+	<solid>true</solid>
+	<drawOrder>8</drawOrder>
+	<drawPrecision>10</drawPrecision>
+	<height>50</height>
+  </Entity>
+     <Entity>
+   <type>null</type>
+   <ID>3</ID>
+   <spriteID>10</spriteID>
+	<X>49</X>
+	<Y>40</Y>
+	<solid>false</solid>
+	<drawOrder>8</drawOrder>
+	<drawPrecision>10</drawPrecision>
+	<height>50</height>
+  </Entity>
+
+</ArrayOfEntity>

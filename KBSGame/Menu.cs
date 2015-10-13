@@ -11,54 +11,95 @@ namespace KBSGame
 {
     public class Menu : Gui 
     {
-        private List<String> StringList;
+		struct Button {
+			public String text;
+
+			public Button(String text)
+			{
+				this.text = text;
+			}
+		};
+
+		private List<Button> buttonList;
         private String menu;
+
+		int hoverPos, clickPos;
+
         public Menu(int ID, int ScreenresX, int ScreenresY, String Menu) : base(ID, ScreenresX, ScreenresY)
         {
             this.menu = Menu;
-            new Gui(ID, ScreenresX, ScreenresY);
+			buttonList = new List<Button>();
+
             xRes = ScreenresX;
             yRes = ScreenresY;
             buffer = new Bitmap(xRes, yRes);
-            StringList = new List<String>();
-            StringList.Add("Resume");
-            StringList.Add("Settings");
-            StringList.Add("Quit game");
 
+			buttonList.Add(new Button("Resume"));
+			buttonList.Add(new Button("Settings"));
+			buttonList.Add(new Button("Help"));
+			buttonList.Add(new Button("Quit"));
         }
-        public override void setInput(Point mousePos)
+
+		public override void setMouseClick(Point mousePos)
         {
-            for (int i = 0; i < StringList.Count; i++)
-            {
-                Rectangle rect = new Rectangle(0,60+i*60, this.yRes, 60);
-                if (rect.Contains(mousePos))
-                {
-                }
-            }
+			clickPos = mousePos.Y / StaticVariables.dpi;
+
+			switch (clickPos) {
+			case 0:
+				setActive (false);
+				break;
+			case 3:
+				Application.Exit();
+				break;
+			default:
+				break;
+			}
         }
-        public void addMenuItem(String Value)
+
+		public override void setMouseHover(Point mousePos)
+		{
+			hoverPos = mousePos.Y / StaticVariables.dpi;
+		}
+
+		public void addMenuItem(String text)
         {
-            this.StringList.Add(Value);
+			this.buttonList.Add(new Button(text));
         }
-        public List<String> getStringList()
+
+		public String[] getButtonList()
         {
-            return this.StringList;
+			String[] returnStrings = new String[buttonList.Count];
+			for (int i = 0; i < buttonList.Count; i++) {
+				returnStrings [i] = buttonList [i].text;
+			}
+
+			return returnStrings;
         }
+
         public override Bitmap getRender()
         {
             var g = Graphics.FromImage(buffer);
-            g.Clear(Color.FromArgb(0));            
-            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, 0, xRes, yRes); //To do: Figure out why -40 is nessecary to have the same margin
-            g.DrawString(this.menu, new Font("Arial", 20, FontStyle.Bold), new SolidBrush(Color.White), xRes / 2, 20);
-            for (int i = 0; i < StringList.Count; i++)
+            g.Clear(Color.FromArgb(0));
+
+			int width = StaticVariables.dpi * 4;
+
+			StringFormat style = new StringFormat ();
+			style.Alignment = StringAlignment.Center;
+			Font font = new Font ("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
+
+			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, 0, width, yRes);
+			g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
+			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverPos * StaticVariables.dpi, width, StaticVariables.dpi);
+
+			for (int i = 0; i < buttonList.Count; i++)
             {
-                g.DrawString((string)StringList[i], new Font("Arial", 16), new SolidBrush(Color.White), 0, 60 + i * 60);
+				float fontSize = StaticVariables.dpi / 3;
+				float x = StaticVariables.dpi / 4;
+				float y = StaticVariables.dpi * i + fontSize / 2;
+
+				g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y);
             }
-            // g.FillRectangle(new SolidBrush(Color.FromArgb(150, Color.White)), xRes / 3, 60, xRes / 2, 25);
-            //  g.DrawString("Resume", new Font("Arial", 16), new SolidBrush(Color.White), 0, 60);
-            //Pen boldPen = new Pen(Color.White, 5);
-            //g.DrawLine(boldPen, xRes - 70, 30, xRes - 30, 70);
-            //g.DrawLine(boldPen, xRes - 70, 70, xRes - 30, 30);
+
             return this.buffer;
         }
     }

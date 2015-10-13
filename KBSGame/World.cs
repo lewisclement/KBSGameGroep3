@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace KBSGame
 {
+    [Serializable]
 	public class World
 	{
 		private TerrainTile[] TileTypes;
@@ -24,17 +25,20 @@ namespace KBSGame
 		/// <param name="height">Height.</param>
 		public World (int width, int height)
 		{
+
+
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-            objects = new List<Entity>();
+            LevelReader level = new LevelReader("Game.xml", "Game");
+            objects = level.getObjects();
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
 
             // TEMPORARY
-			player = new Player(new Point(this.width/2, this.height/2), 50);
-			player.setHeight (50);
-		    objects.Add(player);
+			//player = new Player(new Point(this.width/2, this.height/2), 50);
+			//player.setHeight (50);
+		 //   objects.Add(player);
 
 
             TileTypes = new TerrainTile[(int)TERRAIN.count];
@@ -48,11 +52,11 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-			temporaryWorldGenerator ();
-            //fillWithGrass();
+			//temporaryWorldGenerator ();
+            fillWithGrass();
             
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
-		}
+        }
 
 	    private void fillWithGrass()
 	    {
