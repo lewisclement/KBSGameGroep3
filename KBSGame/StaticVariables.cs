@@ -14,9 +14,10 @@ namespace KBSGame
 		public static String execFolder = null;
 		public const Byte drawOrderSize = 16;
         
+		public static int dpi;
 	}
 
-    
+
 			
 }
 

@@ -16,7 +16,6 @@ namespace KBSGame
 		{
 		    Inventory = new List<Item>();
 		}
-
 		public override void move(World sender, Point relativeLocation)
 		{
 			int moveLocationX = location.X + relativeLocation.X;
