@@ -60,7 +60,7 @@ namespace KBSGame
             {
                 setTerraintile(t.getP(),t.geti());
             }
-            objects.Add(new Finish(new Point(55, 55), (int)SPRITES.fisnish));
+            objects.Add(new Finish(new Point(55, 55), (int)SPRITES.finish));
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
            
 
