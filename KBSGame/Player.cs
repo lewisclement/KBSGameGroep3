@@ -24,24 +24,22 @@ namespace KBSGame
 		    Point targetPoint = new Point(moveLocationX, moveLocationY);
             TerrainTile targetTile = sender.getTerraintile (targetPoint);
             List<Entity> targetEntities = sender.getEntitiesOnTerrainTile(targetPoint);
-
-            // Check for waterlily on the tile
-		    bool IsWaterlily = targetEntities.Any(e => e.getSpriteID() == (int) SPRITES.waterlily);
-            // Check for solid objects on the tile
-		    bool IsSolid = targetEntities.Any(e => e.getSolid());
+            
+            // Initialize booleans for entities on the tile
+		    bool HasSolidEntities = targetEntities.Any(e => e.getSolid());
+		    bool HasWalkableEntities = targetEntities.Any(e => e.getSolid() == false);
 
             // Log current inventory
 		    Inventory.ForEach(Console.WriteLine);
 
-			if (targetTile == null || IsSolid)
+            // If terrain contains solid objects OR if tile has no walkable entity on a non-walkable tile
+            if (targetTile == null || HasSolidEntities ||
+                (!HasWalkableEntities && !targetTile.IsWalkable))
                 return;
-		    // If terrain is walkable or stepping on a waterlily
-            if (targetTile.IsWalkable || IsWaterlily)
-			{
-				location.X = moveLocationX;
-				location.Y = moveLocationY;
-			    PickUpItems(sender);
-			}
+
+		    location.X = moveLocationX;
+		    location.Y = moveLocationY;
+		    PickUpItems(sender);
 		}
 
         public void PickUpItems(World world)
