@@ -48,8 +48,8 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-			//temporaryWorldGenerator ();
-            fillWithGrass();
+			temporaryWorldGenerator ();
+            //fillWithGrass();
             
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
 		}
