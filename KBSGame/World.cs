@@ -33,8 +33,8 @@ namespace KBSGame
             LevelReader level = new LevelReader("Game.xml");
                 this.objects = level.getObjects();
             // TEMPORARY
-			player = new Player(new Point(this.width/2, this.height/2), 50);
-			player.setHeight (50);
+	//		player = new Player(new Point(this.width/2, this.height/2), 50);
+		//	player.setHeight (50);
 	//	    objects.Add(player);
 
 
