@@ -22,8 +22,9 @@ namespace KBSGame
 
 		private List<Button> buttonList;
         private String menu;
+		int width = StaticVariables.dpi * 4;
 
-		int hoverPos, clickPos;
+		int hoverPos = -1, clickPos = -1;
 
         public Menu(int ID, int ScreenresX, int ScreenresY, String Menu) : base(ID, ScreenresX, ScreenresY)
         {
@@ -42,7 +43,10 @@ namespace KBSGame
 
 		public override void setMouseClick(Point mousePos)
         {
-			clickPos = mousePos.Y / StaticVariables.dpi;
+			if (mousePos.X > width)
+				clickPos = -1;
+			else
+				clickPos = mousePos.Y / StaticVariables.dpi;
 
 			switch (clickPos) {
 			case 0:
@@ -58,7 +62,13 @@ namespace KBSGame
 
 		public override void setMouseHover(Point mousePos)
 		{
-			hoverPos = mousePos.Y / StaticVariables.dpi;
+			if (mousePos.X > width)
+				hoverPos = -1;
+			else {
+				hoverPos = mousePos.Y / StaticVariables.dpi;
+				if (hoverPos >= buttonList.Count)
+					hoverPos = -1;
+			}
 		}
 
 		public void addMenuItem(String text)
