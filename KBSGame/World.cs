@@ -30,11 +30,12 @@ namespace KBSGame
 
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-
+            LevelReader level = new LevelReader("Game.xml");
+                this.objects = level.getObjects();
             // TEMPORARY
 			player = new Player(new Point(this.width/2, this.height/2), 50);
 			player.setHeight (50);
-		    objects.Add(player);
+	//	    objects.Add(player);
 
 
             TileTypes = new TerrainTile[(int)TERRAIN.count];
@@ -51,7 +52,7 @@ namespace KBSGame
 			//temporaryWorldGenerator ();
             
             fillWithGrass();
-            objects.Add(new Finish(new Point(157, 160), (int)SPRITES.fisnish));
+            objects.Add(new Finish(new Point(55, 55), (int)SPRITES.fisnish));
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
         }
 
