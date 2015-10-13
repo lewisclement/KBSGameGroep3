@@ -48,10 +48,11 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-			//temporaryWorldGenerator ();
-            fillWithGrass();
+            //temporaryWorldGenerator ();
             
-			setFocusEntity (objects [0]); // TEMPORARY PLAYER
+            fillWithGrass();
+            objects.Add(new Finish(new Point(157, 160), (int)SPRITES.fisnish));
+            setFocusEntity (objects [0]); // TEMPORARY PLAYER
 		}
 
 	    private void fillWithGrass()
@@ -67,12 +68,15 @@ namespace KBSGame
 		/// </summary>
 		private void temporaryWorldGenerator()
 		{
-			//Fill world with water
-			for (int i = 0; i < width * height; i++) 
+
+            
+            //Fill world with water
+            for (int i = 0; i < width * height; i++) 
 			{
 				terrainTiles.Add (TileTypes [(int)TERRAIN.grass]);
 				heightData.Add (50);
-			}
+                
+            }
 				
 			Random rand = new Random ((int)DateTime.Now.Ticks);
 
@@ -211,6 +215,8 @@ namespace KBSGame
             objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
             objects.Add(new Key(new Point(156, 150), (int)SPRITES.key, false, false));
             //objects.Add(new Plant(new Point(155, 150), (int)SPRITES.sapling1, 50, true));
+
+            
         }
 
 		/// <summary>
