@@ -39,5 +39,12 @@
 	<drawPrecision>10</drawPrecision>
 	<height>50</height>
   </Entity>
-
+     <Entity>
+   <type>Terrain</type>
+   <ID>99</ID>
+       <X>80</X>
+       <Y>80</Y>
+       <Walkable>true</Walkable>
+       <TileType>water</TileType>
+  </Entity>
 </ArrayOfEntity>
