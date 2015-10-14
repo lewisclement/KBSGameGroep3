@@ -89,7 +89,7 @@ namespace KBSGame
             style.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
 
-            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 150, 150, width, yRes); //The 150 needs to be changed to the middle value of the screen
+            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, 0, width, yRes); //The 150 needs to be changed to the middle value of the screen
             g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
             g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverPos * StaticVariables.dpi, width, StaticVariables.dpi);
 
