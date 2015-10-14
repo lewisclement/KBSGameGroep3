@@ -20,7 +20,8 @@ namespace KBSGame
 			Width = 1080;
           
  
-			world = new World (300, 300);
+			world = new World(300, 300);
+            world.LevelLoader("Game.xml");
 
 			Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
@@ -122,6 +123,8 @@ namespace KBSGame
 	    {
 	        return world;
 	    }
-	}
+
+
+    }
 }
 

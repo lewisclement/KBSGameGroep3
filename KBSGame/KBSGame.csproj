@@ -95,4 +95,8 @@
     <Content Include="bin\Debug\gold_key.png" />
     <Content Include="bin\Release\finish.png" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
 </Project>

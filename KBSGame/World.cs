@@ -27,7 +27,7 @@ namespace KBSGame
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-
+            this.objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
             LevelLoader("Game.xml");
@@ -50,8 +50,12 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-            //temporaryWorldGenerator ();
+          //  temporaryWorldGenerator ();
             
+
+        }
+        public void LevelLoader(String File)
+        {
             LevelReader level = new LevelReader("Game.xml");
             FillWorld(level.getdefaultbackground());
             this.objects = level.getObjects();
@@ -65,7 +69,7 @@ namespace KBSGame
             objects.Add(new Finish(new PointF(55.0f, 55.0f), (int)SPRITES.finish));
             setFocusEntity (objects [0]); // TEMPORARY PLAYER
         }
-
+           
         private void LevelLoader(String File)
         {
 
@@ -75,8 +79,8 @@ namespace KBSGame
 	    {
             player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
 		    player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
-	    }
-
+		}
+        
 	    private void FillWorld(int SPrite)
 	    {
             for (int i = 0; i < width * height; i++)
