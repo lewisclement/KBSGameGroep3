@@ -84,6 +84,7 @@
     <None Include="bin\Release\sapling2.png" />
     <None Include="bin\Debug\banana.png" />
     <None Include="bin\Release\banana.png" />
+    <None Include="bin\Debug\tiles.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
