@@ -20,7 +20,8 @@ namespace KBSGame
 			Width = 1080;
           
  
-			world = new World (300, 300);
+			world = new World(300, 300);
+            world.LevelLoader();
 
 			Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
@@ -108,7 +109,10 @@ namespace KBSGame
                     renderer.getGui((int)GUI.finish).switchActive();
                     break;
             case Keys.E:
-                world.getPlayer().DropItem(world);
+                //world.getPlayer().DropItem(world);
+                break;
+                case Keys.I:
+                    renderer.getGui((int) GUI.guiinventory);
                 break;
             default:
                 return;
@@ -119,6 +123,8 @@ namespace KBSGame
 	    {
 	        return world;
 	    }
+
+
 	}
 }
 

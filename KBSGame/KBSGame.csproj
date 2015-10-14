@@ -94,5 +94,4 @@
     <Content Include="bin\Debug\gold_key.png" />
     <Content Include="bin\Release\finish.png" />
   </ItemGroup>
-  <ItemGroup />
 </Project>

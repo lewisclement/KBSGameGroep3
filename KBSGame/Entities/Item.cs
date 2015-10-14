@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace KBSGame
 {
-    public class Item : Entity
+    public class Item
     {
         public bool CanPickup { get; set; }
+        private Entity Entity { get; set; }
 
-        public Item(Point location, int spriteID, bool solid = false, bool CanPickup = true, byte height = 50, byte drawOrder = 8, int drawPrecision = 10)
-            : base(location, spriteID, solid, height, drawOrder, drawPrecision)
+        public Item(Entity e)
         {
-            this.CanPickup = CanPickup;
+            this.Entity = e;
         }
     }
 }

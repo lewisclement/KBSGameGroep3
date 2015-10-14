@@ -7,12 +7,8 @@ using System.Threading.Tasks;
 
 namespace KBSGame
 {
-    class Key : Item
+    class Key
     {
-        public Key(Point location, int spriteID, bool solid = false, bool CanPickup = true, byte height = 50, byte drawOrder = 8, int drawPrecision = 10)
-			: base(location, (int)SPRITES.key, solid, CanPickup, height, drawOrder, drawPrecision)
-        {
-
-        }
+        
     }
 }

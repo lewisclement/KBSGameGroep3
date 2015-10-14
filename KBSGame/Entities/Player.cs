@@ -50,8 +50,15 @@ namespace KBSGame
 
 		    location.X = moveLocationX;
 		    location.Y = moveLocationY;
-		    PickUpItems(sender);
+		    //PickUpItems(sender);
 		}
+
+        public void AddItemToInventory(Item i)
+        {
+            Inventory.Add(i);
+		}
+
+        /*
 
         public void PickUpItems(World world)
         {
@@ -62,6 +69,7 @@ namespace KBSGame
             }
         }
 
+        
         public void PickUp(World world, Item i)
         {
             world.RemoveItem(i);
@@ -90,5 +98,6 @@ namespace KBSGame
             // Remove item from inventory
             Inventory.RemoveAt(0);
         }
+        */
     }
 }

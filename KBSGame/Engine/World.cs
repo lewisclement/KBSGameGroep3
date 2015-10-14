@@ -27,10 +27,11 @@ namespace KBSGame
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-
+            this.objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-            LevelLoader("Game.xml");
+		    //player = objects.FirstOrDefault(e => e.GetType().IsAssignableFrom(typeof(Player)));
+
             // TEMPORARY
 	//		player = new Player(new Point(this.width/2, this.height/2), 50);
 		//	player.setHeight (50);
@@ -48,8 +49,12 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-            //temporaryWorldGenerator ();
+          //  temporaryWorldGenerator ();
             
+
+        }
+        public void LevelLoader()
+        {
             LevelReader level = new LevelReader("Game.xml");
             FillWorld(level.getdefaultbackground());
             this.objects = level.getObjects();
@@ -62,12 +67,17 @@ namespace KBSGame
             }
             objects.Add(new Finish(new PointF(55.0f, 55.0f), (int)SPRITES.finish));
             setFocusEntity (objects [0]); // TEMPORARY PLAYER
-           
-
         }
+           
         private void LevelLoader(String File)
         {
 
+		}
+
+	    public void AddItems()
+	    {
+            player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
+		    player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
 		}
         
 	    private void FillWorld(int SPrite)
@@ -226,9 +236,9 @@ namespace KBSGame
 				}
 			}
             // Test Key
-            objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
-            objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
-            objects.Add(new Key(new Point(156, 150), (int)SPRITES.key, false, false));
+            //objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
+            //objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
+            //objects.Add(new Key(new Point(156, 150), (int)SPRITES.key, false, false));
             //objects.Add(new Plant(new Point(155, 150), (int)SPRITES.sapling1, 50, true));
 
             
