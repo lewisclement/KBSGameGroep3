@@ -79,21 +79,23 @@ namespace KBSGame
 
         }
 
+      
+
         protected override void OnKeyDown(KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
             case Keys.Up:
-                world.getEntities()[0].move(world, new Point(0, -1));
+                world.getEntities()[0].move(world, new PointF(0.0f, -0.4f));
                 break;
             case Keys.Down:
-                world.getEntities()[0].move(world, new Point(0, 1));
+                world.getEntities()[0].move(world, new PointF(0.0f, 0.2f));
                 break;
             case Keys.Left:
-                world.getEntities()[0].move(world, new Point(-1, 0));
+                world.getEntities()[0].move(world, new PointF(-0.2f, 0.0f));
                 break;
             case Keys.Right:
-                world.getEntities()[0].move(world, new Point(1, 0));
+                world.getEntities()[0].move(world, new PointF(0.2f, 0.0f));
                 break;
 			case Keys.Escape:
                 renderer.getGui((int)GUI.def).switchActive();
@@ -107,7 +109,6 @@ namespace KBSGame
             default:
                 return;
             }
-			renderer.render ();
         }
 
 	    public World getWorld()

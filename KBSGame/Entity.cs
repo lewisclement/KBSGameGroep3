@@ -10,13 +10,13 @@ namespace KBSGame
 	{
         protected int ID = 0;
         protected int spriteID;
-        protected Point location;
+        protected PointF location;
         protected bool solid;
         protected Byte drawOrder;
         protected int drawPrecision;
         protected Byte height;
 
-		public Entity(Point location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
+		public Entity(PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
 		{
 			this.location = location;
 			this.height = height;
@@ -26,7 +26,7 @@ namespace KBSGame
 			this.solid = solid;
 	        ID++;
 		}
-        public Entity(int ID, Point location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
+        public Entity(int ID, PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
         {
             this.location = location;
             this.height = height;
@@ -47,7 +47,7 @@ namespace KBSGame
 			return solid;
 		}
 
-		public Point getLocation()
+		public PointF getLocation()
 		{
 			return location;
 		}
@@ -92,7 +92,7 @@ namespace KBSGame
 			this.height = height;
 		}
 
-        public void setLocation(Point point)
+        public void setLocation(PointF point)
         {
             this.location = point;
         }
@@ -105,7 +105,7 @@ namespace KBSGame
 				this.drawOrder = drawOrder;
 		}
 
-		public virtual void move(World sender, Point relativeLocation)
+		public virtual void move(World sender, PointF relativeLocation)
 		{
 			//Entity checks
 

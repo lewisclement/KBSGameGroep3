@@ -102,8 +102,8 @@ namespace KBSGame
 
 			foreach (Entity t in entities)
 			{
-			    int x = (t.getLocation ().X - view.Left) * StaticVariables.tileSize;
-			    int y = (t.getLocation().Y - view.Top)*StaticVariables.tileSize - t.getDrawPrecision();
+			    float x = (t.getLocation ().X - view.Left) * StaticVariables.tileSize;
+			    float y = (t.getLocation().Y - view.Top)*StaticVariables.tileSize - t.getDrawPrecision();
 			    area.DrawImage (sprites [t.getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
