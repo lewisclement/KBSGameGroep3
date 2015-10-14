@@ -18,9 +18,6 @@ namespace KBSGame
 
         }
 
-
-
-
         public void LevelDone()
         {
             GameOverMenu finish = new GameOverMenu(50, 200, 200, "finish");
@@ -31,6 +28,5 @@ namespace KBSGame
             //System.Windows.Forms.Application.Exit();
             Console.WriteLine("HALLO LEKKER DING! LEWIS IS GREAT");
         }
-
     }
 }

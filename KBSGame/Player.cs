@@ -56,7 +56,7 @@ namespace KBSGame
         public void AddItemToInventory(Item i)
         {
             Inventory.Add(i);
-        }
+		}
 
         /*
 
