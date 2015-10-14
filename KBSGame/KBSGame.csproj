@@ -34,7 +34,6 @@
     <Compile Include="Gui\GameOverMenu.cs" />
     <Compile Include="Entities\Finish.cs" />
     <Compile Include="Gui\Gui.cs" />
-    <Compile Include="Gui\FinishMenu.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Key.cs" />
     <Compile Include="Gui\Menu.cs" />
@@ -54,6 +53,7 @@
     <Compile Include="Entities\Plant.cs" />
     <Compile Include="Engine\LevelReader.cs" />
     <Compile Include="GuiInventory.cs" />
+    <Compile Include="Gui\FinishMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

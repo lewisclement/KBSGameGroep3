@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,57 +8,45 @@ using System.Xml.Serialization;
 
 namespace KBSGame
 {
-    public class Player : Entity
-    {
-        private List<Item> Inventory;
+	public class Player : Entity
+	{
+		private List<Item> Inventory;
 		public Player(PointF location, Byte height)
-            : base(location, (int)SPRITES.player, true, height, 10)
+			: base(location, (int)SPRITES.player, true, height, 10)
 		{
-		    Inventory = new List<Item>();
+			Inventory = new List<Item>();
 		}
 		public override void move(World sender, PointF relativeLocation)
 		{
 			float moveLocationX = location.X + relativeLocation.X;
 			float moveLocationY = location.Y + relativeLocation.Y;
 
-		    PointF targetPoint = new PointF(moveLocationX, moveLocationY);
-            TerrainTile targetTile = sender.getTerraintile (targetPoint);
-            List<Entity> targetEntities = sender.getEntitiesOnTerrainTile(targetPoint);
-            
-            // Initialize booleans for entities on the tile
-		    bool HasSolidEntities = targetEntities.Any(e => e.getSolid());
-		    bool HasWalkableEntities = targetEntities.Any(e => e.getSolid() == false);
+			PointF targetPoint = new PointF(moveLocationX, moveLocationY);
+			TerrainTile targetTile = sender.getTerraintile (targetPoint);
 
-            // Log current inventory
-		    Inventory.ForEach(Console.WriteLine);
+			// Log current inventory
+			Inventory.ForEach(Console.WriteLine);
 
-            // If terrain contains solid objects OR if tile has no walkable entity on a non-walkable tile
-            if (targetTile == null || HasSolidEntities ||
-                (!HasWalkableEntities && !targetTile.IsWalkable))
-                return;
+			// If terrain contains solid objects OR if tile has no walkable entity on a non-walkable tile
+			if (targetTile == null || sender.checkCollision(this, targetPoint) || !targetTile.IsWalkable)
+				return;
 
-            //Check if the player is moving on a entity and if that entity is Finish
-            foreach (Entity f in sender.getEntitiesOnTerrainTile(targetPoint))
-            {
-                if (f.getSpriteID() == (int)SPRITES.finish)
-                {
-                    ((Finish)f).LevelDone();
-                    
-                }
-            }
-            
+			location.X = (float)Math.Round(moveLocationX, 1);
+			location.Y = (float)Math.Round(moveLocationY, 1);
+			//PickUpItems(sender);
 
-		    location.X = moveLocationX;
-		    location.Y = moveLocationY;
-		    //PickUpItems(sender);
+			//Check if the player is moving on a entity and if that entity is Finish
+			List<Entity> f = sender.getEntitiesByType(ENTITIES.finish);
+			if(f.Count > 0 && sender.checkCollision(this, f[0]))
+				((Finish)f[0]).LevelDone();
 		}
 
-        public void AddItemToInventory(Item i)
-        {
-            Inventory.Add(i);
+		public void AddItemToInventory(Item i)
+		{
+			Inventory.Add(i);
 		}
 
-        /*
+		/*
 
         public void PickUpItems(World world)
         {
@@ -99,5 +87,5 @@ namespace KBSGame
             Inventory.RemoveAt(0);
         }
         */
-    }
+	}
 }
