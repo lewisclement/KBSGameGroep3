@@ -23,7 +23,12 @@ namespace KBSGame
 
         public void LevelDone()
         {
-			System.Windows.Forms.Application.Exit();
+            GameOverMenu finish = new GameOverMenu(50, 200, 200, "finish");
+            finish.addMenuItem("HE DIKKE JONKO");
+
+
+
+            //System.Windows.Forms.Application.Exit();
             Console.WriteLine("HALLO LEKKER DING! LEWIS IS GREAT");
         }
 

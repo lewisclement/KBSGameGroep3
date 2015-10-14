@@ -37,11 +37,13 @@ namespace KBSGame
                 (!HasWalkableEntities && !targetTile.IsWalkable))
                 return;
 
+            //Check if the player is moving on a entity and if that entity is Finish
             foreach (Entity f in sender.getEntitiesOnTerrainTile(targetPoint))
             {
                 if (f.getSpriteID() == (int)SPRITES.finish)
                 {
                     ((Finish)f).LevelDone();
+                    
                 }
             }
             
