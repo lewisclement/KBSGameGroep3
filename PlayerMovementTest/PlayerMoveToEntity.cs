@@ -75,5 +75,19 @@ namespace PlayerMovementTest
             // Check if player didn't move
             Assert.AreEqual(new Point(0, 1), p.getLocation());
         }
+
+        [TestMethod]
+        public void MoveToNonSolid()
+        {
+            // Set Player location
+            p.setLocation(new Point(0, 1));
+            // Add non-solid entity (tall grass) on location 0,0
+            Entity tree = new Plant(new Point(0, 0), (int)SPRITES.tallgrass, 50);
+            w.addEntity(tree);
+            // Try to move one grid to the right to tile with solid entity
+            p.move(w, new Point(1, 1));
+            // Check if player moved
+            Assert.AreEqual(new Point(0, 0), p.getLocation());
+        }
     }
 }

@@ -23,8 +23,9 @@ namespace KBSGame
 
         private List<Button> buttonList;
         private String menu;
+        int width = StaticVariables.dpi * 4;
 
-        int hoverPos, clickPos;
+        int hoverPos = -1, clickPos = -1;
 
         public GameOverMenu(int ID, int ScreenresX, int ScreenresY, String Menu) : base(ID, ScreenresX, ScreenresY)
         {
@@ -35,19 +36,29 @@ namespace KBSGame
             yRes = ScreenresY;
             buffer = new Bitmap(xRes, yRes);
 
-            buttonList.Add(new Button("Retry"));
+            buttonList.Add(new Button("Try again!"));
             buttonList.Add(new Button("Quit"));
         }
 
         public override void setMouseClick(Point mousePos)
         {
-            clickPos = mousePos.Y / StaticVariables.dpi;
+            if (mousePos.X < xRes / 2 - width / 2 || mousePos.X > xRes / 2 + width / 2)
+                clickPos = -1;
+            else
+                clickPos = (mousePos.Y - 100) / StaticVariables.dpi;
 
             switch (clickPos)
             {
                 case 0:
                     setActive(false);
-                    //Here comes a method that needs to reload the current map
+                    /////////////////               //HIER MOET CODE KOMEN OM EEN MAP TE HERLADEN :D
+                    /////////////////        
+                    ////         ////        
+                    ////         ////        ////
+                    ////         ////        ////
+                                 ////        ////
+                                 ////////////////
+                                 ////////////////
                     break;
                 case 1:
                     Application.Exit();
@@ -59,7 +70,14 @@ namespace KBSGame
 
         public override void setMouseHover(Point mousePos)
         {
-            hoverPos = mousePos.Y / StaticVariables.dpi;
+            if (mousePos.X < xRes / 2 - width / 2 || mousePos.X > xRes / 2 + width / 2)
+                hoverPos = -1;
+            else
+            {
+                hoverPos = (mousePos.Y - 100) / StaticVariables.dpi;
+                if (hoverPos >= buttonList.Count)
+                    hoverPos = -1;
+            }
         }
 
         public void addMenuItem(String text)
@@ -89,15 +107,17 @@ namespace KBSGame
             style.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
 
-            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 150, 150, width, yRes); //The 150 needs to be changed to the middle value of the screen
+            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, 100, width, yRes / 2);
             g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
-            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverPos * StaticVariables.dpi, width, StaticVariables.dpi);
+            
+            if(hoverPos >= 0)
+                g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, hoverPos * StaticVariables.dpi + 100, width, StaticVariables.dpi);
 
             for (int i = 0; i < buttonList.Count; i++)
             {
-                float fontSize = StaticVariables.dpi / 3;
-                float x = StaticVariables.dpi / 4;
-                float y = StaticVariables.dpi * i + fontSize / 2;
+                float fontSize = StaticVariables.dpi / 4;
+                float x = xRes / 2 - width / 2;
+                float y = StaticVariables.dpi * i + fontSize / 2 + 100;
 
                 g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y);
             }

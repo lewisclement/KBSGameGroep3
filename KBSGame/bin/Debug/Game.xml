@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <ArrayOfEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Entity>
+    <Entity>
     <Player>
-      <X>40</X>
-      <Y>40</Y>
-      <height>50</height>
+	<X>40</X>	
+	<Y>40</Y>
+	<height>50</height>
       <SpriteID></SpriteID>
     </Player>
     <Finish>
@@ -13,36 +13,36 @@
       <height>50</height>
       <SpriteID>11</SpriteID>
     </Finish>
-    <Entity>
-      <ID>1</ID>
-      <spriteID>0</spriteID>
-      <X>50</X>
-      <Y>50</Y>
-      <solid>true</solid>
-      <drawOrder>8</drawOrder>
-      <drawPrecision>10</drawPrecision>
-      <height>50</height>
-    </Entity>
-    <Entity>
-      <ID>2</ID>
-      <spriteID>0</spriteID>
-      <X>51</X>
-      <Y>50</Y>
-      <solid>true</solid>
-      <drawOrder>8</drawOrder>
-      <drawPrecision>10</drawPrecision>
-      <height>50</height>
-    </Entity>
-    <Entity>
-      <ID>3</ID>
-      <spriteID>10</spriteID>
-      <X>49</X>
-      <Y>40</Y>
-      <solid>false</solid>
-      <drawOrder>8</drawOrder>
-      <drawPrecision>10</drawPrecision>
-      <height>50</height>
-    </Entity>
+  <Entity>
+   <ID>1</ID>
+   <spriteID>0</spriteID>
+	<X>50</X>
+	<Y>50</Y>
+	<solid>false</solid>
+	<drawOrder>8</drawOrder>
+	<drawPrecision>10</drawPrecision>
+	<height>50</height>
+  </Entity>
+   <Entity>
+   <ID>2</ID>
+   <spriteID>0</spriteID>
+	<X>51</X>
+	<Y>50</Y>
+	<solid>false</solid>
+	<drawOrder>8</drawOrder>
+	<drawPrecision>10</drawPrecision>
+	<height>50</height>
+  </Entity>
+     <Entity>
+   <ID>3</ID>
+   <spriteID>10</spriteID>
+	<X>49</X>
+	<Y>40</Y>
+	<solid>false</solid>
+	<drawOrder>8</drawOrder>
+	<drawPrecision>10</drawPrecision>
+	<height>50</height>
+  </Entity>
     <Item></Item>
   </Entity>
         
@@ -53,27 +53,27 @@
   </DefaultTerrain>
   <Terrain>
     <TerrainTile>
-      <ID>99</ID>
-      <X>59</X>
-      <Y>59</Y>
-      <Walkable>false</Walkable>
-      <SpriteID>0</SpriteID>
+   <ID>99</ID>
+       <X>59</X>
+       <Y>59</Y>
+       <Walkable>false</Walkable>
+       <SpriteID>0</SpriteID>
     </TerrainTile>
     <TerrainTile>
-      <type>Terrain</type>
-      <ID>99</ID>
-      <X>59</X>
-      <Y>60</Y>
-      <Walkable>false</Walkable>
-      <SpriteID>0</SpriteID>
+   <type>Terrain</type>
+   <ID>99</ID>
+       <X>59</X>
+       <Y>60</Y>
+       <Walkable>false</Walkable>
+       <SpriteID>0</SpriteID>
     </TerrainTile>
     <TerrainTile>
-      <type>Terrain</type>
-      <ID>99</ID>
-      <X>59</X>
-      <Y>61</Y>
-      <Walkable>false</Walkable>
-      <SpriteID>0</SpriteID>
+   <type>Terrain</type>
+   <ID>99</ID>
+       <X>59</X>
+       <Y>61</Y>
+       <Walkable>false</Walkable>
+       <SpriteID>0</SpriteID>
     </TerrainTile>
   </Terrain>
 </ArrayOfEntity>

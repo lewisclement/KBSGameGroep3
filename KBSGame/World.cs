@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace KBSGame
 {
-    public class World
-    {
-        private TerrainTile[] TileTypes;
-        private List<TerrainTile> terrainTiles;
-        private List<Byte> heightData;
+	public class World
+	{
+		private TerrainTile[] TileTypes;
+		private List<TerrainTile> terrainTiles;
+		private List<Byte> heightData;
 
-        private int width, height;
+		private int width, height;
 		private List<Entity> objects;
 		private Entity focusEntity;
 	    private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
@@ -49,7 +49,7 @@ namespace KBSGame
 
 
           //  temporaryWorldGenerator ();
-           
+            
 
         }
         public void LevelLoader(String File)
@@ -62,11 +62,16 @@ namespace KBSGame
 
             foreach (Terrain t in terrain)
             {
-                setTerraintile(t.getP(), t.geti());
+                setTerraintile(t.getP(),t.geti());
             }
+            objects.Add(new Finish(new PointF(55.0f, 55.0f), (int)SPRITES.finish));
+            setFocusEntity (objects [0]); // TEMPORARY PLAYER
+           
+
+        }
             //objects.Add(new Finish(new Point(55, 55), (int)SPRITES.finish));
             setFocusEntity(objects[0]); // TEMPORARY PLAYER
-        }
+		}
         
 	    private void FillWorld(int SPrite)
 	    {
@@ -237,7 +242,7 @@ namespace KBSGame
 		/// </summary>
 		/// <param name="entityID">Entity I.</param>
 		/// <param name="relativeLocation">Relative location.</param>
-		public void moveObject(int entityID, Point relativeLocation)
+		public void moveObject(int entityID, PointF relativeLocation)
 		{
 
 		}
@@ -293,42 +298,42 @@ namespace KBSGame
 		/// </summary>
 		/// <returns>The entities on terrain tile.</returns>
 		/// <param name="point">Point.</param>
-		public List<Entity> getEntitiesOnTerrainTile(Point point)
+		public List<Entity> getEntitiesOnTerrainTile(PointF point)
 		{
             // Return list with entities on given tile
 		    return objects.Where(e => e.getLocation() == point).ToList();
 		}
 
-	    public List<Item> getItemsOnTerrainTile(Point point)
+	    public List<Item> getItemsOnTerrainTile(PointF point)
 	    {
 	        // Return list with items on given tile
 	        return objects.Where(e => e.getLocation() == point).Where(e => e is Item).Cast<Item>().ToList();
 	    }
 
-	    public TerrainTile getTerraintile(Point point)
+	    public TerrainTile getTerraintile(PointF point)
 	    {
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
 				return null;
 
-	        return terrainTiles[point.X*height + point.Y];
+	        return terrainTiles[(int) point.X*height + (int) point.Y];
 	    }
 
-	    public void setTerraintile(Point point, int terrainID)
+	    public void setTerraintile(PointF point, int terrainID)
 	    {
 	        TerrainTile tile = TileTypes[terrainID];
             if (terrainID == (int)SPRITES.water)
             {
                 tile.IsWalkable = false;
             }
-            terrainTiles[point.X*height + point.Y] = tile;
+            terrainTiles[(int) point.X*height + (int) point.Y] = tile;
 	    }
 
-	    public Byte getTerrainHeight(Point point)
+	    public Byte getTerrainHeight(PointF point)
 		{
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
 				return 0;
 
-			return heightData[point.X*height + point.Y];
+			return heightData[(int) point.X*height + (int) point.Y];
 		}
 
 	    //Stub
@@ -367,7 +372,7 @@ namespace KBSGame
 			}
 
 			for (int i = 0; i < objects.Count; i++) {
-				Point p = objects [i].getLocation ();
+				PointF p = objects [i].getLocation ();
 				if (p.X >= view.Left && p.X <= view.Right && p.Y >= view.Top && p.Y <= view.Bottom) {
 					returnEntities.Insert (drawOrderIndex[objects[i].getDrawOrder()], objects [i]);
 
@@ -379,7 +384,7 @@ namespace KBSGame
 			return returnEntities.ToArray();
 		}
 
-		public Point getFocusCoordinates()
+		public PointF getFocusCoordinates()
 		{
 			return focusEntity.getLocation();
 		}
@@ -397,8 +402,8 @@ namespace KBSGame
 				viewHeight = height;
 
 			//Get viewport
-			int startX = focusEntity.getLocation ().X - (int)viewWidth / 2;
-			int startY = focusEntity.getLocation ().Y - (int)viewHeight / 2;
+			int startX = (int) focusEntity.getLocation ().X - (int)viewWidth / 2;
+			int startY = (int) focusEntity.getLocation ().Y - (int)viewHeight / 2;
 			int endX = startX + viewWidth;
 			int endY = startY + viewHeight;
 

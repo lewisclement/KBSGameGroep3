@@ -10,7 +10,7 @@ namespace KBSGame
 {
     public class Finish : Entity
     {
-        public Finish (Point location, int spriteID, Byte height = 50, bool solid = false, Byte depth = 8, int drawPrecision = 10)
+        public Finish (PointF location, int spriteID, Byte height = 50, bool solid = false, Byte depth = 8, int drawPrecision = 10)
 			: base(location, spriteID, false, height, depth, drawPrecision)
 		{
             this.spriteID = spriteID;
@@ -20,9 +20,13 @@ namespace KBSGame
 
         public void LevelDone()
         {
-			System.Windows.Forms.Application.Exit();
-            Console.WriteLine("HALLO LEKKER DING! LEWIS MONKEY IS ON THE RUN");
-        }
+            GameOverMenu finish = new GameOverMenu(50, 200, 200, "finish");
+            finish.addMenuItem("HE DIKKE JONKO");
 
+
+
+            //System.Windows.Forms.Application.Exit();
+            Console.WriteLine("HALLO LEKKER DING! LEWIS IS GREAT");
+        }
     }
 }

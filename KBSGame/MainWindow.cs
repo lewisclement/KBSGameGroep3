@@ -10,6 +10,7 @@ namespace KBSGame
 		private static DrawEngine renderer;
         private int ScreenY;
         private int ScreenX;
+        private Timer timer = new Timer();
 
 		public MainWindow ()
 
@@ -26,12 +27,17 @@ namespace KBSGame
 			StaticVariables.dpi = (int)g.DpiX;
 
 			renderer = new DrawEngine (world, g, this.ClientSize.Width, this.ClientSize.Height);
-		}
 
-		protected override void OnPaint(PaintEventArgs e) 
-		{
-			renderer.render ();
-		}
+            timer.Interval = 1000 / 60;
+            timer.Tick += Gameloop_Tick;
+
+            timer.Start();
+        }
+
+        private void Gameloop_Tick(object sender, EventArgs e)
+        {
+            renderer.render();
+        }
 
 		protected override void OnResize(EventArgs e) 
 		{
@@ -74,21 +80,23 @@ namespace KBSGame
 
         }
 
+      
+
         protected override void OnKeyDown(KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
             case Keys.Up:
-                world.getEntities()[0].move(world, new Point(0, -1));
+                world.getEntities()[0].move(world, new PointF(0.0f, -0.4f));
                 break;
             case Keys.Down:
-                world.getEntities()[0].move(world, new Point(0, 1));
+                world.getEntities()[0].move(world, new PointF(0.0f, 0.2f));
                 break;
             case Keys.Left:
-                world.getEntities()[0].move(world, new Point(-1, 0));
+                world.getEntities()[0].move(world, new PointF(-0.2f, 0.0f));
                 break;
             case Keys.Right:
-                world.getEntities()[0].move(world, new Point(1, 0));
+                world.getEntities()[0].move(world, new PointF(0.2f, 0.0f));
                 break;
 			case Keys.Escape:
                 renderer.getGui((int)GUI.def).switchActive();
@@ -96,13 +104,16 @@ namespace KBSGame
             case Keys.K:
                 renderer.getGui((int)GUI.gameover).switchActive();
                 break;
+
+                case Keys.L:
+                    renderer.getGui((int)GUI.finish).switchActive();
+                    break;
             case Keys.E:
                 world.getPlayer().DropItem(world);
                 break;
             default:
                 return;
             }
-			renderer.render ();
         }
 
 	    public World getWorld()
