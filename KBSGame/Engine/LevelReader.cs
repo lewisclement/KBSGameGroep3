@@ -30,6 +30,7 @@ namespace KBSGame
     class LevelReader
     {
         private List<Entity> objects;
+        private Entity[] Entities;
         private List<Terrain> TerrainTiles;
         private int defaultbackground;
         private XmlDocument reader;
@@ -95,56 +96,59 @@ namespace KBSGame
             //            break;
             //    }
             //  }
-            addEntity("Player");
-            addEntity("Finish");
         }
         private void getEntitysxml()
         {
 
-            XmlNodeList entityList = reader.GetElementsByTagName("Entity");
+            XmlNodeList entityList = reader.GetElementsByTagName("Item");
             foreach (XmlNode entity in entityList)
             {
-
-            }
-        }
-        public void addEntity(String tag)
-        {
-            try
-            {
-                XmlNodeList elemlist = reader.GetElementsByTagName(tag);
                 Point location = new Point();
-                location.X = Int32.Parse(elemlist[0]["X"].InnerText);
-                location.Y = Int32.Parse(elemlist[0]["Y"].InnerText);
-                int Height = Int32.Parse(elemlist[0]["height"].InnerText);
-                int SpriteID = Int32.Parse(elemlist[0]["SpriteID"].InnerText);
-                if (tag == "Player")
+                location.X = Int32.Parse(entity["X"].InnerText);
+                location.Y = Int32.Parse(entity["Y"].InnerText);
+                int Height = Int32.Parse(entity["height"].InnerText);
+                int SpriteID = Int32.Parse(entity["SpriteID"].InnerText);
+                Entities = new Entity[(int)TERRAIN.count];
+                Entities[(int)ENTITIES.player] = new Player(location,50);
+                Entities[(int)ENTITIES.finish] = new Finish(location, SpriteID);
+                Entities[(int)ENTITIES.plant] = new Plant(location, SpriteID);
+                switch (entity["Type"].InnerText)
                 {
-                    Player player = new Player(location, 50);
-                    this.objects.Add(player);
+                    case "Player":
+                        this.objects.Add(Entities[(int)ENTITIES.player]);
+                        break;
+                    case "Finish":
+                        this.objects.Add(Entities[(int)ENTITIES.finish]);
+                        break;
+                    case "Plant":
+                        this.objects.Add(Entities[(int)ENTITIES.plant]);
+                        break;
                 }
-                else if (tag == "Finish")
-                {
-                    Finish finish = new Finish(location, SpriteID);
-                    this.objects.Add(finish);
-                }                
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
             }
         }
         public List<Entity> getObjects()
         {
+            getEntitysxml();
             return this.objects;
         }
         public List<Terrain> getTerrainTiles()
         {
-            return this.TerrainTiles;
+            XmlNodeList TerraintileList = reader.GetElementsByTagName("TerrainTile");
+            foreach (XmlNode TerrainList in TerraintileList)
+            {
+                Point location = new Point();
+                location.X = Int32.Parse(TerrainList["X"].InnerText);
+                location.Y = Int32.Parse(TerrainList["Y"].InnerText);
+                int TerrainID =Int32.Parse(TerrainList["TerrainID"].InnerText);
+                this.TerrainTiles.Add(new Terrain(location, TerrainID));
+
+            }
+                return this.TerrainTiles;
         }
         public int getdefaultbackground()
         {
             XmlNodeList elemlist = reader.GetElementsByTagName("DefaultTerrain");
-            return Int32.Parse(elemlist[0]["SpriteID"].InnerText);
+            return Int32.Parse(elemlist[0]["TerrainID"].InnerText);
         }
     }
 }

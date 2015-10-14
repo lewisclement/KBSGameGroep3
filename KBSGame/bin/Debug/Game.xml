@@ -1,36 +1,35 @@
 <?xml version="1.0"?>
 <ArrayOfEntity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Entity>
-    <Player>
+    <Item>
+      <Type>Player</Type>
       <X>40</X>
       <Y>40</Y>
       <height>50</height>
       <SpriteID>0</SpriteID>
-    </Player>
-    <Finish>
+    </Item>
+  <Item >
+    <Type>Finish</Type>
       <X>41</X>
       <Y>41</Y>
       <height>50</height>
       <SpriteID>11</SpriteID>
-    </Finish>
-    <Entity>
+    </Item>
+  <Item >
       <ID>3</ID>
       <Type>Plant</Type>
-      <spriteID>10</spriteID>
+      <SpriteID>10</SpriteID>
       <X>49</X>
       <Y>40</Y>
       <solid>false</solid>
       <drawOrder>8</drawOrder>
       <drawPrecision>10</drawPrecision>
       <height>50</height>
-    </Entity>
-    <Item></Item>
-  </Entity>
+    </Item>
 
   <DefaultTerrain>
     <type>DefaultTerrain</type>
     <Walkable>true</Walkable>
-    <SpriteID>2</SpriteID>
+    <TerrainID>2</TerrainID>
   </DefaultTerrain>
   <Terrain>
     <TerrainTile>
@@ -38,15 +37,15 @@
       <X>59</X>
       <Y>59</Y>
       <Walkable>false</Walkable>
-      <SpriteID>0</SpriteID>
+      <TerrainID>0</TerrainID>
     </TerrainTile>
     <TerrainTile>
       <type>Terrain</type>
       <ID>99</ID>
-      <X>59</X>
-      <Y>60</Y>
+      <X>45</X>
+      <Y>45</Y>
       <Walkable>false</Walkable>
-      <SpriteID>0</SpriteID>
+      <TerrainID>0</TerrainID>
     </TerrainTile>
     <TerrainTile>
       <type>Terrain</type>
@@ -54,7 +53,7 @@
       <X>59</X>
       <Y>61</Y>
       <Walkable>false</Walkable>
-      <SpriteID>0</SpriteID>
+      <TerrainID>0</TerrainID>
     </TerrainTile>
   </Terrain>
 </ArrayOfEntity>
