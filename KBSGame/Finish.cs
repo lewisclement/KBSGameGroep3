@@ -19,9 +19,12 @@ namespace KBSGame
         }
 
 
+
+
         public void LevelDone()
         {
-
+			System.Windows.Forms.Application.Exit();
+            Console.WriteLine("HALLO LEKKER DING! LEWIS IS GREAT");
         }
 
     }

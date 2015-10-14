@@ -41,8 +41,8 @@ namespace KBSGame
             Interfaces = new List<Gui>();
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
-            GameOverMenu gameover = new GameOverMenu ((int)GUI.gameover, xRes, yRes, "Oh no, you died! Wanna try again?");
-            Interfaces.Add(gameover);
+            Settings settings = new Settings((int)GUI.def, xRes, yRes);
+            Interfaces.Add(settings);
 			// Load sprites
 		    sprites = getSprites();
 		}
@@ -59,16 +59,15 @@ namespace KBSGame
 			drawTerrain (g);
 			drawEntities (g);
 
-			drawingArea.DrawImage (buffer, 0, 0, xRes, yRes);
-
 			foreach (Gui gui in Interfaces) {
 				if (!gui.isActive ())
 					continue;
 
 				Bitmap render = gui.getRender ();
-				drawingArea.DrawImage (render, 0, 0, render.Width, render.Height);
+				g.DrawImage (render, 0, 0, render.Width, render.Height);
 			}
 
+			drawingArea.DrawImage (buffer, 0, 0, xRes, yRes);
 			g.Dispose ();
 
 			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
@@ -179,7 +178,7 @@ namespace KBSGame
             sprites[(int)SPRITES.waterlily] = new Sprite((int)SPRITES.waterlily, StaticVariables.execFolder + "/waterlily.png");
 			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.execFolder + "/banana.png");
             sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.execFolder + "/gold_key.png");
-            sprites[(int)SPRITES.fisnish] = new Sprite((int)SPRITES.fisnish, StaticVariables.execFolder + "/finish.png");
+			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.execFolder + "/finish.png");
             return sprites;
 	    }
 	}

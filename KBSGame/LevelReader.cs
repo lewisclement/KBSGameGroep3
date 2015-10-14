@@ -8,12 +8,32 @@ using System.Xml;
 
 namespace KBSGame
 {
+    class Terrain
+    {
+        public Point p;
+        public int i; 
+        public Terrain(Point p, int i)
+        {
+            this.i = i;
+            this.p = p;
+        }
+        public int geti()
+        {
+            return this.i;
+        }
+        public Point getP()
+        {
+            return this.p;
+        }
+    }
     class LevelReader
     {
         private List<Entity> objects;
-        private List<TerrainTile> TerrainTiles;
+        private List<Terrain> TerrainTiles;
+        private int defaultbackground;
         public LevelReader(String File)
         {
+            this.TerrainTiles = new List<Terrain>();
             this.objects = new List<Entity>();
 
             XmlDocument reader = new XmlDocument();
@@ -39,13 +59,27 @@ namespace KBSGame
                         }
                         catch (Exception ex)
                          {
-                            Console.WriteLine(ex.Message);
+                          //  Console.WriteLine(ex.Message);
                         }
                         break;
                     case "Terrain":
                         try
                         {
-
+                            int X = Int32.Parse(node["X"].InnerText);
+                            int Y = Int32.Parse(node["Y"].InnerText);
+                            int S = Int32.Parse(node["SpriteID"].InnerText);
+                            Terrain t = new Terrain(new Point(X, Y), S);
+                            this.TerrainTiles.Add(t);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                        break;
+                    case "DefaultTerrain":
+                        try
+                        {
+                            this.defaultbackground = Int32.Parse(node["SpriteID"].InnerText);
                         }
                         catch (Exception ex)
                         {
@@ -66,7 +100,7 @@ namespace KBSGame
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine(ex.Message);
+                          //  Console.WriteLine(ex.Message);
                         }
                         break;
                 }
@@ -76,6 +110,14 @@ namespace KBSGame
         public List<Entity> getObjects()
         {
             return this.objects;
+        }
+        public List<Terrain> getTerrainTiles()
+        {
+            return this.TerrainTiles;
+        }
+        public int getdefaultbackground()
+        {
+            return this.defaultbackground;
         }
     }
 }

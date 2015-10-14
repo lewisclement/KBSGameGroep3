@@ -37,6 +37,15 @@ namespace KBSGame
                 (!HasWalkableEntities && !targetTile.IsWalkable))
                 return;
 
+            foreach (Entity f in sender.getEntitiesOnTerrainTile(targetPoint))
+            {
+                if (f.getSpriteID() == (int)SPRITES.finish)
+                {
+                    ((Finish)f).LevelDone();
+                }
+            }
+            
+
 		    location.X = moveLocationX;
 		    location.Y = moveLocationY;
 		    PickUpItems(sender);
