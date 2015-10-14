@@ -31,28 +31,28 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="GameOverMenu.cs" />
-    <Compile Include="Finish.cs" />
-    <Compile Include="Gui.cs" />
-    <Compile Include="gui\FinishMenu.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Key.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="DrawEngine.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="Gui\GameOverMenu.cs" />
+    <Compile Include="Entities\Finish.cs" />
+    <Compile Include="Gui\Gui.cs" />
+    <Compile Include="Gui\FinishMenu.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Key.cs" />
+    <Compile Include="Gui\Menu.cs" />
+    <Compile Include="Engine\DrawEngine.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Player.cs" />
+    <Compile Include="Entities\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Serialize.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Sprite.cs" />
-    <Compile Include="StaticVariables.cs" />
-    <Compile Include="TerrainTile.cs" />
-    <Compile Include="World.cs" />
-    <Compile Include="Plant.cs" />
-    <Compile Include="LevelReader.cs" />
+    <Compile Include="Gui\Settings.cs" />
+    <Compile Include="Engine\Sprite.cs" />
+    <Compile Include="Engine\StaticVariables.cs" />
+    <Compile Include="Engine\TerrainTile.cs" />
+    <Compile Include="Engine\World.cs" />
+    <Compile Include="Entities\Plant.cs" />
+    <Compile Include="Engine\LevelReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -94,4 +94,5 @@
     <Content Include="bin\Debug\gold_key.png" />
     <Content Include="bin\Release\finish.png" />
   </ItemGroup>
+  <ItemGroup />
 </Project>
