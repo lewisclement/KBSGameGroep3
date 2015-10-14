@@ -30,7 +30,6 @@ namespace KBSGame
             this.objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-            LevelLoader("Game.xml");
 		    //player = objects.FirstOrDefault(e => e.GetType().IsAssignableFrom(typeof(Player)));
 
             // TEMPORARY
@@ -54,7 +53,7 @@ namespace KBSGame
             
 
         }
-        public void LevelLoader(String File)
+        public void LevelLoader()
         {
             LevelReader level = new LevelReader("Game.xml");
             FillWorld(level.getdefaultbackground());

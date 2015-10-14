@@ -21,7 +21,7 @@ namespace KBSGame
           
  
 			world = new World(300, 300);
-            world.LevelLoader("Game.xml");
+            world.LevelLoader();
 
 			Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
