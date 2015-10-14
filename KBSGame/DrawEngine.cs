@@ -43,6 +43,8 @@ namespace KBSGame
 			Interfaces.Add (menu);
             Settings settings = new Settings((int)GUI.def, xRes, yRes);
             Interfaces.Add(settings);
+		    GuiInventory guiInventory = new GuiInventory((int) GUI.def, 64, yRes);
+		    Interfaces.Add(guiInventory);
 			// Load sprites
 		    sprites = getSprites();
 		}

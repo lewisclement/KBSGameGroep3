@@ -34,6 +34,7 @@
     <Compile Include="GameOverMenu.cs" />
     <Compile Include="Finish.cs" />
     <Compile Include="Gui.cs" />
+    <Compile Include="GuiInventory.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Key.cs" />
     <Compile Include="Menu.cs" />

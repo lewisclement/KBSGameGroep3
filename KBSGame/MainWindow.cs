@@ -104,8 +104,11 @@ namespace KBSGame
                 renderer.getGui((int)GUI.gameover).switchActive();
                 break;
             case Keys.E:
-                world.getPlayer().DropItem(world);
+                //world.getPlayer().DropItem(world);
                 break;
+                case Keys.I:
+                    renderer.getGui((int) GUI.guiinventory);
+                    break;
             default:
                 return;
             }
