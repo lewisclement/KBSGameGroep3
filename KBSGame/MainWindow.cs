@@ -101,6 +101,10 @@ namespace KBSGame
             case Keys.K:
                 renderer.getGui((int)GUI.gameover).switchActive();
                 break;
+
+                case Keys.L:
+                    renderer.getGui((int)GUI.finish).switchActive();
+                    break;
             case Keys.E:
                 world.getPlayer().DropItem(world);
                 break;

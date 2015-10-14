@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Collections.Generic;
+using KBSGame.gui;
 
 namespace KBSGame
 {
@@ -39,10 +40,16 @@ namespace KBSGame
 			this.world = world;
 
             Interfaces = new List<Gui>();
+
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
+
             Settings settings = new Settings((int)GUI.def, xRes, yRes);
             Interfaces.Add(settings);
+
+            FinishMenu finishmenu = new FinishMenu((int)GUI.finish, xRes, yRes, "Finished!");
+            Interfaces.Add(finishmenu);
+
 			// Load sprites
 		    sprites = getSprites();
 		}
@@ -148,7 +155,7 @@ namespace KBSGame
 		/// <param name="ID">I.</param>
 		public Gui getGui(int ID)
 		{
-			return Interfaces [ID];
+			return Interfaces[ID];
 		}
 
 		/// <summary>
