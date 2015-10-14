@@ -53,6 +53,7 @@
     <Compile Include="Engine\World.cs" />
     <Compile Include="Entities\Plant.cs" />
     <Compile Include="Engine\LevelReader.cs" />
+    <Compile Include="GuiInventory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
