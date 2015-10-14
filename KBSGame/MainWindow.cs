@@ -21,7 +21,7 @@ namespace KBSGame
              
 			world = new World(300, 300);
 
-			Graphics g = this.CreateGraphics ();
+            Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
 
 			renderer = new DrawEngine (world, g, this.ClientSize.Width, this.ClientSize.Height);

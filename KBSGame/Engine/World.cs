@@ -33,9 +33,9 @@ namespace KBSGame
             //player = objects.FirstOrDefault(e => e.GetType().IsAssignableFrom(typeof(Player)));
 
             // TEMPORARY
-            player = new Player(new Point(this.width / 2, this.height / 2), 50);
-            player.setHeight(50);
-            objects.Add(player);
+            //player = new Player(new Point(this.width / 2, this.height / 2), 50);
+            //player.setHeight(50);
+            //objects.Add(player);
 
             TileTypes = new TerrainTile[(int)TERRAIN.count];
 			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass);
@@ -49,7 +49,11 @@ namespace KBSGame
 
 
             //   temporaryWorldGenerator ();
-            LevelReader level = new LevelReader("Game.xml");
+            LevelLoader("Game.xml");
+        }
+        public void LevelLoader(string File)
+        {
+            LevelReader level = new LevelReader(File);
             FillWorld(level.getdefaultbackground());
             this.objects = level.getObjects();
             List<Terrain> terrain;
@@ -57,26 +61,10 @@ namespace KBSGame
 
             foreach (Terrain t in terrain)
             {
-                setTerraintile(t.getP(), t.geti());
-            }
-            objects.Add(new Finish(new Point(55, 55), (int)SPRITES.finish));
-            setFocusEntity(objects [0]); // TEMPORARY PLAYER
-
-        }
-        public void LevelLoader()
-        {
-            LevelReader level = new LevelReader("Game.xml");
-            FillWorld(1);
-            //this.objects = level.getObjects();
-            List<Terrain> terrain;
-            terrain = level.getTerrainTiles();
-
-            foreach (Terrain t in terrain)
-            {
                 setTerraintile(t.getP(),t.geti());
             }
-           // objects.Add(new Finish(new PointF(55.0f, 55.0f), (int)SPRITES.finish));
-            //setFocusEntity (objects [0]); // TEMPORARY PLAYER
+            objects.Add(new Finish(new PointF(55.0f, 55.0f), (int)SPRITES.finish));
+            setFocusEntity (objects [0]); // TEMPORARY PLAYER
         }
 
 	    public void AddItems()
