@@ -30,13 +30,12 @@ namespace KBSGame
             this.objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-		    //player = objects.FirstOrDefault(e => e.GetType().IsAssignableFrom(typeof(Player)));
+            //player = objects.FirstOrDefault(e => e.GetType().IsAssignableFrom(typeof(Player)));
 
             // TEMPORARY
-	//		player = new Player(new Point(this.width/2, this.height/2), 50);
-		//	player.setHeight (50);
-	//	    objects.Add(player);
-
+            player = new Player(new Point(this.width / 2, this.height / 2), 50);
+            player.setHeight(50);
+            objects.Add(player);
 
             TileTypes = new TerrainTile[(int)TERRAIN.count];
 			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass);
@@ -49,12 +48,7 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-          //  temporaryWorldGenerator ();
-            
-
-        }
-        public void LevelLoader()
-        {
+            //   temporaryWorldGenerator ();
             LevelReader level = new LevelReader("Game.xml");
             FillWorld(level.getdefaultbackground());
             this.objects = level.getObjects();
@@ -63,16 +57,27 @@ namespace KBSGame
 
             foreach (Terrain t in terrain)
             {
+                setTerraintile(t.getP(), t.geti());
+            }
+            objects.Add(new Finish(new Point(55, 55), (int)SPRITES.finish));
+            setFocusEntity(objects [0]); // TEMPORARY PLAYER
+
+        }
+        public void LevelLoader()
+        {
+            LevelReader level = new LevelReader("Game.xml");
+            FillWorld(1);
+            //this.objects = level.getObjects();
+            List<Terrain> terrain;
+            terrain = level.getTerrainTiles();
+
+            foreach (Terrain t in terrain)
+            {
                 setTerraintile(t.getP(),t.geti());
             }
-            objects.Add(new Finish(new PointF(55.0f, 55.0f), (int)SPRITES.finish));
-            setFocusEntity (objects [0]); // TEMPORARY PLAYER
+           // objects.Add(new Finish(new PointF(55.0f, 55.0f), (int)SPRITES.finish));
+            //setFocusEntity (objects [0]); // TEMPORARY PLAYER
         }
-           
-        private void LevelLoader(String File)
-        {
-
-		}
 
 	    public void AddItems()
 	    {

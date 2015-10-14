@@ -18,10 +18,8 @@ namespace KBSGame
 			Text = "MainWindow";
 			Height = 1920;
 			Width = 1080;
-          
- 
+             
 			world = new World(300, 300);
-            world.LevelLoader();
 
 			Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
@@ -76,6 +74,7 @@ namespace KBSGame
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "MainWindow";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
 
         }
@@ -124,7 +123,10 @@ namespace KBSGame
 	        return world;
 	    }
 
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
 
-	}
+        }
+    }
 }
 
