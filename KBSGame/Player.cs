@@ -11,17 +11,17 @@ namespace KBSGame
     public class Player : Entity
     {
         private List<Item> Inventory;
-		public Player(Point location, Byte height)
+		public Player(PointF location, Byte height)
             : base(location, (int)SPRITES.player, true, height, 10)
 		{
 		    Inventory = new List<Item>();
 		}
-		public override void move(World sender, Point relativeLocation)
+		public override void move(World sender, PointF relativeLocation)
 		{
-			int moveLocationX = location.X + relativeLocation.X;
-			int moveLocationY = location.Y + relativeLocation.Y;
+			float moveLocationX = location.X + relativeLocation.X;
+			float moveLocationY = location.Y + relativeLocation.Y;
 
-		    Point targetPoint = new Point(moveLocationX, moveLocationY);
+		    PointF targetPoint = new PointF(moveLocationX, moveLocationY);
             TerrainTile targetTile = sender.getTerraintile (targetPoint);
             List<Entity> targetEntities = sender.getEntitiesOnTerrainTile(targetPoint);
             
@@ -55,7 +55,7 @@ namespace KBSGame
 
         public void PickUpItems(World world)
         {
-            List<Item> items = world.getItemsOnTerrainTile(new Point(location.X, location.Y));
+            List<Item> items = world.getItemsOnTerrainTile(new PointF(location.X, location.Y));
             foreach (Item i in items.Where(i => i.CanPickup))
             {
                 PickUp(world, i);
@@ -71,7 +71,7 @@ namespace KBSGame
         // Removes first item from inventory if exists
         public void DropItem(World world)
         {
-            Point dropLocation = new Point(location.X + 1, location.Y);
+            PointF dropLocation = new PointF(location.X + 1, location.Y);
 
             // Check if item can be dropped on target from dropLocation
             bool isLand = world.getTerraintile(dropLocation).IsWalkable;

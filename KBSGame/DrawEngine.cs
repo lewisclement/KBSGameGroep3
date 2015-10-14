@@ -41,8 +41,8 @@ namespace KBSGame
             Interfaces = new List<Gui>();
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
-            GameOverMenu gameover = new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no you died");
-            Interfaces.Add(gameover);
+            Settings settings = new Settings((int)GUI.def, xRes, yRes);
+            Interfaces.Add(settings);
 			// Load sprites
 		    sprites = getSprites();
 		}
@@ -102,8 +102,8 @@ namespace KBSGame
 
 			foreach (Entity t in entities)
 			{
-			    int x = (t.getLocation ().X - view.Left) * StaticVariables.tileSize;
-			    int y = (t.getLocation().Y - view.Top)*StaticVariables.tileSize - t.getDrawPrecision();
+			    float x = (t.getLocation ().X - view.Left) * StaticVariables.tileSize;
+			    float y = (t.getLocation().Y - view.Top)*StaticVariables.tileSize - t.getDrawPrecision();
 			    area.DrawImage (sprites [t.getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}

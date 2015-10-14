@@ -12,7 +12,7 @@
    <spriteID>0</spriteID>
 	<X>50</X>
 	<Y>50</Y>
-	<solid>true</solid>
+	<solid>false</solid>
 	<drawOrder>8</drawOrder>
 	<drawPrecision>10</drawPrecision>
 	<height>50</height>
@@ -23,7 +23,7 @@
    <spriteID>0</spriteID>
 	<X>51</X>
 	<Y>50</Y>
-	<solid>true</solid>
+	<solid>false</solid>
 	<drawOrder>8</drawOrder>
 	<drawPrecision>10</drawPrecision>
 	<height>50</height>

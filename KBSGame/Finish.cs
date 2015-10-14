@@ -10,7 +10,7 @@ namespace KBSGame
 {
     public class Finish : Entity
     {
-        public Finish (Point location, int spriteID, Byte height = 50, bool solid = false, Byte depth = 8, int drawPrecision = 10)
+        public Finish (PointF location, int spriteID, Byte height = 50, bool solid = false, Byte depth = 8, int drawPrecision = 10)
 			: base(location, spriteID, false, height, depth, drawPrecision)
 		{
             this.spriteID = spriteID;
