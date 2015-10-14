@@ -10,6 +10,7 @@ namespace KBSGame
 		private static DrawEngine renderer;
         private int ScreenY;
         private int ScreenX;
+        private Timer timer = new Timer();
 
 		public MainWindow ()
 
@@ -25,12 +26,17 @@ namespace KBSGame
 			StaticVariables.dpi = (int)g.DpiX;
 
 			renderer = new DrawEngine (world, g, this.ClientSize.Width, this.ClientSize.Height);
-		}
 
-		protected override void OnPaint(PaintEventArgs e) 
-		{
-			renderer.render ();
-		}
+            timer.Interval = 1000 / 60;
+            timer.Tick += Gameloop_Tick;
+
+            timer.Start();
+        }
+
+        private void Gameloop_Tick(object sender, EventArgs e)
+        {
+            renderer.render();
+        }
 
 		protected override void OnResize(EventArgs e) 
 		{
