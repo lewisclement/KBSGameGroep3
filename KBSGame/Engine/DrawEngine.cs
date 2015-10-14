@@ -62,7 +62,7 @@ namespace KBSGame
 		/// </summary>
 		public void render()
         { 
-			long startTick = System.DateTime.UtcNow.Millisecond;
+			long startTick = System.DateTime.UtcNow.Ticks;
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
 
@@ -80,7 +80,7 @@ namespace KBSGame
 			drawingArea.DrawImage (buffer, 0, 0, xRes, yRes);
 			g.Dispose ();
 
-			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
+			Console.WriteLine (10000000 / (System.DateTime.UtcNow.Ticks - startTick) + " fps");
 		}
 
 		/// <summary>
