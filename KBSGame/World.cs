@@ -27,16 +27,14 @@ namespace KBSGame
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-            LevelReader level = new LevelReader("Game.xml", "Game");
-            objects = level.getObjects();
-           // objects = new List<Entity>();
+
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-
+            LevelLoader("Game.xml");
             // TEMPORARY
-			player = new Player(new Point(this.width/2, this.height/2), 50);
-			player.setHeight (50);
-		    objects.Add(player);
+	//		player = new Player(new Point(this.width/2, this.height/2), 50);
+		//	player.setHeight (50);
+	//	    objects.Add(player);
 
 
             TileTypes = new TerrainTile[(int)TERRAIN.count];
@@ -52,16 +50,31 @@ namespace KBSGame
 
             //temporaryWorldGenerator ();
             
-            fillWithGrass();
+            LevelReader level = new LevelReader("Game.xml");
+            FillWorld(level.getdefaultbackground());
+            this.objects = level.getObjects();
+            List<Terrain> terrain;
+            terrain = level.getTerrainTiles();
+
+            foreach (Terrain t in terrain)
+            {
+                setTerraintile(t.getP(),t.geti());
+            }
             objects.Add(new Finish(new Point(55, 55), (int)SPRITES.finish));
             setFocusEntity (objects [0]); // TEMPORARY PLAYER
+           
+
+        }
+        private void LevelLoader(String File)
+        {
+
 		}
         
-	    private void fillWithGrass()
+	    private void FillWorld(int SPrite)
 	    {
             for (int i = 0; i < width * height; i++)
             {
-                terrainTiles.Add(TileTypes[(int)TERRAIN.grass]);
+                terrainTiles.Add(TileTypes[SPrite]);
             }
         }
 

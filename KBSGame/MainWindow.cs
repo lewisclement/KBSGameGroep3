@@ -90,18 +90,11 @@ namespace KBSGame
                 world.getEntities()[0].move(world, new Point(1, 0));
                 break;
 			case Keys.Escape:
-                    //temporary solution for escape if settings is active
-                    if (!renderer.getGui(1).isActive() &&!renderer.getGui((int)GUI.def).isActive() || renderer.getGui((int)GUI.def).isActive())
-                    {
-                        renderer.getGui((int)GUI.def).switchActive();
-                    }
-                    else if (renderer.getGui(1).isActive())
-                    {
-                        renderer.getGui((int)GUI.def).setActive(false);
-                        renderer.getGui(1).setActive(false);
-                    }
-
+                renderer.getGui((int)GUI.def).switchActive();
 				break;
+            case Keys.K:
+                renderer.getGui((int)GUI.gameover).switchActive();
+                break;
             case Keys.E:
                 world.getPlayer().DropItem(world);
                 break;
