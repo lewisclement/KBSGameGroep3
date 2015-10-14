@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -31,81 +32,101 @@ namespace KBSGame
         private List<Entity> objects;
         private List<Terrain> TerrainTiles;
         private int defaultbackground;
-        public LevelReader(String File)
-        {
+        private XmlDocument reader;
+        public LevelReader(string File)
+        {          
             this.TerrainTiles = new List<Terrain>();
             this.objects = new List<Entity>();
 
-            XmlDocument reader = new XmlDocument();
+            this.reader = new XmlDocument();
             try {
-            reader.Load(File);
+            this.reader.Load(File);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-            foreach (XmlNode node in reader.DocumentElement.ChildNodes)
+            //foreach (XmlNode node in reader.DocumentElement)
+            //{
+            //    switch (node["type"].InnerText)
+            //    {
+            //            break;
+            //        case "Terrain":
+            //            try
+            //            {
+            //                int X = Int32.Parse(node["X"].InnerText);
+            //                int Y = Int32.Parse(node["Y"].InnerText);
+            //                int S = Int32.Parse(node["SpriteID"].InnerText);
+            //                Terrain t = new Terrain(new Point(X, Y), S);
+            //                this.TerrainTiles.Add(t);
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //                Console.WriteLine(ex.Message);
+            //            }
+            //            break;
+            //        case "DefaultTerrain":
+            //            try
+            //            {
+            //                this.defaultbackground = Int32.Parse(node["SpriteID"].InnerText);
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //                Console.WriteLine(ex.Message);
+            //            }
+            //            break;
+            //        default:
+            //            try
+            //            {
+            //                Point location = new Point();
+            //                location.X = Int32.Parse(node["X"].InnerText);
+            //                location.Y = Int32.Parse(node["Y"].InnerText);
+            //                bool solid = Convert.ToBoolean(node["solid"].InnerText);
+            //                int sprite = Int32.Parse(node["spriteID"].InnerText);
+            //                int ID = Int32.Parse(node["ID"].InnerText);
+            //                Entity e = new Entity(ID, location, sprite, solid);
+            //                this.objects.Add(e);
+            //            }
+            //            catch (Exception ex)
+            //            {
+            //              //  Console.WriteLine(ex.Message);
+            //            }
+            //            break;
+            //    }
+            //  }
+            addEntity("Player");
+            addEntity("Finish");
+        }
+        private void addEntity(String sort)
+        {
+            try
             {
-                switch (node["type"].InnerText)
+                XmlNodeList elemlist = reader.GetElementsByTagName(sort);
+                foreach (XmlNode Entity in elemlist)
                 {
-                    case "Player":
-                        try
-                        {
+                    switch (Entity.ParentNode.LocalName)
+                    {
+                        case "Player":
+
                             Point location = new Point();
-                            location.X = Int32.Parse(node["X"].InnerText);
-                            location.Y = Int32.Parse(node["Y"].InnerText);
+                            location.X = Int32.Parse(Entity["X"].InnerText);
+                            location.Y = Int32.Parse(Entity["Y"].InnerText);
+                            int Height = Int32.Parse(Entity["height"].InnerText);
+                            int SpriteID = Int32.Parse(Entity["SpriteID"].InnerText);
                             Player p = new Player(location, 50);
-                            this.objects.Add(p);                            
-                        }
-                        catch (Exception ex)
-                         {
-                          //  Console.WriteLine(ex.Message);
-                        }
-                        break;
-                    case "Terrain":
-                        try
-                        {
-                            int X = Int32.Parse(node["X"].InnerText);
-                            int Y = Int32.Parse(node["Y"].InnerText);
-                            int S = Int32.Parse(node["SpriteID"].InnerText);
-                            Terrain t = new Terrain(new Point(X, Y), S);
-                            this.TerrainTiles.Add(t);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                        break;
-                    case "DefaultTerrain":
-                        try
-                        {
-                            this.defaultbackground = Int32.Parse(node["SpriteID"].InnerText);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                        break;
-                    default:
-                        try
-                        {
-                            Point location = new Point();
-                            location.X = Int32.Parse(node["X"].InnerText);
-                            location.Y = Int32.Parse(node["Y"].InnerText);
-                            bool solid = Convert.ToBoolean(node["solid"].InnerText);
-                            int sprite = Int32.Parse(node["spriteID"].InnerText);
-                            int ID = Int32.Parse(node["ID"].InnerText);
-                            Entity e = new Entity(ID, location, sprite, solid);
-                            this.objects.Add(e);
-                        }
-                        catch (Exception ex)
-                        {
-                          //  Console.WriteLine(ex.Message);
-                        }
-                        break;
+                            this.objects.Add(p);
+                            break;
+                        case "Finish":
+                            //Finish F = new Finish(location, SpriteID);
+                            //this.objects.Add(F);
+                            break;
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         public List<Entity> getObjects()
         {

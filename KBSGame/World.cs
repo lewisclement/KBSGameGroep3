@@ -6,13 +6,13 @@ using System.Linq;
 
 namespace KBSGame
 {
-	public class World
-	{
-		private TerrainTile[] TileTypes;
-		private List<TerrainTile> terrainTiles;
-		private List<Byte> heightData;
+    public class World
+    {
+        private TerrainTile[] TileTypes;
+        private List<TerrainTile> terrainTiles;
+        private List<Byte> heightData;
 
-		private int width, height;
+        private int width, height;
 		private List<Entity> objects;
 		private Entity focusEntity;
 	    private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
@@ -27,10 +27,10 @@ namespace KBSGame
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-
+            this.objects = new List<Entity>();
             terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-            LevelLoader("Game.xml");
+            //LevelLoader("Game.xml");
             // TEMPORARY
 	//		player = new Player(new Point(this.width/2, this.height/2), 50);
 		//	player.setHeight (50);
@@ -48,8 +48,12 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-            //temporaryWorldGenerator ();
-            
+          //  temporaryWorldGenerator ();
+           
+
+        }
+        public void LevelLoader(String File)
+        {
             LevelReader level = new LevelReader("Game.xml");
             FillWorld(level.getdefaultbackground());
             this.objects = level.getObjects();
@@ -58,17 +62,11 @@ namespace KBSGame
 
             foreach (Terrain t in terrain)
             {
-                setTerraintile(t.getP(),t.geti());
+                setTerraintile(t.getP(), t.geti());
             }
-            objects.Add(new Finish(new Point(55, 55), (int)SPRITES.finish));
-            setFocusEntity (objects [0]); // TEMPORARY PLAYER
-           
-
+            //objects.Add(new Finish(new Point(55, 55), (int)SPRITES.finish));
+            setFocusEntity(objects[0]); // TEMPORARY PLAYER
         }
-        private void LevelLoader(String File)
-        {
-
-		}
         
 	    private void FillWorld(int SPrite)
 	    {
