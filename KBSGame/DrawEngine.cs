@@ -41,7 +41,7 @@ namespace KBSGame
             Interfaces = new List<Gui>();
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
-            GameOverMenu gameover = new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no you died");
+            GameOverMenu gameover = new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?");
             Interfaces.Add(gameover);
 			// Load sprites
 		    sprites = getSprites();
