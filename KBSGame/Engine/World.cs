@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Xml;
 
 namespace KBSGame
 {
@@ -17,6 +18,9 @@ namespace KBSGame
 		private Entity focusEntity;
 		private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
 
+		private World() { //For serializing
+		}
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="KBSGame.World"/> class.
 		/// </summary>
@@ -30,7 +34,6 @@ namespace KBSGame
 			this.objects = new List<Entity>();
 			terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-			//player = objects.FirstOrDefault(e => e.GetType().IsAssignableFrom(typeof(Player)));
 
 			// TEMPORARY
 			//player = new Player(new Point(this.width / 2, this.height / 2), 50);
@@ -48,21 +51,29 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 
-			//   temporaryWorldGenerator ();
-			LevelLoader("Game.xml");
+			LevelLoader("tiles.xml");
+			//temporaryWorldGenerator ();
+
+			//LevelWriter levelWriter = new LevelWriter ();
+			//levelWriter.saveWorld (this);
+
+			setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
 		}
+
 		public void LevelLoader(string File)
 		{
 			LevelReader level = new LevelReader(File);
-			FillWorld(level.getdefaultbackground());
+			//FillWorld(level.getdefaultbackground());
 			this.objects = level.getObjects();
-			List<Terrain> terrain;
-			terrain = level.getTerrainTiles();
 
-			foreach (Terrain t in terrain)
+			List<int> terrain = level.getTerrainTiles();int count = 0;
+			foreach (int id in terrain)
 			{
-				setTerraintile(t.getP(),t.geti());
+				if (id == (int)TERRAIN.grass)
+					Console.WriteLine (count++);
+				terrainTiles.Add(TileTypes[id]);
 			}
+
 			setFocusEntity (objects [0]); // TEMPORARY PLAYER
 		}
 
@@ -72,22 +83,19 @@ namespace KBSGame
 			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
 		}
 
-		private void FillWorld(int SPrite)
+		private void FillWorld(int Sprite)
 		{
 			for (int i = 0; i < width * height; i++)
 			{
-				terrainTiles.Add(TileTypes[SPrite]);
+				terrainTiles.Add(TileTypes[Sprite]);
 			}
 		}
 
 		/// <summary>
-		/// This is a temporary world generator for as long as there isn't a wordl loader
+		/// This is a temporary world generator for as long as there isn't a world loader
 		/// </summary>
 		private void temporaryWorldGenerator()
 		{
-
-
-			//Fill world with water
 			for (int i = 0; i < width * height; i++) 
 			{
 				terrainTiles.Add (TileTypes [(int)TERRAIN.grass]);
@@ -227,13 +235,22 @@ namespace KBSGame
 					}
 				}
 			}
-			// Test Key
-			//objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
-			//objects.Add(new Key(new Point(155, 150), (int)SPRITES.key));
-			//objects.Add(new Key(new Point(156, 150), (int)SPRITES.key, false, false));
-			//objects.Add(new Plant(new Point(155, 150), (int)SPRITES.sapling1, 50, true));
 
+			for (bool placed = false; !placed;) {
+				Point place = new Point (rand.Next (0, width), rand.Next (0, height));
+				if (getTerraintile (place).IsWalkable) {
+					objects.Add (new Player(place, 50));
+					placed = true;
+				}
+			}
 
+			for (bool placed = false; !placed;) {
+				Point place = new Point (rand.Next (0, width), rand.Next (0, height));
+				if (getTerraintile (place).IsWalkable) {
+					objects.Add (new Finish(place, 50));
+					placed = true;
+				}
+			}
 		}
 
 		/// <summary>
@@ -275,6 +292,15 @@ namespace KBSGame
 		}
 
 		/// <summary>
+		/// Gets the focus entity.
+		/// </summary>
+		/// <returns>The focus entity.</returns>
+		public Entity getFocusEntity()
+		{
+			return focusEntity;
+		}
+
+		/// <summary>
 		/// Adds the entity.
 		/// </summary>
 		/// <param name="entity">Entity.</param>
@@ -290,6 +316,15 @@ namespace KBSGame
 		public List<Entity> getEntities()
 		{
 			return objects;
+		} 
+			
+		/// <summary>
+		/// Gets the terrain.
+		/// </summary>
+		/// <returns>The entities.</returns>
+		public List<TerrainTile> getTerrain()
+		{
+			return terrainTiles;
 		} 
 
 		/// <summary>

@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -15,7 +15,9 @@ namespace KBSGame
 			: base(location, (int)SPRITES.player, true, height, 10)
 		{
 			Inventory = new List<Item>();
+			this.type = ENTITIES.player;
 		}
+
 		public override void move(World sender, PointF relativeLocation)
 		{
 			float moveLocationX = location.X + relativeLocation.X;
