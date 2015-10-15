@@ -111,9 +111,9 @@ namespace KBSGame
             case Keys.E:
                 //world.getPlayer().DropItem(world);
                 break;
-                //case Keys.I:
-                //    renderer.getGui((int) GUI.guiinventory);
-                //break;
+                case Keys.I:
+                    renderer.getGui((int) GUI.guiinventory);
+                break;
             default:
                 return;
             }

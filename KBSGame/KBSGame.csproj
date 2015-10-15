@@ -37,6 +37,7 @@
     <Compile Include="Gui\FinishMenu.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Key.cs" />
+    <Compile Include="Gui\GuiInventory.cs" />
     <Compile Include="Gui\Menu.cs" />
     <Compile Include="Engine\DrawEngine.cs" />
     <Compile Include="Entities\Entity.cs" />

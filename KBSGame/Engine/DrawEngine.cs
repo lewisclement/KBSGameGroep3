@@ -50,8 +50,8 @@ namespace KBSGame
             GameOverMenu gameover = new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?");
             Interfaces.Add(gameover);
 
-		    //GuiInventory guiInventory = new GuiInventory((int) GUI.def, 64, yRes);
-          //Interfaces.Add(guiInventory);
+		    GuiInventory guiInventory = new GuiInventory((int) GUI.guiinventory, xRes, yRes);
+            Interfaces.Add(guiInventory);
 			
             // Load sprites
 		    sprites = getSprites();
