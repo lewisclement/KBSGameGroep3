@@ -86,7 +86,7 @@ namespace KBSGame
             switch (e.KeyCode)
             {
             case Keys.Up:
-				world.getFocusEntity().move(world, new PointF(0.0f, -0.4f));
+				world.getFocusEntity().move(world, new PointF(0.0f, -0.2f));
                 break;
             case Keys.Down:
 				world.getFocusEntity().move(world, new PointF(0.0f, 0.2f));

@@ -32,7 +32,7 @@ namespace KBSGame
 			Inventory.ForEach(Console.WriteLine);
 
 			// If terrain contains solid objects OR if tile has no walkable entity on a non-walkable tile
-			if (targetTile == null || sender.checkCollision(this, targetPoint) || !targetTile.IsWalkable &&  !sender.checkCollision(this, targetPoint, false))
+			if (targetTile == null || sender.checkCollision(this, targetPoint) || !targetTile.IsWalkable && !sender.checkCollision(this, targetPoint, false))
 				return;
 
 			location.X = (float)Math.Round(moveLocationX, 1);

@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Drawing;
 using System.Xml;
 using System.Xml.Schema;
@@ -14,25 +14,25 @@ namespace KBSGame
 		protected PointF location;
 		protected bool solid;
 		protected Byte drawOrder;
-		protected int drawPrecision;
+		protected float boundingBox;
 		protected Byte height;
 
-		public Entity(PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
+		public Entity(PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, float boundingBox = 1.0f)
 		{
 			this.location = location;
 			this.height = height;
 			this.drawOrder = drawOrder;
-			this.drawPrecision = drawPrecision;
+			this.boundingBox = boundingBox;
 			this.spriteID = spriteID;
 			this.solid = solid;
-			ID++;
+			this.ID = ID++;
 		}
-		public Entity(int ID, PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
+		public Entity(int ID, PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, float boundingBox = 1.0f)
 		{
 			this.location = location;
 			this.height = height;
 			this.drawOrder = drawOrder;
-			this.drawPrecision = drawPrecision;
+			this.boundingBox = boundingBox;
 			this.spriteID = spriteID;
 			this.solid = solid;
 			this.ID = ID;
@@ -63,9 +63,14 @@ namespace KBSGame
 			return spriteID;
 		}
 
-		public int getDrawPrecision()
+		public float getBoundingBox()
 		{
-			return drawPrecision;
+			return boundingBox;
+		}
+
+		public void setSolid(float boundingBox)
+		{
+			this.boundingBox = boundingBox;
 		}
 
 		public void setSolid(bool solid)

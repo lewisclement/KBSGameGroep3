@@ -243,7 +243,7 @@ namespace KBSGame
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
 						if(rand.Next(0, 60) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.waterlily, 50, false, 0, 0));
+							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.waterlily, 50, false, 0, 0.51f));
 					}
 				}
 			}
@@ -259,7 +259,7 @@ namespace KBSGame
 			for (bool placed = false; !placed;) {
 				Point place = new Point (rand.Next (0, width), rand.Next (0, height));
 				if (getTerraintile (place).IsWalkable) {
-					objects.Add (new Finish(place, 50));
+					objects.Add (new Finish(place, (int)SPRITES.finish));
 					placed = true;
 				}
 			}
@@ -388,7 +388,7 @@ namespace KBSGame
 					continue;
 
 				PointF loc = e.getLocation ();
-				if (target.X > loc.X - 0.6f && target.X < loc.X + 0.6f && target.Y > loc.Y - 0.6f && target.Y < loc.Y + 0.6f) {
+				if (target.X > loc.X - e.getBoundingBox() && target.X < loc.X + e.getBoundingBox() && target.Y > loc.Y - e.getBoundingBox() && target.Y < loc.Y + e.getBoundingBox()) {
 					collision = true;
 					break;
 				}
@@ -403,7 +403,7 @@ namespace KBSGame
 
 			PointF loc1 = entity1.getLocation ();
 			PointF loc2 = entity2.getLocation ();
-			if (loc1.X > loc2.X - 1.0f && loc1.X < loc2.X + 1.0f && loc1.Y > loc2.Y - 1.0f && loc1.Y < loc2.Y + 1.0f)
+			if (loc1.X > loc2.X - entity2.getBoundingBox() && loc1.X < loc2.X + entity2.getBoundingBox() && loc1.Y > loc2.Y - entity2.getBoundingBox() && loc1.Y < loc2.Y + entity2.getBoundingBox())
 				collision = true;
 
 			return collision;
