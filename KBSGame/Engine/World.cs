@@ -54,12 +54,12 @@ namespace KBSGame
 
 			currentLevelPath = StaticVariables.execFolder + "/tiles.xml";
 			loadLevel();
-			//temporaryWorldGenerator ();
+            //temporaryWorldGenerator ();
 
-			//LevelWriter levelWriter = new LevelWriter ();
-			//levelWriter.saveWorld (this);
+            //LevelWriter levelWriter = new LevelWriter ();
+            //levelWriter.saveWorld (this);
 
-			setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
+            setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
 		}
 
 		public void loadLevel()
