@@ -13,6 +13,8 @@ namespace KBSGame
 		String sEntity = "e";
 		String sType = "ty";
 		String sSpriteID = "s";
+		String sSolid = "so";
+		String sDrawOrder = "d";
 
 		public LevelWriter ()
 		{
@@ -52,7 +54,8 @@ namespace KBSGame
 					writer.WriteElementString(sSpriteID, e.getSpriteID().ToString());
 					writer.WriteElementString("x", e.getLocation().X.ToString());
 					writer.WriteElementString("y", e.getLocation().Y.ToString());
-					writer.WriteElementString("so", e.getSolid().ToString());
+					writer.WriteElementString(sSolid, e.getSolid().ToString());
+					writer.WriteElementString(sDrawOrder, e.getDrawOrder().ToString());
 
 					writer.WriteEndElement();
 				}

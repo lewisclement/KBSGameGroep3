@@ -52,26 +52,31 @@ namespace KBSGame
 			XmlNodeList entityList = reader.GetElementsByTagName("e");
 			foreach (XmlNode entity in entityList)
 			{
-				PointF location = new PointF();
-				location.X = float.Parse(entity["x"].InnerText);
-				location.Y = float.Parse(entity["y"].InnerText);
-				int SpriteID = Int32.Parse(entity["s"].InnerText);
-				bool solid = bool.Parse(entity["so"].InnerText);
+				try {
+					PointF location = new PointF();
+					location.X = float.Parse(entity["x"].InnerText);
+					location.Y = float.Parse(entity["y"].InnerText);
+					int SpriteID = Int32.Parse(entity["s"].InnerText);
+					bool solid = bool.Parse(entity["so"].InnerText);
+					Byte drawOrder = Byte.Parse (entity ["d"].InnerText);
 
-				switch (Int32.Parse(entity["ty"].InnerText))
-				{
-				case (int)ENTITIES.player:
-					objects.Add(new Player(location, 50));
-					break;
-				case (int)ENTITIES.finish:
-					objects.Add(new Finish(location, SpriteID));
-					break;
-				case (int)ENTITIES.plant:
-					objects.Add(new Plant(location, SpriteID, 50, solid));
-					break;
-				default:
-					objects.Add (new Entity (location, SpriteID, solid));
-					break;
+					switch (Int32.Parse(entity["ty"].InnerText))
+					{
+					case (int)ENTITIES.player:
+						objects.Add(new Player(location, 50));
+						break;
+					case (int)ENTITIES.finish:
+						objects.Add(new Finish(location, SpriteID));
+						break;
+					case (int)ENTITIES.plant:
+						objects.Add(new Plant(location, SpriteID, 50, solid, drawOrder));
+						break;
+					default:
+						objects.Add (new Entity (location, SpriteID, solid, 50, drawOrder));
+						break;
+					}
+				} catch (Exception e) {
+					Console.WriteLine ("Could not load entity: " + entity.InnerXml + "\n\r" + e.Message);
 				}
 			}
 
