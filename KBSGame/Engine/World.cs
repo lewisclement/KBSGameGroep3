@@ -77,8 +77,8 @@ namespace KBSGame
 				terrainTiles.Add(TileTypes[id]);
 			}
 
-			setFocusEntity (objects [0]); // TEMPORARY PLAYER
-		}
+            setFocusEntity(objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
+        }
 
 		public void AddItems()
 		{

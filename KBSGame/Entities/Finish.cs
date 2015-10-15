@@ -20,8 +20,8 @@ namespace KBSGame
 
 		public void LevelDone()
 		{
-			GameOverMenu finish = new GameOverMenu(50, 200, 200, "finish");
-			finish.addMenuItem("HE DIKKE JONKO");
+			//GameOverMenu finish = new GameOverMenu(50, 200, 200, "finish", );
+			//finish.addMenuItem("HE DIKKE JONKO");
 
 
 

@@ -26,9 +26,11 @@ namespace KBSGame
         int width = StaticVariables.dpi * 4;
 
         int hoverPos = -1, clickPos = -1;
+        World map;
 
-        public GameOverMenu(int ID, int ScreenresX, int ScreenresY, String Menu) : base(ID, ScreenresX, ScreenresY)
+        public GameOverMenu(int ID, int ScreenresX, int ScreenresY, String Menu, World map) : base(ID, ScreenresX, ScreenresY)
         {
+            this.map = map;
             this.menu = Menu;
             buttonList = new List<Button>();
 
@@ -50,15 +52,9 @@ namespace KBSGame
             switch (clickPos)
             {
                 case 0:
+                    map.loadLevel();
+                    
                     setActive(false);
-                    /////////////////               //HIER MOET CODE KOMEN OM EEN MAP TE HERLADEN :D
-                    /////////////////        
-                    ////         ////        
-                    ////         ////        ////
-                    ////         ////        ////
-                                 ////        ////
-                                 ////////////////
-                                 ////////////////
                     break;
                 case 1:
                     Application.Exit();
