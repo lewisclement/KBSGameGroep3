@@ -47,7 +47,7 @@ namespace KBSGame
 
 		}
 
-		private List<Entity> getObjects()
+		public List<Entity> getObjects()
 		{
 			List<Entity> objects = new List<Entity> ();
 			XmlNodeList entityList = reader.GetElementsByTagName("e");
