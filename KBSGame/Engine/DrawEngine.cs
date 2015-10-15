@@ -39,29 +39,29 @@ namespace KBSGame
 			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
 			this.world = world;
 
-            Interfaces = new List<Gui>();
+			Interfaces = new List<Gui>();
 
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
 
             FinishMenu finishmenu = new FinishMenu((int)GUI.finish, xRes, yRes, "Finished!"); //Create FinishedMenu GUI
-            Interfaces.Add(finishmenu);
+			Interfaces.Add(finishmenu);
 
-            GameOverMenu gameover = new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?");
-            Interfaces.Add(gameover);
+			GameOverMenu gameover = new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?");
+			Interfaces.Add(gameover);
 
-		    //GuiInventory guiInventory = new GuiInventory((int) GUI.def, 64, yRes);
-          //Interfaces.Add(guiInventory);
-			
-            // Load sprites
-		    sprites = getSprites();
+		    GuiInventory guiInventory = new GuiInventory((int) GUI.guiinventory, xRes, yRes);
+            Interfaces.Add(guiInventory);
+
+			// Load sprites
+			sprites = getSprites();
 		}
 
 		/// <summary>
 		/// Render de view naar scherm
 		/// </summary>
 		public void render()
-        { 
+		{ 
 			long startTick = System.DateTime.UtcNow.Ticks;
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
@@ -114,7 +114,7 @@ namespace KBSGame
 			{
 				float x = (t.getLocation ().X - view.Left - 0.5f) * StaticVariables.tileSize;
 				float y = (t.getLocation().Y - view.Top - 0.5f) * StaticVariables.tileSize;
-			    area.DrawImage (sprites [t.getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+				area.DrawImage (sprites [t.getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
 
@@ -174,22 +174,22 @@ namespace KBSGame
 		/// Gets the sprites.
 		/// </summary>
 		/// <returns>The sprites.</returns>
-	    private Sprite[] getSprites()
-	    {
-            Sprite[] sprites = new Sprite[(int)SPRITES.count];
-            sprites[(int)SPRITES.water] = new Sprite((int)SPRITES.water, StaticVariables.execFolder + "/water_still.png");
-            sprites[(int)SPRITES.grass] = new Sprite((int)SPRITES.grass, StaticVariables.execFolder + "/grass_top.png");
-            sprites[(int)SPRITES.sand] = new Sprite((int)SPRITES.sand, StaticVariables.execFolder + "/sand.png");
-            sprites[(int)SPRITES.player] = new Sprite((int)SPRITES.player, StaticVariables.execFolder + "/player.png");
-            sprites[(int)SPRITES.dirt] = new Sprite((int)SPRITES.dirt, StaticVariables.execFolder + "/dirt.png");
-            sprites[(int)SPRITES.sapling1] = new Sprite((int)SPRITES.sapling1, StaticVariables.execFolder + "/sapling1.png");
-            sprites[(int)SPRITES.sapling2] = new Sprite((int)SPRITES.sapling2, StaticVariables.execFolder + "/sapling2.png");
-            sprites[(int)SPRITES.tallgrass] = new Sprite((int)SPRITES.tallgrass, StaticVariables.execFolder + "/tallgrass.png");
-            sprites[(int)SPRITES.waterlily] = new Sprite((int)SPRITES.waterlily, StaticVariables.execFolder + "/waterlily.png");
+		private Sprite[] getSprites()
+		{
+			Sprite[] sprites = new Sprite[(int)SPRITES.count];
+			sprites[(int)SPRITES.water] = new Sprite((int)SPRITES.water, StaticVariables.execFolder + "/water_still.png");
+			sprites[(int)SPRITES.grass] = new Sprite((int)SPRITES.grass, StaticVariables.execFolder + "/grass_top.png");
+			sprites[(int)SPRITES.sand] = new Sprite((int)SPRITES.sand, StaticVariables.execFolder + "/sand.png");
+			sprites[(int)SPRITES.player] = new Sprite((int)SPRITES.player, StaticVariables.execFolder + "/player.png");
+			sprites[(int)SPRITES.dirt] = new Sprite((int)SPRITES.dirt, StaticVariables.execFolder + "/dirt.png");
+			sprites[(int)SPRITES.sapling1] = new Sprite((int)SPRITES.sapling1, StaticVariables.execFolder + "/sapling1.png");
+			sprites[(int)SPRITES.sapling2] = new Sprite((int)SPRITES.sapling2, StaticVariables.execFolder + "/sapling2.png");
+			sprites[(int)SPRITES.tallgrass] = new Sprite((int)SPRITES.tallgrass, StaticVariables.execFolder + "/tallgrass.png");
+			sprites[(int)SPRITES.waterlily] = new Sprite((int)SPRITES.waterlily, StaticVariables.execFolder + "/waterlily.png");
 			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.execFolder + "/banana.png");
-            sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.execFolder + "/gold_key.png");
+			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.execFolder + "/gold_key.png");
 			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.execFolder + "/finish.png");
-            return sprites;
-	    }
+			return sprites;
+		}
 	}
 }

@@ -18,10 +18,10 @@ namespace KBSGame
 			Text = "MainWindow";
 			Height = 1920;
 			Width = 1080;
-          
+             
 			world = new World(300, 300);
 
-			Graphics g = this.CreateGraphics ();
+            Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
 
 			renderer = new DrawEngine (world, g, this.ClientSize.Width, this.ClientSize.Height);
@@ -110,9 +110,9 @@ namespace KBSGame
             case Keys.E:
                 //world.getPlayer().DropItem(world);
                 break;
-                //case Keys.I:
-                //    renderer.getGui((int) GUI.guiinventory);
-                //break;
+                case Keys.I:
+                    renderer.getGui((int) GUI.guiinventory);
+                break;
             default:
                 return;
             }
@@ -126,7 +126,7 @@ namespace KBSGame
         private void MainWindow_Load(object sender, EventArgs e)
         {
 
-	}
-}
+        }
+    }
 }
 
