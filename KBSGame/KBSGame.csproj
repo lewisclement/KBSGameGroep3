@@ -34,7 +34,6 @@
     <Compile Include="Gui\GameOverMenu.cs" />
     <Compile Include="Entities\Finish.cs" />
     <Compile Include="Gui\Gui.cs" />
-    <Compile Include="Gui\FinishMenu.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Key.cs" />
     <Compile Include="Gui\GuiInventory.cs" />
@@ -54,6 +53,9 @@
     <Compile Include="Engine\World.cs" />
     <Compile Include="Entities\Plant.cs" />
     <Compile Include="Engine\LevelReader.cs" />
+    <Compile Include="GuiInventory.cs" />
+    <Compile Include="Gui\FinishMenu.cs" />
+    <Compile Include="Engine\LevelWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -83,6 +85,7 @@
     <None Include="bin\Release\sapling2.png" />
     <None Include="bin\Debug\banana.png" />
     <None Include="bin\Release\banana.png" />
+    <None Include="bin\Debug\tiles.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">

@@ -62,7 +62,7 @@ namespace KBSGame
 		/// </summary>
 		public void render()
         { 
-			long startTick = System.DateTime.UtcNow.Millisecond;
+			long startTick = System.DateTime.UtcNow.Ticks;
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
 
@@ -80,7 +80,7 @@ namespace KBSGame
 			drawingArea.DrawImage (buffer, 0, 0, xRes, yRes);
 			g.Dispose ();
 
-			Console.WriteLine (System.DateTime.UtcNow.Millisecond - startTick);
+			Console.WriteLine (10000000 / (System.DateTime.UtcNow.Ticks - startTick) + " fps");
 		}
 
 		/// <summary>
@@ -112,8 +112,8 @@ namespace KBSGame
 
 			foreach (Entity t in entities)
 			{
-			    float x = (t.getLocation ().X - view.Left) * StaticVariables.tileSize;
-			    float y = (t.getLocation().Y - view.Top)*StaticVariables.tileSize - t.getDrawPrecision();
+				float x = (t.getLocation ().X - view.Left - 0.5f) * StaticVariables.tileSize;
+				float y = (t.getLocation().Y - view.Top - 0.5f) * StaticVariables.tileSize;
 			    area.DrawImage (sprites [t.getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
@@ -193,4 +193,3 @@ namespace KBSGame
 	    }
 	}
 }
-

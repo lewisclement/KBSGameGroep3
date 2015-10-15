@@ -19,9 +19,7 @@ namespace KBSGame
 			Height = 1920;
 			Width = 1080;
           
- 
 			world = new World(300, 300);
-            world.LevelLoader();
 
 			Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
@@ -76,6 +74,7 @@ namespace KBSGame
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "MainWindow";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
 
         }
@@ -87,16 +86,16 @@ namespace KBSGame
             switch (e.KeyCode)
             {
             case Keys.Up:
-                world.getEntities()[0].move(world, new PointF(0.0f, -0.4f));
+				world.getFocusEntity().move(world, new PointF(0.0f, -0.4f));
                 break;
             case Keys.Down:
-                world.getEntities()[0].move(world, new PointF(0.0f, 0.2f));
+				world.getFocusEntity().move(world, new PointF(0.0f, 0.2f));
                 break;
             case Keys.Left:
-                world.getEntities()[0].move(world, new PointF(-0.2f, 0.0f));
+				world.getFocusEntity().move(world, new PointF(-0.2f, 0.0f));
                 break;
             case Keys.Right:
-                world.getEntities()[0].move(world, new PointF(0.2f, 0.0f));
+				world.getFocusEntity().move(world, new PointF(0.2f, 0.0f));
                 break;
 			case Keys.Escape:
                 renderer.getGui((int)GUI.def).switchActive();
@@ -124,7 +123,10 @@ namespace KBSGame
 	        return world;
 	    }
 
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
 
 	}
+}
 }
 

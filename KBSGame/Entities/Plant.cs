@@ -10,7 +10,7 @@ namespace KBSGame
 		{
 			this.spriteID = spriteID;
             this.solid = solid;
-            
+			this.type = ENTITIES.plant;
 		}
 	}
 }
