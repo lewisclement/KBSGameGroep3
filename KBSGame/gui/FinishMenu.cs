@@ -13,6 +13,8 @@ namespace KBSGame.gui
         private List<Button> buttonList;
         private String menu;
 
+        
+
         public FinishMenu(int ID, int ScreenresX, int ScreenresY, String Menu) : base(ID, ScreenresX, ScreenresY)
         {
             this.menu = Menu; //Basic Menu class
@@ -44,6 +46,56 @@ namespace KBSGame.gui
             g.DrawString("Next Level", new Font("Arial", fontSize), new SolidBrush(Color.White), (xRes / 5) * 3, (yRes / 4) * 3); //Create button
 
             return this.buffer;
+        }
+
+        int width = StaticVariables.dpi * 4;
+        int hoverPos = -1, clickPos = -1;
+
+        public override void setMouseClick(Point mousePos)
+        {
+            if ((mousePos.X < xRes / 2))
+                clickPos = 0;
+            //else
+            //    clickPos = (mousePos.Y - ((yRes /4)* 3)) / StaticVariables.dpi;
+
+            if ((mousePos.X > xRes / 2))
+                clickPos = 1;
+
+            switch (clickPos)
+            {
+                case 0:
+                    setActive(false);
+                    
+                    Console.WriteLine("MWUAHAHAHHAHAHAHAHHA");
+                    /////////////////               //HIER MOET CODE KOMEN OM EEN MAP TE HERLADEN :D
+                    /////////////////        
+                    ////         ////        
+                    ////         ////        ////
+                    ////         ////        ////
+                    ////        ////
+                    ////////////////
+                    ////////////////
+                    break;
+                case 1:
+                    Console.WriteLine("HIHIHIHIHIHIHIHHIIH");
+                    
+                    //Application.Exit();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public override void setMouseHover(Point mousePos)
+        {
+            if (mousePos.X < xRes / 2 - width / 2 || mousePos.X > xRes / 2 + width / 2)
+                hoverPos = -1;
+            else
+            {
+                hoverPos = (mousePos.Y - 100) / StaticVariables.dpi;
+                if (hoverPos >= buttonList.Count)
+                    hoverPos = -1;
+            }
         }
     }
 }
