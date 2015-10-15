@@ -526,6 +526,22 @@ namespace KBSGame
 			return new Rectangle (startX, startY, viewWidth, viewHeight);
 		}
 
+		public PointF getViewOffset(int viewWidth, int viewHeight)
+		{
+			float xCenter = focusEntity.getLocation().X;
+			if (xCenter <= width - viewWidth / 2 && xCenter > viewWidth / 2)
+				xCenter -= (float)Math.Floor (xCenter);
+			else
+				xCenter = 0;
+
+			float yCenter = focusEntity.getLocation().Y;
+			if (yCenter <= height - viewHeight / 2 && yCenter > viewHeight / 2)
+				yCenter -= (float)Math.Floor (yCenter);
+			else
+				yCenter = 0;
+
+			return new PointF (xCenter, yCenter);
+		}
 
 		//Stub for later
 		public bool resize(int x, int y) //returns true on succes, false on fail

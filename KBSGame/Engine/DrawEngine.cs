@@ -86,10 +86,12 @@ namespace KBSGame
 			//Get array of tiles that are within view
 			TerrainTile[] tiles = world.getTilesView (viewWidth, viewHeight);
 
+			PointF offset = world.getViewOffset (viewWidth, viewHeight);
+
 			for (int i = 0; i < tiles.Length; i++) {
 				//Retreive coordinate based on index
-				int x = (i / viewHeight) * StaticVariables.tileSize;
-				int y = (i % viewHeight) * StaticVariables.tileSize;
+				int x = (int)((i / viewHeight - offset.X) * StaticVariables.tileSize);
+				int y = (int)((i % viewHeight - offset.Y) * StaticVariables.tileSize);
 				area.DrawImage (sprites [tiles [i].getSpriteID ()].getBitmap(), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
@@ -104,10 +106,12 @@ namespace KBSGame
 			Entity[] entities = world.getEntitiesView (viewWidth, viewHeight);
 			Rectangle view = world.getView (viewWidth, viewHeight);
 
+			PointF offset = world.getViewOffset (viewWidth, viewHeight);
+
 			foreach (Entity t in entities)
 			{
-				float x = (t.getLocation ().X - view.Left - 0.5f) * StaticVariables.tileSize;
-				float y = (t.getLocation().Y - view.Top - 0.5f) * StaticVariables.tileSize;
+				float x = (t.getLocation ().X - view.Left - 0.5f - offset.X) * StaticVariables.tileSize;
+				float y = (t.getLocation().Y - view.Top - 0.5f - offset.Y) * StaticVariables.tileSize;
 				area.DrawImage (sprites [t.getSpriteID ()].getBitmap (), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
@@ -127,7 +131,7 @@ namespace KBSGame
 
 			setView(xRes / StaticVariables.tileSize, yRes / StaticVariables.tileSize);
 
-			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
+			buffer = new Bitmap (xRes, yRes);
 
 			foreach (Gui gui in Interfaces) {
 				gui.resize (xRes, yRes);
@@ -141,8 +145,8 @@ namespace KBSGame
 		/// <param name="Height">Height.</param>
 		private void setView(int Width, int Height) 
 		{
-			viewWidth = Math.Max(1, Width);
-			viewHeight = Math.Max(1, Height);
+			viewWidth = Math.Max(1, Width+1);
+			viewHeight = Math.Max(1, Height+1);
 		}
 
 		/// <summary>

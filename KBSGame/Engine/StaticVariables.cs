@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 
 namespace KBSGame
 {
@@ -13,6 +13,7 @@ namespace KBSGame
 		public const int minWorldSize = 20;
 		public const int maxWorldSize = 1000;
 		public static String execFolder = null;
+		public static String levelFolder = null;
 		public const Byte drawOrderSize = 16;
         
 		public static int dpi;

@@ -43,7 +43,6 @@ namespace KBSGame
 				return;
 
 			renderer.resize (this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
-			renderer.render ();
 		}
 
 		protected override void OnClick(EventArgs e)
@@ -52,8 +51,6 @@ namespace KBSGame
 				if (renderer.getGui (i).isActive ())
 					renderer.getGui (i).setMouseClick(PointToClient(Cursor.Position));
 			}
-
-            renderer.render();
         }
 
 		protected override void OnMouseMove(MouseEventArgs e)
@@ -62,8 +59,6 @@ namespace KBSGame
 				if (renderer.getGui (i).isActive ())
 					renderer.getGui (i).setMouseHover(PointToClient(Cursor.Position));
 			}
-
-            renderer.render();
         }
 
         private void InitializeComponent()

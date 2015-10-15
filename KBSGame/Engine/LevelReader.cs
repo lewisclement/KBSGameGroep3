@@ -30,7 +30,6 @@ namespace KBSGame
 
 	class LevelReader
 	{
-		private int defaultbackground;
 		private XmlDocument reader;
 
 		public LevelReader(string File)
