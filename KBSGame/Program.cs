@@ -10,8 +10,8 @@ namespace KBSGame
 		{
 			StaticVariables.execFolder = System.IO.Path.GetDirectoryName (Application.ExecutablePath);
 			var f = new MainWindow ();
-            System.Media.SoundPlayer player = new System.Media.SoundPlayer(StaticVariables.execFolder + ("/On_the_moon.wav"));
-            player.Play();
+            //System.Media.SoundPlayer player = new System.Media.SoundPlayer(StaticVariables.execFolder + ("/On_the_moon.wav"));
+            //player.Play();
             Application.Run (f);
 		}
 	}

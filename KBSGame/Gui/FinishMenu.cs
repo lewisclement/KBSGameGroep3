@@ -79,7 +79,7 @@ namespace KBSGame.gui
                     break;
                 case 1:
                     
-                    map.loadLevel();
+                    map.reload();
                     setActive(false);
                     
                     break;

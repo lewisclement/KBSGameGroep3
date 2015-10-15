@@ -52,7 +52,7 @@ namespace KBSGame
             switch (clickPos)
             {
                 case 0:
-                    map.loadLevel();
+                    map.reload();
                     
                     setActive(false);
                     break;

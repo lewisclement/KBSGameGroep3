@@ -28,7 +28,7 @@ namespace KBSGame
 		/// </summary>
 		/// <param name="width">Width.</param>
 		/// <param name="height">Height.</param>
-		public World (int width, int height)
+		public World (int width, int height, String fileName)
 		{
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
@@ -52,32 +52,41 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
-			currentLevelPath = StaticVariables.execFolder + "/tiles.xml";
-			loadLevel();
-            //temporaryWorldGenerator ();
+			currentLevelPath = StaticVariables.execFolder + "/" + fileName;
+			//loadLevel(currentLevelPath);
+            temporaryWorldGenerator ();
 
-            //LevelWriter levelWriter = new LevelWriter ();
-            //levelWriter.saveWorld (this);
+            LevelWriter levelWriter = new LevelWriter ();
+            levelWriter.saveWorld (this);
 
             setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
 		}
 
-		public void loadLevel()
+		public void reload()
 		{
-			objects = new List<Entity>();
-			terrainTiles = new List<TerrainTile>();
-			heightData = new List<Byte> ();
+			loadLevel (currentLevelPath);
+		}
 
-			LevelReader level = new LevelReader(currentLevelPath);
-			this.objects = level.getObjects();
+		public void loadLevel(String fileName)
+		{
+			if (fileName != null) {
+				objects = new List<Entity> ();
+				terrainTiles = new List<TerrainTile> ();
+				heightData = new List<Byte> ();
 
-			List<int> terrain = level.getTerrainTiles();
-			foreach (int id in terrain)
-			{
-				terrainTiles.Add(TileTypes[id]);
+				LevelReader level = new LevelReader (fileName);
+				this.objects = level.getObjects ();
+
+				List<int> terrain = level.getTerrainTiles ();
+				foreach (int id in terrain) {
+					terrainTiles.Add (TileTypes [id]);
+				}
+
+				setFocusEntity (objects.FirstOrDefault (e => e.getType () == ENTITIES.player));
+				currentLevelPath = fileName;
+			} else {
+				FillWorld ((int)TERRAIN.grass);
 			}
-
-            setFocusEntity(objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
         }
 
 		public void AddItems()
@@ -217,24 +226,24 @@ namespace KBSGame
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
 						if(rand.Next(0, 5) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling1, 50, true));
+							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.sapling1, 50, true));
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Entity(new Point(x, y), (int)SPRITES.banana, false, 50, 9));
+							objects.Add (new Entity(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.sapling2, 50, true));
+							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.sapling2, 50, true));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.tallgrass, 50, false, 11));
+							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.tallgrass, 50, false, 11));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
 						if(rand.Next(0, 60) == 0)
-							objects.Add (new Plant(new Point(x, y), (int)SPRITES.waterlily, 50, false, 0, 0));
+							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.waterlily, 50, false, 0, 0));
 					}
 				}
 			}
@@ -272,7 +281,7 @@ namespace KBSGame
 		/// <returns>The player.</returns>
 		public Player getPlayer()
 		{
-			return player;
+			return (Player) objects.FirstOrDefault (e => e.getType () == ENTITIES.player);
 		}
 
 		/// <summary>

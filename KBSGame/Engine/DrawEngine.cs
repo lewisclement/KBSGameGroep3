@@ -45,8 +45,8 @@ namespace KBSGame
             Interfaces = new List<Gui>
             {
                 new Menu ((int)GUI.def, xRes, yRes, "Pause"),                           //Temporary static Gui
-                new FinishMenu((int)GUI.finish, xRes, yRes, "Finished!"),               //Create FinishedMenu GUI
-                new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?"),   //Game over menu
+				new FinishMenu((int)GUI.finish, xRes, yRes, "Finished!", world),               //Create FinishedMenu GUI
+                new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?", world),   //Game over menu
                 new GuiInventory((int) GUI.guiinventory, xRes, yRes, world.getPlayer(), sprites) //Inventory GUI
             };
 		}

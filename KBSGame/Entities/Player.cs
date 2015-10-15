@@ -10,7 +10,7 @@ namespace KBSGame
 {
 	public class Player : Entity
 	{
-	    public List<Item> Inventory { get; }
+		public List<Item> Inventory { get; private set; }
 
 		public Player(PointF location, Byte height)
 			: base(location, (int)SPRITES.player, true, height, 10)
