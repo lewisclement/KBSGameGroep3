@@ -44,7 +44,7 @@ namespace KBSGame
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes, "Pause");	//Temporary static Gui
 			Interfaces.Add (menu);
 
-            FinishMenu finishmenu = new FinishMenu((int)GUI.finish, xRes, yRes, "Finished!");
+            FinishMenu finishmenu = new FinishMenu((int)GUI.finish, xRes, yRes, "Finished!"); //Create FinishedMenu GUI
             Interfaces.Add(finishmenu);
 
             GameOverMenu gameover = new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?");

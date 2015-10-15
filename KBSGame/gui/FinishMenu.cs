@@ -15,10 +15,10 @@ namespace KBSGame.gui
 
         public FinishMenu(int ID, int ScreenresX, int ScreenresY, String Menu) : base(ID, ScreenresX, ScreenresY)
         {
-            this.menu = Menu;
-			buttonList = new List<Button>();
+            this.menu = Menu; //Basic Menu class
+			buttonList = new List<Button>(); //Button List
 
-            xRes = ScreenresX;
+            xRes = ScreenresX;              
             yRes = ScreenresY;
 
             buffer = new Bitmap(xRes, yRes);
@@ -33,15 +33,15 @@ namespace KBSGame.gui
 
             StringFormat style = new StringFormat();
             style.Alignment = StringAlignment.Center;
-            Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
+            Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);     //Fonttype
 
-            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, (yRes / 3) * 2, xRes, yRes);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, (yRes / 3) * 2, xRes, yRes); //Draw a large square for content
             g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, (yRes / 3), style);
 
-            float fontSize = StaticVariables.dpi / 3;
+            float fontSize = StaticVariables.dpi / 3; //Create fontSize on the basis of dpi
 
-            g.DrawString("Home", new Font("Arial", fontSize), new SolidBrush(Color.White), (xRes / 4), (yRes / 4) * 3);
-            g.DrawString("Next Level", new Font("Arial", fontSize), new SolidBrush(Color.White), (xRes / 5) * 3, (yRes / 4) * 3);
+            g.DrawString("Home", new Font("Arial", fontSize), new SolidBrush(Color.White), (xRes / 4), (yRes / 4) * 3);     // Create button
+            g.DrawString("Next Level", new Font("Arial", fontSize), new SolidBrush(Color.White), (xRes / 5) * 3, (yRes / 4) * 3); //Create button
 
             return this.buffer;
         }
