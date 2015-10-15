@@ -70,7 +70,7 @@ namespace KBSGame.gui
                     setActive(false);
                     
                     Console.WriteLine("Exit to main menu");
-
+                    Application.Exit();
                     break;
                 case 1:
                     
