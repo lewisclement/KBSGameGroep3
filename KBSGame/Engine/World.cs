@@ -53,11 +53,11 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 			currentLevelPath = StaticVariables.execFolder + "/" + fileName;
-			//loadLevel(currentLevelPath);
-            temporaryWorldGenerator ();
+			loadLevel(currentLevelPath);
+            //temporaryWorldGenerator ();
 
-            LevelWriter levelWriter = new LevelWriter ();
-            levelWriter.saveWorld (this);
+            //LevelWriter levelWriter = new LevelWriter ();
+            //levelWriter.saveWorld (this);
 
             setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
 		}

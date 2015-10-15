@@ -53,9 +53,9 @@ namespace KBSGame
 			XmlNodeList entityList = reader.GetElementsByTagName("e");
 			foreach (XmlNode entity in entityList)
 			{
-				Point location = new Point();
-				location.X = Int32.Parse(entity["x"].InnerText);
-				location.Y = Int32.Parse(entity["y"].InnerText);
+				PointF location = new PointF();
+				location.X = float.Parse(entity["x"].InnerText);
+				location.Y = float.Parse(entity["y"].InnerText);
 				int SpriteID = Int32.Parse(entity["s"].InnerText);
 				bool solid = bool.Parse(entity["so"].InnerText);
 
