@@ -10,7 +10,8 @@ namespace KBSGame
 {
 	public class Player : Entity
 	{
-		private List<Item> Inventory;
+	    public List<Item> Inventory { get; }
+
 		public Player(PointF location, Byte height)
 			: base(location, (int)SPRITES.player, true, height, 10)
 		{
@@ -25,12 +26,13 @@ namespace KBSGame
 
 			PointF targetPoint = new PointF(moveLocationX, moveLocationY);
 			TerrainTile targetTile = sender.getTerraintile (targetPoint);
+		    //bool HasNonSolidEntities = sender.getEntitiesOnTerrainTile((targetPoint)).Any(e => e.getSolid() == false);
 
 			// Log current inventory
 			Inventory.ForEach(Console.WriteLine);
 
 			// If terrain contains solid objects OR if tile has no walkable entity on a non-walkable tile
-			if (targetTile == null || sender.checkCollision(this, targetPoint) || !targetTile.IsWalkable)
+			if (targetTile == null || sender.checkCollision(this, targetPoint))
 				return;
 
 			location.X = (float)Math.Round(moveLocationX, 1);

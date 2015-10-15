@@ -54,9 +54,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="PlayerMove.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PlayerMoveToEntity.cs" />
+    <Compile Include="PlayerMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KBSGame\KBSGame.csproj">

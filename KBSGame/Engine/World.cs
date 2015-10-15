@@ -16,72 +16,74 @@ namespace KBSGame
 		private int width, height;
 		private List<Entity> objects;
 		private Entity focusEntity;
-		private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
+		private Player player;
 
 		private World() { //For serializing
 		}
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="KBSGame.World"/> class.
-		/// </summary>
-		/// <param name="width">Width.</param>
-		/// <param name="height">Height.</param>
-		public World (int width, int height)
-		{
-			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
-			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
+	    /// <summary>
+	    /// Initializes a new instance of the <see cref="KBSGame.World"/> class.
+	    /// </summary>
+	    /// <param name="width">Width.</param>
+	    /// <param name="height">Height.</param>
+	    public World(int width, int height, string fileName = null)
+	    {
+	        this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
+	        this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-			this.objects = new List<Entity>();
-			terrainTiles = new List<TerrainTile>();
-			heightData = new List<Byte> ();
+	        this.objects = new List<Entity>();
+	        terrainTiles = new List<TerrainTile>();
+	        heightData = new List<Byte>();
 
-			// TEMPORARY
-			//player = new Player(new Point(this.width / 2, this.height / 2), 50);
-			//player.setHeight(50);
-			//objects.Add(player);
+	        TileTypes = new TerrainTile[(int) TERRAIN.count];
+	        TileTypes[(int) TERRAIN.grass] = new TerrainTile((int) TERRAIN.grass);
+	        TileTypes[(int) TERRAIN.grass].setSpriteID((int) SPRITES.grass);
+	        TileTypes[(int) TERRAIN.water] = new TerrainTile((int) TERRAIN.water, false);
+	        TileTypes[(int) TERRAIN.water].setSpriteID((int) SPRITES.water);
+	        TileTypes[(int) TERRAIN.sand] = new TerrainTile((int) TERRAIN.sand);
+	        TileTypes[(int) TERRAIN.sand].setSpriteID((int) SPRITES.sand);
+	        TileTypes[(int) TERRAIN.dirt] = new TerrainTile((int) TERRAIN.dirt);
+	        TileTypes[(int) TERRAIN.dirt].setSpriteID((int) SPRITES.dirt);
 
-			TileTypes = new TerrainTile[(int)TERRAIN.count];
-			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass);
-			TileTypes [(int)TERRAIN.grass].setSpriteID ((int)SPRITES.grass);
-			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water, false);
-			TileTypes [(int)TERRAIN.water].setSpriteID ((int)SPRITES.water);
-			TileTypes [(int)TERRAIN.sand] = new TerrainTile ((int)TERRAIN.sand);
-			TileTypes [(int)TERRAIN.sand].setSpriteID ((int)SPRITES.sand);
-			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
-			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
+	        LevelLoader(fileName);
+	        //temporaryWorldGenerator ();
 
-
-			LevelLoader("tiles.xml");
-			//temporaryWorldGenerator ();
-
-			//LevelWriter levelWriter = new LevelWriter ();
-			//levelWriter.saveWorld (this);
-
-			setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
+            //LevelWriter levelWriter = new LevelWriter ();
+            //levelWriter.saveWorld (this);
+            AddItemsToInventory();
+            setFocusEntity(player);
 		}
 
-		public void LevelLoader(string File)
+		public void LevelLoader(string fileName)
 		{
-			LevelReader level = new LevelReader(File);
-			//FillWorld(level.getdefaultbackground());
-			this.objects = level.getObjects();
+		    if (!String.IsNullOrEmpty(fileName))
+		    {
+		        LevelReader level = new LevelReader(fileName);
+                //FillWorld(level.getdefaultbackground());
+                this.objects = level.getObjects();
 
-			List<int> terrain = level.getTerrainTiles();int count = 0;
-			foreach (int id in terrain)
-			{
-				if (id == (int)TERRAIN.grass)
-					Console.WriteLine (count++);
-				terrainTiles.Add(TileTypes[id]);
-			}
+		        List<int> terrain = level.getTerrainTiles();
+		        int count = 0;
+		        foreach (int id in terrain)
+		        {
+		            if (id == (int) TERRAIN.grass)
+		                Console.WriteLine(count++);
+		            terrainTiles.Add(TileTypes[id]);
+		        }
+                player = getPlayer();
+                return;
+		    }
+            FillWorld((int)SPRITES.grass);
+            player = new Player(new PointF(10, 10), 50);
+            objects.Add(player);
+        }
 
-			setFocusEntity (objects [0]); // TEMPORARY PLAYER
-		}
-
-		public void AddItems()
+		public void AddItemsToInventory()
 		{
-			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
-			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
-		}
+			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana, false, 50, 9)));
+			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana, false, 50, 9)));
+            player.AddItemToInventory(new Item(new Plant(new Point(0, 0), (int)SPRITES.sapling1, 50, true)));
+        }
 
 		private void FillWorld(int Sprite)
 		{
@@ -269,10 +271,10 @@ namespace KBSGame
 		/// <returns>The player.</returns>
 		public Player getPlayer()
 		{
-			return player;
+		    return (Player) objects.FirstOrDefault(e => e.getType() == ENTITIES.player);
 		}
 
-		/// <summary>
+	    /// <summary>
 		/// Removes the item.
 		/// </summary>
 		/// <param name="e">E.</param>
@@ -358,10 +360,10 @@ namespace KBSGame
 			return returnEntities;
 		}
 
-		public List<Item> getItemsOnTerrainTile(PointF point)
+		public List<Entity> getEntitiesOnTerrainTile(PointF point)
 		{
 			// Return list with items on given tile
-			return objects.Where(e => e.getLocation() == point).Where(e => e is Item).Cast<Item>().ToList();
+			return objects.Where(e => e.getLocation() == point).ToList();
 		}
 
 		public bool checkCollision(Entity entity, PointF target)
@@ -369,12 +371,9 @@ namespace KBSGame
 			bool collision = false;
 
 			foreach (Entity e in objects) {
-				if (e == entity)
+				if (e == entity || !e.getSolid())
 					continue;
-
-				if (!e.getSolid ())
-					continue;
-
+                
 				PointF loc = e.getLocation ();
 				if (target.X > loc.X - 1.0f && target.X < loc.X + 1.0f && target.Y > loc.Y - 1.0f && target.Y < loc.Y + 1.0f) {
 					collision = true;
@@ -405,14 +404,14 @@ namespace KBSGame
 			return terrainTiles[(int) point.X*height + (int) point.Y];
 		}
 
-		public void setTerraintile(PointF point, int terrainID)
+		public void setTerraintile(Point point, int terrainID)
 		{
 			TerrainTile tile = TileTypes[terrainID];
 			if (terrainID == (int)SPRITES.water)
 			{
 				tile.IsWalkable = false;
 			}
-			terrainTiles[(int) point.X*height + (int) point.Y] = tile;
+			terrainTiles[point.X*height + point.Y] = tile;
 		}
 
 		public Byte getTerrainHeight(PointF point)

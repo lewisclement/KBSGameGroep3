@@ -11,7 +11,7 @@ namespace KBSGame
     public class Item
     {
         public bool CanPickup { get; set; }
-        private Entity Entity { get; set; }
+        public Entity Entity { get; private set; }
 
         public Item(Entity e)
         {
