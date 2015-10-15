@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Drawing;
 using System.Xml;
 using System.Xml.Schema;
@@ -6,40 +6,46 @@ using System.Xml.Serialization;
 
 namespace KBSGame
 {
-    public class Entity        
+	public class Entity        
 	{
-        protected int ID = 0;
-        protected int spriteID;
-        protected PointF location;
-        protected bool solid;
-        protected Byte drawOrder;
-        protected int drawPrecision;
-        protected Byte height;
+		protected int ID = 0;
+		protected ENTITIES type = ENTITIES.def;
+		protected int spriteID;
+		protected PointF location;
+		protected bool solid;
+		protected Byte drawOrder;
+		protected int drawPrecision;
+		protected Byte height;
 
 		public Entity(PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
 		{
 			this.location = location;
 			this.height = height;
 			this.drawOrder = drawOrder;
-		    this.drawPrecision = drawPrecision;
+			this.drawPrecision = drawPrecision;
 			this.spriteID = spriteID;
 			this.solid = solid;
-	        ID++;
+			ID++;
 		}
-        public Entity(int ID, PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
-        {
-            this.location = location;
-            this.height = height;
-            this.drawOrder = drawOrder;
-            this.drawPrecision = drawPrecision;
-            this.spriteID = spriteID;
-            this.solid = solid;
-            this.ID = ID;
-        }
+		public Entity(int ID, PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, int drawPrecision = 10)
+		{
+			this.location = location;
+			this.height = height;
+			this.drawOrder = drawOrder;
+			this.drawPrecision = drawPrecision;
+			this.spriteID = spriteID;
+			this.solid = solid;
+			this.ID = ID;
+		}
 
-        public int getID()
+		public int getID()
 		{
 			return ID;
+		}
+
+		public ENTITIES getType()
+		{
+			return type;
 		}
 
 		public bool getSolid()
@@ -57,12 +63,12 @@ namespace KBSGame
 			return spriteID;
 		}
 
-	    public int getDrawPrecision()
-	    {
-            return drawPrecision;
-	    }
+		public int getDrawPrecision()
+		{
+			return drawPrecision;
+		}
 
-	    public void setSolid(bool solid)
+		public void setSolid(bool solid)
 		{
 			this.solid = solid;
 		}
@@ -92,12 +98,12 @@ namespace KBSGame
 			this.height = height;
 		}
 
-        public void setLocation(PointF point)
-        {
-            this.location = point;
-        }
+		public void setLocation(PointF point)
+		{
+			this.location = point;
+		}
 
-	    protected void setDrawOrder(Byte drawOrder)
+		protected void setDrawOrder(Byte drawOrder)
 		{
 			if (drawOrder >= StaticVariables.drawOrderSize)
 				this.drawOrder = StaticVariables.drawOrderSize-1;
@@ -111,16 +117,15 @@ namespace KBSGame
 
 			//Have world move the entity
 
-	        location.X += relativeLocation.X;
-	        location.Y += relativeLocation.Y;
+			location.X += relativeLocation.X;
+			location.Y += relativeLocation.Y;
 		}
 
 		public virtual void collisionCheck()
 		{
 
-            
+
 
 		}
-    }
+	}
 }
-
