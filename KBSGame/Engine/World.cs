@@ -376,7 +376,7 @@ namespace KBSGame
 			return objects.Where(e => e.getLocation() == point).Where(e => e is Item).Cast<Item>().ToList();
 		}
 
-		public bool checkCollision(Entity entity, PointF target)
+		public bool checkCollision(Entity entity, PointF target, bool solid = true)
 		{
 			bool collision = false;
 
@@ -384,11 +384,11 @@ namespace KBSGame
 				if (e == entity)
 					continue;
 
-				if (!e.getSolid ())
+				if (!e.getSolid () == solid)
 					continue;
 
 				PointF loc = e.getLocation ();
-				if (target.X > loc.X - 1.0f && target.X < loc.X + 1.0f && target.Y > loc.Y - 1.0f && target.Y < loc.Y + 1.0f) {
+				if (target.X > loc.X - 0.6f && target.X < loc.X + 0.6f && target.Y > loc.Y - 0.6f && target.Y < loc.Y + 0.6f) {
 					collision = true;
 					break;
 				}
