@@ -18,21 +18,23 @@ namespace KBSGame
 		private Entity focusEntity;
 		private Player player;
 
+		private String currentLevelPath = null;
+
 		private World() { //For serializing
 		}
 
-	    /// <summary>
-	    /// Initializes a new instance of the <see cref="KBSGame.World"/> class.
-	    /// </summary>
-	    /// <param name="width">Width.</param>
-	    /// <param name="height">Height.</param>
+		/// <summary>
+		/// Initializes a new instance of the <see cref="KBSGame.World"/> class.
+		/// </summary>
+		/// <param name="width">Width.</param>
+		/// <param name="height">Height.</param>
 	    public World(int width, int height, string fileName = null)
-	    {
-	        this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
-	        this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
+		{
+			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
+			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-	        this.objects = new List<Entity>();
-	        terrainTiles = new List<TerrainTile>();
+			objects = new List<Entity>();
+			terrainTiles = new List<TerrainTile>();
 	        heightData = new List<Byte>();
 
 	        TileTypes = new TerrainTile[(int) TERRAIN.count];
@@ -46,10 +48,10 @@ namespace KBSGame
 	        TileTypes[(int) TERRAIN.dirt].setSpriteID((int) SPRITES.dirt);
 
 	        LevelLoader(fileName);
-	        //temporaryWorldGenerator ();
+			//temporaryWorldGenerator ();
 
-            //LevelWriter levelWriter = new LevelWriter ();
-            //levelWriter.saveWorld (this);
+			//LevelWriter levelWriter = new LevelWriter ();
+			//levelWriter.saveWorld (this);
             AddItemsToInventory();
             setFocusEntity(player);
 		}
@@ -57,22 +59,22 @@ namespace KBSGame
 		public void LevelLoader(string fileName)
 		{
 		    if (!String.IsNullOrEmpty(fileName))
-		    {
+		{
 		        LevelReader level = new LevelReader(fileName);
                 //FillWorld(level.getdefaultbackground());
-                this.objects = level.getObjects();
+			this.objects = level.getObjects();
 
 		        List<int> terrain = level.getTerrainTiles();
 		        int count = 0;
-		        foreach (int id in terrain)
-		        {
+			foreach (int id in terrain)
+			{
 		            if (id == (int) TERRAIN.grass)
 		                Console.WriteLine(count++);
-		            terrainTiles.Add(TileTypes[id]);
-		        }
+				terrainTiles.Add(TileTypes[id]);
+			}
                 player = getPlayer();
                 return;
-		    }
+		}
             FillWorld((int)SPRITES.grass);
             player = new Player(new PointF(10, 10), 50);
             objects.Add(player);
@@ -83,7 +85,7 @@ namespace KBSGame
 			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana, false, 50, 9)));
 			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana, false, 50, 9)));
             player.AddItemToInventory(new Item(new Plant(new Point(0, 0), (int)SPRITES.sapling1, 50, true)));
-        }
+		}
 
 		private void FillWorld(int Sprite)
 		{
@@ -274,7 +276,7 @@ namespace KBSGame
 		    return (Player) objects.FirstOrDefault(e => e.getType() == ENTITIES.player);
 		}
 
-	    /// <summary>
+		/// <summary>
 		/// Removes the item.
 		/// </summary>
 		/// <param name="e">E.</param>
@@ -373,7 +375,7 @@ namespace KBSGame
 			foreach (Entity e in objects) {
 				if (e == entity || !e.getSolid())
 					continue;
-                
+
 				PointF loc = e.getLocation ();
 				if (target.X > loc.X - 1.0f && target.X < loc.X + 1.0f && target.Y > loc.Y - 1.0f && target.Y < loc.Y + 1.0f) {
 					collision = true;

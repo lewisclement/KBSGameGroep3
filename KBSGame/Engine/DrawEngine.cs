@@ -49,7 +49,7 @@ namespace KBSGame
                 new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?"),   //Game over menu
                 new GuiInventory((int) GUI.guiinventory, xRes, yRes, world.getPlayer(), sprites) //Inventory GUI
             };
-        }
+		}
 
 		/// <summary>
 		/// Render de view naar scherm

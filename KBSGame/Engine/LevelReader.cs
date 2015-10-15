@@ -27,19 +27,14 @@ namespace KBSGame
 			return this.p;
 		}
 	}
+
 	class LevelReader
 	{
-		private List<Entity> objects;
-		private Entity[] Entities;
-		//private List<Terrain> TerrainTiles;
 		private int defaultbackground;
 		private XmlDocument reader;
 
 		public LevelReader(string File)
 		{
-			//this.TerrainTiles = new List<Terrain>();
-			this.objects = new List<Entity>();
-
 			this.reader = new XmlDocument();
 			try
 			{
@@ -49,59 +44,12 @@ namespace KBSGame
 			{
 				Console.WriteLine(ex.Message);
 			}
-			//foreach (XmlNode node in reader.DocumentElement)
-			//{
-			//    switch (node["type"].InnerText)
-			//    {
-			//            break;
-			//        case "Terrain":
-			//            try
-			//            {
-			//                int X = Int32.Parse(node["X"].InnerText);
-			//                int Y = Int32.Parse(node["Y"].InnerText);
-			//                int S = Int32.Parse(node["SpriteID"].InnerText);
-			//                Terrain t = new Terrain(new Point(X, Y), S);
-			//                this.TerrainTiles.Add(t);
-			//            }
-			//            catch (Exception ex)
-			//            {
-			//                Console.WriteLine(ex.Message);
-			//            }
-			//            break;
-			//        case "DefaultTerrain":
-			//            try
-			//            {
-			//                this.defaultbackground = Int32.Parse(node["SpriteID"].InnerText);
-			//            }
-			//            catch (Exception ex)
-			//            {
-			//                Console.WriteLine(ex.Message);
-			//            }
-			//            break;
-			//        default:
-			//            try
-			//            {
-			//                Point location = new Point();
-			//                location.X = Int32.Parse(node["X"].InnerText);
-			//                location.Y = Int32.Parse(node["Y"].InnerText);
-			//                bool solid = Convert.ToBoolean(node["solid"].InnerText);
-			//                int sprite = Int32.Parse(node["spriteID"].InnerText);
-			//                int ID = Int32.Parse(node["ID"].InnerText);
-			//                Entity e = new Entity(ID, location, sprite, solid);
-			//                this.objects.Add(e);
-			//            }
-			//            catch (Exception ex)
-			//            {
-			//              //  Console.WriteLine(ex.Message);
-			//            }
-			//            break;
-			//    }
-			//  }
+
 		}
 
-		private void getEntitysxml()
+		public List<Entity> getObjects()
 		{
-
+			List<Entity> objects = new List<Entity> ();
 			XmlNodeList entityList = reader.GetElementsByTagName("e");
 			foreach (XmlNode entity in entityList)
 			{
@@ -128,13 +76,7 @@ namespace KBSGame
 				}
 			}
 
-
-		}
-
-		public List<Entity> getObjects()
-		{
-			getEntitysxml();
-			return this.objects;
+			return objects;
 		}
 
 		public List<int> getTerrainTiles()
@@ -150,12 +92,6 @@ namespace KBSGame
 			}
 
 			return terrainTiles;
-		}
-
-		public int getdefaultbackground()
-		{
-			XmlNodeList elemlist = reader.GetElementsByTagName("DefaultTerrain");
-			return Int32.Parse(elemlist[0]["TerrainID"].InnerText);
 		}
 	}
 }
