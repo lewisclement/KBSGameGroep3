@@ -9,10 +9,17 @@ namespace KBSGame
 {
     class GuiInventory : Gui
     {
-        public GuiInventory(int ID, int ScreenresX, int ScreenresY)
+        const int SPACING = 8;
+        const int HEIGHT = 48;
+        const int WIDTH = 512;
+        private Player player;
+        private Sprite[] sprites;
+        public GuiInventory(int ID, int ScreenresX, int ScreenresY, Player p, Sprite[] s)
             : base(ID, ScreenresX, ScreenresY)
         {
             setActive(true);
+            player = p;
+            sprites = s;
         }
 
         public override Bitmap getRender()
@@ -20,24 +27,17 @@ namespace KBSGame
             var g = Graphics.FromImage(buffer);
             g.Clear(Color.FromArgb(0));
 
-            int width = StaticVariables.dpi * 4;
-
             StringFormat style = new StringFormat();
             style.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
             
-            g.FillRectangle(new SolidBrush(Color.FromArgb(90, Color.Black)), 0, 0, 512, 64);
-//            g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
-//            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverPos * StaticVariables.dpi, width, StaticVariables.dpi);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(90, Color.Black)), 0, 0, WIDTH, HEIGHT);
 
-            /*for (int i = 0; i < buttonList.Count; i++)
+            for(int i = 0; i < player.Inventory.Count; i++)
             {
-                float fontSize = StaticVariables.dpi / 3;
-                float x = StaticVariables.dpi / 4;
-                float y = StaticVariables.dpi * i + fontSize / 2;
-
-                g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y);
-            }*/
+                int spriteID = player.Inventory[i].Entity.getSpriteID();
+                g.DrawImage(sprites[spriteID].getBitmap(), SPACING + (i * (HEIGHT - SPACING)), SPACING, StaticVariables.tileSize, StaticVariables.tileSize);
+            }
 
             return this.buffer;
         }

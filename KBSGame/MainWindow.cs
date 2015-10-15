@@ -19,7 +19,7 @@ namespace KBSGame
 			Height = 1920;
 			Width = 1080;
              
-			world = new World(300, 300);
+			world = new World(300, 300, "tiles.xml");
 
             Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
