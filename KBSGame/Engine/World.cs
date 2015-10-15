@@ -18,6 +18,8 @@ namespace KBSGame
 		private Entity focusEntity;
 		private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
 
+		private String currentLevelPath = null;
+
 		private World() { //For serializing
 		}
 
@@ -31,7 +33,7 @@ namespace KBSGame
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
 
-			this.objects = new List<Entity>();
+			objects = new List<Entity>();
 			terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
 
@@ -50,8 +52,8 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
-
-			LevelLoader("tiles.xml");
+			currentLevelPath = StaticVariables.execFolder + "/tiles.xml";
+			loadLevel();
 			//temporaryWorldGenerator ();
 
 			//LevelWriter levelWriter = new LevelWriter ();
@@ -60,17 +62,18 @@ namespace KBSGame
 			setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
 		}
 
-		public void LevelLoader(string File)
+		public void loadLevel()
 		{
-			LevelReader level = new LevelReader(File);
-			//FillWorld(level.getdefaultbackground());
+			objects = new List<Entity>();
+			terrainTiles = new List<TerrainTile>();
+			heightData = new List<Byte> ();
+
+			LevelReader level = new LevelReader(currentLevelPath);
 			this.objects = level.getObjects();
 
-			List<int> terrain = level.getTerrainTiles();int count = 0;
+			List<int> terrain = level.getTerrainTiles();
 			foreach (int id in terrain)
 			{
-				if (id == (int)TERRAIN.grass)
-					Console.WriteLine (count++);
 				terrainTiles.Add(TileTypes[id]);
 			}
 
