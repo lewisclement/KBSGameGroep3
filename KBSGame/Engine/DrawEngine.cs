@@ -136,7 +136,7 @@ namespace KBSGame
 			xDrawRes = xRes / 2;
 			yDrawRes = yRes / 2;
 
-			setView(xDrawRes / StaticVariables.tileSize, yDrawRes / StaticVariables.tileSize);
+			setView(xDrawRes / StaticVariables.tileSize + 1, yDrawRes / StaticVariables.tileSize + 1);
 
 			buffer = new Bitmap (xDrawRes, yDrawRes);
 
