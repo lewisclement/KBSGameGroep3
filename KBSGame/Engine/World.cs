@@ -53,8 +53,8 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
 			currentLevelPath = StaticVariables.execFolder + "/" + fileName;
-			loadLevel(currentLevelPath);
-            //temporaryWorldGenerator ();
+			//loadLevel(currentLevelPath);
+            temporaryWorldGenerator ();
 
             //LevelWriter levelWriter = new LevelWriter ();
             //levelWriter.saveWorld (this);
@@ -238,7 +238,7 @@ namespace KBSGame
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.tallgrass, 50, false, 11));
+							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.tallgrass, 50, false));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
@@ -465,19 +465,29 @@ namespace KBSGame
 			//Get viewport
 			Rectangle view = getView (viewWidth, viewHeight);
 
-			int[] drawOrderIndex = new int[StaticVariables.drawOrderSize];
+			/*int[] drawOrderIndex = new int[StaticVariables.drawOrderSize];
 			for (int i = 0; i < drawOrderIndex.Length; i++) {
 				drawOrderIndex[i] = 0;
-			}
+			}*/
 
 			for (int i = 0; i < objects.Count; i++) {
 				PointF p = objects [i].getLocation ();
 				if (p.X >= view.Left && p.X <= view.Right && p.Y >= view.Top && p.Y <= view.Bottom) {
-					returnEntities.Insert (drawOrderIndex[objects[i].getDrawOrder()], objects [i]);
+					returnEntities.Add (objects [i]);
 
-					for (int j = objects [i].getDrawOrder () + 1; j < StaticVariables.drawOrderSize; j++)
-						drawOrderIndex [j]++;
+					//for (int j = objects [i].getDrawOrder () + 1; j < StaticVariables.drawOrderSize; j++)
+					//	drawOrderIndex [j]++;
 				}
+			}
+
+			for (int i = 0; i < returnEntities.Count; i++) {
+				Entity x = returnEntities[i];                              
+				while ((i - 1 >= 0) && (x.getLocation().Y + x.getDrawOrder() * viewHeight < returnEntities[i - 1].getLocation().Y + returnEntities[i - 1].getDrawOrder() * viewHeight)) 
+				{                                          
+					returnEntities[i] = returnEntities[i - 1];                 
+					i--;
+				}
+				returnEntities[i] = x;                             
 			}
 
 			return returnEntities.ToArray();
