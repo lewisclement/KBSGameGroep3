@@ -29,7 +29,7 @@ namespace KBSGame
 		    //bool HasNonSolidEntities = sender.getEntitiesOnTerrainTile((targetPoint)).Any(e => e.getSolid() == false);
 
 			// Log current inventory
-			Inventory.ForEach(Console.WriteLine);
+			//Inventory.ForEach(Console.WriteLine);
 
 			// If terrain contains solid objects OR if tile has no walkable entity on a non-walkable tile
 			if (targetTile == null || sender.checkCollision(this, targetPoint) || !targetTile.IsWalkable && !sender.checkCollision(this, targetPoint, false))
@@ -50,23 +50,21 @@ namespace KBSGame
 			Inventory.Add(i);
 		}
 
-		/*
-
-        public void PickUpItems(World world)
-        {
-            List<Item> items = world.getItemsOnTerrainTile(new PointF(location.X, location.Y));
-            foreach (Item i in items.Where(i => i.CanPickup))
-            {
-                PickUp(world, i);
-            }
-        }
-
-        
-        public void PickUp(World world, Item i)
-        {
-            world.RemoveItem(i);
-            Inventory.Add(i);
-        }
+	    public void PickupItems(World w)
+	    {
+	        if (Inventory.Count >= 10) return;
+            // Get a list with nonSolid entities on terrain tile and filter for bananas or keys
+	        List<Entity> EntitiesOnTile =
+	            w.getEntitiesOnTerrainTile(getLocation(), true)
+	                .Where(e => e.getSpriteID() == (int) SPRITES.banana || e.getSpriteID() == (int) SPRITES.key)
+	                .ToList();
+            // If there's nothing in the list, return;
+	        if (EntitiesOnTile.Count == 0) return;
+            // Add first item of list to inventory
+	        Inventory.Add(new Item(EntitiesOnTile[0]));
+            // Remove item from world
+	        w.getEntities().Remove(EntitiesOnTile[0]);
+	    }
 
         // Removes first item from inventory if exists
         public void DropItem(World world)
@@ -84,12 +82,11 @@ namespace KBSGame
                 return;
 
             // Set droplocation on item
-            Inventory[0].setLocation(dropLocation);
+            Inventory[0].Entity.setLocation(dropLocation);
             // Push item in world objects list
-            world.getEntities().Add(Inventory[0]);
+            world.getEntities().Add(Inventory[0].Entity);
             // Remove item from inventory
             Inventory.RemoveAt(0);
         }
-        */
 	}
 }

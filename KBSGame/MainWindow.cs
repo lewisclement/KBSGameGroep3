@@ -81,31 +81,37 @@ namespace KBSGame
             switch (e.KeyCode)
             {
             case Keys.Up:
-				world.getFocusEntity().move(world, new PointF(0.0f, -0.2f));
+				world.getPlayer().move(world, new PointF(0.0f, -0.2f));
                 break;
             case Keys.Down:
-				world.getFocusEntity().move(world, new PointF(0.0f, 0.2f));
+				world.getPlayer().move(world, new PointF(0.0f, 0.2f));
                 break;
             case Keys.Left:
-				world.getFocusEntity().move(world, new PointF(-0.2f, 0.0f));
+				world.getPlayer().move(world, new PointF(-0.2f, 0.0f));
                 break;
             case Keys.Right:
-				world.getFocusEntity().move(world, new PointF(0.2f, 0.0f));
+				world.getPlayer().move(world, new PointF(0.2f, 0.0f));
                 break;
-			case Keys.Escape:
+            case Keys.Space:
+                world.getPlayer().PickupItems(world);
+                break;
+            case Keys.Z:
+                world.getPlayer().DropItem(world);
+                break;
+            case Keys.Escape:
                 renderer.getGui((int)GUI.def).switchActive();
 				break;
             case Keys.K:
                 renderer.getGui((int)GUI.gameover).switchActive();
                 break;
 
-                case Keys.L:
-                    renderer.getGui((int)GUI.finish).switchActive(); //GUI finish innitiated when L is pressed.
-                    break;
+            case Keys.L:
+                renderer.getGui((int)GUI.finish).switchActive(); //GUI finish innitiated when L is pressed.
+                break;
             case Keys.E:
                 //world.getPlayer().DropItem(world);
                 break;
-                case Keys.I:
+            case Keys.I:
                     renderer.getGui((int) GUI.guiinventory);
                 break;
             default:

@@ -11,7 +11,7 @@ namespace KBSGame
     {
         const int SPACING = 8;
         const int HEIGHT = 48;
-        const int WIDTH = 512;
+        const int WIDTH = 408;
         private Player player;
         private Sprite[] sprites;
         public GuiInventory(int ID, int ScreenresX, int ScreenresY, Player p, Sprite[] s)

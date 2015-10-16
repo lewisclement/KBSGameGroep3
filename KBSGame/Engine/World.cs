@@ -58,11 +58,25 @@ namespace KBSGame
 
             //LevelWriter levelWriter = new LevelWriter ();
             //levelWriter.saveWorld (this);
-
+		    
             setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
-		}
+            AddItemsToInventory((Player) focusEntity);
+        }
 
-		public void reload()
+	    public void AddItemsToInventory(Player player)
+	    {
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+	    }
+
+	    public void reload()
 		{
 			loadLevel (currentLevelPath);
 		}
@@ -81,19 +95,15 @@ namespace KBSGame
 				foreach (int id in terrain) {
 					terrainTiles.Add (TileTypes [id]);
 				}
-
-				setFocusEntity (objects.FirstOrDefault (e => e.getType () == ENTITIES.player));
+			    player = (Player) objects.FirstOrDefault(e => e.getType() == ENTITIES.player);
+                setFocusEntity (player);
 				currentLevelPath = fileName;
-			} else {
+			} else
+			{
+			    player = new Player(new PointF(120, 120), 50);
 				FillWorld ((int)TERRAIN.grass);
 			}
         }
-
-		public void AddItems()
-		{
-			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
-			player.AddItemToInventory(new Item(new Entity(new PointF(0.0f, 0.0f), (int)SPRITES.banana)));
-		}
 
 		private void FillWorld(int Sprite)
 		{
@@ -228,7 +238,7 @@ namespace KBSGame
 						if(rand.Next(0, 5) == 0)
 							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.sapling1, 50, true));
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Entity(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9));
+							objects.Add (new Entity(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9, 0.6f));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
@@ -307,7 +317,7 @@ namespace KBSGame
 		/// Gets the focus entity.
 		/// </summary>
 		/// <returns>The focus entity.</returns>
-		public Entity getFocusEntity()
+		public Entity getPlayergetFocusEntity()
 		{
 			return focusEntity;
 		}
@@ -370,10 +380,25 @@ namespace KBSGame
 			return returnEntities;
 		}
 
-		public List<Item> getItemsOnTerrainTile(PointF point)
+		public List<Entity> getEntitiesOnTerrainTile(PointF point, bool nonSolidOnly = false)
 		{
-			// Return list with items on given tile
-			return objects.Where(e => e.getLocation() == point).Where(e => e is Item).Cast<Item>().ToList();
+            // If nonSolidOnly, select the nonSolid entities else create a new list (not used)
+		    List<Entity> nonSolidObjects = nonSolidOnly ? objects.Where(e => e.getSolid() == false).ToList() : new List<Entity>();
+            List<Entity> objectsOnTile = new List<Entity>();
+		    
+            // If nonSolidOnly, use the nonSolidObjects list, else go through all objects
+		    foreach (Entity e in nonSolidOnly ? nonSolidObjects : objects)
+		    {
+		        if (e == getPlayer())
+		            continue;
+		        PointF loc = e.getLocation();
+		        if (point.X > loc.X - e.getBoundingBox() && point.X < loc.X + e.getBoundingBox() &&
+		            point.Y > loc.Y - e.getBoundingBox() && point.Y < loc.Y + e.getBoundingBox())
+		        {
+		            objectsOnTile.Add(e);
+		        }
+		    }
+		    return objectsOnTile;
 		}
 
 		public bool checkCollision(Entity entity, PointF target, bool solid = true)
@@ -388,7 +413,8 @@ namespace KBSGame
 					continue;
 
 				PointF loc = e.getLocation ();
-				if (target.X > loc.X - e.getBoundingBox() && target.X < loc.X + e.getBoundingBox() && target.Y > loc.Y - e.getBoundingBox() && target.Y < loc.Y + e.getBoundingBox()) {
+				if (target.X > loc.X - e.getBoundingBox() && target.X < loc.X + e.getBoundingBox() && 
+                    target.Y > loc.Y - e.getBoundingBox() && target.Y < loc.Y + e.getBoundingBox()) {
 					collision = true;
 					break;
 				}
