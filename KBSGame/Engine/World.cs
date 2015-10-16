@@ -235,8 +235,8 @@ namespace KBSGame
 			for(int x = 0; x < width; x++) {
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
-						if(rand.Next(0, 5) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.sapling1, 50, true));
+						if (rand.Next (0, 5) == 0)
+							objects.Add (new Plant(new PointF(x + 0.5f + (rand.Next(-3, 3) / 10.0f), y + 0.5f - (rand.Next(0, 3) / 10.0f)), (int)SPRITES.sapling1, 50, true));
 						if(rand.Next(0, 50) == 0)
 							objects.Add (new Entity(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9, 0.6f));
 					}
@@ -392,23 +392,19 @@ namespace KBSGame
 
 		public List<Entity> getEntitiesOnTerrainTile(PointF point, bool nonSolidOnly = false)
 		{
-            // If nonSolidOnly, select the nonSolid entities else create a new list (not used)
-		    List<Entity> nonSolidObjects = nonSolidOnly ? objects.Where(e => e.getSolid() == false).ToList() : new List<Entity>();
-            List<Entity> objectsOnTile = new List<Entity>();
+			List<Entity> returnObjects = new List<Entity> ();
 		    
             // If nonSolidOnly, use the nonSolidObjects list, else go through all objects
-		    foreach (Entity e in nonSolidOnly ? nonSolidObjects : objects)
+			foreach (Entity e in objects)
 		    {
-		        if (e == getPlayer())
-		            continue;
 		        PointF loc = e.getLocation();
 		        if (point.X > loc.X - e.getBoundingBox() && point.X < loc.X + e.getBoundingBox() &&
 		            point.Y > loc.Y - e.getBoundingBox() && point.Y < loc.Y + e.getBoundingBox())
-		{
-		            objectsOnTile.Add(e);
+				{
+					returnObjects.Add(e);
 		        }
 		    }
-		    return objectsOnTile;
+			return returnObjects;
 		}
 
 		public bool checkCollision(Entity entity, PointF target, bool solid = true)
