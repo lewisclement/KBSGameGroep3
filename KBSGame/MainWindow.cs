@@ -18,6 +18,7 @@ namespace KBSGame
 			Text = "MainWindow";
 			Height = 1920;
 			Width = 1080;
+            MinimumSize = new Size(320, 320);
              
 			world = new World(300, 300, "tiles.xml");
 
