@@ -58,10 +58,10 @@ namespace KBSGame
 
             //LevelWriter levelWriter = new LevelWriter ();
             //levelWriter.saveWorld (this);
-		    
+
             setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
             AddItemsToInventory((Player) focusEntity);
-        }
+		}
 
 	    public void AddItemsToInventory(Player player)
 	    {
@@ -76,7 +76,7 @@ namespace KBSGame
             player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
 	    }
 
-	    public void reload()
+		public void reload()
 		{
 			loadLevel (currentLevelPath);
 		}
@@ -244,6 +244,16 @@ namespace KBSGame
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
 							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.sapling2, 50, true));
+						if(rand.Next(0, 100) == 0) {
+							int amountbushes = rand.Next (4, 10);
+							for (int i = 0; i < amountbushes; i++) {
+								float X = rand.Next (0, 40) / 10.0f - 2.0f;
+								float Y = rand.Next (0, 40) / 10.0f - 2.0f;
+								TerrainTile tile = getTerraintile (new PointF (x + X, y + Y));
+								if(tile != null && tile.IsWalkable)
+									objects.Add (new Plant(new PointF(x + X, y + Y), (int)SPRITES.berrybush, 50, true, 10, 0.2f));
+							}
+						}
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
@@ -317,7 +327,7 @@ namespace KBSGame
 		/// Gets the focus entity.
 		/// </summary>
 		/// <returns>The focus entity.</returns>
-		public Entity getPlayergetFocusEntity()
+		public Entity getFocusEntity()
 		{
 			return focusEntity;
 		}
@@ -394,7 +404,7 @@ namespace KBSGame
 		        PointF loc = e.getLocation();
 		        if (point.X > loc.X - e.getBoundingBox() && point.X < loc.X + e.getBoundingBox() &&
 		            point.Y > loc.Y - e.getBoundingBox() && point.Y < loc.Y + e.getBoundingBox())
-		        {
+		{
 		            objectsOnTile.Add(e);
 		        }
 		    }

@@ -12,6 +12,7 @@ namespace KBSGame
 		private Bitmap buffer; 					//Back buffer to which the view is drawn
 
 		private int xRes, yRes; 				//Resolution of buffer
+		private int xDrawRes, yDrawRes;
 		private int viewWidth, viewHeight;		//Size of view in tiles
 
 		private List<Gui> Interfaces;			//List of GUI
@@ -34,6 +35,9 @@ namespace KBSGame
 			xRes = xResolution;
 			yRes = yResolution;
 
+			xDrawRes = xRes / 2;
+			yDrawRes = yRes / 2;
+
 			setView(xRes / StaticVariables.tileSize, yRes / StaticVariables.tileSize);
 
 			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
@@ -44,10 +48,10 @@ namespace KBSGame
 
             Interfaces = new List<Gui>
             {
-                new Menu ((int)GUI.def, xRes, yRes, "Pause"),                           //Temporary static Gui
-				new FinishMenu((int)GUI.finish, xRes, yRes, "Finished!", world),               //Create FinishedMenu GUI
-                new GameOverMenu((int)GUI.gameover, xRes, yRes, "Oh no.. you died?", world),   //Game over menu
-                new GuiInventory((int) GUI.guiinventory, xRes, yRes, world.getPlayer(), sprites) //Inventory GUI
+				new Menu ((int)GUI.def, xRes, yRes, xRes / xDrawRes, "Pause"),                           //Temporary static Gui
+				new FinishMenu((int)GUI.finish, xRes, yRes, xRes / xDrawRes, "Finished!", world),               //Create FinishedMenu GUI
+				new GameOverMenu((int)GUI.gameover, xRes, yRes, xRes / xDrawRes, "Oh no.. you died?", world),   //Game over menu
+				new GuiInventory((int) GUI.guiinventory, xRes, yRes, xRes / xDrawRes, world.getPlayer(), sprites) //Inventory GUI
             };
 		}
 
@@ -129,12 +133,15 @@ namespace KBSGame
 			xRes = xResolution;
 			yRes = yResolution;
 
-			setView(xRes / StaticVariables.tileSize, yRes / StaticVariables.tileSize);
+			xDrawRes = xRes / 2;
+			yDrawRes = yRes / 2;
 
-			buffer = new Bitmap (xRes, yRes);
+			setView(xDrawRes / StaticVariables.tileSize + 1, yDrawRes / StaticVariables.tileSize + 1);
+
+			buffer = new Bitmap (xDrawRes, yDrawRes);
 
 			foreach (Gui gui in Interfaces) {
-				gui.resize (xRes, yRes);
+				gui.resize (xDrawRes, yDrawRes, xRes / xDrawRes);
 			}
 		}
 
@@ -187,6 +194,7 @@ namespace KBSGame
 			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.execFolder + "/banana.png");
 			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.execFolder + "/gold_key.png");
 			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.execFolder + "/finish.png");
+			sprites[(int)SPRITES.berrybush] = new Sprite((int)SPRITES.berrybush, StaticVariables.execFolder + "/berrybush.png");
 			return sprites;
 		}
 	}

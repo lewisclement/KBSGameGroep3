@@ -46,7 +46,6 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Serialize.cs" />
-    <Compile Include="Gui\Settings.cs" />
     <Compile Include="Engine\Sprite.cs" />
     <Compile Include="Engine\StaticVariables.cs" />
     <Compile Include="Engine\TerrainTile.cs" />
@@ -85,6 +84,7 @@
     <None Include="bin\Debug\banana.png" />
     <None Include="bin\Release\banana.png" />
     <None Include="bin\Debug\tiles.xml" />
+    <None Include="bin\Debug\berrybush.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
