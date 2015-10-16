@@ -13,15 +13,18 @@ namespace KBSGame
 		private Boolean active;
 		protected Bitmap buffer;
 		protected int xRes, yRes;
+		protected float drawRatio; //Ratio between render resolution and screen resolution
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="KBSGame.Gui"/> class.
 		/// </summary>
 		/// <param name="ID">I.</param>
 		/// <param name="ScreenresX">Screenres x.</param>
 		/// <param name="ScreenresY">Screenres y.</param>
-		public Gui(int ID, int ScreenresX, int ScreenresY)
+		public Gui(int ID, int ScreenresX, int ScreenresY, float drawRatio)
         {
 			this.ID = ID;
+			this.drawRatio = drawRatio;
 
 			xRes = ScreenresX;
 			yRes = ScreenresY;
@@ -81,8 +84,10 @@ namespace KBSGame
 		/// </summary>
 		/// <param name="ScreenresX">Screenres x.</param>
 		/// <param name="ScreenresY">Screenres y.</param>
-		public virtual void resize(int ScreenresX, int ScreenresY)
+		public virtual void resize(int ScreenresX, int ScreenresY, float drawRatio)
 		{
+			this.drawRatio = drawRatio;
+
 			xRes = ScreenresX;
 			yRes = ScreenresY;
 
@@ -113,6 +118,14 @@ namespace KBSGame
 		public void switchActive()
 		{
 			active = !active;
+		}
+
+		protected Point scaleToDrawRatio(Point point)
+		{
+			point.X = (int)(point.X / drawRatio);
+			point.Y = (int)(point.Y / drawRatio);
+
+			return point;
 		}
     }
 }

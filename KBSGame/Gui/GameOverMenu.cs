@@ -28,7 +28,7 @@ namespace KBSGame
         int hoverPos = -1, clickPos = -1;
         World map;
 
-        public GameOverMenu(int ID, int ScreenresX, int ScreenresY, String Menu, World map) : base(ID, ScreenresX, ScreenresY)
+		public GameOverMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, String Menu, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             this.map = map;
             this.menu = Menu;
@@ -44,6 +44,8 @@ namespace KBSGame
 
         public override void setMouseClick(Point mousePos)
         {
+			mousePos = scaleToDrawRatio (mousePos);
+
             if (mousePos.X < xRes / 2 - width / 2 || mousePos.X > xRes / 2 + width / 2)
                 clickPos = -1;
             else
@@ -66,6 +68,8 @@ namespace KBSGame
 
         public override void setMouseHover(Point mousePos)
         {
+			mousePos = scaleToDrawRatio (mousePos);
+
             if (mousePos.X < xRes / 2 - width / 2 || mousePos.X > xRes / 2 + width / 2)
                 hoverPos = -1;
             else

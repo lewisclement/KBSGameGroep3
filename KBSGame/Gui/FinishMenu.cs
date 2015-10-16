@@ -17,7 +17,7 @@ namespace KBSGame.gui
 
         
 
-        public FinishMenu(int ID, int ScreenresX, int ScreenresY, String Menu, World map) : base(ID, ScreenresX, ScreenresY)
+		public FinishMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, String Menu, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             this.map = map;
             this.menu = Menu; //Basic Menu class
@@ -61,6 +61,8 @@ namespace KBSGame.gui
 
         public override void setMouseClick(Point mousePos)
         {
+			mousePos = scaleToDrawRatio (mousePos);
+
             if ((mousePos.X < xRes / 2))
                 clickPos = 0;
             //else
@@ -90,6 +92,8 @@ namespace KBSGame.gui
 
         public override void setMouseHover(Point mousePos)
         {
+			mousePos = scaleToDrawRatio (mousePos);
+
             if (mousePos.X < xRes / 2)
                 hoverPos = 0;
             if (mousePos.X >= xRes / 2)

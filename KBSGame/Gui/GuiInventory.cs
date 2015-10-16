@@ -14,8 +14,8 @@ namespace KBSGame
         const int WIDTH = 512;
         private Player player;
         private Sprite[] sprites;
-        public GuiInventory(int ID, int ScreenresX, int ScreenresY, Player p, Sprite[] s)
-            : base(ID, ScreenresX, ScreenresY)
+		public GuiInventory(int ID, int ScreenresX, int ScreenresY, float drawRatio, Player p, Sprite[] s)
+			: base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             setActive(true);
             player = p;

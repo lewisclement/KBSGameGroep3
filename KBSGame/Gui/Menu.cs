@@ -26,7 +26,7 @@ namespace KBSGame
 
 		int hoverPos = -1, clickPos = -1;
 
-        public Menu(int ID, int ScreenresX, int ScreenresY, String Menu) : base(ID, ScreenresX, ScreenresY)
+		public Menu(int ID, int ScreenresX, int ScreenresY, float drawRatio, String Menu) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             this.menu = Menu;
 			buttonList = new List<Button>();
@@ -43,6 +43,8 @@ namespace KBSGame
 
 		public override void setMouseClick(Point mousePos)
         {
+			mousePos = scaleToDrawRatio (mousePos);
+
 			if (mousePos.X > width)
 				clickPos = -1;
 			else
@@ -62,6 +64,8 @@ namespace KBSGame
 
 		public override void setMouseHover(Point mousePos)
 		{
+			mousePos = scaleToDrawRatio (mousePos);
+
 			if (mousePos.X > width)
 				hoverPos = -1;
 			else {
