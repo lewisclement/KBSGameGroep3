@@ -1,6 +1,7 @@
 ﻿ using System;
 using System.Collections.Generic;
-using System.Drawing;
+ using System.Diagnostics;
+ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,7 +74,7 @@ namespace KBSGame
 
             // Check if item can be dropped on target from dropLocation
             bool isLand = world.getTerraintile(dropLocation).IsWalkable;
-            bool hasSolidEntitiesOnTarget = world.getEntitiesOnTerrainTile(dropLocation).Any(e => e.getSolid());
+            bool hasSolidEntitiesOnTarget = world.checkCollision(this, dropLocation);
 
             // If no item exists in inventory or 
             //      there is a solid target on dropLocation or
