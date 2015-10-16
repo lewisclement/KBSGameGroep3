@@ -228,12 +228,22 @@ namespace KBSGame
 						if(rand.Next(0, 5) == 0)
 							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.sapling1, 50, true));
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Entity(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9));
+							objects.Add (new Entity(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 10));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
 						if(rand.Next(0, 100) == 0)
 							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.sapling2, 50, true));
+						if(rand.Next(0, 100) == 0) {
+							int amountbushes = rand.Next (4, 10);
+							for (int i = 0; i < amountbushes; i++) {
+								float X = rand.Next (0, 40) / 10.0f - 2.0f;
+								float Y = rand.Next (0, 40) / 10.0f - 2.0f;
+								TerrainTile tile = getTerraintile (new PointF (x + X, y + Y));
+								if(tile != null && tile.IsWalkable)
+									objects.Add (new Plant(new PointF(x + X, y + Y), (int)SPRITES.berrybush, 50, true, 10, 0.2f));
+							}
+						}
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {

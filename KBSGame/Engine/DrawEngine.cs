@@ -187,6 +187,7 @@ namespace KBSGame
 			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.execFolder + "/banana.png");
 			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.execFolder + "/gold_key.png");
 			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.execFolder + "/finish.png");
+			sprites[(int)SPRITES.berrybush] = new Sprite((int)SPRITES.berrybush, StaticVariables.execFolder + "/berrybush.png");
 			return sprites;
 		}
 	}
