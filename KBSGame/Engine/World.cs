@@ -397,7 +397,9 @@ namespace KBSGame
             // If nonSolidOnly, use the nonSolidObjects list, else go through all objects
 			foreach (Entity e in objects)
 		    {
-		        PointF loc = e.getLocation();
+                if (nonSolidOnly && e.getSolid())
+                    continue;
+                PointF loc = e.getLocation();
 		        if (point.X > loc.X - e.getBoundingBox() && point.X < loc.X + e.getBoundingBox() &&
 		            point.Y > loc.Y - e.getBoundingBox() && point.Y < loc.Y + e.getBoundingBox())
 				{
