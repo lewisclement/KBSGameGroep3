@@ -20,25 +20,50 @@ namespace KBSGame
 			}
 		};
 
+		public enum STATE : int {main=0, pause, editor}
+
+		private List<List<Button>> menus;
 		private List<Button> buttonList;
         private String menu;
-		int width = StaticVariables.dpi * 4;
+		private int width = StaticVariables.dpi * 4;
+		private STATE currentState;
+		private World world;
 
 		int hoverPos = -1, clickPos = -1;
 
-		public Menu(int ID, int ScreenresX, int ScreenresY, float drawRatio, String Menu) : base(ID, ScreenresX, ScreenresY, drawRatio)
+		public Menu(int ID, int ScreenresX, int ScreenresY, float drawRatio, World world) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
-            this.menu = Menu;
-			buttonList = new List<Button>();
+			this.world = world;
+			menus = new List<List<Button>> ();
 
             xRes = ScreenresX;
             yRes = ScreenresY;
             buffer = new Bitmap(xRes, yRes);
 
-			buttonList.Add(new Button("Resume"));
+			List<Button> buttonList = new List<Button> ();
+			buttonList.Add(new Button("Start"));
+			buttonList.Add(new Button("Editor"));
 			buttonList.Add(new Button("Settings"));
 			buttonList.Add(new Button("Help"));
 			buttonList.Add(new Button("Quit"));
+			menus.Insert ((int)STATE.main, buttonList);
+
+			buttonList = new List<Button> ();
+			buttonList.Add(new Button("Resume"));
+			buttonList.Add(new Button("Settings"));
+			buttonList.Add(new Button("Help"));
+			buttonList.Add(new Button("Exit to main menu"));
+			menus.Insert ((int)STATE.pause, buttonList);
+
+			buttonList = new List<Button> ();
+			buttonList.Add(new Button("Settings"));
+			buttonList.Add(new Button("Help"));
+			buttonList.Add(new Button("Save & exit"));
+			buttonList.Add(new Button("Exit (no save)"));
+			menus.Insert ((int)STATE.editor, buttonList);
+
+			changeState (STATE.main);
+			this.setActive (true);
         }
 
 		public override void setMouseClick(Point mousePos)
@@ -50,15 +75,32 @@ namespace KBSGame
 			else
 				clickPos = mousePos.Y / StaticVariables.dpi;
 
-			switch (clickPos) {
-			case 0:
-				setActive (false);
-				break;
-			case 3:
-				Application.Exit();
-				break;
-			default:
-				break;
+			if (currentState == STATE.main) {
+				switch (clickPos) {
+				case 0:
+					setActive (false);
+					world.loadLevel ("testworld");
+					changeState (STATE.pause);
+					break;
+				case 4:
+					Application.Exit ();
+					break;
+				default:
+					break;
+				}
+			} else if (currentState == STATE.pause) {
+				switch (clickPos) {
+				case 0:
+					setActive (false);
+					break;
+				case 3:
+					changeState (STATE.main);
+					break;
+				default:
+					break;
+				}
+			} else if (currentState == STATE.editor) {
+
 			}
         }
 
@@ -95,7 +137,7 @@ namespace KBSGame
             var g = Graphics.FromImage(buffer);
             g.Clear(Color.FromArgb(0));
 
-			int width = StaticVariables.dpi * 4;
+			int width = Math.Min(StaticVariables.dpi * 3, xRes / 2);
 
 			StringFormat style = new StringFormat ();
 			style.Alignment = StringAlignment.Center;
@@ -114,8 +156,20 @@ namespace KBSGame
 				g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y);
             }
 
+			g.Dispose ();
             return this.buffer;
         }
+
+		public void changeState(STATE state)
+		{
+			if (state == STATE.main) {
+				world.loadLevel ("mainmenu");
+				world.setFocusEntity(world.getEntitiesByType (ENTITIES.plant)[40]);
+			}
+
+			currentState = state;
+			buttonList = menus [(int)state];
+		}
     }
 
 }

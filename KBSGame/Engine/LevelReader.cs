@@ -9,58 +9,43 @@ using System.Xml;
 
 namespace KBSGame
 {
-	class Terrain
-	{
-		public Point p;
-		public int i;
-		public Terrain(Point p, int i)
-		{
-			this.i = i;
-			this.p = p;
-		}
-		public int geti()
-		{
-			return this.i;
-		}
-		public Point getP()
-		{
-			return this.p;
-		}
-	}
-
 	class LevelReader
 	{
 		private XmlDocument reader;
 
-		public LevelReader(string File)
+		public LevelReader(string file)
 		{
 			this.reader = new XmlDocument();
 			try
 			{
-				this.reader.Load(File);
+				reader.Load(file);
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine(ex.Message);
 			}
+		}
 
+		~LevelReader()
+		{
+			reader = null;
 		}
 
 		public List<Entity> getObjects()
 		{
 			List<Entity> objects = new List<Entity> ();
-			XmlNodeList entityList = reader.GetElementsByTagName("e");
+			XmlNodeList entityList = reader.GetElementsByTagName(xmlVar.Entity);
 			foreach (XmlNode entity in entityList)
 			{
 				try {
 					PointF location = new PointF();
 					location.X = float.Parse(entity["x"].InnerText);
 					location.Y = float.Parse(entity["y"].InnerText);
-					int SpriteID = Int32.Parse(entity["s"].InnerText);
-					bool solid = bool.Parse(entity["so"].InnerText);
-					Byte drawOrder = Byte.Parse (entity ["d"].InnerText);
+					int SpriteID = Int32.Parse(entity[xmlVar.SpriteID].InnerText);
+					bool solid = bool.Parse(entity[xmlVar.Solid].InnerText);
+					Byte drawOrder = Byte.Parse (entity [xmlVar.DrawOrder].InnerText);
 
-					switch (Int32.Parse(entity["ty"].InnerText))
+					switch (Int32.Parse(entity[xmlVar.Type].InnerText))
 					{
 					case (int)ENTITIES.player:
 						objects.Add(new Player(location, 50));
@@ -85,17 +70,22 @@ namespace KBSGame
 
 		public List<int> getTerrainTiles()
 		{
-			reader.Load(StaticVariables.execFolder + "/tiles.xml");
-			XmlNodeList TerraintileList = reader.GetElementsByTagName("t");
+			XmlNodeList TerraintileList = reader.GetElementsByTagName(xmlVar.Tile);
 
 			List<int> terrainTiles = new List<int> ();
 
 			foreach (XmlNode TerrainList in TerraintileList)
 			{
-				terrainTiles.Add(Int32.Parse(TerrainList["i"].InnerText));
+				terrainTiles.Add(Int32.Parse(TerrainList[xmlVar.ID].InnerText));
 			}
 
 			return terrainTiles;
+		}
+
+		public Size getSize()
+		{
+			XmlNode size = reader.GetElementsByTagName("size")[0];
+			return new Size (Int32.Parse(size[xmlVar.Width].InnerText), Int32.Parse(size[xmlVar.Height].InnerText));
 		}
 	}
 }

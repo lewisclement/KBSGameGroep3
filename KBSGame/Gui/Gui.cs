@@ -14,6 +14,7 @@ namespace KBSGame
 		protected Bitmap buffer;
 		protected int xRes, yRes;
 		protected float drawRatio; //Ratio between render resolution and screen resolution
+		protected float aspectRatio;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="KBSGame.Gui"/> class.
@@ -28,6 +29,8 @@ namespace KBSGame
 
 			xRes = ScreenresX;
 			yRes = ScreenresY;
+
+			aspectRatio = xRes / yRes;
 
 			buffer = new Bitmap (xRes, yRes);
 
@@ -90,6 +93,8 @@ namespace KBSGame
 
 			xRes = ScreenresX;
 			yRes = ScreenresY;
+
+			aspectRatio = xRes / yRes;
 
 			buffer = new Bitmap (xRes, yRes);
 		}

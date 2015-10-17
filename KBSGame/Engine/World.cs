@@ -28,7 +28,7 @@ namespace KBSGame
 		/// </summary>
 		/// <param name="width">Width.</param>
 		/// <param name="height">Height.</param>
-		public World (int width, int height, String fileName)
+		public World (int width, int height)
 		{
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(height, StaticVariables.maxWorldSize));
@@ -52,15 +52,10 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
 			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
 
-			currentLevelPath = StaticVariables.execFolder + "/" + fileName;
-			//loadLevel(currentLevelPath);
-            temporaryWorldGenerator ();
+            //temporaryWorldGenerator ();
 
             //LevelWriter levelWriter = new LevelWriter ();
-            //levelWriter.saveWorld (this);
-
-            setFocusEntity (objects.FirstOrDefault(e => e.getType() == ENTITIES.player));
-            AddItemsToInventory((Player) focusEntity);
+            //levelWriter.saveWorld (this, "testworld");
 		}
 
 	    public void AddItemsToInventory(Player player)
@@ -84,6 +79,7 @@ namespace KBSGame
 		public void loadLevel(String fileName)
 		{
 			if (fileName != null) {
+				fileName = StaticVariables.levelFolder + "/" + fileName + ".xml";
 				objects = new List<Entity> ();
 				terrainTiles = new List<TerrainTile> ();
 				heightData = new List<Byte> ();
@@ -95,11 +91,15 @@ namespace KBSGame
 				foreach (int id in terrain) {
 					terrainTiles.Add (TileTypes [id]);
 				}
+
+				Size size = level.getSize ();
+				width = size.Width;
+				height = size.Height;
+
 			    player = (Player) objects.FirstOrDefault(e => e.getType() == ENTITIES.player);
                 setFocusEntity (player);
 				currentLevelPath = fileName;
-			} else
-			{
+			} else {
 			    player = new Player(new PointF(120, 120), 50);
 				FillWorld ((int)TERRAIN.grass);
 			}
@@ -587,41 +587,9 @@ namespace KBSGame
 			return new PointF (xCenter, yCenter);
 		}
 
-		//Stub for later
-		public bool resize(int x, int y) //returns true on succes, false on fail
+		public Size getSize()
 		{
-			bool allowedSize = false;
-
-			if (width + x >= StaticVariables.minWorldSize && width + x <= StaticVariables.maxWorldSize) {
-				allowedSize = true;
-			} else
-				allowedSize = false;
-
-			if (height + y >= StaticVariables.minWorldSize && height + y <= StaticVariables.maxWorldSize) {
-				allowedSize = true;
-			} else
-				allowedSize = false;
-
-			if (!allowedSize)
-				return false;
-
-			if (width + x < width) { //Shrink
-
-			} else if (width + x == width) { //No change
-
-			} else { //Grow
-
-			}
-
-			if (height + y < height) { //Shrink
-
-			} else if (height + x == height) { //No change
-
-			} else { //Grow
-
-			}
-
-			return false;
+			return new Size (width, height);
 		}
 
 

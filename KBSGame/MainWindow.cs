@@ -13,14 +13,13 @@ namespace KBSGame
         private Timer timer = new Timer();
 
 		public MainWindow ()
-
 		{
 			Text = "MainWindow";
 			Height = 1920;
 			Width = 1080;
             MinimumSize = new Size(320, 320);
              
-			world = new World(300, 300, "tiles.xml");
+			world = new World(300, 300);
 
             Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;

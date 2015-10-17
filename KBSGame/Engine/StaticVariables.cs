@@ -21,6 +21,16 @@ namespace KBSGame
 		public static int dpi;
 	}
 
-
-			
+	public static class xmlVar
+	{
+		public const String Tile = "t";
+		public const String ID = "i";
+		public const String Entity = "e";
+		public const String Type = "ty";
+		public const String SpriteID = "s";
+		public const String Solid = "so";
+		public const String DrawOrder = "d";
+		public const String Width = "w";
+		public const String Height = "h";
+	}		
 }

@@ -85,6 +85,8 @@
     <None Include="bin\Release\banana.png" />
     <None Include="bin\Debug\tiles.xml" />
     <None Include="bin\Debug\berrybush.png" />
+    <None Include="bin\Debug\worlds\mainmenu.xml" />
+    <None Include="bin\Debug\worlds\testworld.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
@@ -96,5 +98,8 @@
     <Content Include="bin\Debug\Game.xml" />
     <Content Include="bin\Debug\gold_key.png" />
     <Content Include="bin\Release\finish.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\worlds\" />
   </ItemGroup>
 </Project>
