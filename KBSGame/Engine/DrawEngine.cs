@@ -7,13 +7,12 @@ namespace KBSGame
 {
 	public class DrawEngine
 	{
-		private Sprite[] sprites; 				//List of existing Sprites in game
+		public static Sprite[] sprites; 				//List of existing Sprites in game
 		private World world;
 		private Bitmap buffer; 					//Back buffer to which the view is drawn
 
 		private int xRes, yRes; 				//Resolution of buffer
 		private int xDrawRes, yDrawRes;
-		private int viewWidth, viewHeight;		//Size of view in tiles
 
 		private List<Gui> Interfaces;			//List of GUI
 		private Gui modalGui;				//Modal interface, blocking all other input/output
@@ -40,19 +39,21 @@ namespace KBSGame
 
 			setView(xRes / StaticVariables.tileSize, yRes / StaticVariables.tileSize);
 
-			buffer = new Bitmap (viewWidth * StaticVariables.tileSize, viewHeight * StaticVariables.tileSize);
+			buffer = new Bitmap (StaticVariables.viewWidth * StaticVariables.tileSize, StaticVariables.viewHeight * StaticVariables.tileSize);
 			this.world = world;
 
 			// Load sprites
 			sprites = getSprites();
 
-            Interfaces = new List<Gui>
-            {
-				new Menu ((int)GUI.def, xRes, yRes, xRes / xDrawRes, world),                           //Temporary static Gui
-				new FinishMenu((int)GUI.finish, xRes, yRes, xRes / xDrawRes, "Finished!", world),               //Create FinishedMenu GUI
-				new GameOverMenu((int)GUI.gameover, xRes, yRes, xRes / xDrawRes, "Oh no.. you died?", world),   //Game over menu
-				new GuiInventory((int) GUI.guiinventory, xRes, yRes, xRes / xDrawRes, world.getPlayer(), sprites) //Inventory GUI
-            };
+			Menu menu = new Menu ((int)GUI.def, xRes, yRes, xRes / xDrawRes, world);
+
+			Interfaces = new List<Gui> ();
+			Interfaces.Insert ((int)GUI.def, menu);       
+			Interfaces.Insert ((int)GUI.gameover, new GameOverMenu((int)GUI.gameover, xRes, yRes, xRes / xDrawRes, "Oh no.. you died?", world));   //Game over menu
+			     //Temporary static Gui
+			Interfaces.Insert ((int)GUI.finish, new FinishMenu((int)GUI.finish, xRes, yRes, xRes / xDrawRes, "Finished!", world));               //Create FinishedMenu GUI
+			Interfaces.Insert ((int)GUI.guiinventory, new GuiInventory((int) GUI.guiinventory, xRes, yRes, xRes / xDrawRes, world.getPlayer(), sprites)); //Inventory GUI
+			Interfaces.Insert ((int)GUI.editor, menu.getEditorGui());
 		}
 
 		/// <summary>
@@ -60,7 +61,6 @@ namespace KBSGame
 		/// </summary>
 		public void render()
 		{ 
-			long startTick = System.DateTime.UtcNow.Ticks;
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
 
@@ -77,8 +77,6 @@ namespace KBSGame
 
 			drawingArea.DrawImage (buffer, 0, 0, xRes, yRes);
 			g.Dispose ();
-
-			Console.WriteLine (10000000 / (System.DateTime.UtcNow.Ticks - startTick) + " fps");
 		}
 
 		/// <summary>
@@ -88,14 +86,14 @@ namespace KBSGame
 		public void drawTerrain(Graphics area)
 		{
 			//Get array of tiles that are within view
-			TerrainTile[] tiles = world.getTilesView (viewWidth, viewHeight);
+			TerrainTile[] tiles = world.getTilesView ();
 
-			PointF offset = world.getViewOffset (viewWidth, viewHeight);
+			PointF offset = world.getViewOffset ();
 
 			for (int i = 0; i < tiles.Length; i++) {
 				//Retreive coordinate based on index
-				int x = (int)((i / viewHeight - offset.X) * StaticVariables.tileSize);
-				int y = (int)((i % viewHeight - offset.Y) * StaticVariables.tileSize);
+				int x = (int)((i / StaticVariables.viewHeight - offset.X) * StaticVariables.tileSize);
+				int y = (int)((i % StaticVariables.viewHeight - offset.Y) * StaticVariables.tileSize);
 				area.DrawImage (sprites [tiles [i].getSpriteID ()].getBitmap(), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 		}
@@ -107,10 +105,10 @@ namespace KBSGame
 		public void drawEntities(Graphics area)
 		{
 			//Get array of entities that are within view
-			Entity[] entities = world.getEntitiesView (viewWidth, viewHeight);
-			Rectangle view = world.getView (viewWidth, viewHeight);
+			Entity[] entities = world.getEntitiesView ();
+			Rectangle view = world.getView ();
 
-			PointF offset = world.getViewOffset (viewWidth, viewHeight);
+			PointF offset = world.getViewOffset ();
 
 			foreach (Entity t in entities)
 			{
@@ -152,8 +150,8 @@ namespace KBSGame
 		/// <param name="Height">Height.</param>
 		private void setView(int Width, int Height) 
 		{
-			viewWidth = Math.Max(1, Width+1);
-			viewHeight = Math.Max(1, Height+1);
+			StaticVariables.viewWidth = Math.Max(1, Width+1);
+			StaticVariables.viewHeight = Math.Max(1, Height+1);
 		}
 
 		/// <summary>

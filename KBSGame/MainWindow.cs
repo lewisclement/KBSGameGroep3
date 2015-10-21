@@ -34,7 +34,9 @@ namespace KBSGame
 
         private void Gameloop_Tick(object sender, EventArgs e)
         {
+			long startTick = System.DateTime.UtcNow.Ticks;
             renderer.render();
+			Text = 10000000 / (System.DateTime.UtcNow.Ticks - startTick) + " fps";
         }
 
 		protected override void OnResize(EventArgs e) 
@@ -78,26 +80,47 @@ namespace KBSGame
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            switch (e.KeyCode)
-            {
-            case Keys.Up:
-				world.getPlayer().move(world, new PointF(0.0f, -0.2f));
-                break;
-            case Keys.Down:
-				world.getPlayer().move(world, new PointF(0.0f, 0.2f));
-                break;
-            case Keys.Left:
-				world.getPlayer().move(world, new PointF(-0.2f, 0.0f));
-                break;
-            case Keys.Right:
-				world.getPlayer().move(world, new PointF(0.2f, 0.0f));
-                break;
-            case Keys.Space:
-                world.getPlayer().PickupItems(world);
-                break;
-            case Keys.Z:
-                world.getPlayer().DropItem(world);
-                break;
+			Player player = world.getPlayer ();
+
+			if(player != null)
+			switch (e.KeyCode) {
+			case Keys.Up:
+				player.move (world, new PointF (0.0f, -0.2f));
+				break;
+			case Keys.Down:
+				player.move (world, new PointF (0.0f, 0.2f));
+				break;
+			case Keys.Left:
+				player.move (world, new PointF (-0.2f, 0.0f));
+				break;
+			case Keys.Right:
+				player.move (world, new PointF (0.2f, 0.0f));
+				break;
+			case Keys.Space:
+				player.PickupItems (world);
+				break;
+			case Keys.Z:
+				player.DropItem (world);
+				break;
+				}
+			else
+			switch (e.KeyCode) {
+			case Keys.Up:
+				world.getFocusEntity ().move (world, new PointF (0.0f, -0.2f));
+				break;
+			case Keys.Down:
+				world.getFocusEntity ().move (world, new PointF (0.0f, 0.2f));
+				break;
+			case Keys.Left:
+				world.getFocusEntity ().move (world, new PointF (-0.2f, 0.0f));
+				break;
+			case Keys.Right:
+				world.getFocusEntity ().move (world, new PointF (0.2f, 0.0f));
+				break;
+			}
+				
+
+			switch(e.KeyCode) {
             case Keys.Escape:
                 renderer.getGui((int)GUI.def).switchActive();
 				break;

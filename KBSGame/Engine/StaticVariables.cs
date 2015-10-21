@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace KBSGame
 {
@@ -6,14 +6,16 @@ namespace KBSGame
 								sapling1, sapling2, tallgrass, waterlily, key, 
 								banana, finish, berrybush, trapOpened, trapClosed, count};
 	public enum ENTITIES : int {def=0, player, finish, key, plant, fruit, trap, count};
-	enum TERRAIN : int {water=0, grass, sand, dirt, count}
-	enum GUI : int {def=0, gameover, finish, guiinventory, count};
+	public enum TERRAIN : int {water=0, grass, sand, dirt, count}
+	public enum GUI : int {def=0, gameover, finish, guiinventory, editor, count};
+
     
     public static class StaticVariables
 	{
 		public const int tileSize = 32;
 		public const int minWorldSize = 20;
 		public const int maxWorldSize = 1000;
+		public static int viewWidth, viewHeight;
 		public static String execFolder = null;
 		public static String levelFolder = null;
 		public const Byte drawOrderSize = 16;

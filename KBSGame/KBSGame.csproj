@@ -55,6 +55,7 @@
     <Compile Include="Engine\LevelReader.cs" />
     <Compile Include="Gui\FinishMenu.cs" />
     <Compile Include="Engine\LevelWriter.cs" />
+    <Compile Include="Gui\EditorGui.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

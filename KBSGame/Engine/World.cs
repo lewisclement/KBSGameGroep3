@@ -42,15 +42,7 @@ namespace KBSGame
 			//player.setHeight(50);
 			//objects.Add(player);
 
-			TileTypes = new TerrainTile[(int)TERRAIN.count];
-			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass);
-			TileTypes [(int)TERRAIN.grass].setSpriteID ((int)SPRITES.grass);
-			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water, false);
-			TileTypes [(int)TERRAIN.water].setSpriteID ((int)SPRITES.water);
-			TileTypes [(int)TERRAIN.sand] = new TerrainTile ((int)TERRAIN.sand);
-			TileTypes [(int)TERRAIN.sand].setSpriteID ((int)SPRITES.sand);
-			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
-			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
+			loadTileTypes ();
 
             //temporaryWorldGenerator ();
 
@@ -101,15 +93,21 @@ namespace KBSGame
 				currentLevelPath = fileName;
 			} else {
 			    player = new Player(new PointF(120, 120), 50);
-				FillWorld ((int)TERRAIN.grass);
+				FillWorld (TERRAIN.grass, new Size(50, 50));
 			}
         }
 
-		private void FillWorld(int Sprite)
+		public void FillWorld(TERRAIN terrain, Size size)
 		{
+			width = size.Width;
+			height = size.Height;
+
+			terrainTiles = new List<TerrainTile> ();
+			objects = new List<Entity> ();
+
 			for (int i = 0; i < width * height; i++)
 			{
-				terrainTiles.Add(TileTypes[Sprite]);
+				terrainTiles.Add(TileTypes[(int)terrain]);
 			}
 		}
 
@@ -461,6 +459,16 @@ namespace KBSGame
 			terrainTiles[(int) point.X*height + (int) point.Y] = tile;
 		}
 
+		public void setTerrainTileRelative(Point point, int terrainID)
+		{
+			Rectangle view = getView ();
+
+			int x = view.X + point.X / StaticVariables.tileSize;
+			int y = view.Y + point.Y / StaticVariables.tileSize;
+
+			terrainTiles [x * height + y] = TileTypes [terrainID];
+		}
+
 		public Byte getTerrainHeight(PointF point)
 		{
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
@@ -470,17 +478,17 @@ namespace KBSGame
 		}
 
 		//Stub
-		public TerrainTile[] getTilesView(int viewWidth, int viewHeight)
+		public TerrainTile[] getTilesView()
 		{
-			if (viewWidth > width)
-				viewWidth = width;
-			if (viewHeight > height)
-				viewHeight = height;
+			if (StaticVariables.viewWidth > width)
+				StaticVariables.viewWidth = width;
+			if (StaticVariables.viewHeight > height)
+				StaticVariables.viewHeight = height;
 
-			TerrainTile[] returnTiles = new TerrainTile[viewWidth * viewHeight];
+			TerrainTile[] returnTiles = new TerrainTile[StaticVariables.viewWidth * StaticVariables.viewHeight];
 
 			//Get viewport
-			Rectangle view = getView (viewWidth, viewHeight);
+			Rectangle view = getView ();
 
 			int index = 0;
 			for (int i = view.Left; i < view.Right; i++) {
@@ -492,12 +500,12 @@ namespace KBSGame
 			return returnTiles;
 		}
 
-		public Entity[] getEntitiesView(int viewWidth, int viewHeight)
+		public Entity[] getEntitiesView()
 		{
 			List<Entity> returnEntities = new List<Entity> ();
 
 			//Get viewport
-			Rectangle view = getView (viewWidth, viewHeight);
+			Rectangle view = getView ();
 
 			/*int[] drawOrderIndex = new int[StaticVariables.drawOrderSize];
 			for (int i = 0; i < drawOrderIndex.Length; i++) {
@@ -516,7 +524,7 @@ namespace KBSGame
 
 			for (int i = 0; i < returnEntities.Count; i++) {
 				Entity x = returnEntities[i];                              
-				while ((i - 1 >= 0) && (x.getLocation().Y + x.getDrawOrder() * viewHeight < returnEntities[i - 1].getLocation().Y + returnEntities[i - 1].getDrawOrder() * viewHeight)) 
+				while ((i - 1 >= 0) && (x.getLocation().Y + x.getDrawOrder() * StaticVariables.viewHeight < returnEntities[i - 1].getLocation().Y + returnEntities[i - 1].getDrawOrder() * StaticVariables.viewHeight)) 
 				{                                          
 					returnEntities[i] = returnEntities[i - 1];                 
 					i--;
@@ -537,49 +545,49 @@ namespace KBSGame
 			focusEntity = entity;
 		}
 
-		public Rectangle getView(int viewWidth, int viewHeight)
+		public Rectangle getView()
 		{
-			if (viewWidth > width)
-				viewWidth = width;
-			if (viewHeight > height)
-				viewHeight = height;
+			if (StaticVariables.viewWidth > width)
+				StaticVariables.viewWidth = width;
+			if (StaticVariables.viewHeight > height)
+				StaticVariables.viewHeight = height;
 
 			//Get viewport
-			int startX = (int) focusEntity.getLocation ().X - (int)viewWidth / 2;
-			int startY = (int) focusEntity.getLocation ().Y - (int)viewHeight / 2;
-			int endX = startX + viewWidth;
-			int endY = startY + viewHeight;
+			int startX = (int) focusEntity.getLocation ().X - (int)StaticVariables.viewWidth / 2;
+			int startY = (int) focusEntity.getLocation ().Y - (int)StaticVariables.viewHeight / 2;
+			int endX = startX + StaticVariables.viewWidth;
+			int endY = startY + StaticVariables.viewHeight;
 
 			if (startX < 0) {
 				startX = 0;
-				endX = viewWidth;
+				endX = StaticVariables.viewWidth;
 			}
 			if (startY < 0) {
 				startY = 0;
-				endY = viewHeight;
+				endY = StaticVariables.viewHeight;
 			}
 			if (endX > width - 1) {
 				endX = width;
-				startX = width - viewWidth;
+				startX = width - StaticVariables.viewWidth;
 			}
 			if (endY > height - 1) {
 				endY = height;
-				startY = height - viewHeight;
+				startY = height - StaticVariables.viewHeight;
 			}
 
-			return new Rectangle (startX, startY, viewWidth, viewHeight);
+			return new Rectangle (startX, startY, StaticVariables.viewWidth, StaticVariables.viewHeight);
 		}
 
-		public PointF getViewOffset(int viewWidth, int viewHeight)
+		public PointF getViewOffset()
 		{
 			float xCenter = focusEntity.getLocation().X;
-			if (xCenter <= width - viewWidth / 2 && xCenter > viewWidth / 2)
+			if (xCenter <= width - StaticVariables.viewWidth / 2 && xCenter > StaticVariables.viewWidth / 2)
 				xCenter -= (float)Math.Floor (xCenter);
 			else
 				xCenter = 0;
 
 			float yCenter = focusEntity.getLocation().Y;
-			if (yCenter <= height - viewHeight / 2 && yCenter > viewHeight / 2)
+			if (yCenter <= height - StaticVariables.viewHeight / 2 && yCenter > StaticVariables.viewHeight / 2)
 				yCenter -= (float)Math.Floor (yCenter);
 			else
 				yCenter = 0;
@@ -592,6 +600,22 @@ namespace KBSGame
 			return new Size (width, height);
 		}
 
+		private void loadTileTypes() 
+		{
+			TileTypes = new TerrainTile[(int)TERRAIN.count];
+			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass);
+			TileTypes [(int)TERRAIN.grass].setSpriteID ((int)SPRITES.grass);
+			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water, false);
+			TileTypes [(int)TERRAIN.water].setSpriteID ((int)SPRITES.water);
+			TileTypes [(int)TERRAIN.sand] = new TerrainTile ((int)TERRAIN.sand);
+			TileTypes [(int)TERRAIN.sand].setSpriteID ((int)SPRITES.sand);
+			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
+			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
+		}
 
+		public TerrainTile[] getTileTypes()
+		{
+			return TileTypes;
+		}
 	}
 }

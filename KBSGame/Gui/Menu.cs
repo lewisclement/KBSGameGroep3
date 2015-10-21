@@ -25,9 +25,11 @@ namespace KBSGame
 		private List<List<Button>> menus;
 		private List<Button> buttonList;
         private String menu;
-		private int width = StaticVariables.dpi * 4;
+		private int width;
 		private STATE currentState;
 		private World world;
+
+		EditorGui editorGui;
 
 		int hoverPos = -1, clickPos = -1;
 
@@ -39,6 +41,7 @@ namespace KBSGame
             xRes = ScreenresX;
             yRes = ScreenresY;
             buffer = new Bitmap(xRes, yRes);
+			width = Math.Min (StaticVariables.dpi * 2, this.xRes / 2);
 
 			List<Button> buttonList = new List<Button> ();
 			buttonList.Add(new Button("Start"));
@@ -62,6 +65,8 @@ namespace KBSGame
 			buttonList.Add(new Button("Exit (no save)"));
 			menus.Insert ((int)STATE.editor, buttonList);
 
+			editorGui = new EditorGui ((int)GUI.editor, xRes, yRes, drawRatio, world);
+
 			changeState (STATE.main);
 			this.setActive (true);
         }
@@ -82,6 +87,14 @@ namespace KBSGame
 					world.loadLevel ("testworld");
 					changeState (STATE.pause);
 					break;
+				case 1:
+					setActive (false);
+					world.FillWorld (TERRAIN.grass, new Size (50, 50));
+					editorGui.setActive (true);
+					changeState (STATE.editor);
+					Entity focus = new Entity (new PointF (50 / 2, 50 / 2), 0);
+					world.setFocusEntity (focus);
+					break;
 				case 4:
 					Application.Exit ();
 					break;
@@ -100,7 +113,16 @@ namespace KBSGame
 					break;
 				}
 			} else if (currentState == STATE.editor) {
-
+				switch (clickPos) {
+				case 2:
+					break;
+				case 3:
+					editorGui.setActive (false);
+					changeState (STATE.main);
+					break;
+				default:
+					break;
+				}
 			}
         }
 
@@ -137,8 +159,6 @@ namespace KBSGame
             var g = Graphics.FromImage(buffer);
             g.Clear(Color.FromArgb(0));
 
-			int width = Math.Min(StaticVariables.dpi * 3, xRes / 2);
-
 			StringFormat style = new StringFormat ();
 			style.Alignment = StringAlignment.Center;
 			Font font = new Font ("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
@@ -164,11 +184,15 @@ namespace KBSGame
 		{
 			if (state == STATE.main) {
 				world.loadLevel ("mainmenu");
-				world.setFocusEntity(world.getEntitiesByType (ENTITIES.plant)[40]);
+				world.setFocusEntity(world.getEntitiesByType (ENTITIES.plant)[40]); //Quick'n'Dirty
 			}
 
 			currentState = state;
 			buttonList = menus [(int)state];
+		}
+
+		public EditorGui getEditorGui() {
+			return editorGui;
 		}
     }
 
