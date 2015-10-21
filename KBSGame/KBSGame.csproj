@@ -31,6 +31,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Entities\Trap.cs" />
     <Compile Include="Gui\GameOverMenu.cs" />
     <Compile Include="Entities\Finish.cs" />
     <Compile Include="Gui\Gui.cs" />
@@ -97,9 +98,11 @@
     <Content Include="bin\Debug\finish.png" />
     <Content Include="bin\Debug\Game.xml" />
     <Content Include="bin\Debug\gold_key.png" />
+    <None Include="bin\Debug\trap_closed.png" />
+    <Content Include="bin\Debug\trap_opened.png" />
     <Content Include="bin\Release\finish.png" />
+    <Content Include="bin\Release\trap_closed.png" />
+    <Content Include="bin\Release\trap_opened.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\worlds\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

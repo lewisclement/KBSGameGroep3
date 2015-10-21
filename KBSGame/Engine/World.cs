@@ -403,7 +403,7 @@ namespace KBSGame
 		        if (point.X > loc.X - e.getBoundingBox() && point.X < loc.X + e.getBoundingBox() &&
 		            point.Y > loc.Y - e.getBoundingBox() && point.Y < loc.Y + e.getBoundingBox())
 				{
-					returnObjects.Add(e);
+				returnObjects.Add(e);
 		        }
 		    }
 			return returnObjects;

@@ -53,10 +53,13 @@ namespace KBSGame
 					case (int)ENTITIES.finish:
 						objects.Add(new Finish(location, SpriteID));
 						break;
+                    case (int)ENTITIES.trap:
+                        objects.Add(new Trap(location, SpriteID));
+                        break;
 					case (int)ENTITIES.plant:
 						objects.Add(new Plant(location, SpriteID, 50, solid, drawOrder));
 						break;
-					default:
+                    default:
 						objects.Add (new Entity (location, SpriteID, solid, 50, drawOrder));
 						break;
 					}

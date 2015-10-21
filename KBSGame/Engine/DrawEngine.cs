@@ -195,7 +195,9 @@ namespace KBSGame
 			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.execFolder + "/gold_key.png");
 			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.execFolder + "/finish.png");
 			sprites[(int)SPRITES.berrybush] = new Sprite((int)SPRITES.berrybush, StaticVariables.execFolder + "/berrybush.png");
-			return sprites;
+            sprites[(int)SPRITES.trapOpened] = new Sprite((int)SPRITES.trapOpened, StaticVariables.execFolder + "/trap_opened.png");
+            sprites[(int)SPRITES.trapClosed] = new Sprite((int)SPRITES.trapClosed, StaticVariables.execFolder + "/trap_closed.png");
+            return sprites;
 		}
 	}
 }
