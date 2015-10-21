@@ -52,13 +52,10 @@ namespace KBSGame
 
 			if (currentHover.X < xRes - width) { //Pos in world
 				if (selected >= 0) {
-					PointF focusPos = world.getFocusEntity ().getLocation ();
+					PointF offset = world.getViewOffset ();
 
-					int offsetX = (int)(StaticVariables.tileSize * (focusPos.X - (int)focusPos.X));
-					int offsetY = (int)(StaticVariables.tileSize * (focusPos.Y - (int)focusPos.Y));
-
-					int x = currentHover.X - currentHover.X % StaticVariables.tileSize - offsetX;
-					int y = currentHover.Y - currentHover.Y % StaticVariables.tileSize - offsetY;
+					int x = (int)(currentHover.X - (currentHover.X + StaticVariables.tileSize * offset.X) % StaticVariables.tileSize);
+					int y = (int)(currentHover.Y - (currentHover.Y + StaticVariables.tileSize * offset.Y) % StaticVariables.tileSize);
 
 					g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 				}

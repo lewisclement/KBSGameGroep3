@@ -452,19 +452,19 @@ namespace KBSGame
 		public void setTerraintile(PointF point, int terrainID)
 		{
 			TerrainTile tile = TileTypes[terrainID];
-			if (terrainID == (int)SPRITES.water)
-			{
-				tile.IsWalkable = false;
-			}
 			terrainTiles[(int) point.X*height + (int) point.Y] = tile;
 		}
 
 		public void setTerrainTileRelative(Point point, int terrainID)
 		{
 			Rectangle view = getView ();
+			PointF offset = getViewOffset ();
 
-			int x = view.X + point.X / StaticVariables.tileSize;
-			int y = view.Y + point.Y / StaticVariables.tileSize;
+			float addX = (point.X - (point.X + StaticVariables.tileSize * offset.X) % StaticVariables.tileSize) / StaticVariables.tileSize;
+			float addY = (point.Y - (point.Y + StaticVariables.tileSize * offset.Y) % StaticVariables.tileSize) / StaticVariables.tileSize;
+
+			int x = view.X + (int)Math.Ceiling(addX);
+			int y = view.Y + (int)Math.Ceiling(addY);
 
 			terrainTiles [x * height + y] = TileTypes [terrainID];
 		}
