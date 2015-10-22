@@ -180,21 +180,21 @@ namespace KBSGame
 		private Sprite[] getSprites()
 		{
 			Sprite[] sprites = new Sprite[(int)SPRITES.count];
-			sprites[(int)SPRITES.water] = new Sprite((int)SPRITES.water, StaticVariables.execFolder + "/water_still.png");
-			sprites[(int)SPRITES.grass] = new Sprite((int)SPRITES.grass, StaticVariables.execFolder + "/grass_top.png");
-			sprites[(int)SPRITES.sand] = new Sprite((int)SPRITES.sand, StaticVariables.execFolder + "/sand.png");
-			sprites[(int)SPRITES.player] = new Sprite((int)SPRITES.player, StaticVariables.execFolder + "/player.png");
-			sprites[(int)SPRITES.dirt] = new Sprite((int)SPRITES.dirt, StaticVariables.execFolder + "/dirt.png");
-			sprites[(int)SPRITES.sapling1] = new Sprite((int)SPRITES.sapling1, StaticVariables.execFolder + "/sapling1.png");
-			sprites[(int)SPRITES.sapling2] = new Sprite((int)SPRITES.sapling2, StaticVariables.execFolder + "/sapling2.png");
-			sprites[(int)SPRITES.tallgrass] = new Sprite((int)SPRITES.tallgrass, StaticVariables.execFolder + "/tallgrass.png");
-			sprites[(int)SPRITES.waterlily] = new Sprite((int)SPRITES.waterlily, StaticVariables.execFolder + "/waterlily.png");
-			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.execFolder + "/banana.png");
-			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.execFolder + "/gold_key.png");
-			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.execFolder + "/finish.png");
-			sprites[(int)SPRITES.berrybush] = new Sprite((int)SPRITES.berrybush, StaticVariables.execFolder + "/berrybush.png");
-            sprites[(int)SPRITES.trapOpened] = new Sprite((int)SPRITES.trapOpened, StaticVariables.execFolder + "/trap_opened.png");
-            sprites[(int)SPRITES.trapClosed] = new Sprite((int)SPRITES.trapClosed, StaticVariables.execFolder + "/trap_closed.png");
+			sprites[(int)SPRITES.water] = new Sprite((int)SPRITES.water, StaticVariables.spriteFolder + "/water_still.png");
+			sprites[(int)SPRITES.grass] = new Sprite((int)SPRITES.grass, StaticVariables.spriteFolder + "/grass_top.png");
+			sprites[(int)SPRITES.sand] = new Sprite((int)SPRITES.sand, StaticVariables.spriteFolder + "/sand.png");
+			sprites[(int)SPRITES.player] = new Sprite((int)SPRITES.player, StaticVariables.spriteFolder + "/player.png");
+			sprites[(int)SPRITES.dirt] = new Sprite((int)SPRITES.dirt, StaticVariables.spriteFolder + "/dirt.png");
+			sprites[(int)SPRITES.sapling1] = new Sprite((int)SPRITES.sapling1, StaticVariables.spriteFolder + "/sapling1.png");
+			sprites[(int)SPRITES.sapling2] = new Sprite((int)SPRITES.sapling2, StaticVariables.spriteFolder + "/sapling2.png");
+			sprites[(int)SPRITES.tallgrass] = new Sprite((int)SPRITES.tallgrass, StaticVariables.spriteFolder + "/tallgrass.png");
+			sprites[(int)SPRITES.waterlily] = new Sprite((int)SPRITES.waterlily, StaticVariables.spriteFolder + "/waterlily.png");
+			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.spriteFolder + "/banana.png");
+			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.spriteFolder + "/gold_key.png");
+			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.spriteFolder + "/finish.png");
+			sprites[(int)SPRITES.berrybush] = new Sprite((int)SPRITES.berrybush, StaticVariables.spriteFolder + "/berrybush.png");
+			sprites[(int)SPRITES.trapOpened] = new Sprite((int)SPRITES.trapOpened, StaticVariables.spriteFolder + "/trap_opened.png");
+			sprites[(int)SPRITES.trapClosed] = new Sprite((int)SPRITES.trapClosed, StaticVariables.spriteFolder + "/trap_closed.png");
             return sprites;
 		}
 	}
