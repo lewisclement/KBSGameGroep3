@@ -146,6 +146,9 @@ namespace KBSGame
 				return;
 
 			selected = x / StaticVariables.tileSize + (y / StaticVariables.tileSize) * rowLength;
+
+			if (selected > (int)TERRAIN.count)
+				selected = -1;
 		}
 
 		/// <summary>
@@ -161,6 +164,24 @@ namespace KBSGame
 		/// </summary>
 		/// <param name="pos">Position.</param>
 		private void entityTabClick(Point pos)
+		{
+
+		}
+
+		/// <summary>
+		/// Renders the world tab.
+		/// </summary>
+		/// <param name="g">The green component.</param>
+		private void renderWorldTab(Graphics g) 
+		{
+
+		}
+
+		/// <summary>
+		/// Processes a click when world tab displayed
+		/// </summary>
+		/// <param name="pos">Position.</param>
+		private void worldTabClick(Point pos)
 		{
 
 		}
