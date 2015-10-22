@@ -11,11 +11,13 @@ namespace KBSGame
 		private const int margin = 5;
 		Point currentHover;
 		int selected= -1;
+		int rowLength;
 
 		public EditorGui (int ID, int screenResX, int screenResY, float drawRatio, World world) : base(ID, screenResX, screenResY, drawRatio)
 		{
 			this.world = world;
 			width = Math.Min (StaticVariables.dpi * 2, screenResX / 2);
+			rowLength = (width - margin * 2) / StaticVariables.tileSize;
 			currentHover = new Point (0, 0);
 		}
 
@@ -32,11 +34,10 @@ namespace KBSGame
 
 			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes - width, 0, width, yRes);
 
-
 			for (int i = 0; i < terrainTiles.Length; i++) {
 				Bitmap bmp = (Bitmap)DrawEngine.sprites [terrainTiles [i].getSpriteID ()].getBitmap ();
-				int x = xRes - width + margin + i * StaticVariables.tileSize;
-				int y = margin;
+				int x = xRes - width + margin + (i % rowLength) * StaticVariables.tileSize;
+				int y = margin + (i / rowLength) * StaticVariables.tileSize;
 				g.DrawImage (bmp, x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 
 				if (selected == i) {
@@ -45,9 +46,9 @@ namespace KBSGame
 				}
 
 				if(currentHover.X > x && currentHover.X < x + StaticVariables.tileSize && currentHover.Y > y && currentHover.Y < y + StaticVariables.tileSize)
-					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.White)), x, margin, StaticVariables.tileSize, StaticVariables.tileSize);
+					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.White)), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 				else
-					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.Black)), x, margin, StaticVariables.tileSize, StaticVariables.tileSize);
+					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.Black)), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			}
 
 			if (currentHover.X < xRes - width) { //Pos in world
@@ -80,7 +81,7 @@ namespace KBSGame
 				int x = mousePos.X - xArea;
 				int y = mousePos.Y - yArea;
 
-				selected = x / StaticVariables.tileSize;
+				selected = x / StaticVariables.tileSize + (y / StaticVariables.tileSize) * rowLength;
 			}
 		}
 
