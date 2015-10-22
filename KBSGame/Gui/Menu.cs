@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace KBSGame
 {
@@ -20,7 +21,7 @@ namespace KBSGame
 			}
 		};
 
-		public enum STATE : int {main=0, pause, editor}
+		public enum STATE : int {main=0, pause, editor, levelloader}
 
 		private List<List<Button>> menus;
 		private List<Button> buttonList;
@@ -29,9 +30,13 @@ namespace KBSGame
 		private STATE currentState;
 		private World world;
 
+		//For loading levels
+		FileInfo[] files;
+
 		EditorGui editorGui;
 
-		int hoverPos = -1, clickPos = -1;
+		int hoverIndex = -1, clickIndex = -1;
+		Point hoverPos = new Point (0, 0), clickPos = new Point (0, 0);
 
 		public Menu(int ID, int ScreenresX, int ScreenresY, float drawRatio, World world) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
@@ -65,6 +70,10 @@ namespace KBSGame
 			buttonList.Add(new Button("Exit"));
 			menus.Insert ((int)STATE.editor, buttonList);
 
+			buttonList = new List<Button> ();
+			buttonList.Add(new Button("Back"));
+			menus.Insert ((int)STATE.levelloader, buttonList);
+
 			editorGui = new EditorGui ((int)GUI.editor, xRes, yRes, drawRatio, world);
 
 			changeState (STATE.main);
@@ -76,16 +85,16 @@ namespace KBSGame
 			mousePos = scaleToDrawRatio (mousePos);
 
 			if (mousePos.X > width)
-				clickPos = -1;
+				clickIndex = -1;
 			else
-				clickPos = mousePos.Y / StaticVariables.dpi;
+				clickIndex = mousePos.Y / StaticVariables.dpi;
 
 			if (currentState == STATE.main) {
-				switch (clickPos) {
+				switch (clickIndex) {
 				case 0:
-					setActive (false);
-					world.loadLevel ("testworld");
-					changeState (STATE.pause);
+					DirectoryInfo d = new DirectoryInfo (StaticVariables.levelFolder);
+					files = d.GetFiles ("*.xml");
+					changeState (STATE.levelloader);
 					break;
 				case 1:
 					setActive (false);
@@ -102,7 +111,7 @@ namespace KBSGame
 					break;
 				}
 			} else if (currentState == STATE.pause) {
-				switch (clickPos) {
+				switch (clickIndex) {
 				case 0:
 					setActive (false);
 					break;
@@ -113,7 +122,7 @@ namespace KBSGame
 					break;
 				}
 			} else if (currentState == STATE.editor) {
-				switch (clickPos) {
+				switch (clickIndex) {
 				case 2:
 					break;
 				case 3:
@@ -121,6 +130,27 @@ namespace KBSGame
 					changeState (STATE.main);
 					break;
 				default:
+					break;
+				}
+			} else if (currentState == STATE.levelloader) {
+				switch (clickIndex) {
+				case 0:
+					changeState (STATE.main);
+					break;
+				default:
+					if (currentState == STATE.levelloader) {
+						int offsetY = StaticVariables.dpi * buttonList.Count;
+
+						int index = (hoverPos.Y - offsetY) / 10;
+						if (hoverPos.X < width) {
+							if (index < files.Length) {
+								String name = files [index].Name.Substring (0, files [index].Name.Length - 4);
+								world.loadLevel (name);
+								changeState (STATE.pause);
+								setActive (false);
+							}
+						}
+					}
 					break;
 				}
 			}
@@ -131,12 +161,14 @@ namespace KBSGame
 			mousePos = scaleToDrawRatio (mousePos);
 
 			if (mousePos.X > width)
-				hoverPos = -1;
+				hoverIndex = -1;
 			else {
-				hoverPos = mousePos.Y / StaticVariables.dpi;
-				if (hoverPos >= buttonList.Count)
-					hoverPos = -1;
+				hoverIndex = mousePos.Y / StaticVariables.dpi;
+				if (hoverIndex >= buttonList.Count)
+					hoverIndex = -1;
 			}
+
+			hoverPos = mousePos;
 		}
 
 		public void addMenuItem(String text)
@@ -165,7 +197,7 @@ namespace KBSGame
 
 			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, 0, width, yRes);
 			g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
-			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverPos * StaticVariables.dpi, width, StaticVariables.dpi);
+			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverIndex * StaticVariables.dpi, width, StaticVariables.dpi);
 
 			for (int i = 0; i < buttonList.Count; i++)
             {
@@ -175,6 +207,24 @@ namespace KBSGame
 
 				g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y);
             }
+
+			if (currentState == STATE.levelloader) {
+				for (int i = 0; i < files.Length; i++) {
+					float x = StaticVariables.dpi / 4;
+					int offsetY = StaticVariables.dpi * buttonList.Count;
+					float y = offsetY + i * 10;
+					font = new Font ("Arial", 10, FontStyle.Bold);
+
+					int index = (hoverPos.Y - offsetY) / 10;
+					if (index == i && hoverPos.X < width) {
+						if(index < files.Length)
+							g.FillRectangle (new SolidBrush (Color.FromArgb (40, Color.Black)), 0, y, width, 10);
+					}
+
+					String name = files [i].Name.Substring (0, files [i].Name.Length - 4);
+					g.DrawString (name, font, new SolidBrush (Color.White), x, y - 5);
+				}
+			}
 
 			g.Dispose ();
             return this.buffer;

@@ -91,7 +91,8 @@ namespace KBSGame
 			    player = (Player) objects.FirstOrDefault(e => e.getType() == ENTITIES.player);
 				if (player == null) {
 					Random rand = new Random ();
-					player = new Player (new PointF (rand.Next(), rand.Next()), 50);
+					player = new Player (new PointF (rand.Next(0, width), rand.Next(0, height)), 50);
+					objects.Add (player);
 				}
                 setFocusEntity (player);
 				currentLevelPath = fileName;
