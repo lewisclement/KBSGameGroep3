@@ -138,5 +138,7 @@
   <ItemGroup />
   <ItemGroup>
     <Folder Include="bin\Debug\sprites\" />
+    <Folder Include="Entities\flowers\" />
+    <Folder Include="Entities\saplings\" />
   </ItemGroup>
 </Project>

@@ -9,9 +9,10 @@ namespace KBSGame
 		private int spriteID;
         public bool IsWalkable { get; set; }
 
-		public TerrainTile (int ID, bool IsWalkable = true)
+		public TerrainTile (int ID, int spriteID, bool IsWalkable = true)
 		{
 			this.ID = ID;
+			this.spriteID = spriteID;
 		    this.IsWalkable = IsWalkable;
 		}
 
@@ -23,11 +24,6 @@ namespace KBSGame
 		public int getSpriteID()
 		{
 			return spriteID;
-		}
-
-		public void setSpriteID(int ID)
-		{
-			this.spriteID = ID;
 		}
 	}
 }

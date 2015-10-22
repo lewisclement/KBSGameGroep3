@@ -604,47 +604,24 @@ namespace KBSGame
 		{
 			TileTypes = new TerrainTile[(int)TERRAIN.count];
 
-			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass);
-			TileTypes [(int)TERRAIN.grass].setSpriteID ((int)SPRITES.grass);
+			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass, (int)SPRITES.grass);
+			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water, (int)SPRITES.water, false);
+			TileTypes [(int)TERRAIN.planks_birch] = new TerrainTile ((int)TERRAIN.planks_birch, (int)SPRITES.planks_birch);
 
-			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water, false);
-			TileTypes [(int)TERRAIN.water].setSpriteID ((int)SPRITES.water);
+			//Sandy types
+			TileTypes [(int)TERRAIN.sand] = new TerrainTile ((int)TERRAIN.sand, (int)SPRITES.sand);
+			TileTypes [(int)TERRAIN.red_sand] = new TerrainTile ((int)TERRAIN.red_sand, (int)SPRITES.red_sand);
+			TileTypes [(int)TERRAIN.clay] = new TerrainTile ((int)TERRAIN.clay, (int)SPRITES.clay);
+			TileTypes [(int)TERRAIN.sandstone] = new TerrainTile ((int)TERRAIN.sandstone, (int)SPRITES.sandstone);
+			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt, (int)SPRITES.dirt);
+			TileTypes [(int)TERRAIN.farmland] = new TerrainTile ((int)TERRAIN.farmland, (int)SPRITES.farmland);
 
-			TileTypes [(int)TERRAIN.sand] = new TerrainTile ((int)TERRAIN.sand);
-			TileTypes [(int)TERRAIN.sand].setSpriteID ((int)SPRITES.sand);
-
-			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt);
-			TileTypes [(int)TERRAIN.dirt].setSpriteID ((int)SPRITES.dirt);
-
-			TileTypes [(int)TERRAIN.stone] = new TerrainTile ((int)TERRAIN.stone);
-			TileTypes [(int)TERRAIN.stone].setSpriteID ((int)SPRITES.stone);
-
-			TileTypes [(int)TERRAIN.stone_diorite] = new TerrainTile ((int)TERRAIN.stone_diorite);
-			TileTypes [(int)TERRAIN.stone_diorite].setSpriteID ((int)SPRITES.stone_diorite);
-
-			TileTypes [(int)TERRAIN.stone_granite] = new TerrainTile ((int)TERRAIN.stone_granite);
-			TileTypes [(int)TERRAIN.stone_granite].setSpriteID ((int)SPRITES.stone_granite);
-
-			TileTypes [(int)TERRAIN.red_sand] = new TerrainTile ((int)TERRAIN.red_sand);
-			TileTypes [(int)TERRAIN.red_sand].setSpriteID ((int)SPRITES.red_sand);
-
-			TileTypes [(int)TERRAIN.sandstone] = new TerrainTile ((int)TERRAIN.sandstone);
-			TileTypes [(int)TERRAIN.sandstone].setSpriteID ((int)SPRITES.sandstone);
-
-			TileTypes [(int)TERRAIN.stonebrick] = new TerrainTile ((int)TERRAIN.stonebrick);
-			TileTypes [(int)TERRAIN.stonebrick].setSpriteID ((int)SPRITES.stonebrick);
-
-			TileTypes [(int)TERRAIN.planks_birch] = new TerrainTile ((int)TERRAIN.planks_birch);
-			TileTypes [(int)TERRAIN.planks_birch].setSpriteID ((int)SPRITES.planks_birch);
-
-			TileTypes [(int)TERRAIN.clay] = new TerrainTile ((int)TERRAIN.clay);
-			TileTypes [(int)TERRAIN.clay].setSpriteID ((int)SPRITES.clay);
-
-			TileTypes [(int)TERRAIN.brick] = new TerrainTile ((int)TERRAIN.brick);
-			TileTypes [(int)TERRAIN.brick].setSpriteID ((int)SPRITES.brick);
-
-			TileTypes [(int)TERRAIN.farmland] = new TerrainTile ((int)TERRAIN.farmland);
-			TileTypes [(int)TERRAIN.farmland].setSpriteID ((int)SPRITES.farmland);
+			//Rocky types
+			TileTypes [(int)TERRAIN.stone] = new TerrainTile ((int)TERRAIN.stone, (int)SPRITES.stone);
+			TileTypes [(int)TERRAIN.stone_diorite] = new TerrainTile ((int)TERRAIN.stone_diorite, (int)SPRITES.stone_diorite);
+			TileTypes [(int)TERRAIN.stone_granite] = new TerrainTile ((int)TERRAIN.stone_granite, (int)SPRITES.stone_granite);
+			TileTypes [(int)TERRAIN.stonebrick] = new TerrainTile ((int)TERRAIN.stonebrick, (int)SPRITES.stonebrick);
+			TileTypes [(int)TERRAIN.brick] = new TerrainTile ((int)TERRAIN.brick, (int)SPRITES.brick);
 		}
 
 		public TerrainTile[] getTileTypes()

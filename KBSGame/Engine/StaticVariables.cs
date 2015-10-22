@@ -12,7 +12,7 @@ namespace KBSGame
 								flower_rose, flower_tulip_orange, flower_tulip_pink, flower_tulip_red, flower_tulip_white, 
 								carrots_stage_0, carrots_stage_1, carrots_stage_2, carrots_stage_3, 
 								sapling_acacia, sapling_birch, sapling_jungle, sapling_oak, sapling_roofed_oak, sapling_spruce, 
-								wheat_stage_7, deadbush, count};
+								wheat_stage_7, deadbush, icon_world, count};
 	
 	public enum ENTITIES : int {def=0, player, finish, key, plant, fruit, trap,
 								carrots, flower, sapling, count};
