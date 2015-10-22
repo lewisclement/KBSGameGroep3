@@ -55,14 +55,14 @@ namespace KBSGame
 			buttonList.Add(new Button("Resume"));
 			buttonList.Add(new Button("Settings"));
 			buttonList.Add(new Button("Help"));
-			buttonList.Add(new Button("Exit to main menu"));
+			buttonList.Add(new Button("Exit"));
 			menus.Insert ((int)STATE.pause, buttonList);
 
 			buttonList = new List<Button> ();
 			buttonList.Add(new Button("Settings"));
 			buttonList.Add(new Button("Help"));
-			buttonList.Add(new Button("Save & exit"));
-			buttonList.Add(new Button("Exit (no save)"));
+			buttonList.Add(new Button("Save"));
+			buttonList.Add(new Button("Exit"));
 			menus.Insert ((int)STATE.editor, buttonList);
 
 			editorGui = new EditorGui ((int)GUI.editor, xRes, yRes, drawRatio, world);

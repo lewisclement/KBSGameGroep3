@@ -13,7 +13,7 @@ namespace KBSGame
 			
 		}
 
-		public void saveWorld(World world, String fileName) 
+		public static void saveWorld(World world, String fileName) 
 		{
 			List<TerrainTile> tiles = world.getTerrain ();
 			List<Entity> entities = world.getEntities ();

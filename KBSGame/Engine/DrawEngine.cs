@@ -188,6 +188,8 @@ namespace KBSGame
 			sprites[(int)SPRITES.trapOpened] = new Sprite((int)SPRITES.trapOpened, StaticVariables.spriteFolder + "/trap_opened.png");
 			sprites[(int)SPRITES.trapClosed] = new Sprite((int)SPRITES.trapClosed, StaticVariables.spriteFolder + "/trap_closed.png");
 			sprites[(int)SPRITES.icon_world] = new Sprite((int)SPRITES.icon_world, StaticVariables.spriteFolder + "/icon_world.png");
+			sprites[(int)SPRITES.save] = new Sprite((int)SPRITES.save, StaticVariables.spriteFolder + "/save.png");
+			sprites[(int)SPRITES.load] = new Sprite((int)SPRITES.load, StaticVariables.spriteFolder + "/folder.png");
 
 			//Terrain
 			sprites[(int)SPRITES.water] = new Sprite((int)SPRITES.water, StaticVariables.spriteFolder + "/water_still.png");
