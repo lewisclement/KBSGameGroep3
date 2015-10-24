@@ -124,6 +124,7 @@
     <None Include="bin\Debug\sprites\folder.png" />
     <None Include="bin\Debug\sprites\save.png" />
     <None Include="bin\Debug\sprites\icon_world.png" />
+    <None Include="bin\Debug\worlds\fatsoenlijkogendescenario.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">

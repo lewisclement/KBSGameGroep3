@@ -9,16 +9,18 @@ namespace KBSGame
 {
     class Trap : Entity
     {
-        public Trap(PointF location, int spriteID, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 1.0f)
-			: base(ENTITIES.trap, location, spriteID, solid, height, depth, boundingBox)
+        public Trap(PointF location, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 1.0f)
+			: base(ENTITIES.trap, location, (int)SPRITES.trapOpened, solid, height, depth, boundingBox)
 		{
 
         }
+
         public void Dead()
         {
             trapClosed();
             Console.WriteLine("You're dead");
         }
+
         private void trapClosed()
         {
             this.spriteID = 14;

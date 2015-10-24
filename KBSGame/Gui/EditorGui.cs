@@ -361,14 +361,8 @@ namespace KBSGame
 						x = (float)Math.Round (x, 1);
 						y = (float)Math.Round (y, 1);
 
-						switch (e.getID ()) {
-						case (int)ENTITIES.player:
-							e = new Player (new PointF (0, 0), e.getHeight ());
-							break;
-						default:
-							e = new Entity (e.getType(), new PointF(0, 0), e.getSpriteID (), e.getSolid (), e.getHeight (), e.getDrawOrder (), e.getBoundingBox ());
-							break;
-						}
+						e = new Entity (e.getType(), new PointF(0, 0), e.getSpriteID (), e.getSolid (), e.getHeight (), e.getDrawOrder (), e.getBoundingBox ());
+
 						world.addEntityRelative (e, new PointF(x, y));
 					}
 					break;
@@ -457,7 +451,14 @@ namespace KBSGame
 		private void loadEntities() {
 			entityList = new List<Entity> ();
 			entityList.Add (new Player(new PointF(0,0), 50));
+			entityList.Add (new Entity (ENTITIES.key, new PointF (0, 0), (int)SPRITES.key, false));
 			entityList.Add (new Finish (new PointF (0, 0)));
+
+			entityList.Add (new Entity (ENTITIES.fruit, new PointF (0, 0), (int)SPRITES.banana));
+			entityList.Add (new Trap(new PointF(0,0)));
+
+			///Plants
+			//Trees
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling1));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling2));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_acacia));
@@ -466,6 +467,8 @@ namespace KBSGame
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_oak));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_roofed_oak));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_spruce));
+
+			//Flowers
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_rose, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_oxeye_daisy, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_houstonia, 50, false));
@@ -476,6 +479,9 @@ namespace KBSGame
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_pink, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_red, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_white, 50, false));
+
+			//Misc plants
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.berrybush, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.tallgrass, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.deadbush, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.wheat_stage_7, 50, false));
@@ -483,6 +489,7 @@ namespace KBSGame
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_1, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_2, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_3, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.waterlily, 50, false));
 		}
 	}
 }

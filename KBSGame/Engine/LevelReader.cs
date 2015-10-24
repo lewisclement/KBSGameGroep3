@@ -55,7 +55,7 @@ namespace KBSGame
 						objects.Add(new Finish(location));
 						break;
                     case (int)ENTITIES.trap:
-                        objects.Add(new Trap(location, SpriteID));
+                        objects.Add(new Trap(location));
                         break;
 					case (int)ENTITIES.plant:
 						objects.Add(new Plant(location, SpriteID, 50, solid, drawOrder, BoudingBox));
