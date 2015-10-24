@@ -315,7 +315,7 @@ namespace KBSGame
 		/// <returns>The player.</returns>
 		public Player getPlayer()
 		{
-			return (Player) objects.FirstOrDefault (e => e.getType () == ENTITIES.player);
+			return player;
 		}
 
 		/// <summary>
