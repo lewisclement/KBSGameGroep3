@@ -270,12 +270,12 @@ namespace KBSGame
 			if (currentHover.X > xRes - width && currentHover.X < xRes - tabbarWidth) {
 				int index = (currentHover.Y - margin) / 10;
 				if(index < files.Length)
-					g.FillRectangle (new SolidBrush (Color.FromArgb (40, Color.Black)), xRes - width, index * 10 + 10, width - tabbarWidth, 10);
+					g.FillRectangle (new SolidBrush (Color.FromArgb (40, Color.Black)), xRes - width, index * 10 + 5, width - tabbarWidth, 10);
 			}
 
 			for (int i = 0; i < files.Length; i++) {
 				String name = files [i].Name.Substring (0, files [i].Name.Length - 4);
-				g.DrawString (name, font, new SolidBrush (Color.White), xRes - width + margin, margin + i * 10);
+				g.DrawString (name, font, new SolidBrush (Color.White), xRes - width + margin, margin + i * 10 - 5);
 			}
 		}
 

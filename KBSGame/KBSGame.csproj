@@ -121,6 +121,9 @@
     <None Include="bin\Debug\sprites\deadbush.png" />
     <None Include="bin\Debug\sprites\flower_rose.png" />
     <None Include="bin\Debug\sprites\flower_allium.png" />
+    <None Include="bin\Debug\sprites\folder.png" />
+    <None Include="bin\Debug\sprites\save.png" />
+    <None Include="bin\Debug\sprites\icon_world.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
