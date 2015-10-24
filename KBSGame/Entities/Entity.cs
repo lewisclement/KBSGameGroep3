@@ -17,8 +17,9 @@ namespace KBSGame
 		protected float boundingBox;
 		protected Byte height;
 
-		public Entity(PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, float boundingBox = 1.0f)
+		public Entity(ENTITIES type, PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, float boundingBox = 1.0f)
 		{
+			this.type = type;
 			this.location = location;
 			this.height = height;
 			this.drawOrder = drawOrder;

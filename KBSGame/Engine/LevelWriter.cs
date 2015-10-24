@@ -54,6 +54,7 @@ namespace KBSGame
 					writer.WriteElementString("y", e.getLocation().Y.ToString());
 					writer.WriteElementString(xmlVar.Solid, e.getSolid().ToString());
 					writer.WriteElementString(xmlVar.DrawOrder, e.getDrawOrder().ToString());
+					writer.WriteElementString(xmlVar.BoudingBox, e.getBoundingBox().ToString());
 
 					writer.WriteEndElement();
 				}

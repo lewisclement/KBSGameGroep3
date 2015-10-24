@@ -44,6 +44,7 @@ namespace KBSGame
 					int SpriteID = Int32.Parse(entity[xmlVar.SpriteID].InnerText);
 					bool solid = bool.Parse(entity[xmlVar.Solid].InnerText);
 					Byte drawOrder = Byte.Parse (entity [xmlVar.DrawOrder].InnerText);
+					float BoudingBox = float.Parse (entity [xmlVar.BoudingBox].InnerText);
 
 					switch (Int32.Parse(entity[xmlVar.Type].InnerText))
 					{
@@ -51,16 +52,16 @@ namespace KBSGame
 						objects.Add(new Player(location, 50));
 						break;
 					case (int)ENTITIES.finish:
-						objects.Add(new Finish(location, SpriteID));
+						objects.Add(new Finish(location));
 						break;
                     case (int)ENTITIES.trap:
                         objects.Add(new Trap(location, SpriteID));
                         break;
 					case (int)ENTITIES.plant:
-						objects.Add(new Plant(location, SpriteID, 50, solid, drawOrder));
+						objects.Add(new Plant(location, SpriteID, 50, solid, drawOrder, BoudingBox));
 						break;
                     default:
-						objects.Add (new Entity (location, SpriteID, solid, 50, drawOrder));
+						objects.Add (new Entity (ENTITIES.def, location, SpriteID, solid, 50, drawOrder, BoudingBox));
 						break;
 					}
 				} catch (Exception e) {

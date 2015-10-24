@@ -52,15 +52,15 @@ namespace KBSGame
 
 	    public void AddItemsToInventory(Player player)
 	    {
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-            player.AddItemToInventory(new Item(new Entity(new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+            player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
 	    }
 
 		public void reload()
@@ -241,7 +241,7 @@ namespace KBSGame
 						if (rand.Next (0, 5) == 0)
 							objects.Add (new Plant(new PointF(x + 0.5f + (rand.Next(-3, 3) / 10.0f), y + 0.5f - (rand.Next(0, 3) / 10.0f)), (int)SPRITES.sapling1, 50, true));
 						if(rand.Next(0, 50) == 0)
-							objects.Add (new Entity(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9, 0.6f));
+							objects.Add (new Entity(ENTITIES.fruit, new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9, 0.6f));
 					}
 
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
@@ -341,6 +341,21 @@ namespace KBSGame
 		/// <param name="entity">Entity.</param>
 		public void addEntity(Entity entity)
 		{
+			objects.Add (entity);
+		}
+
+		/// <summary>
+		/// Adds the entity relative to view position.
+		/// </summary>
+		/// <param name="entity">Entity.</param>
+		/// <param name="relativeLocation">Relative location.</param>
+		public void addEntityRelative(Entity entity, PointF relativeLocation)
+		{
+			Rectangle view = getView ();
+			PointF offset = getViewOffset ();
+
+			entity.setLocation (new PointF(view.Left + relativeLocation.X + offset.X, view.Top + relativeLocation.Y + offset.Y));
+
 			objects.Add (entity);
 		}
 

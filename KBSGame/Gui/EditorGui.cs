@@ -40,6 +40,9 @@ namespace KBSGame
 		private int selectedTab = 0;
 		private int selected = -1;
 		private int rowLength;
+		List<Entity> entityList;
+		TerrainTile[] terrainTiles;
+
 
 		//Save/load tabs
 		FileInfo[] files;
@@ -58,6 +61,9 @@ namespace KBSGame
 			width = Math.Min (StaticVariables.dpi * 2, screenResX / 2);
 			rowLength = (width - margin * 2 - tabbarWidth) / StaticVariables.tileSize;
 			currentHover = new Point (0, 0);
+
+			terrainTiles = world.getTileTypes ();
+			loadEntities ();
 		}
 
 		/// <summary>
@@ -151,8 +157,6 @@ namespace KBSGame
 		/// <param name="g">The green component.</param>
 		private void renderTerrainTab(Graphics g)
 		{
-			TerrainTile[] terrainTiles = world.getTileTypes ();
-
 			for (int i = 0; i < terrainTiles.Length; i++) {
 				Bitmap bmp = DrawEngine.sprites [terrainTiles [i].getSpriteID ()].getBitmap ();
 				int x = xRes - width + margin + (i % rowLength) * StaticVariables.tileSize;
@@ -208,7 +212,33 @@ namespace KBSGame
 		/// </summary>
 		private void renderEntityTab(Graphics g) 
 		{
+			for (int i = 0; i < entityList.Count; i++) {
+				Bitmap bmp = DrawEngine.sprites [entityList [i].getSpriteID ()].getBitmap ();
+				int x = xRes - width + margin + (i % rowLength) * StaticVariables.tileSize;
+				int y = margin + (i / rowLength) * StaticVariables.tileSize;
+				g.DrawImage (bmp, x, y, StaticVariables.tileSize, StaticVariables.tileSize);
 
+				if (selected == i) {
+					g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize - Pens.Green.Width, StaticVariables.tileSize - Pens.Green.Width);
+					continue;
+				}
+
+				if(currentHover.X > x && currentHover.X < x + StaticVariables.tileSize && currentHover.Y > y && currentHover.Y < y + StaticVariables.tileSize)
+					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.White)), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+				else
+					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.Black)), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			}
+
+			if (currentHover.X < xRes - width) { //Pos in world
+				if (selected >= 0) {
+					//Make snap to a grid of 10x10 per tile
+					float x = currentHover.X - currentHover.X % (StaticVariables.tileSize / 10.0f) - StaticVariables.tileSize/2;
+					float y = currentHover.Y - currentHover.Y % (StaticVariables.tileSize / 10.0f) - StaticVariables.tileSize/2;
+
+					Bitmap bmp = DrawEngine.sprites [entityList [selected].getSpriteID ()].getBitmap ();
+					g.DrawImage (bmp, x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+				}
+			}
 		}
 
 		/// <summary>
@@ -217,7 +247,19 @@ namespace KBSGame
 		/// <param name="pos">Position.</param>
 		private void entityTabClick(Point pos)
 		{
+			int xArea = xRes - width + margin;
+			int yArea = margin;
 
+			int x = pos.X - xArea;
+			int y = pos.Y - yArea;
+
+			if (x > rowLength * StaticVariables.tileSize)
+				return;
+
+			selected = x / StaticVariables.tileSize + (y / StaticVariables.tileSize) * rowLength;
+
+			if (selected > entityList.Count)
+				selected = -1;
 		}
 
 		/// <summary>
@@ -310,6 +352,26 @@ namespace KBSGame
 						world.setTerrainTileRelative (mousePos, selected);
 					}
 					break;
+				case 2:
+					if (selected >= 0) {
+						Entity e = entityList [selected];
+
+						float x = (mousePos.X - mousePos.X % (StaticVariables.tileSize / 10.0f)) / StaticVariables.tileSize;
+						float y = (mousePos.Y - mousePos.Y % (StaticVariables.tileSize / 10.0f)) / StaticVariables.tileSize;
+						x = (float)Math.Round (x, 1);
+						y = (float)Math.Round (y, 1);
+
+						switch (e.getID ()) {
+						case (int)ENTITIES.player:
+							e = new Player (new PointF (0, 0), e.getHeight ());
+							break;
+						default:
+							e = new Entity (e.getType(), new PointF(0, 0), e.getSpriteID (), e.getSolid (), e.getHeight (), e.getDrawOrder (), e.getBoundingBox ());
+							break;
+						}
+						world.addEntityRelative (e, new PointF(x, y));
+					}
+					break;
 				default:
 					break;
 				}
@@ -386,6 +448,41 @@ namespace KBSGame
 		{
 			mousePos = scaleToDrawRatio (mousePos);
 			currentHover = mousePos;
+		}
+
+
+		/// <summary>
+		/// Loads the entities used for placing in world
+		/// </summary>
+		private void loadEntities() {
+			entityList = new List<Entity> ();
+			entityList.Add (new Player(new PointF(0,0), 50));
+			entityList.Add (new Finish (new PointF (0, 0)));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling1));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling2));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_acacia));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_birch));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_jungle));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_oak));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_roofed_oak));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_spruce));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_rose, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_oxeye_daisy, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_houstonia, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_dandelion, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_blue_orchid, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_allium, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_orange, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_pink, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_red, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_white, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.tallgrass, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.deadbush, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.wheat_stage_7, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_0, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_1, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_2, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_3, 50, false));
 		}
 	}
 }

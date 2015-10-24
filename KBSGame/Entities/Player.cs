@@ -14,10 +14,9 @@ namespace KBSGame
 		public List<Item> Inventory { get; private set; }
 
 		public Player(PointF location, Byte height)
-			: base(location, (int)SPRITES.player, true, height, 10)
+			: base(ENTITIES.player, location, (int)SPRITES.player, true, height, 10)
 		{
 			Inventory = new List<Item>();
-			this.type = ENTITIES.player;
 		}
 
 		public override void move(World sender, PointF relativeLocation)

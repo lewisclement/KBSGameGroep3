@@ -66,7 +66,6 @@ namespace KBSGame
 			buttonList = new List<Button> ();
 			buttonList.Add(new Button("Settings"));
 			buttonList.Add(new Button("Help"));
-			buttonList.Add(new Button("Save"));
 			buttonList.Add(new Button("Exit"));
 			menus.Insert ((int)STATE.editor, buttonList);
 
@@ -101,7 +100,7 @@ namespace KBSGame
 					world.FillWorld (TERRAIN.grass, new Size (50, 50));
 					editorGui.setActive (true);
 					changeState (STATE.editor);
-					Entity focus = new Entity (new PointF (50 / 2, 50 / 2), 0);
+					Entity focus = new Entity (ENTITIES.def, new PointF (50 / 2, 50 / 2), 0);
 					world.setFocusEntity (focus);
 					break;
 				case 4:
@@ -123,9 +122,9 @@ namespace KBSGame
 				}
 			} else if (currentState == STATE.editor) {
 				switch (clickIndex) {
-				case 2:
+				case 1:
 					break;
-				case 3:
+				case 2:
 					editorGui.setActive (false);
 					changeState (STATE.main);
 					break;

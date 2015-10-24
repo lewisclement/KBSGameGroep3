@@ -50,5 +50,6 @@ namespace KBSGame
 		public const String DrawOrder = "d";
 		public const String Width = "w";
 		public const String Height = "h";
+		public const String BoudingBox = "b";
 	}		
 }
