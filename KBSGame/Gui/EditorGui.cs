@@ -481,7 +481,7 @@ namespace KBSGame
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_white, 50, false));
 
 			//Misc plants
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.berrybush, 50, false));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.berrybush, 50, true, 10, 0.2f));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.tallgrass, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.deadbush, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.wheat_stage_7, 50, false));
