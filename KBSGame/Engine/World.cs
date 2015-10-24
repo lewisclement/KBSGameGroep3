@@ -79,6 +79,17 @@ namespace KBSGame
 				LevelReader level = new LevelReader (fileName);
 				this.objects = level.getObjects ();
 
+				//Pre-sort entities by Y-position for improved performance when rendering
+				for (int i = 0; i < objects.Count; i++) {
+					Entity x = objects[i];                              
+					while ((i - 1 >= 0) && (x.getLocation().Y < objects[i - 1].getLocation().Y)) 
+					{                                          
+						objects[i] = objects[i - 1];                 
+						i--;
+					}
+					objects[i] = x;                             
+				}
+
 				List<int> terrain = level.getTerrainTiles ();
 				foreach (int id in terrain) {
 					terrainTiles.Add (TileTypes [id]);
@@ -527,18 +538,10 @@ namespace KBSGame
 			//Get viewport
 			Rectangle view = getView ();
 
-			/*int[] drawOrderIndex = new int[StaticVariables.drawOrderSize];
-			for (int i = 0; i < drawOrderIndex.Length; i++) {
-				drawOrderIndex[i] = 0;
-			}*/
-
 			for (int i = 0; i < objects.Count; i++) {
 				PointF p = objects [i].getLocation ();
 				if (p.X >= view.Left && p.X <= view.Right && p.Y >= view.Top && p.Y <= view.Bottom) {
 					returnEntities.Add (objects [i]);
-
-					//for (int j = objects [i].getDrawOrder () + 1; j < StaticVariables.drawOrderSize; j++)
-					//	drawOrderIndex [j]++;
 				}
 			}
 
