@@ -37,7 +37,7 @@ namespace KBSGame
 			xDrawRes = xRes / 2;
 			yDrawRes = yRes / 2;
 
-			setView(xRes / StaticVariables.tileSize, yRes / StaticVariables.tileSize);
+			setView(xDrawRes / StaticVariables.tileSize + 1, yDrawRes / StaticVariables.tileSize + 1);
 
 			buffer = new Bitmap (StaticVariables.viewWidth * StaticVariables.tileSize, StaticVariables.viewHeight * StaticVariables.tileSize);
 			this.world = world;
