@@ -27,6 +27,7 @@ namespace KBSGame
 		private List<Button> buttonList;
         private String menu;
 		private int width;
+		private int buttonHeight;
 		private STATE currentState;
 		private World world;
 
@@ -47,6 +48,7 @@ namespace KBSGame
             yRes = ScreenresY;
             buffer = new Bitmap(xRes, yRes);
 			width = Math.Min (StaticVariables.dpi * 2, this.xRes / 2);
+			buttonHeight = Math.Min (StaticVariables.dpi, yRes / 5);
 
 			List<Button> buttonList = new List<Button> ();
 			buttonList.Add(new Button("Start"));
@@ -86,7 +88,7 @@ namespace KBSGame
 			if (mousePos.X > width)
 				clickIndex = -1;
 			else
-				clickIndex = mousePos.Y / StaticVariables.dpi;
+				clickIndex = mousePos.Y / buttonHeight;
 
 			if (currentState == STATE.main) {
 				switch (clickIndex) {
@@ -162,7 +164,7 @@ namespace KBSGame
 			if (mousePos.X > width)
 				hoverIndex = -1;
 			else {
-				hoverIndex = mousePos.Y / StaticVariables.dpi;
+				hoverIndex = mousePos.Y / buttonHeight;
 				if (hoverIndex >= buttonList.Count)
 					hoverIndex = -1;
 			}
@@ -191,20 +193,20 @@ namespace KBSGame
             g.Clear(Color.FromArgb(0));
 
 			StringFormat style = new StringFormat ();
-			style.Alignment = StringAlignment.Center;
+			style.LineAlignment = StringAlignment.Center;
 			Font font = new Font ("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
 
 			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, 0, width, yRes);
 			g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
-			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverIndex * StaticVariables.dpi, width, StaticVariables.dpi);
+			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverIndex * buttonHeight, width, buttonHeight);
 
 			for (int i = 0; i < buttonList.Count; i++)
             {
 				float fontSize = StaticVariables.dpi / 3;
 				float x = StaticVariables.dpi / 4;
-				float y = StaticVariables.dpi * i + fontSize / 2;
+				float y = buttonHeight * i + buttonHeight/2;
 
-				g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y);
+				g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y, style);
             }
 
 			if (currentState == STATE.levelloader) {
@@ -228,6 +230,13 @@ namespace KBSGame
 			g.Dispose ();
             return this.buffer;
         }
+
+		public override void resize (int ScreenresX, int ScreenresY, float drawRatio)
+		{
+			base.resize (ScreenresX, ScreenresY, drawRatio);
+
+			buttonHeight = Math.Min (StaticVariables.dpi, yRes / 5);
+		}
 
 		public void changeState(STATE state)
 		{
