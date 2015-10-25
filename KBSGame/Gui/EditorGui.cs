@@ -33,9 +33,14 @@ namespace KBSGame
 	public class EditorGui : Gui
 	{
 		private World world;
+
+		//Sizes
 		private int width;
 		private const int margin = 5;
 		private int tabbarWidth = StaticVariables.tileSize + margin;
+		private int tabWidth;
+		private const int lineHeight = 20;
+
 		private Point currentHover;
 		private int selectedTab = 0;
 		private int selected = -1;
@@ -46,6 +51,9 @@ namespace KBSGame
 
 		//Save/load tabs
 		FileInfo[] files;
+
+		//World tab
+		Size worldSize;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="KBSGame.EditorGui"/> class.
@@ -58,12 +66,37 @@ namespace KBSGame
 		public EditorGui (int ID, int screenResX, int screenResY, float drawRatio, World world) : base(ID, screenResX, screenResY, drawRatio)
 		{
 			this.world = world;
+
 			width = Math.Min (StaticVariables.dpi * 2, screenResX / 2);
+			tabWidth = width - tabbarWidth - margin*2;
+
 			rowLength = (width - margin * 2 - tabbarWidth) / StaticVariables.tileSize;
 			currentHover = new Point (0, 0);
 
+			worldSize = world.getSize ();
+
 			terrainTiles = world.getTileTypes ();
 			loadEntities ();
+		}
+
+		public void reset(int screenResX, int screenResY, float drawRatio, World world)
+		{
+			this.world = world;
+			base.resize (screenResX, screenResY, drawRatio);
+
+			width = Math.Min (StaticVariables.dpi * 2, screenResX / 2);
+			tabWidth = width - tabbarWidth - margin*2;
+
+			rowLength = (width - margin * 2 - tabbarWidth) / StaticVariables.tileSize;
+			currentHover = new Point (0, 0);
+
+			worldSize = world.getSize ();
+
+			terrainTiles = world.getTileTypes ();
+			loadEntities ();
+
+			selectedTab = 0;
+			selected = -1;
 		}
 
 		/// <summary>
@@ -97,55 +130,7 @@ namespace KBSGame
 				break;
 			}
 
-			//Draw tabbar icons
-			Bitmap tileIcon = DrawEngine.sprites [world.getTileTypes () [(int)TERRAIN.sandstone].getSpriteID ()].getBitmap ();
-
-			//World icon
-			Bitmap bmp = DrawEngine.sprites [(int)SPRITES.icon_world].getBitmap ();
-			float xTile = xRes - tabbarWidth;
-			float x = xTile + StaticVariables.tileSize * 0.2f;
-			float y = margin;
-			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
-			y += StaticVariables.tileSize * 0.2f;
-			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
-			if (selectedTab == 0)
-				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
-
-			//Terrain icon
-			bmp = DrawEngine.sprites [(int)SPRITES.grass].getBitmap ();
-			y = margin + StaticVariables.tileSize;
-			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
-			y += StaticVariables.tileSize * 0.2f;
-			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
-			if (selectedTab == 1)
-				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
-
-			//Entity icon
-			bmp = DrawEngine.sprites [(int)SPRITES.key].getBitmap ();
-			y = margin + StaticVariables.tileSize*2;
-			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
-			y += StaticVariables.tileSize * 0.2f;
-			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
-			if (selectedTab == 2)
-				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
-
-			//Save icon
-			bmp = DrawEngine.sprites [(int)SPRITES.save].getBitmap ();
-			y = margin + StaticVariables.tileSize*3;
-			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
-			y += StaticVariables.tileSize * 0.2f;
-			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
-			if (selectedTab == 3)
-				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
-
-			//Load icon
-			bmp = DrawEngine.sprites [(int)SPRITES.load].getBitmap ();
-			y = margin + StaticVariables.tileSize*4;
-			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
-			y += StaticVariables.tileSize * 0.2f;
-			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
-			if (selectedTab == 4)
-				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
+			drawTabbar (g);
 
 			g.Dispose ();
 			return this.buffer;
@@ -157,22 +142,7 @@ namespace KBSGame
 		/// <param name="g">The green component.</param>
 		private void renderTerrainTab(Graphics g)
 		{
-			for (int i = 0; i < terrainTiles.Length; i++) {
-				Bitmap bmp = DrawEngine.sprites [terrainTiles [i].getSpriteID ()].getBitmap ();
-				int x = xRes - width + margin + (i % rowLength) * StaticVariables.tileSize;
-				int y = margin + (i / rowLength) * StaticVariables.tileSize;
-				g.DrawImage (bmp, x, y, StaticVariables.tileSize, StaticVariables.tileSize);
-
-				if (selected == i) {
-					g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize - Pens.Green.Width, StaticVariables.tileSize - Pens.Green.Width);
-					continue;
-				}
-
-				if(currentHover.X > x && currentHover.X < x + StaticVariables.tileSize && currentHover.Y > y && currentHover.Y < y + StaticVariables.tileSize)
-					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.White)), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
-				else
-					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.Black)), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
-			}
+			renderTerrainSelector (g, 0);
 
 			if (currentHover.X < xRes - width) { //Pos in world
 				if (selected >= 0) {
@@ -192,13 +162,47 @@ namespace KBSGame
 		/// <param name="pos">Position.</param>
 		private void terrainTabClick(Point pos) 
 		{
+			terrainSelectorClick (pos, 0);
+		}
+
+		/// <summary>
+		/// Renders the terrain selector.
+		/// </summary>
+		/// <param name="g">The green component.</param>
+		/// <param name="verticalPosition">Vertical position.</param>
+		private void renderTerrainSelector(Graphics g, int verticalPosition)
+		{
+			for (int i = 0; i < terrainTiles.Length; i++) {
+				Bitmap bmp = DrawEngine.sprites [terrainTiles [i].getSpriteID ()].getBitmap ();
+				int x = xRes - width + margin + (i % rowLength) * StaticVariables.tileSize;
+				int y = margin + (i / rowLength) * StaticVariables.tileSize + verticalPosition;
+				g.DrawImage (bmp, x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+
+				if (selected == i) {
+					g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize - Pens.Green.Width, StaticVariables.tileSize - Pens.Green.Width);
+					continue;
+				}
+
+				if(currentHover.X > x && currentHover.X < x + StaticVariables.tileSize && currentHover.Y > y && currentHover.Y < y + StaticVariables.tileSize)
+					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.White)), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+				else
+					g.FillRectangle (new SolidBrush(Color.FromArgb(40, Color.Black)), x, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			}
+		}
+
+		/// <summary>
+		/// Handles input when clicked on terrain selector
+		/// </summary>
+		/// <param name="pos">Position.</param>
+		private void terrainSelectorClick(Point pos, int verticalPosition) 
+		{
 			int xArea = xRes - width + margin;
 			int yArea = margin;
 
 			int x = pos.X - xArea;
-			int y = pos.Y - yArea;
+			int y = pos.Y - yArea - verticalPosition;
 
-			if (x > rowLength * StaticVariables.tileSize)
+			if (x > rowLength * StaticVariables.tileSize || y < 0)
 				return;
 
 			selected = x / StaticVariables.tileSize + (y / StaticVariables.tileSize) * rowLength;
@@ -268,7 +272,51 @@ namespace KBSGame
 		/// <param name="g">The green component.</param>
 		private void renderWorldTab(Graphics g) 
 		{
+			int x = xRes - width + margin;
+			int y = margin;
+			int xEnd = 0;
+			int yEnd = 0;
 
+			Font headerFont = new Font ("Arial", lineHeight * 0.7f, FontStyle.Bold);
+			Font subFont = new Font ("Arial", lineHeight / 2);
+			g.DrawString ("World size", headerFont, new SolidBrush (Color.Black), x, y);
+
+			y += lineHeight;
+			g.DrawString ("width/height", subFont, new SolidBrush (Color.Black), x, y);
+			y += lineHeight;
+
+			//Hover over width box
+			xEnd = x + tabWidth / 3;
+			yEnd = (int)(y + lineHeight * 0.6);
+			if (currentHover.Y > y && currentHover.Y < yEnd && currentHover.X > x && currentHover.X < xEnd)
+				g.FillRectangle (new SolidBrush (Color.FromArgb(40, Color.Black)), x, y, tabWidth / 3, (int)(lineHeight * 0.6));
+			//Draw width box
+			g.FillRectangle (new SolidBrush (Color.FromArgb(40, Color.Black)), x, y, tabWidth / 3, (int)(lineHeight * 0.6));
+			g.DrawString (worldSize.Width.ToString(), subFont, new SolidBrush (Color.White), x, y);
+
+			//Hover over height box
+			xEnd = x + tabWidth / 3 * 2 + margin;
+			if (currentHover.Y > y && currentHover.Y < yEnd && currentHover.X > x + tabWidth / 3 + margin && currentHover.X < xEnd)
+				g.FillRectangle (new SolidBrush (Color.FromArgb(40, Color.Black)), x + tabWidth / 3 + margin, y, tabWidth / 3, (int)(lineHeight * 0.6));
+			//Draw height box
+			g.FillRectangle (new SolidBrush (Color.FromArgb(40, Color.Black)), x + tabWidth / 3 + margin, y, tabWidth / 3, (int)(lineHeight * 0.6));
+			g.DrawString (worldSize.Height.ToString(), subFont, new SolidBrush (Color.White), x + tabWidth / 3 + margin, y);
+
+
+			y += lineHeight;
+			if (selected >= 0) {
+				xEnd = x + tabWidth / 2;
+				yEnd = y + lineHeight;
+				if (currentHover.Y > y && currentHover.Y < yEnd && currentHover.X > x && currentHover.X < xEnd)
+					g.FillRectangle (new SolidBrush (Color.Black), x, y, tabWidth / 2, lineHeight);
+				else
+					g.FillRectangle (new SolidBrush (Color.FromArgb(100, Color.Black)), x, y, tabWidth / 2, lineHeight);
+
+				g.DrawString ("Fill world", subFont, new SolidBrush (Color.White), x, y);
+			}
+
+			y += lineHeight;
+			renderTerrainSelector (g, y);
 		}
 
 		/// <summary>
@@ -277,7 +325,46 @@ namespace KBSGame
 		/// <param name="pos">Position.</param>
 		private void worldTabClick(Point pos)
 		{
+			terrainSelectorClick (pos, margin + 4 * lineHeight);
 
+			int x = xRes - width + margin;
+			int y = margin + lineHeight * 2;
+
+			//Clicked in "world size" row
+			if (pos.Y > y && pos.Y < y + lineHeight * 0.6) {
+				//Clicked width box
+				if (pos.X > x && pos.X < x + tabWidth / 3) {
+					String input = Dialog.ShowDialog("Set world width", "World width in tiles:");
+
+					try {
+						worldSize.Width = Int32.Parse(input);
+						worldSize.Width = Math.Max(StaticVariables.minWorldSize, Math.Min(worldSize.Width, StaticVariables.maxWorldSize));
+					} catch (Exception e) {
+						Console.WriteLine ("Please supply a decimal number");
+					}
+				} 
+
+				//Clicked height box
+				else if (pos.X > x + tabWidth / 3 + margin && pos.X < x + tabWidth / 3 * 2 + margin) {
+					String input = Dialog.ShowDialog("Set world height", "World height in tiles:");
+
+					try {
+						worldSize.Height = Int32.Parse(input);
+						worldSize.Height = Math.Max(StaticVariables.minWorldSize, Math.Min(worldSize.Height, StaticVariables.maxWorldSize));
+					} catch (Exception e) {
+						Console.WriteLine ("Please supply a decimal number");
+					}
+				}
+			}
+
+			//Clicked on "Fill world"
+			y += lineHeight;
+			if (selected >= 0) {
+				int xEnd = x + tabWidth / 2;
+				int yEnd = y + lineHeight;
+				if (pos.Y > y && pos.Y < yEnd && pos.X > x && pos.X < xEnd)
+					world.FillWorld ((TERRAIN)terrainTiles[selected].getID(), worldSize);
+			}
 		}
 
 		/// <summary>
@@ -442,6 +529,60 @@ namespace KBSGame
 		{
 			mousePos = scaleToDrawRatio (mousePos);
 			currentHover = mousePos;
+		}
+
+
+		private void drawTabbar(Graphics g)
+		{
+			//Draw tabbar icons
+			Bitmap tileIcon = DrawEngine.sprites [world.getTileTypes () [(int)TERRAIN.sandstone].getSpriteID ()].getBitmap ();
+
+			//World icon
+			Bitmap bmp = DrawEngine.sprites [(int)SPRITES.icon_world].getBitmap ();
+			float xTile = xRes - tabbarWidth;
+			float x = xTile + StaticVariables.tileSize * 0.2f;
+			float y = margin;
+			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			y += StaticVariables.tileSize * 0.2f;
+			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
+			if (selectedTab == 0)
+				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
+
+			//Terrain icon
+			bmp = DrawEngine.sprites [(int)SPRITES.grass].getBitmap ();
+			y = margin + StaticVariables.tileSize;
+			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			y += StaticVariables.tileSize * 0.2f;
+			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
+			if (selectedTab == 1)
+				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
+
+			//Entity icon
+			bmp = DrawEngine.sprites [(int)SPRITES.key].getBitmap ();
+			y = margin + StaticVariables.tileSize*2;
+			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			y += StaticVariables.tileSize * 0.2f;
+			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
+			if (selectedTab == 2)
+				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
+
+			//Save icon
+			bmp = DrawEngine.sprites [(int)SPRITES.save].getBitmap ();
+			y = margin + StaticVariables.tileSize*3;
+			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			y += StaticVariables.tileSize * 0.2f;
+			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
+			if (selectedTab == 3)
+				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
+
+			//Load icon
+			bmp = DrawEngine.sprites [(int)SPRITES.load].getBitmap ();
+			y = margin + StaticVariables.tileSize*4;
+			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
+			y += StaticVariables.tileSize * 0.2f;
+			g.DrawImage (bmp, x, y, StaticVariables.tileSize * 0.6f, StaticVariables.tileSize * 0.6f);
+			if (selectedTab == 4)
+				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
 		}
 
 

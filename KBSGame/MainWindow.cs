@@ -29,8 +29,14 @@ namespace KBSGame
             timer.Interval = 1000 / 60;
             timer.Tick += Gameloop_Tick;
 
-            timer.Start();
+			timer.Start();
         }
+
+		~MainWindow()
+		{
+			world = null;
+			renderer = null;
+		}
 
         private void Gameloop_Tick(object sender, EventArgs e)
         {
@@ -121,8 +127,8 @@ namespace KBSGame
 				
 
 			switch(e.KeyCode) {
-            case Keys.Escape:
-                renderer.getGui((int)GUI.def).switchActive();
+			case Keys.Escape:
+				renderer.getGui ((int)GUI.def).setInput (Keys.Escape);
 				break;
             case Keys.K:
                 renderer.getGui((int)GUI.gameover).switchActive();

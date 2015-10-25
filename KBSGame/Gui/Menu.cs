@@ -95,15 +95,18 @@ namespace KBSGame
 				case 0:
 					DirectoryInfo d = new DirectoryInfo (StaticVariables.levelFolder);
 					files = d.GetFiles ("*.xml");
+
 					changeState (STATE.levelloader);
 					break;
 				case 1:
 					setActive (false);
 					world.FillWorld (TERRAIN.grass, new Size (50, 50));
+					editorGui.reset (xRes, yRes, drawRatio, world);
 					editorGui.setActive (true);
-					changeState (STATE.editor);
 					Entity focus = new Entity (ENTITIES.def, new PointF (50 / 2, 50 / 2), 0);
 					world.setFocusEntity (focus);
+
+					changeState (STATE.editor);
 					break;
 				case 4:
 					Application.Exit ();
@@ -170,6 +173,13 @@ namespace KBSGame
 			}
 
 			hoverPos = mousePos;
+		}
+
+		public override void setInput (Keys key)
+		{
+			if (key == Keys.Escape && currentState != STATE.main && currentState != STATE.levelloader) {
+				switchActive ();
+			}
 		}
 
 		public void addMenuItem(String text)
