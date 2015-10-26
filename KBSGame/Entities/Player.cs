@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+ using KBSGame.Entities;
 
 namespace KBSGame
 {
@@ -95,11 +96,12 @@ namespace KBSGame
 	    // Removes first item from inventory if exists
         public void DropItem(World world)
         {
-            PointF dropLocation = GetTileInFrontOfPlayer();
+            PointF dropLocation = GetLocationInFrontOfPlayer();
 
             // Check if item can be dropped on target from dropLocation
             bool isLand = world.getTerraintile(dropLocation).IsWalkable;
             bool hasSolidEntitiesOnTarget = world.checkCollision(this, dropLocation);
+            List<Entity> entitiesOnTerrainTile = world.getEntitiesOnTerrainTile(location);
 
             // If no item exists in inventory or 
             //      there is a solid target on dropLocation or
@@ -107,20 +109,23 @@ namespace KBSGame
             if (!Inventory.Any() || hasSolidEntitiesOnTarget || !isLand)
                 return;
 
+            // If item is key, lock door
+            if (Inventory[0].Entity is Key)
+            {
+                if (entitiesOnTerrainTile.Exists(e => e is Door))
+                    return;
+                world.LockDoor((Key)Inventory[0].Entity);
+            }
+
             // Set droplocation on item
             Inventory[0].Entity.setLocation(dropLocation);
             // Push item in world objects list
             world.getEntities().Add(Inventory[0].Entity);
-            // If key is dropped, lock door
-            if (Inventory[0].Entity is Key)
-            {
-                world.LockDoor((Key)Inventory[0].Entity);
-            }
             // Remove item from inventory
             Inventory.RemoveAt(0);
         }
 
-	    private PointF GetTileInFrontOfPlayer()
+	    private PointF GetLocationInFrontOfPlayer()
 	    {
 	        switch (CurrentDirection)
 	        {
