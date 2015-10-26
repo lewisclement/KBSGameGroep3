@@ -52,15 +52,7 @@ namespace KBSGame
 
 	    public void AddItemsToInventory(Player player)
 	    {
-            player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
-			player.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), (int) SPRITES.banana, false, 50, 8, 0.6f)));
+           
 	    }
 
 		public void reload()
@@ -83,11 +75,11 @@ namespace KBSGame
 				for (int i = 0; i < objects.Count; i++) {
 					Entity x = objects[i];                              
 					while ((i - 1 >= 0) && (x.getLocation().Y < objects[i - 1].getLocation().Y)) 
-					{                                          
-						objects[i] = objects[i - 1];                 
+					{
+						objects[i] = objects[i - 1];
 						i--;
 					}
-					objects[i] = x;                             
+					objects[i] = x;
 				}
 
 				List<int> terrain = level.getTerrainTiles ();
