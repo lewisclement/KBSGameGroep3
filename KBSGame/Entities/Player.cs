@@ -42,14 +42,21 @@ namespace KBSGame
             //Check if the player is moving on a entity and if that entity is Finish
             List<Entity> f = sender.getEntitiesByType(ENTITIES.finish);
             List<Entity> t = sender.getEntitiesByType(ENTITIES.trap);
+            for (int i = 0; i < t.Count; i++)
+            {
+                if (t.Count > 0 && sender.checkCollision(this, t[i]))
+                {
+                    ((Trap)t[i]).Dead();
+                }
+            }
             if (f.Count > 0 && sender.checkCollision(this, f[0]))
             {
                 ((Finish)f[0]).LevelDone();
             }
-            else if (t.Count > 0 && sender.checkCollision(this, t[0]))
-            {
-                ((Trap)t[0]).Dead();
-            }
+            //else if (t.Count > 0 && sender.checkCollision(this, t[0]))
+            //{
+            //    ((Trap)t[0]).Dead();
+            //}
         }
 
 		public void AddItemToInventory(Item i)

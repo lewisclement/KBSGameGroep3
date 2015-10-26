@@ -127,7 +127,7 @@ namespace KBSGame
 			location.Y += relativeLocation.Y;
 		}
 
-		public virtual void collisionCheck()
+		public virtual void collisionCheck(Entity e)
 		{
 
 

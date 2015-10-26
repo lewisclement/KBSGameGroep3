@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KBSGame
 {
-    class Trap : Entity
+    class Trap : Enemy
     {
         public Trap(PointF location, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 1.0f)
 			: base(ENTITIES.trap, location, (int)SPRITES.trapOpened, solid, height, depth, boundingBox)
@@ -23,7 +23,7 @@ namespace KBSGame
 
         private void trapClosed()
         {
-            this.spriteID = 14;
+            this.spriteID = (int)SPRITES.trapClosed;
         }
     }
 }
