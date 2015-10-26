@@ -12,11 +12,15 @@ namespace KBSGame
 	public class Player : Entity
 	{
 		public List<Item> Inventory { get; private set; }
+	    public enum Direction { Up = 0, Down, Left, Right };
 
-		public Player(PointF location, Byte height)
+	    public int CurrentDirection;
+
+	    public Player(PointF location, Byte height)
 			: base(ENTITIES.player, location, (int)SPRITES.player, true, height, 10)
 		{
 			Inventory = new List<Item>();
+	        CurrentDirection = (int) Direction.Down;
 		}
 
 		public override void move(World sender, PointF relativeLocation)
@@ -74,12 +78,12 @@ namespace KBSGame
 	        Inventory.Add(new Item(EntitiesOnTile[0]));
             // Remove item from world
 	        w.getEntities().Remove(EntitiesOnTile[0]);
-	    }
+        }
 
         // Removes first item from inventory if exists
         public void DropItem(World world)
         {
-            PointF dropLocation = new PointF(location.X + 1, location.Y);
+            PointF dropLocation = GetTileInFrontOfPlayer();
 
             // Check if item can be dropped on target from dropLocation
             bool isLand = world.getTerraintile(dropLocation).IsWalkable;
@@ -97,6 +101,22 @@ namespace KBSGame
             world.getEntities().Add(Inventory[0].Entity);
             // Remove item from inventory
             Inventory.RemoveAt(0);
+        }
+
+	    private PointF GetTileInFrontOfPlayer()
+	    {
+	        switch (CurrentDirection)
+	        {
+                case (int)Direction.Up:
+                    return new PointF(location.X, location.Y - 1);
+                case (int)Direction.Down:
+                    return new PointF(location.X, location.Y + 1);
+                case (int)Direction.Left:
+                    return new PointF(location.X - 1, location.Y);
+                case (int)Direction.Right:
+                    return new PointF(location.X + 1, location.Y);
+            }
+            return new PointF(location.X, location.Y);
         }
 	}
 }

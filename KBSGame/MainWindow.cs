@@ -47,10 +47,7 @@ namespace KBSGame
 
 		protected override void OnResize(EventArgs e) 
 		{
-			if (renderer == null)
-				return;
-
-			renderer.resize (this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
+		    renderer?.resize (this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
 		}
 
 		protected override void OnClick(EventArgs e)
@@ -91,17 +88,21 @@ namespace KBSGame
 			if(player != null)
 			switch (e.KeyCode) {
 			case Keys.Up:
-				player.move (world, new PointF (0.0f, -0.2f));
-				break;
+				        player.move (world, new PointF (0.0f, -0.2f));
+			            player.CurrentDirection = (int) Player.Direction.Up;
+				        break;
 			case Keys.Down:
-				player.move (world, new PointF (0.0f, 0.2f));
-				break;
+				        player.move (world, new PointF (0.0f, 0.2f));
+                        player.CurrentDirection = (int)Player.Direction.Down;
+                        break;
 			case Keys.Left:
-				player.move (world, new PointF (-0.2f, 0.0f));
-				break;
+				        player.move (world, new PointF (-0.2f, 0.0f));
+                        player.CurrentDirection = (int)Player.Direction.Left;
+                        break;
 			case Keys.Right:
-				player.move (world, new PointF (0.2f, 0.0f));
-				break;
+				        player.move (world, new PointF (0.2f, 0.0f));
+                        player.CurrentDirection = (int)Player.Direction.Right;
+                        break;
 			case Keys.Space:
 				player.PickupItems (world);
 				break;
@@ -138,10 +139,10 @@ namespace KBSGame
                 renderer.getGui((int)GUI.finish).switchActive(); //GUI finish innitiated when L is pressed.
                 break;
             case Keys.E:
-                //world.getPlayer().DropItem(world);
+                world.getPlayer().DropItem(world);
                 break;
             case Keys.I:
-                    renderer.getGui((int) GUI.guiinventory);
+                    renderer.getGui((int) GUI.guiinventory).switchActive();
                 break;
             default:
                 return;
