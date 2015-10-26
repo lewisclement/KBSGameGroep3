@@ -80,11 +80,19 @@ namespace KBSGame
 	        if (EntitiesOnTile.Count == 0) return;
             // Add first item of list to inventory
 	        Inventory.Add(new Item(EntitiesOnTile[0]));
-            // Remove item from world
+            // If key is picked up, unlock door
+	        if (EntitiesOnTile[0] is Key)
+	        {
+                w.UnlockDoor((Key)EntitiesOnTile[0]);
+	        }
+	        
+
+	        // Remove item from world
 	        w.getEntities().Remove(EntitiesOnTile[0]);
         }
 
-        // Removes first item from inventory if exists
+
+	    // Removes first item from inventory if exists
         public void DropItem(World world)
         {
             PointF dropLocation = GetTileInFrontOfPlayer();
@@ -103,6 +111,11 @@ namespace KBSGame
             Inventory[0].Entity.setLocation(dropLocation);
             // Push item in world objects list
             world.getEntities().Add(Inventory[0].Entity);
+            // If key is dropped, lock door
+            if (Inventory[0].Entity is Key)
+            {
+                world.LockDoor((Key)Inventory[0].Entity);
+            }
             // Remove item from inventory
             Inventory.RemoveAt(0);
         }

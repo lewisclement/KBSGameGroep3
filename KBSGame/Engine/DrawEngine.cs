@@ -240,6 +240,9 @@ namespace KBSGame
 			sprites[(int)SPRITES.carrots_stage_2] = new Sprite((int)SPRITES.carrots_stage_2, StaticVariables.spriteFolder + "/carrots_stage_2.png");
 			sprites[(int)SPRITES.carrots_stage_3] = new Sprite((int)SPRITES.carrots_stage_3, StaticVariables.spriteFolder + "/carrots_stage_3.png");
 
+            //Door
+            sprites[(int)SPRITES.doorClosed] = new Sprite((int)SPRITES.doorClosed, StaticVariables.spriteFolder + "/door_closed.png");
+            sprites[(int)SPRITES.doorOpened] = new Sprite((int)SPRITES.doorOpened, StaticVariables.spriteFolder + "/door_opened.png");
             return sprites;
 		}
 	}

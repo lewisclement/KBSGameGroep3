@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using KBSGame.Entities;
 
 namespace KBSGame
 {
@@ -57,7 +58,13 @@ namespace KBSGame
                     case (int)ENTITIES.trap:
                         objects.Add(new Trap(location));
                         break;
-					case (int)ENTITIES.plant:
+                    case (int)ENTITIES.key:
+                        objects.Add(new Key(location));
+                        break;
+                    case (int)ENTITIES.door:
+                        objects.Add(new Door(location));
+                        break;
+                    case (int)ENTITIES.plant:
 						objects.Add(new Plant(location, SpriteID, 50, solid, drawOrder, BoudingBox));
 						break;
                     default:

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Xml;
+using KBSGame.Entities;
 
 namespace KBSGame
 {
@@ -103,6 +104,7 @@ namespace KBSGame
 			    player = new Player(new PointF(120, 120), 50);
 				FillWorld (TERRAIN.grass, new Size(50, 50));
 			}
+            objects.Where(e => e is Door).ToList().ForEach(Console.WriteLine);
         }
 
 		public void FillWorld(TERRAIN terrain, Size size)
@@ -550,7 +552,31 @@ namespace KBSGame
 			return returnEntities.ToArray();
 		}
 
-		public PointF getFocusCoordinates()
+        public void LockDoor(Key key)
+        {
+            foreach (Entity e in objects)
+            {
+                if(e is Door && key.getKeyid() == ((Door)e).getDoorid())
+                { 
+                    ((Door)e).LockDoor();
+                    return;
+                }
+            }
+        }
+
+        public void UnlockDoor(Key key)
+	    {
+            foreach (Entity e in objects)
+	        {
+	            if (e is Door && key.getKeyid() == ((Door) e).getDoorid())
+	            {
+                    ((Door)e).UnlockDoor();
+	                return;
+	            }
+	        }
+	    }
+
+	    public PointF getFocusCoordinates()
 		{
 			return focusEntity.getLocation();
 		}

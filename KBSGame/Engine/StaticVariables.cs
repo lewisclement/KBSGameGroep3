@@ -3,7 +3,7 @@ using System;
 namespace KBSGame
 {
     public enum SPRITES : int {water=0, grass, sand, player, dirt, 
-								sapling1, sapling2, tallgrass, waterlily, key, 
+								sapling1, sapling2, tallgrass, waterlily, key,
 								banana, finish, berrybush, trapOpened, trapClosed,
 								brick, clay, farmland, planks_birch, 
 								red_sand, sandstone, stone, stonebrick, stone_diorite, 
@@ -13,10 +13,11 @@ namespace KBSGame
 								carrots_stage_0, carrots_stage_1, carrots_stage_2, carrots_stage_3, 
 								sapling_acacia, sapling_birch, sapling_jungle, sapling_oak, sapling_roofed_oak, sapling_spruce, 
 								wheat_stage_7, deadbush, icon_world,
-								save, load, count};
+								save, load, doorClosed, doorOpened, count
+    };
 	
 	public enum ENTITIES : int {def=0, player, finish, key, plant, fruit, trap,
-								carrots, flower, sapling, count};
+								carrots, flower, sapling, door, count};
 
 	public enum TERRAIN : int {water=0, grass, sand, dirt, brick, clay, farmland, planks_birch, 
 								red_sand, sandstone, stone, stonebrick, stone_diorite, 
