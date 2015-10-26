@@ -53,10 +53,6 @@ namespace KBSGame
             {
                 ((Finish)f[0]).LevelDone();
             }
-            //else if (t.Count > 0 && sender.checkCollision(this, t[0]))
-            //{
-            //    ((Trap)t[0]).Dead();
-            //}
         }
 
 		public void AddItemToInventory(Item i)
