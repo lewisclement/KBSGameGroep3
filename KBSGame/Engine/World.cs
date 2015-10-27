@@ -65,7 +65,7 @@ namespace KBSGame
 		public void loadLevel(String fileName)
 		{
 			if (fileName != null) {
-                if (currentLevelPath == null) {
+                if (currentLevelPath == null || currentLevelPath != fileName) {
                     fileName = Path.Combine(StaticVariables.levelFolder, fileName + ".xml");
                 } else
                 {
