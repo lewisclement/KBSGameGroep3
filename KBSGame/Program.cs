@@ -11,6 +11,7 @@ namespace KBSGame
 			StaticVariables.execFolder = System.IO.Path.GetDirectoryName (Application.ExecutablePath);
 			StaticVariables.levelFolder = StaticVariables.execFolder + "/worlds";
 			StaticVariables.spriteFolder = StaticVariables.execFolder + "/sprites";
+            StaticVariables.textFolder = StaticVariables.execFolder + "/text";
 
 			var f = new MainWindow ();
             //System.Media.SoundPlayer player = new System.Media.SoundPlayer(StaticVariables.execFolder + ("/On_the_moon.wav"));

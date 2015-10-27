@@ -42,10 +42,34 @@ namespace KBSGame
 					PointF location = new PointF();
 					location.X = float.Parse(entity["x"].InnerText);
 					location.Y = float.Parse(entity["y"].InnerText);
-					int SpriteID = Int32.Parse(entity[xmlVar.SpriteID].InnerText);
-					bool solid = bool.Parse(entity[xmlVar.Solid].InnerText);
-					Byte drawOrder = Byte.Parse (entity [xmlVar.DrawOrder].InnerText);
-					float BoudingBox = float.Parse (entity [xmlVar.BoudingBox].InnerText);
+
+					int SpriteID = 0;
+					try {
+						SpriteID = Int32.Parse(entity[xmlVar.SpriteID].InnerText);
+					} catch (Exception ex) {
+
+					}
+
+					bool solid = false;
+					try {
+						solid = bool.Parse(entity[xmlVar.Solid].InnerText);
+					} catch (Exception ex) {
+
+					}
+
+					Byte drawOrder = 10;
+					try {
+						drawOrder = Byte.Parse (entity [xmlVar.DrawOrder].InnerText);
+					} catch (Exception ex) {
+
+					}
+
+					float BoudingBox = 0.51f;
+					try {
+						BoudingBox = float.Parse (entity [xmlVar.BoudingBox].InnerText);
+					} catch (Exception ex) {
+
+					}
 
 					switch (Int32.Parse(entity[xmlVar.Type].InnerText))
 					{
