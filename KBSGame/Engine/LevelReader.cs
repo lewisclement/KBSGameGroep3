@@ -56,7 +56,7 @@ namespace KBSGame
 						objects.Add(new Finish(location));
 						break;
                     case (int)ENTITIES.trap:
-                        objects.Add(new Trap(location));
+                        objects.Add(new Trap(location, SpriteID));
                         break;
                     case (int)ENTITIES.key:
                         objects.Add(new Key(location));

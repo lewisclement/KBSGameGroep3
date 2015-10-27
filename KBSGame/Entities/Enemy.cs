@@ -14,10 +14,16 @@ namespace KBSGame
 		{
 
         }
+		/// <summary>
+		/// Dead this instance.
+		/// </summary>
         public void Dead()
         {
-       //     Console.WriteLine("You're dead");
         }
+		/// <summary>
+		/// checks for collisions.
+		/// </summary>
+		/// <param name="e">E.</param>
         public override void collisionCheck(Entity e)
         {
             if (this.location == e.getLocation())
