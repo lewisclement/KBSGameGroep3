@@ -2,6 +2,7 @@
 using System.Xml;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 
 namespace KBSGame
 {
@@ -18,7 +19,7 @@ namespace KBSGame
 			List<Entity> entities = world.getEntities ();
 			Size size = world.getSize ();
 
-			using (XmlWriter writer = XmlWriter.Create(StaticVariables.levelFolder + "/" + fileName + ".xml"))
+			using (XmlWriter writer = XmlWriter.Create(Path.Combine(StaticVariables.levelFolder, fileName + ".xml")))
 			{
 				writer.WriteStartDocument();
 				writer.WriteStartElement("world");
