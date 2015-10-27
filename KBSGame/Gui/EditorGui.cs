@@ -595,12 +595,13 @@ namespace KBSGame
 		private void loadEntities() {
 			entityList = new List<Entity> ();
 			entityList.Add (new Player(new PointF(0,0), 50));
-			entityList.Add (new Key(new PointF (0, 0)));
+            entityList.Add (new Enemy(new PointF(0, 0)));
+            entityList.Add (new Key(new PointF (0, 0)));
             entityList.Add (new Door(new PointF(0, 0)));
             entityList.Add (new Finish (new PointF (0, 0)));
 
 			entityList.Add (new Entity (ENTITIES.fruit, new PointF (0, 0), (int)SPRITES.banana));
-			entityList.Add (new Trap(new PointF(0,0)));
+			entityList.Add (new Trap(new PointF(0,0),(int)SPRITES.trapOpened));
 
 			///Plants
 			//Trees

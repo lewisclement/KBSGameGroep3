@@ -14,7 +14,9 @@ namespace KBSGame
 
 		public MainWindow ()
 		{
-			Text = "MainWindow";
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
+            Text = "MainWindow";
 			Height = 1920;
 			Width = 1080;
             MinimumSize = new Size(320, 320);

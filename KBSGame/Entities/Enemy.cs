@@ -9,21 +9,15 @@ namespace KBSGame
 {
     class Enemy : Entity
     {
-        public Enemy(ENTITIES type, PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, float boundingBox = 1.0f)
-			: base(type, location, spriteID, solid, height, drawOrder, boundingBox)
+        public Enemy(PointF location, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 1.0f)
+            : base(ENTITIES.enemy, location, (int)SPRITES.trapClosed, solid, height, depth, boundingBox)
 		{
 
         }
-        public void Dead()
+
+        public override void onCollision()
         {
-       //     Console.WriteLine("You're dead");
-        }
-        public override void collisionCheck(Entity e)
-        {
-            if (this.location == e.getLocation())
-            {
-                Dead();
-            }
+            Console.WriteLine("Gameover");
         }
     }
 }

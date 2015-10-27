@@ -44,20 +44,16 @@ namespace KBSGame
 			location.Y = (float)Math.Round(moveLocationY, 1);
             //PickUpItems(sender);
 
-            //Check if the player is moving on a entity and if that entity is Finish
-            List<Entity> f = sender.getEntitiesByType(ENTITIES.finish);
-            List<Entity> t = sender.getEntitiesByType(ENTITIES.trap);
-            for (int i = 0; i < t.Count; i++)
+            //Check if the player is moving on a entity and call oncolission of that entity
+            List<Entity> entities = sender.getEntities();
+
+            for(int i = 0; i < entities.Count; i++)
             {
-                if (t.Count > 0 && sender.checkCollision(this, t[i]))
+                if(sender.checkCollision(this, entities[i]) && entities[i].getType() != ENTITIES.player)
                 {
-                    ((Trap)t[i]).Dead();
+                    entities[i].onCollision();
                 }
-            }
-            if (f.Count > 0 && sender.checkCollision(this, f[0]))
-            {
-                ((Finish)f[0]).LevelDone();
-            }
+            }            
         }
 
 		public void AddItemToInventory(Item i)

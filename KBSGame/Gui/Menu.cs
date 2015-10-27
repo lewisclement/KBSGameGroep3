@@ -103,8 +103,6 @@ namespace KBSGame
 					world.FillWorld (TERRAIN.grass, new Size (50, 50));
 					editorGui.reset (xRes, yRes, drawRatio, world);
 					editorGui.setActive (true);
-					Entity focus = new Entity (ENTITIES.def, new PointF (50 / 2, 50 / 2), 0);
-					world.setFocusEntity (focus);
 
 					changeState (STATE.editor);
 					break;
