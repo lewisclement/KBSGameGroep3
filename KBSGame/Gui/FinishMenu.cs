@@ -38,7 +38,7 @@ namespace KBSGame.gui
             style.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);     //Fonttype
 
-            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, (yRes / 3) * 2, xRes, yRes / 3); //Draw a large square for content
+            g.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.SandyBrown)), 0, (yRes / 3) * 2, xRes, yRes / 3); //Draw a large square for content
             Image newImage = Image.FromFile(StaticVariables.textFolder + "/finished.png");
             g.DrawImage(newImage, xRes / 2 - width / 2, yRes / 3, xRes / 2, (yRes / 3));
 

@@ -100,28 +100,34 @@ namespace KBSGame
             g.Clear(Color.FromArgb(0));
 
             int width = StaticVariables.dpi * 4;
-            Image newImage = Image.FromFile(StaticVariables.textFolder + "/game_over.png");
-            g.DrawImage(newImage, xRes / 2 - width / 2, 0, width, yRes / 3);
-
 
             StringFormat style = new StringFormat();
             style.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
             
-            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, 100, width, yRes / 2);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.SandyBrown)), xRes / 2 - width / 2, 100, width, yRes / 2);
             
             if(hoverPos >= 0)
                 g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, hoverPos * StaticVariables.dpi + 100, width, StaticVariables.dpi);
 
+            
+
             for (int i = 0; i < buttonList.Count; i++)
             {
-                float fontSize = StaticVariables.dpi / 4;
-                float x = xRes / 2 - width / 2;
-                float y = StaticVariables.dpi * i + fontSize / 2 + 100;
+                float x = xRes / 2 - width / 2 + 40;
+                float y = StaticVariables.dpi * i + 100;
 
-                g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y);
+                if(i == 0)
+                {
+                Image tryagain = Image.FromFile(StaticVariables.textFolder + "/gameover_try_again.png");
+                g.DrawImage(tryagain, x, y, 300, 120);
+                } else {
+                Image quit = Image.FromFile(StaticVariables.textFolder + "/menu_quit.png");
+                g.DrawImage(quit, x, y, 300, 120);
+                }
             }
-
+            Image newImage = Image.FromFile(StaticVariables.textFolder + "/game_over.png");
+            g.DrawImage(newImage, xRes / 2 - width / 2, 0, width, yRes / 3);
             return this.buffer;
         }
     }
