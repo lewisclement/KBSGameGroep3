@@ -7,23 +7,24 @@ using System.Threading.Tasks;
 
 namespace KBSGame
 {
-    class GuiInventory : Gui
+    public class GuiInventory : Gui
     {
         const int SPACING = 8;
         const int HEIGHT = 48;
-        const int WIDTH = 512;
-        private Player player;
+        const int WIDTH = 408;
+        public World world;
         private Sprite[] sprites;
-        public GuiInventory(int ID, int ScreenresX, int ScreenresY, Player p, Sprite[] s)
-            : base(ID, ScreenresX, ScreenresY)
+		public GuiInventory(int ID, int ScreenresX, int ScreenresY, float drawRatio, World w, Sprite[] s)
+			: base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             setActive(true);
-            player = p;
+		    world = w;
             sprites = s;
         }
 
         public override Bitmap getRender()
         {
+            Player player = world.getPlayer();
             var g = Graphics.FromImage(buffer);
             g.Clear(Color.FromArgb(0));
 
@@ -32,10 +33,10 @@ namespace KBSGame
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
             
             g.FillRectangle(new SolidBrush(Color.FromArgb(90, Color.Black)), 0, 0, WIDTH, HEIGHT);
-
             for(int i = 0; i < player.Inventory.Count; i++)
             {
                 int spriteID = player.Inventory[i].Entity.getSpriteID();
+                
                 g.DrawImage(sprites[spriteID].getBitmap(), SPACING + (i * (HEIGHT - SPACING)), SPACING, StaticVariables.tileSize, StaticVariables.tileSize);
             }
 

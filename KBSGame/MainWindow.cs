@@ -13,13 +13,13 @@ namespace KBSGame
         private Timer timer = new Timer();
 
 		public MainWindow ()
-
 		{
 			Text = "MainWindow";
 			Height = 1920;
 			Width = 1080;
+            MinimumSize = new Size(320, 320);
              
-			world = new World(300, 300, "tiles.xml");
+			world = new World(300, 300);
 
             Graphics g = this.CreateGraphics ();
 			StaticVariables.dpi = (int)g.DpiX;
@@ -29,21 +29,25 @@ namespace KBSGame
             timer.Interval = 1000 / 60;
             timer.Tick += Gameloop_Tick;
 
-            timer.Start();
+			timer.Start();
         }
+
+		~MainWindow()
+		{
+			world = null;
+			renderer = null;
+		}
 
         private void Gameloop_Tick(object sender, EventArgs e)
         {
+			long startTick = System.DateTime.UtcNow.Ticks;
             renderer.render();
+			Text = 10000000 / (System.DateTime.UtcNow.Ticks - startTick) + " fps";
         }
 
 		protected override void OnResize(EventArgs e) 
 		{
-			if (renderer == null)
-				return;
-
-			renderer.resize (this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
-			renderer.render ();
+		    renderer?.resize (this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
 		}
 
 		protected override void OnClick(EventArgs e)
@@ -52,8 +56,6 @@ namespace KBSGame
 				if (renderer.getGui (i).isActive ())
 					renderer.getGui (i).setMouseClick(PointToClient(Cursor.Position));
 			}
-
-            renderer.render();
         }
 
 		protected override void OnMouseMove(MouseEventArgs e)
@@ -62,8 +64,6 @@ namespace KBSGame
 				if (renderer.getGui (i).isActive ())
 					renderer.getGui (i).setMouseHover(PointToClient(Cursor.Position));
 			}
-
-            renderer.render();
         }
 
         private void InitializeComponent()
@@ -83,35 +83,66 @@ namespace KBSGame
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            switch (e.KeyCode)
-            {
-            case Keys.Up:
-				world.getFocusEntity().move(world, new PointF(0.0f, -0.4f));
-                break;
-            case Keys.Down:
-				world.getFocusEntity().move(world, new PointF(0.0f, 0.2f));
-                break;
-            case Keys.Left:
-				world.getFocusEntity().move(world, new PointF(-0.2f, 0.0f));
-                break;
-            case Keys.Right:
-				world.getFocusEntity().move(world, new PointF(0.2f, 0.0f));
-                break;
+			Player player = world.getPlayer ();
+
+			if(player != null)
+			switch (e.KeyCode) {
+			case Keys.Up:
+				        player.move (world, new PointF (0.0f, -0.2f));
+			            player.CurrentDirection = (int) Player.Direction.Up;
+				        break;
+			case Keys.Down:
+				        player.move (world, new PointF (0.0f, 0.2f));
+                        player.CurrentDirection = (int)Player.Direction.Down;
+                        break;
+			case Keys.Left:
+				        player.move (world, new PointF (-0.2f, 0.0f));
+                        player.CurrentDirection = (int)Player.Direction.Left;
+                        break;
+			case Keys.Right:
+				        player.move (world, new PointF (0.2f, 0.0f));
+                        player.CurrentDirection = (int)Player.Direction.Right;
+                        break;
+			case Keys.Space:
+				player.PickupItems (world);
+				break;
+			case Keys.Z:
+				player.DropItem (world);
+				break;
+				}
+			else
+			switch (e.KeyCode) {
+			case Keys.Up:
+				world.getFocusEntity ().move (world, new PointF (0.0f, -0.2f));
+				break;
+			case Keys.Down:
+				world.getFocusEntity ().move (world, new PointF (0.0f, 0.2f));
+				break;
+			case Keys.Left:
+				world.getFocusEntity ().move (world, new PointF (-0.2f, 0.0f));
+				break;
+			case Keys.Right:
+				world.getFocusEntity ().move (world, new PointF (0.2f, 0.0f));
+				break;
+			}
+				
+
+			switch(e.KeyCode) {
 			case Keys.Escape:
-                renderer.getGui((int)GUI.def).switchActive();
+				renderer.getGui ((int)GUI.def).setInput (Keys.Escape);
 				break;
             case Keys.K:
                 renderer.getGui((int)GUI.gameover).switchActive();
                 break;
 
-                case Keys.L:
-                    renderer.getGui((int)GUI.finish).switchActive(); //GUI finish innitiated when L is pressed.
-                    break;
-            case Keys.E:
-                //world.getPlayer().DropItem(world);
+            case Keys.L:
+                renderer.getGui((int)GUI.finish).switchActive(); //GUI finish innitiated when L is pressed.
                 break;
-                case Keys.I:
-                    renderer.getGui((int) GUI.guiinventory);
+            case Keys.E:
+                world.getPlayer().DropItem(world);
+                break;
+            case Keys.I:
+                    renderer.getGui((int) GUI.guiinventory).switchActive();
                 break;
             default:
                 return;

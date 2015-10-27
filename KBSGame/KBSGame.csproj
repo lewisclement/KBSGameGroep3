@@ -31,6 +31,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Entities\Door.cs" />
+    <Compile Include="Entities\Enemy.cs" />
+    <Compile Include="Entities\Trap.cs" />
     <Compile Include="Gui\GameOverMenu.cs" />
     <Compile Include="Entities\Finish.cs" />
     <Compile Include="Gui\Gui.cs" />
@@ -46,7 +49,6 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Serialize.cs" />
-    <Compile Include="Gui\Settings.cs" />
     <Compile Include="Engine\Sprite.cs" />
     <Compile Include="Engine\StaticVariables.cs" />
     <Compile Include="Engine\TerrainTile.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Engine\LevelReader.cs" />
     <Compile Include="Gui\FinishMenu.cs" />
     <Compile Include="Engine\LevelWriter.cs" />
+    <Compile Include="Gui\EditorGui.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -64,27 +67,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bin\Debug\grass_top.png" />
-    <None Include="bin\Debug\player.png" />
-    <None Include="bin\Debug\sand.png" />
-    <None Include="bin\Debug\water_still.png" />
     <None Include="bin\Release\grass_top.png" />
     <None Include="bin\Release\sand.png" />
     <None Include="bin\Release\water_still.png" />
-    <None Include="bin\Debug\dirt.png" />
     <None Include="bin\Release\player.png" />
     <None Include="bin\Release\dirt.png" />
-    <None Include="bin\Debug\sapling1.png" />
     <None Include="bin\Release\sapling1.png" />
-    <None Include="bin\Debug\waterlily.png" />
-    <None Include="bin\Debug\tallgrass.png" />
-    <None Include="bin\Debug\sapling2.png" />
     <None Include="bin\Release\waterlily.png" />
     <None Include="bin\Release\tallgrass.png" />
     <None Include="bin\Release\sapling2.png" />
-    <None Include="bin\Debug\banana.png" />
     <None Include="bin\Release\banana.png" />
-    <None Include="bin\Debug\tiles.xml" />
+    <None Include="bin\Debug\worlds\mainmenu.xml" />
+    <None Include="bin\Debug\worlds\testworld.xml" />
+    <None Include="bin\Debug\sprites\banana.png" />
+    <None Include="bin\Debug\sprites\berrybush.png" />
+    <None Include="bin\Debug\sprites\dirt.png" />
+    <None Include="bin\Debug\sprites\grass_top.png" />
+    <None Include="bin\Debug\sprites\player.png" />
+    <None Include="bin\Debug\sprites\sand.png" />
+    <None Include="bin\Debug\sprites\sapling1.png" />
+    <None Include="bin\Debug\sprites\sapling2.png" />
+    <None Include="bin\Debug\sprites\tallgrass.png" />
+    <None Include="bin\Debug\sprites\trap_closed.png" />
+    <None Include="bin\Debug\sprites\water_still.png" />
+    <None Include="bin\Debug\sprites\waterlily.png" />
+    <None Include="bin\Debug\sprites\sandstone.png" />
+    <None Include="bin\Debug\sprites\red_sand.png" />
+    <None Include="bin\Debug\sprites\clay.png" />
+    <None Include="bin\Debug\sprites\sapling_jungle.png" />
+    <None Include="bin\Debug\sprites\sapling_spruce.png" />
+    <None Include="bin\Debug\sprites\sapling_acacia.png" />
+    <None Include="bin\Debug\sprites\sapling_birch.png" />
+    <None Include="bin\Debug\sprites\sapling_oak.png" />
+    <None Include="bin\Debug\sprites\sapling_roofed_oak.png" />
+    <None Include="bin\Debug\sprites\brick.png" />
+    <None Include="bin\Debug\sprites\stone_diorite.png" />
+    <None Include="bin\Debug\sprites\stone_granite.png" />
+    <None Include="bin\Debug\sprites\flower_dandelion.png" />
+    <None Include="bin\Debug\sprites\flower_oxeye_daisy.png" />
+    <None Include="bin\Debug\sprites\planks_birch.png" />
+    <None Include="bin\Debug\sprites\stonebrick.png" />
+    <None Include="bin\Debug\sprites\stone.png" />
+    <None Include="bin\Debug\sprites\wheat_stage_7.png" />
+    <None Include="bin\Debug\sprites\carrots_stage_0.png" />
+    <None Include="bin\Debug\sprites\carrots_stage_1.png" />
+    <None Include="bin\Debug\sprites\carrots_stage_2.png" />
+    <None Include="bin\Debug\sprites\carrots_stage_3.png" />
+    <None Include="bin\Debug\sprites\flower_blue_orchid.png" />
+    <None Include="bin\Debug\sprites\flower_tulip_orange.png" />
+    <None Include="bin\Debug\sprites\flower_tulip_red.png" />
+    <None Include="bin\Debug\sprites\flower_tulip_pink.png" />
+    <None Include="bin\Debug\sprites\flower_tulip_white.png" />
+    <None Include="bin\Debug\sprites\flower_houstonia.png" />
+    <None Include="bin\Debug\sprites\farmland_wet.png" />
+    <None Include="bin\Debug\sprites\deadbush.png" />
+    <None Include="bin\Debug\sprites\flower_rose.png" />
+    <None Include="bin\Debug\sprites\flower_allium.png" />
+    <None Include="bin\Debug\sprites\folder.png" />
+    <None Include="bin\Debug\sprites\save.png" />
+    <None Include="bin\Debug\sprites\icon_world.png" />
+    <None Include="bin\Debug\worlds\fatsoenlijkogendescenario.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
@@ -92,9 +134,19 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\finish.png" />
-    <Content Include="bin\Debug\Game.xml" />
-    <Content Include="bin\Debug\gold_key.png" />
+    <Content Include="bin\Debug\sprites\door_opened.png" />
+    <Content Include="bin\Debug\sprites\door_closed.png" />
+    <Content Include="bin\Debug\worlds\DoorsTestFinish.xml" />
     <Content Include="bin\Release\finish.png" />
+    <Content Include="bin\Release\trap_closed.png" />
+    <Content Include="bin\Release\trap_opened.png" />
+    <Content Include="bin\Debug\sprites\finish.png" />
+    <Content Include="bin\Debug\sprites\gold_key.png" />
+    <Content Include="bin\Debug\sprites\trap_opened.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\flowers\" />
+    <Folder Include="Entities\saplings\" />
+  </ItemGroup>
+  <ItemGroup />
 </Project>
