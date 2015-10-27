@@ -17,7 +17,7 @@ namespace KBSGame
     };
 	
 	public enum ENTITIES : int {def=0, player, finish, key, plant, fruit, trap,
-								carrots, flower, sapling, door, count};
+								carrots, flower, sapling, door, enemy, count};
 
 	public enum TERRAIN : int {water=0, grass, sand, dirt, brick, clay, farmland, planks_birch, 
 								red_sand, sandstone, stone, stonebrick, stone_diorite, 

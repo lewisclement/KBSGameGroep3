@@ -52,7 +52,10 @@ namespace KBSGame
 					case (int)ENTITIES.player:
 						objects.Add(new Player(location, 50));
 						break;
-					case (int)ENTITIES.finish:
+                    case (int)ENTITIES.enemy:
+                        objects.Add(new Enemy(location));
+                        break;
+	    			case (int)ENTITIES.finish:
 						objects.Add(new Finish(location));
 						break;
                     case (int)ENTITIES.trap:
