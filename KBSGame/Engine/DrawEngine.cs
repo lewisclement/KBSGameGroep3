@@ -51,7 +51,7 @@ namespace KBSGame
 			Interfaces.Insert ((int)GUI.def, menu);       
 			Interfaces.Insert ((int)GUI.gameover, new GameOverMenu((int)GUI.gameover, xRes, yRes, xRes / xDrawRes, world));   //Game over menu
 			     //Temporary static Gui
-			Interfaces.Insert ((int)GUI.finish, new FinishMenu((int)GUI.finish, xRes, yRes, xRes / xDrawRes, "Finished!", world));               //Create FinishedMenu GUI
+			Interfaces.Insert ((int)GUI.finish, new FinishMenu((int)GUI.finish, xRes, yRes, xRes / xDrawRes, world));               //Create FinishedMenu GUI
 			Interfaces.Insert ((int)GUI.guiinventory, new GuiInventory((int) GUI.guiinventory, xRes, yRes, xRes / xDrawRes, world, sprites)); //Inventory GUI
 			Interfaces.Insert ((int)GUI.editor, menu.getEditorGui());
 		}

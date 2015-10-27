@@ -11,16 +11,14 @@ namespace KBSGame.gui
     class FinishMenu : Gui
     {
         private List<Button> buttonList;
-        private String menu;
 
         World map;
 
         
 
-		public FinishMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, String Menu, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
+		public FinishMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             this.map = map;
-            this.menu = Menu; //Basic Menu class
 			buttonList = new List<Button>(); //Button List
 
             xRes = ScreenresX;              
@@ -41,7 +39,8 @@ namespace KBSGame.gui
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);     //Fonttype
 
             g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, (yRes / 3) * 2, xRes, yRes / 3); //Draw a large square for content
-            g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, (yRes / 3), style);
+            Image newImage = Image.FromFile(StaticVariables.textFolder + "/finished.png");
+            g.DrawImage(newImage, xRes / 2 - width / 2, yRes / 3, xRes / 2, (yRes / 3));
 
             float fontSize = StaticVariables.dpi / 3; //Create fontSize on the basis of dpi
 
