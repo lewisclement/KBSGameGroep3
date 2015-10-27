@@ -3,7 +3,6 @@ using System.Xml;
 using System.Collections.Generic;
 using System.Drawing;
 
-
 namespace KBSGame
 {
 	public class LevelWriter
