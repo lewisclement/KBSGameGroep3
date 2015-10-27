@@ -601,7 +601,7 @@ namespace KBSGame
             entityList.Add (new Finish (new PointF (0, 0)));
 
 			entityList.Add (new Entity (ENTITIES.fruit, new PointF (0, 0), (int)SPRITES.banana));
-			entityList.Add (new Trap(new PointF(0,0)));
+			entityList.Add (new Trap(new PointF(0,0),(int)SPRITES.trapOpened));
 
 			///Plants
 			//Trees
