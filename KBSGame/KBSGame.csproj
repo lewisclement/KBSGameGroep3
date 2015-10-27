@@ -31,6 +31,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
+    <Compile Include="Engine\Controller.cs" />
     <Compile Include="Entities\Door.cs" />
     <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\Trap.cs" />
