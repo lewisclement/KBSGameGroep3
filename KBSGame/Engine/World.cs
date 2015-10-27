@@ -650,7 +650,12 @@ namespace KBSGame
 			return new Size (width, height);
 		}
 
-		private void loadTileTypes() 
+	    public void InitPlayer(PointF location)
+	    {
+            player = new Player(location, 50);
+        }
+
+	    private void loadTileTypes() 
 		{
 			TileTypes = new TerrainTile[(int)TERRAIN.count];
 

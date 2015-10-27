@@ -13,7 +13,8 @@ namespace PlayerMovementTest
 
         public PlayerMovement()
         {
-            this.w = new World(3, 3, null);
+            this.w = new World(3, 3);
+            w.InitPlayer(new PointF(1, 1));
             this.p = w.getPlayer();
             /*
              * Grid simulation setup:

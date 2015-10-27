@@ -14,7 +14,7 @@ namespace PlayerInventoryTest
 
         public PlayerInventory()
         {
-            this.w = new World(3, 3, null);
+            this.w = new World(3, 3);
             this.p = w.getPlayer();
             /*
              * Grid simulation setup:
