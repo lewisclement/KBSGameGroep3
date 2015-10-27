@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Xml;
 using KBSGame.Entities;
+using System.IO;
 
 namespace KBSGame
 {
@@ -64,7 +65,13 @@ namespace KBSGame
 		public void loadLevel(String fileName)
 		{
 			if (fileName != null) {
-				fileName = StaticVariables.levelFolder + "/" + fileName + ".xml";
+                if (currentLevelPath == null) {
+                    fileName = Path.Combine(StaticVariables.levelFolder, fileName + ".xml");
+                } else
+                {
+                    fileName = currentLevelPath;
+                }
+
 				objects = new List<Entity> ();
 				terrainTiles = new List<TerrainTile> ();
 				heightData = new List<Byte> ();
@@ -104,7 +111,6 @@ namespace KBSGame
 			    player = new Player(new PointF(120, 120), 50);
 				FillWorld (TERRAIN.grass, new Size(50, 50));
 			}
-            objects.Where(e => e is Door).ToList().ForEach(Console.WriteLine);
         }
 
 		public void FillWorld(TERRAIN terrain, Size size)
