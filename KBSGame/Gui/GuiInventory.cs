@@ -33,7 +33,6 @@ namespace KBSGame
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
             
             g.FillRectangle(new SolidBrush(Color.FromArgb(90, Color.Black)), 0, 0, WIDTH, HEIGHT);
-            Console.WriteLine(player.getLocation());
             for(int i = 0; i < player.Inventory.Count; i++)
             {
                 int spriteID = player.Inventory[i].Entity.getSpriteID();

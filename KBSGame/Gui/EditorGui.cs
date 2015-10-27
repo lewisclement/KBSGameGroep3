@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
+using KBSGame.Entities;
 
 //Temporary dialog solution
 public static class Dialog
@@ -216,7 +217,8 @@ namespace KBSGame
 		/// </summary>
 		private void renderEntityTab(Graphics g) 
 		{
-			for (int i = 0; i < entityList.Count; i++) {
+			for (int i = 0; i < entityList.Count; i++)
+			{
 				Bitmap bmp = DrawEngine.sprites [entityList [i].getSpriteID ()].getBitmap ();
 				int x = xRes - width + margin + (i % rowLength) * StaticVariables.tileSize;
 				int y = margin + (i / rowLength) * StaticVariables.tileSize;
@@ -442,15 +444,16 @@ namespace KBSGame
 				case 2:
 					if (selected >= 0) {
 						Entity e = entityList [selected];
-
+                        
 						float x = (mousePos.X - mousePos.X % (StaticVariables.tileSize / 10.0f)) / StaticVariables.tileSize;
 						float y = (mousePos.Y - mousePos.Y % (StaticVariables.tileSize / 10.0f)) / StaticVariables.tileSize;
 						x = (float)Math.Round (x, 1);
 						y = (float)Math.Round (y, 1);
-
-						e = new Entity (e.getType(), new PointF(0, 0), e.getSpriteID (), e.getSolid (), e.getHeight (), e.getDrawOrder (), e.getBoundingBox ());
-
-						world.addEntityRelative (e, new PointF(x, y));
+                        
+                        
+                        e = new Entity(e.getType(), new PointF(0, 0), e.getSpriteID(), e.getSolid(), e.getHeight(), e.getDrawOrder(), e.getBoundingBox());
+                        
+					    world.addEntityRelative (e, new PointF(x, y));
 					}
 					break;
 				default:
@@ -592,8 +595,9 @@ namespace KBSGame
 		private void loadEntities() {
 			entityList = new List<Entity> ();
 			entityList.Add (new Player(new PointF(0,0), 50));
-			entityList.Add (new Entity (ENTITIES.key, new PointF (0, 0), (int)SPRITES.key, false));
-			entityList.Add (new Finish (new PointF (0, 0)));
+			entityList.Add (new Key(new PointF (0, 0)));
+            entityList.Add (new Door(new PointF(0, 0)));
+            entityList.Add (new Finish (new PointF (0, 0)));
 
 			entityList.Add (new Entity (ENTITIES.fruit, new PointF (0, 0), (int)SPRITES.banana));
 			entityList.Add (new Trap(new PointF(0,0)));

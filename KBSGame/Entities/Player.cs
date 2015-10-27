@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+ using KBSGame.Entities;
 
 namespace KBSGame
 {
@@ -76,24 +77,41 @@ namespace KBSGame
 	        if (EntitiesOnTile.Count == 0) return;
             // Add first item of list to inventory
 	        Inventory.Add(new Item(EntitiesOnTile[0]));
-            // Remove item from world
+            // If key is picked up, unlock door
+	        if (EntitiesOnTile[0] is Key)
+	        {
+                w.UnlockDoor((Key)EntitiesOnTile[0]);
+	        }
+	        
+
+	        // Remove item from world
 	        w.getEntities().Remove(EntitiesOnTile[0]);
         }
 
-        // Removes first item from inventory if exists
+
+	    // Removes first item from inventory if exists
         public void DropItem(World world)
         {
-            PointF dropLocation = GetTileInFrontOfPlayer();
+            PointF dropLocation = GetLocationInFrontOfPlayer();
 
             // Check if item can be dropped on target from dropLocation
             bool isLand = world.getTerraintile(dropLocation).IsWalkable;
             bool hasSolidEntitiesOnTarget = world.checkCollision(this, dropLocation);
+            List<Entity> entitiesOnTerrainTile = world.getEntitiesOnTerrainTile(location);
 
             // If no item exists in inventory or 
             //      there is a solid target on dropLocation or
             //      targettile is not land, return
             if (!Inventory.Any() || hasSolidEntitiesOnTarget || !isLand)
                 return;
+
+            // If item is key, lock door
+            if (Inventory[0].Entity is Key)
+            {
+                if (entitiesOnTerrainTile.Exists(e => e is Door))
+                    return;
+                world.LockDoor((Key)Inventory[0].Entity);
+            }
 
             // Set droplocation on item
             Inventory[0].Entity.setLocation(dropLocation);
@@ -103,7 +121,7 @@ namespace KBSGame
             Inventory.RemoveAt(0);
         }
 
-	    private PointF GetTileInFrontOfPlayer()
+	    private PointF GetLocationInFrontOfPlayer()
 	    {
 	        switch (CurrentDirection)
 	        {
