@@ -35,6 +35,7 @@ namespace KBSGame
 		public static String execFolder = null;
 		public static String levelFolder = null;
 		public static String spriteFolder = null;
+        public static String textFolder = null;
 		public const Byte drawOrderSize = 16;
         
 		public static int dpi;

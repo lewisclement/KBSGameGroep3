@@ -22,16 +22,14 @@ namespace KBSGame
         };
 
         private List<Button> buttonList;
-        private String menu;
         int width = StaticVariables.dpi * 4;
 
         int hoverPos = -1, clickPos = -1;
         World map;
 
-		public GameOverMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, String Menu, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
+		public GameOverMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             this.map = map;
-            this.menu = Menu;
             buttonList = new List<Button>();
 
             xRes = ScreenresX;
@@ -102,13 +100,15 @@ namespace KBSGame
             g.Clear(Color.FromArgb(0));
 
             int width = StaticVariables.dpi * 4;
+            Image newImage = Image.FromFile(StaticVariables.textFolder + "/game_over.png");
+            g.DrawImage(newImage, xRes / 2 - width / 2, 0, width, yRes / 3);
+
 
             StringFormat style = new StringFormat();
             style.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
-
+            
             g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, 100, width, yRes / 2);
-            g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
             
             if(hoverPos >= 0)
                 g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, hoverPos * StaticVariables.dpi + 100, width, StaticVariables.dpi);
