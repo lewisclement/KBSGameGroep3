@@ -104,7 +104,6 @@ namespace KBSGame
 			    player = new Player(new PointF(120, 120), 50);
 				FillWorld (TERRAIN.grass, new Size(50, 50));
 			}
-            objects.Where(e => e is Door).ToList().ForEach(Console.WriteLine);
         }
 
 		public void FillWorld(TERRAIN terrain, Size size)

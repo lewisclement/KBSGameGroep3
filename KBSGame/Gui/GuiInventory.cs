@@ -17,7 +17,7 @@ namespace KBSGame
 		public GuiInventory(int ID, int ScreenresX, int ScreenresY, float drawRatio, World w, Sprite[] s)
 			: base(ID, ScreenresX, ScreenresY, drawRatio)
         {
-            setActive(true);
+            setActive(false);
 		    world = w;
             sprites = s;
         }
