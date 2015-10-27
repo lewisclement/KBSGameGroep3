@@ -13,11 +13,11 @@ namespace KBSGame
 								carrots_stage_0, carrots_stage_1, carrots_stage_2, carrots_stage_3, 
 								sapling_acacia, sapling_birch, sapling_jungle, sapling_oak, sapling_roofed_oak, sapling_spruce, 
 								wheat_stage_7, deadbush, icon_world,
-								save, load, doorClosed, doorOpened, count
+								save, load, doorClosed, doorOpened, peerbomb, tiki, tiki2, count
     };
 	
 	public enum ENTITIES : int {def=0, player, finish, key, plant, fruit, trap,
-								carrots, flower, sapling, door, count};
+								carrots, flower, sapling, door, peerbomb, tiki, tiki2, count};
 
 	public enum TERRAIN : int {water=0, grass, sand, dirt, brick, clay, farmland, planks_birch, 
 								red_sand, sandstone, stone, stonebrick, stone_diorite, 

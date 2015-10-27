@@ -182,7 +182,10 @@ namespace KBSGame
 			Sprite[] sprites = new Sprite[(int)SPRITES.count];
 
 			sprites[(int)SPRITES.player] = new Sprite((int)SPRITES.player, StaticVariables.spriteFolder + "/player.png");
-			sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.spriteFolder + "/banana.png");
+            sprites[(int)SPRITES.peerbomb] = new Sprite((int)SPRITES.peerbomb, StaticVariables.spriteFolder + "/peerbomb.png");
+            sprites[(int)SPRITES.tiki] = new Sprite((int)SPRITES.tiki, StaticVariables.spriteFolder + "/tiki.png");
+            sprites[(int)SPRITES.tiki2] = new Sprite((int)SPRITES.tiki2, StaticVariables.spriteFolder + "/tiki2.png");
+            sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.spriteFolder + "/banana.png");
 			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.spriteFolder + "/gold_key.png");
 			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.spriteFolder + "/finish.png");
 			sprites[(int)SPRITES.trapOpened] = new Sprite((int)SPRITES.trapOpened, StaticVariables.spriteFolder + "/trap_opened.png");
