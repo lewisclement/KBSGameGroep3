@@ -10,7 +10,7 @@ using KBSGame.Entities;
 
 namespace KBSGame
 {
-	class LevelReader
+	public class LevelReader
 	{
 		private XmlDocument reader;
 
@@ -25,11 +25,6 @@ namespace KBSGame
 			{
 				Console.WriteLine(ex.Message);
 			}
-		}
-
-		~LevelReader()
-		{
-			reader = null;
 		}
 
 		public List<Entity> getObjects()
