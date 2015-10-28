@@ -11,26 +11,36 @@ namespace XmlReadAndWriteTest
     {
         private World w;
         private Player p;
-        private List<TerrainTile> beforelist, afterlist;
         private String file = "test";
 
         public XmlWrite()
         {
+            // initialise levelFolder
+            StaticVariables.execFolder = AppDomain.CurrentDomain.BaseDirectory;
+            StaticVariables.levelFolder = StaticVariables.execFolder + "/worlds";
+            // create world
             this.w = new World(10, 10);
+            // fill world
             this.w.FillWorld(TERRAIN.grass, new Size(50, 50));
-            p = new Player(new PointF(5, 5), 50);
-            this.w.addEntity(p);
-            LevelWriter level = new LevelWriter();
-            beforelist = w.getTerrain();
-            LevelWriter.saveWorld(w, file);
+            // initialize player
+            this.w.InitPlayer(new PointF(5, 5));
+            this.p = w.getPlayer();
         }
         [TestMethod]
         public void WriteReadXml()
         {
+            LevelWriter.saveWorld(this.w, this.file);
+            TerrainTile[] beforelist, afterlist;
+            beforelist = new TerrainTile[w.getTerrain().Count];
+            // save beforlist
+            w.getTerrain().CopyTo(beforelist);
             World world = new World(10, 10);
-            LevelReader level = new LevelReader(file);
-            this.afterlist= world.getTerrain();
-            Assert.AreEqual(this.beforelist, this.afterlist);
+            world.loadLevel(this.file);
+            afterlist = new TerrainTile[world.getTerrain().Count];
+            // save afterlist
+            world.getTerrain().CopyTo(afterlist);
+            // checks if lists are equal
+            CollectionAssert.AreEqual(beforelist, afterlist);
         }
     }
 }
