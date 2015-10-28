@@ -115,8 +115,8 @@ namespace KBSGame
 
 		public void FillWorld(TERRAIN terrain, Size size)
 		{
-			width = size.Width;
-			height = size.Height;
+			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(size.Width, StaticVariables.maxWorldSize));
+			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(size.Height, StaticVariables.maxWorldSize));
 
 			terrainTiles = new List<TerrainTile> ();
 			objects = new List<Entity> ();
