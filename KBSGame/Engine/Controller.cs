@@ -12,10 +12,13 @@ namespace KBSGame
     {
 		private int modalGuiID = -1;
 		private HashSet<Keys> keypresses;
+		private HashSet<Keys> processedkeys;
+
 		private int iteration = 0;
 
 		public Controller() {
 			keypresses = new HashSet<Keys> ();
+			processedkeys = new HashSet<Keys> ();
 		}
 
 		public void gameover() {
@@ -77,6 +80,7 @@ namespace KBSGame
 
 		public void setKeyRelease(Keys key) {
 			keypresses.Remove (key);
+			processedkeys.Remove (key);
 		}
 
 		public void cycle(object sender, EventArgs e) {
@@ -86,7 +90,7 @@ namespace KBSGame
 			StaticVariables.controller.render();
 			iteration++;
 		}
-
+			
 		private void processInput()
 		{
 			foreach (Keys key in keypresses) {
@@ -133,27 +137,20 @@ namespace KBSGame
 						break;
 					}
 
-
-				switch (key) {
-				case Keys.Escape:
-					if(!StaticVariables.renderer.getGui ((int)GUI.def).isActive())
+				if(processedkeys.Add(key)) {
+					switch (key) {
+					case Keys.Escape:
 						StaticVariables.renderer.getGui ((int)GUI.def).setInput (Keys.Escape);
-					break;
-				case Keys.K:
-					StaticVariables.renderer.getGui ((int)GUI.gameover).switchActive ();
-					break;
-
-				case Keys.L:
-					StaticVariables.renderer.getGui ((int)GUI.finish).switchActive (); //GUI finish innitiated when L is pressed.
-					break;
-				case Keys.E:
-					StaticVariables.world.getPlayer ().DropItem (StaticVariables.world);
-					break;
-				case Keys.I:
-					StaticVariables.renderer.getGui ((int)GUI.guiinventory).switchActive ();
-					break;
-				default:
-					return;
+						break;
+					case Keys.E:
+						StaticVariables.world.getPlayer ().DropItem (StaticVariables.world);
+						break;
+					case Keys.I:
+						StaticVariables.renderer.getGui ((int)GUI.guiinventory).switchActive ();
+						break;
+					default:
+						return;
+					}
 				}
 			}
 		}
