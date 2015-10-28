@@ -140,6 +140,8 @@
     <Content Include="bin\Debug\sprites\tiki.png" />
     <Content Include="bin\Debug\sprites\tiki2.png" />
     <Content Include="bin\Debug\text\finished.png" />
+    <Content Include="bin\Debug\text\finished_home.png" />
+    <Content Include="bin\Debug\text\finished_nextlevel.png" />
     <Content Include="bin\Debug\text\gameover_quit.png" />
     <Content Include="bin\Debug\text\gameover_try_again.png" />
     <Content Include="bin\Debug\text\game_over.png" />

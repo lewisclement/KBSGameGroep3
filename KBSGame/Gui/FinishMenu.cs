@@ -38,17 +38,19 @@ namespace KBSGame.gui
             style.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);     //Fonttype
 
-            g.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.SandyBrown)), 0, (yRes / 3) * 2, xRes, yRes / 3); //Draw a large square for content
+            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, (yRes / 3) * 2, xRes, yRes / 3); //Draw a large square for content
             Image newImage = Image.FromFile(StaticVariables.textFolder + "/finished.png");
-            g.DrawImage(newImage, xRes / 2 - width / 2, yRes / 3, xRes / 2, (yRes / 3));
+            g.DrawImage(newImage, xRes / 2 - width / 2, yRes / 3, xRes / 2, (yRes / 4));
 
             float fontSize = StaticVariables.dpi / 3; //Create fontSize on the basis of dpi
 
             if (hoverPos >= 0)
-                g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), hoverPos * width, (yRes / 3) * 2, width, yRes / 3);
+                g.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.SandyBrown)), hoverPos * width, (yRes / 3) * 2, width, yRes / 3);
 
-            g.DrawString("Home", new Font("Arial", fontSize), new SolidBrush(Color.White), (xRes / 4), (yRes / 4) * 3);     // Create button
-            g.DrawString("Next Level", new Font("Arial", fontSize), new SolidBrush(Color.White), (xRes / 5) * 3, (yRes / 4) * 3); //Create button
+            Image home = Image.FromFile(StaticVariables.textFolder + "/finished_home.png");
+            Image nextlevel = Image.FromFile(StaticVariables.textFolder + "/finished_nextlevel.png");
+            g.DrawImage(home, (xRes / 14), (yRes / 4) * 3, 300, 120);
+            g.DrawImage(nextlevel, (xRes / 5) * 3, (yRes / 4) * 3, 300, 120);
 
             return this.buffer;
 
@@ -75,7 +77,6 @@ namespace KBSGame.gui
                 case 0:
                     setActive(false);
                     
-                    Console.WriteLine("Exit to main menu");
                     Application.Exit();
                     break;
                 case 1:

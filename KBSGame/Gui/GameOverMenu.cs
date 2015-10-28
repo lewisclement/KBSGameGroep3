@@ -106,10 +106,10 @@ namespace KBSGame
             style.Alignment = StringAlignment.Center;
             Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
             
-            g.FillRectangle(new SolidBrush(Color.FromArgb(255, Color.SandyBrown)), xRes / 2 - width / 2, topskip, width, yRes / 2);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, topskip, width, yRes / 3 + 12);
 
             if (hoverPos >= 0)
-                g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, hoverPos * StaticVariables.dpi + topskip, width, StaticVariables.dpi);
+                g.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.SandyBrown)), xRes / 2 - width / 2, hoverPos * StaticVariables.dpi + topskip, width, StaticVariables.dpi);
 
             for (int i = 0; i < buttonList.Count; i++)
             {
@@ -121,12 +121,12 @@ namespace KBSGame
                 Image tryagain = Image.FromFile(StaticVariables.textFolder + "/gameover_try_again.png");
                 g.DrawImage(tryagain, x, y, 300, 120);
                 } else {
-                Image quit = Image.FromFile(StaticVariables.textFolder + "/menu_quit.png");
+                Image quit = Image.FromFile(StaticVariables.textFolder + "/gameover_quit.png");
                 g.DrawImage(quit, x, y, 300, 120);
                 }
             }
             Image newImage = Image.FromFile(StaticVariables.textFolder + "/game_over.png");
-            g.DrawImage(newImage, xRes / 2 - width / 2, 0, width, yRes / 3);
+            g.DrawImage(newImage, xRes / 2 - width / 2, 0, width, yRes / 5);
             return this.buffer;
         }
     }
