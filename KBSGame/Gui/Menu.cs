@@ -210,6 +210,9 @@ namespace KBSGame
 
             if (currentState == STATE.main)
             {
+                Image gamename = Image.FromFile(StaticVariables.textFolder + "/gamename.png");
+                g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width *3, yRes / 3);
+
                 for (int i = 0; i < buttonList.Count; i++)
                 {
                     float fontSize = StaticVariables.dpi / 3;
@@ -314,14 +317,14 @@ namespace KBSGame
                     {
                         float x = StaticVariables.dpi / 4;
                         int offsetY = StaticVariables.dpi * buttonList.Count;
-                        float y = offsetY + i * 10;
-                        font = new Font("Arial", 10, FontStyle.Bold);
+                        float y = (offsetY + i * 10);
+                        font = new Font("Tahoma", 9, FontStyle.Bold);
 
                     int index = (hoverPos.Y - offsetY) / 10;
                         if (index == i && hoverPos.X < width)
                         {
                             if (index < files.Length)
-                                g.FillRectangle(new SolidBrush(Color.FromArgb(40, Color.Black)), 0, y, width, 10);
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, y - 2, width, 10);
                         }
 
                         String name = files[i].Name.Substring(0, files[i].Name.Length - 4);
