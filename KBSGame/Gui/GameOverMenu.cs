@@ -102,11 +102,7 @@ namespace KBSGame
             int width = StaticVariables.dpi * 4;
             int topskip = 100;
 
-            StringFormat style = new StringFormat();
-            style.Alignment = StringAlignment.Center;
-            Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
-            
-            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, topskip, width, yRes / 3 + 12);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes / 2 - width / 2, topskip, width, yRes / 3 + topskip);
 
             if (hoverPos >= 0)
                 g.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.SandyBrown)), xRes / 2 - width / 2, hoverPos * StaticVariables.dpi + topskip, width, StaticVariables.dpi);
