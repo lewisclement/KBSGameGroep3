@@ -361,6 +361,11 @@ namespace KBSGame
 		public EditorGui getEditorGui() {
 			return editorGui;
 		}
-    }
 
+		public void mainmenu() {
+			StaticVariables.world.loadLevel("mainmenu");
+			changeState (STATE.main);
+			setActive (true);
+		}    
+	}
 }
