@@ -19,7 +19,7 @@ namespace KBSGame
         {
             this.spriteID = (int)SPRITES.trapClosed;
 
-            StaticVariables.controller.gameover();
+            Console.WriteLine("you're dead");
         }
     }
 }
