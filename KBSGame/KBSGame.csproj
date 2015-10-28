@@ -139,6 +139,10 @@
     <Content Include="bin\Debug\sprites\player.png" />
     <Content Include="bin\Debug\sprites\tiki.png" />
     <Content Include="bin\Debug\sprites\tiki2.png" />
+    <Content Include="bin\Debug\text\editor_entitytab.png" />
+    <Content Include="bin\Debug\text\editor_objecttab.png" />
+    <Content Include="bin\Debug\text\editor_tiletab.png" />
+    <Content Include="bin\Debug\text\editor_worldtab.png" />
     <Content Include="bin\Debug\text\finished.png" />
     <Content Include="bin\Debug\text\finished_home.png" />
     <Content Include="bin\Debug\text\finished_nextlevel.png" />
@@ -146,6 +150,7 @@
     <Content Include="bin\Debug\text\gameover_quit.png" />
     <Content Include="bin\Debug\text\gameover_try_again.png" />
     <Content Include="bin\Debug\text\game_over.png" />
+    <Content Include="bin\Debug\text\loadlevel.png" />
     <Content Include="bin\Debug\text\menu_back.png" />
     <Content Include="bin\Debug\text\menu_editor.png" />
     <Content Include="bin\Debug\text\menu_exit.png" />
@@ -154,6 +159,7 @@
     <Content Include="bin\Debug\text\menu_resume.png" />
     <Content Include="bin\Debug\text\menu_settings.png" />
     <Content Include="bin\Debug\text\menu_start.png" />
+    <Content Include="bin\Debug\text\pause.png" />
     <Content Include="bin\Debug\worlds\DoorsTestFinish.xml" />
     <Content Include="bin\Release\finish.png" />
     <Content Include="bin\Release\trap_closed.png" />

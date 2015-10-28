@@ -125,6 +125,19 @@ namespace KBSGame
             g.DrawImage(newImage, xRes / 2 - width / 2, 0, width, yRes / 5);
             return this.buffer;
         }
+
+		public override void setActive (bool active)
+		{
+			if (active && StaticVariables.controller.modalActive ())
+				return;
+
+			base.setActive (active);
+
+			if (active)
+				StaticVariables.controller.setModalGui (GUI.gameover);
+			else
+				StaticVariables.controller.disableModalGui ();
+		}
     }
 
 }
