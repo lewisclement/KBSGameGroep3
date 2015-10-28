@@ -214,7 +214,7 @@ namespace KBSGame
                 {
                     float fontSize = StaticVariables.dpi / 3;
                     float x = StaticVariables.dpi / 4;
-                    float y = buttonHeight * i + buttonHeight / 3;
+                    float y = (buttonHeight * i + buttonHeight / 6);
 
                     if (i == 0)
                     {
