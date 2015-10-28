@@ -146,6 +146,7 @@
     <Content Include="bin\Debug\text\gameover_quit.png" />
     <Content Include="bin\Debug\text\gameover_try_again.png" />
     <Content Include="bin\Debug\text\game_over.png" />
+    <Content Include="bin\Debug\text\loadlevel.png" />
     <Content Include="bin\Debug\text\menu_back.png" />
     <Content Include="bin\Debug\text\menu_editor.png" />
     <Content Include="bin\Debug\text\menu_exit.png" />
@@ -154,6 +155,7 @@
     <Content Include="bin\Debug\text\menu_resume.png" />
     <Content Include="bin\Debug\text\menu_settings.png" />
     <Content Include="bin\Debug\text\menu_start.png" />
+    <Content Include="bin\Debug\text\pause.png" />
     <Content Include="bin\Debug\worlds\DoorsTestFinish.xml" />
     <Content Include="bin\Release\finish.png" />
     <Content Include="bin\Release\trap_closed.png" />
