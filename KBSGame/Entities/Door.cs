@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KBSGame.Entities
 {
-    class Door : Entity
+    public class Door : Entity
     {
         private static int DoorCount = 0;
         public int Doorid;
