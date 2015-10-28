@@ -275,6 +275,8 @@ namespace KBSGame
 
             if (currentState == STATE.pause)
             {
+                Image gamename = Image.FromFile(StaticVariables.textFolder + "/pause.png");
+                g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width * 3, yRes / 3);
                 for (int i = 0; i < buttonList.Count; i++)
                 {
                     float fontSize = StaticVariables.dpi / 3;
@@ -305,6 +307,8 @@ namespace KBSGame
             }
             if (currentState == STATE.levelloader)
                 {
+                Image gamename = Image.FromFile(StaticVariables.textFolder + "/loadlevel.png");
+                g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width * 3, yRes / 3);
                 for (int i = 0; i < buttonList.Count; i++)
                 {
                     float fontSize = StaticVariables.dpi / 3;
