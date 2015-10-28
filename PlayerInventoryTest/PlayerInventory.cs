@@ -111,5 +111,27 @@ namespace PlayerInventoryTest
             // Check if banana still exists in inventory
             Assert.AreEqual(p.Inventory.Count, 0);
         }
+
+        [TestMethod]
+        public void PickUpMoreThanTenItems()
+        {
+            // Add 11 banana's on location 1,1
+            for(int i = 0; i < 11; i++)
+                w.addEntity(new Entity(ENTITIES.fruit, new PointF(1, 1), bananaId));
+            // Pickup 10 banana's
+            for (int i = 0; i < 10; i++)
+                p.PickupItems(w);
+            // Check if inventory count is 10
+            Assert.AreEqual(p.Inventory.Count, 10);
+
+            // Try to pickup one more
+            p.PickupItems(w);
+            // Check if inventory count is still 10
+            Assert.AreEqual(p.Inventory.Count, 10);
+            
+            // Check if there's one banana left on tile
+            List<Entity> entities = w.getEntitiesOnTerrainTile(new PointF(1, 1));
+            Assert.AreEqual(entities.Count, 1);
+        }
     }
 }
