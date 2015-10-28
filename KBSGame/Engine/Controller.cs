@@ -122,7 +122,8 @@ namespace KBSGame
 						player.PickupItems (StaticVariables.world);
 						break;
 					case Keys.Z:
-						player.DropItem (StaticVariables.world);
+						if(processedkeys.Add(key))
+							player.DropItem (StaticVariables.world);
 						break;
 					}
 				else

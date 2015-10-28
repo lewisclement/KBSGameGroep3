@@ -120,6 +120,7 @@ namespace KBSGame
 					setActive (false);
 					break;
 				case 2:
+					StaticVariables.controller.disableModalGui ();
 					changeState (STATE.main);
 					break;
 				default:
