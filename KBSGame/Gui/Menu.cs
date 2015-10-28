@@ -22,6 +22,7 @@ namespace KBSGame
 		};
 
 		public enum STATE : int {main=0, pause, editor, levelloader}
+		private enum IMAGES : int {start=0, resume, editor, help, back, exit, quit, title, count}
 
 		private List<List<Button>> menus;
 		private List<Button> buttonList;
@@ -30,6 +31,8 @@ namespace KBSGame
 		private int buttonHeight;
 		private STATE currentState;
 		private World world;
+
+		Image[] images;
 
 		//For loading levels
 		FileInfo[] files;
@@ -74,6 +77,8 @@ namespace KBSGame
 			menus.Insert ((int)STATE.levelloader, buttonList);
 
 			editorGui = new EditorGui ((int)GUI.editor, xRes, yRes, drawRatio, world);
+
+			loadButtonImages ();
 
 			changeState (STATE.main);
 			this.setActive (true);
@@ -218,8 +223,7 @@ namespace KBSGame
 
             if (currentState == STATE.main)
             {
-                Image gamename = Image.FromFile(StaticVariables.textFolder + "/gamename.png");
-                g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width *3, yRes / 3);
+				g.DrawImage(images[(int)IMAGES.title], xRes / 2 - width / 2 - 100, 0, width *3, yRes / 3);
 
                 for (int i = 0; i < buttonList.Count; i++)
                 {
@@ -229,23 +233,19 @@ namespace KBSGame
 
                     if (i == 0)
                     {
-                        Image start = Image.FromFile(StaticVariables.textFolder + "/menu_start.png");
-                        g.DrawImage(start, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.start], x, y, 150, 70);
                     }
                     if (i == 1)
                     {
-                        Image editor = Image.FromFile(StaticVariables.textFolder + "/menu_editor.png");
-                        g.DrawImage(editor, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.editor], x, y, 150, 70);
                     }
                     if (i == 2)
                     {
-                        Image help = Image.FromFile(StaticVariables.textFolder + "/menu_help.png");
-                        g.DrawImage(help, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.help], x, y, 150, 70);
                     }
                     if (i == 3)
                     {
-                        Image quit = Image.FromFile(StaticVariables.textFolder + "/menu_quit.png");
-                        g.DrawImage(quit, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.quit], x, y, 150, 70);
                     }
                 }
             }
@@ -259,18 +259,15 @@ namespace KBSGame
 
                     if (i == 0)
                     {
-                        Image start = Image.FromFile(StaticVariables.textFolder + "/menu_resume.png");
-                        g.DrawImage(start, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.resume], x, y, 150, 70);
                     }
                     if (i == 1)
                     {
-                        Image editor = Image.FromFile(StaticVariables.textFolder + "/menu_help.png");
-                        g.DrawImage(editor, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.help], x, y, 150, 70);
                     }
                     if (i == 2)
                     {
-                        Image editor = Image.FromFile(StaticVariables.textFolder + "/menu_exit.png");
-                        g.DrawImage(editor, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.exit], x, y, 150, 70);
                     }
                 }
             }
@@ -288,18 +285,15 @@ namespace KBSGame
 
                     if (i == 0)
                     {
-                        Image resume = Image.FromFile(StaticVariables.textFolder + "/menu_resume.png");
-                        g.DrawImage(resume, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.resume], x, y, 150, 70);
                     }
                     if (i == 1)
                     {
-                        Image help = Image.FromFile(StaticVariables.textFolder + "/menu_help.png");
-                        g.DrawImage(help, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.help], x, y, 150, 70);
                     }
                     if (i == 2)
                     {
-                        Image exit = Image.FromFile(StaticVariables.textFolder + "/menu_exit.png");
-                        g.DrawImage(exit, x, y, 150, 70);
+						g.DrawImage(images[(int)IMAGES.exit], x, y, 150, 70);
                     }
                 }
             }
@@ -312,8 +306,7 @@ namespace KBSGame
                     float fontSize = StaticVariables.dpi / 3;
                     float x = StaticVariables.dpi / 4;
                     float y = buttonHeight * i + buttonHeight / 6;
-                    Image back = Image.FromFile(StaticVariables.textFolder + "/menu_back.png");
-                    g.DrawImage(back, x, y, 150, 70);
+					g.DrawImage(images[(int)IMAGES.back], x, y, 150, 70);
                 }
                     for (int i = 0; i < files.Length; i++)
                     {
@@ -364,6 +357,19 @@ namespace KBSGame
 			StaticVariables.world.loadLevel("mainmenu");
 			changeState (STATE.main);
 			setActive (true);
-		}    
+		}
+
+		private void loadButtonImages()
+		{
+			images = new Image[(int)IMAGES.count];
+			images[(int)IMAGES.start] = Image.FromFile (StaticVariables.textFolder + "/menu_start.png");
+			images[(int)IMAGES.resume] = Image.FromFile (StaticVariables.textFolder + "/menu_resume.png");
+			images[(int)IMAGES.back] = Image.FromFile (StaticVariables.textFolder + "/menu_back.png");
+			images[(int)IMAGES.exit] = Image.FromFile (StaticVariables.textFolder + "/menu_exit.png");
+			images[(int)IMAGES.quit] = Image.FromFile (StaticVariables.textFolder + "/menu_quit.png");
+			images[(int)IMAGES.editor] = Image.FromFile (StaticVariables.textFolder + "/menu_editor.png");
+			images[(int)IMAGES.help] = Image.FromFile (StaticVariables.textFolder + "/menu_help.png");
+			images[(int)IMAGES.title] = Image.FromFile (StaticVariables.textFolder + "/gamename.png");
+		}
 	}
 }
