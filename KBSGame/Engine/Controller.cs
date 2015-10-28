@@ -13,6 +13,8 @@ namespace KBSGame
 		private int modalGuiID = -1;
 		private HashSet<Keys> keypresses;
 		private HashSet<Keys> processedkeys;
+		private long lastTick = 0;
+		private float movement;
 
 		private int iteration = 0;
 
@@ -88,8 +90,17 @@ namespace KBSGame
 		}
 
 		public void cycle(object sender, EventArgs e) {
-			if(modalGuiID < 0)
+			if (modalGuiID < 0) {
+				long currentTick = System.DateTime.UtcNow.Ticks / 10000;
+				movement = currentTick - lastTick;
+				movement /= 200.0f;
+
+				Console.WriteLine (movement);
+
 				processInput ();
+
+				lastTick = currentTick;
+			}
 
 			StaticVariables.controller.render();
 			iteration++;
@@ -103,19 +114,19 @@ namespace KBSGame
 				if (player != null)
 					switch (key) {
 					case Keys.Up:
-						player.move (StaticVariables.world, new PointF (0.0f, -0.2f));
+					player.move (StaticVariables.world, new PointF (0.0f, -movement));
 						player.CurrentDirection = (int)Player.Direction.Up;
 						break;
 					case Keys.Down:
-						player.move (StaticVariables.world, new PointF (0.0f, 0.2f));
+					player.move (StaticVariables.world, new PointF (0.0f, movement));
 						player.CurrentDirection = (int)Player.Direction.Down;
 						break;
 					case Keys.Left:
-						player.move (StaticVariables.world, new PointF (-0.2f, 0.0f));
+					player.move (StaticVariables.world, new PointF (-movement, 0.0f));
 						player.CurrentDirection = (int)Player.Direction.Left;
 						break;
 					case Keys.Right:
-						player.move (StaticVariables.world, new PointF (0.2f, 0.0f));
+					player.move (StaticVariables.world, new PointF (movement, 0.0f));
 						player.CurrentDirection = (int)Player.Direction.Right;
 						break;
 					case Keys.Space:
@@ -129,16 +140,16 @@ namespace KBSGame
 				else
 					switch (key) {
 					case Keys.Up:
-						StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (0.0f, -0.2f));
+					StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (0.0f, -movement));
 						break;
 					case Keys.Down:
-						StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (0.0f, 0.2f));
+					StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (0.0f, movement));
 						break;
 					case Keys.Left:
-						StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (-0.2f, 0.0f));
+					StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (-movement, 0.0f));
 						break;
 					case Keys.Right:
-						StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (0.2f, 0.0f));
+					StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (movement, 0.0f));
 						break;
 					}
 
