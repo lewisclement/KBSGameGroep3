@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KBSGame
 {
-    class Trap : Entity
+    public class Trap : Entity
     {
         public Trap(PointF location, int spriteID, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 1.0f)
 			: base(ENTITIES.trap, location, spriteID, solid, height, depth, boundingBox)
