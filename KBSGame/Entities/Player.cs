@@ -21,7 +21,7 @@ namespace KBSGame
 			: base(ENTITIES.player, location, (int)SPRITES.player, true, height, 10)
 		{
 			Inventory = new List<Item>();
-	        CurrentDirection = (int) Direction.Down;
+	        CurrentDirection = (int) Direction.Up;
 		}
 
 		public override void move(World sender, PointF relativeLocation)

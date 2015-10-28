@@ -10,27 +10,29 @@ namespace PlayerMovementTest
     {
         private World w;
         private Player p;
+        private const int Size = 3;
+
+        /*
+         * Grid simulation setup:
+         * G = Grass, W = Water
+         * |G|G|G|
+         * |G|G|G|
+         * |W|W|W|
+         */
 
         public PlayerMovement()
         {
-            this.w = new World(3, 3);
+            // Initialize world
+            this.w = new World(Size, Size);
+            // Fill world with tiles of grass
+            w.FillWorld(TERRAIN.grass, new Size(Size, Size));
+            // Fill third row with water
+            for (int i = 0; i <= 2; i++)
+                w.setTerraintile(new Point(i, 2), (int)SPRITES.water);
+
+            // Initialize player
             w.InitPlayer(new PointF(1, 1));
             this.p = w.getPlayer();
-            /*
-             * Grid simulation setup:
-             * G = Grass, W = Water
-             * |G|G|G|
-             * |G|G|G|
-             * |W|W|W|
-             */
-            for (int i = 0; i <= 2; i++)
-            {
-                for (int j = 0; j <= 1; j++)
-                {
-                    w.setTerraintile(new Point(i, j), (int)SPRITES.grass);
-                }
-                w.setTerraintile(new Point(i, 2), (int)SPRITES.water);
-            }
         }
 
         [TestMethod]
