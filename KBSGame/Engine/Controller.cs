@@ -25,6 +25,10 @@ namespace KBSGame
 			StaticVariables.renderer.getGui ((int)GUI.gameover).setActive (true);
 		}
 
+		public void finish() {
+			StaticVariables.renderer.getGui ((int)GUI.finish).setActive (true);
+		}
+
 		public void render() {
 			StaticVariables.renderer.render ();
 		}
