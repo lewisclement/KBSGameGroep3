@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using KBSGame.Entities;
+using System.Windows.Forms;
 
 namespace KBSGame
 {
@@ -42,29 +43,32 @@ namespace KBSGame
 					try {
 						SpriteID = Int32.Parse(entity[xmlVar.SpriteID].InnerText);
 					} catch (Exception ex) {
-
-					}
+                        MessageBox.Show(ex.Message);
+                    }
 
 					bool solid = false;
 					try {
 						solid = bool.Parse(entity[xmlVar.Solid].InnerText);
-					} catch (Exception ex) {
-
-					}
+					} catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
 					Byte drawOrder = 10;
 					try {
 						drawOrder = Byte.Parse (entity [xmlVar.DrawOrder].InnerText);
-					} catch (Exception ex) {
-
-					}
+					} catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
 					float BoudingBox = 0.51f;
 					try {
 						BoudingBox = float.Parse (entity [xmlVar.BoudingBox].InnerText);
-					} catch (Exception ex) {
-
-					}
+					} catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
 					switch (Int32.Parse(entity[xmlVar.Type].InnerText))
 					{
@@ -94,7 +98,8 @@ namespace KBSGame
 						break;
 					}
 				} catch (Exception e) {
-					Console.WriteLine ("Could not load entity: " + entity.InnerXml + "\n\r" + e.Message);
+
+                    MessageBox.Show("Could not load entity: " + entity.InnerXml + "\n\r" + e.Message);
 				}
 			}
 
