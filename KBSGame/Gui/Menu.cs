@@ -249,7 +249,7 @@ namespace KBSGame
                 {
                     float fontSize = StaticVariables.dpi / 3;
                     float x = StaticVariables.dpi / 4;
-                    float y = buttonHeight * i + buttonHeight / 3;
+                    float y = buttonHeight * i + buttonHeight / 6;
 
                     if (i == 0)
                     {
@@ -276,7 +276,7 @@ namespace KBSGame
                 {
                     float fontSize = StaticVariables.dpi / 3;
                     float x = StaticVariables.dpi / 4;
-                    float y = buttonHeight * i + buttonHeight / 3;
+                    float y = buttonHeight * i + buttonHeight / 6;
 
                     if (i == 0)
                     {
@@ -302,8 +302,14 @@ namespace KBSGame
             }
             if (currentState == STATE.levelloader)
                 {
-                    Image back = Image.FromFile(StaticVariables.textFolder + "/menu_back.png"); //Deze moet nog even mooi uitgelijnd worden!!
-                    g.DrawImage(back, 0, 0, 150, 70);
+                for (int i = 0; i < buttonList.Count; i++)
+                {
+                    float fontSize = StaticVariables.dpi / 3;
+                    float x = StaticVariables.dpi / 4;
+                    float y = buttonHeight * i + buttonHeight / 6;
+                    Image back = Image.FromFile(StaticVariables.textFolder + "/menu_back.png");
+                    g.DrawImage(back, x, y, 150, 70);
+                }
                     for (int i = 0; i < files.Length; i++)
                     {
                         float x = StaticVariables.dpi / 4;
