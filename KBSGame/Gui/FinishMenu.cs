@@ -74,10 +74,10 @@ namespace KBSGame.gui
 
             switch (clickPos)
             {
-                case 0:
-                    setActive(false);
-                    
-                    Application.Exit();
+			case 0:
+				setActive (false);
+				StaticVariables.world.loadLevel ("mainmenu");
+				((Menu) StaticVariables.renderer.getGui ((int)GUI.def)).mainmenu ();
                     break;
                 case 1:
                     
