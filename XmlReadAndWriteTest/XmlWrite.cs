@@ -13,6 +13,7 @@ namespace XmlReadAndWriteTest
         private Player p;
         private List<TerrainTile> beforelist, afterlist;
         private String file = "test";
+
         public XmlWrite()
         {
             this.w = new World(10, 10);
