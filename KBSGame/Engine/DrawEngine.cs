@@ -68,6 +68,9 @@ namespace KBSGame
 			drawEntities (g);
 
 			foreach (Gui gui in Interfaces) {
+				if (modalGui != null && gui != modalGui)
+					continue;
+
 				if (!gui.isActive ())
 					continue;
 
@@ -171,6 +174,16 @@ namespace KBSGame
 		public int getGuiCount()
 		{
 			return Interfaces.Count;
+		}
+
+		public void setModalGui(GUI gui)
+		{
+			modalGui = Interfaces [(int)gui];
+		}
+
+		public void disableModalGui() 
+		{
+			modalGui = null;
 		}
 
 		/// <summary>

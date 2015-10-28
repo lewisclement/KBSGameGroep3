@@ -40,6 +40,10 @@ namespace KBSGame
 		public const Byte drawOrderSize = 16;
         
 		public static int dpi;
+
+		public static Controller controller;
+		public static DrawEngine renderer;
+		public static World world;
 	}
 
 	public static class xmlVar

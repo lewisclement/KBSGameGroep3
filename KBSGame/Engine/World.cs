@@ -104,7 +104,7 @@ namespace KBSGame
 					Random rand = new Random ();
 					player = new Player (new PointF (rand.Next(0, width), rand.Next(0, height)), 50);
 					objects.Add (player);
-				}
+				}Console.WriteLine (player.getLocation ());
                 setFocusEntity (player);
 				currentLevelPath = fileName;
 			} else {

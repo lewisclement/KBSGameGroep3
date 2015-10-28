@@ -103,7 +103,7 @@ namespace KBSGame
 		/// Sets whether Gui is active.
 		/// </summary>
 		/// <param name="active">If set to <c>true</c> active.</param>
-		public void setActive(bool active)
+		public virtual void setActive(bool active)
 		{
 			this.active = active;
 		}
@@ -122,7 +122,7 @@ namespace KBSGame
 		/// </summary>
 		public void switchActive()
 		{
-			active = !active;
+			setActive(!active);
 		}
 
 		protected Point scaleToDrawRatio(Point point)

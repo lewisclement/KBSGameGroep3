@@ -99,5 +99,18 @@ namespace KBSGame.gui
             if (mousePos.X >= xRes / 2)
                     hoverPos = 1;
         }
+
+		public override void setActive (bool active)
+		{
+			if (active && StaticVariables.controller.modalActive ())
+				return;
+
+			base.setActive (active);
+
+			if (active)
+				StaticVariables.controller.setModalGui (GUI.finish);
+			else
+				StaticVariables.controller.disableModalGui ();
+		}
     }
 }
