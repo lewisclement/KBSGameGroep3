@@ -50,7 +50,7 @@ namespace KBSGame.gui
             Image home = Image.FromFile(StaticVariables.textFolder + "/finished_home.png");
             Image nextlevel = Image.FromFile(StaticVariables.textFolder + "/finished_nextlevel.png");
             g.DrawImage(home, (xRes / 15), (yRes / 4) * 3, 300, 120);
-            g.DrawImage(nextlevel, (xRes / 5) * 3 , (yRes / 4) * 3, 300, 120);
+            g.DrawImage(nextlevel, (xRes / 6) * 3 , (yRes / 4) * 3, 300, 120);
 
             return this.buffer;
 
