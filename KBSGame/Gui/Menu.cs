@@ -53,20 +53,18 @@ namespace KBSGame
 			List<Button> buttonList = new List<Button> ();
 			buttonList.Add(new Button("Start"));
 			buttonList.Add(new Button("Editor"));
-			buttonList.Add(new Button("Settings"));
 			buttonList.Add(new Button("Help"));
 			buttonList.Add(new Button("Quit"));
 			menus.Insert ((int)STATE.main, buttonList);
 
 			buttonList = new List<Button> ();
 			buttonList.Add(new Button("Resume"));
-			buttonList.Add(new Button("Settings"));
 			buttonList.Add(new Button("Help"));
 			buttonList.Add(new Button("Exit"));
 			menus.Insert ((int)STATE.pause, buttonList);
 
 			buttonList = new List<Button> ();
-			buttonList.Add(new Button("Settings"));
+			buttonList.Add(new Button("Resume"));
 			buttonList.Add(new Button("Help"));
 			buttonList.Add(new Button("Exit"));
 			menus.Insert ((int)STATE.editor, buttonList);
@@ -106,7 +104,7 @@ namespace KBSGame
 
 					changeState (STATE.editor);
 					break;
-				case 4:
+				case 3:
 					Application.Exit ();
 					break;
 				default:
@@ -115,9 +113,10 @@ namespace KBSGame
 			} else if (currentState == STATE.pause) {
 				switch (clickIndex) {
 				case 0:
+					StaticVariables.controller.disableModalGui ();
 					setActive (false);
 					break;
-				case 3:
+				case 2:
 					changeState (STATE.main);
 					break;
 				default:
@@ -125,6 +124,9 @@ namespace KBSGame
 				}
 			} else if (currentState == STATE.editor) {
 				switch (clickIndex) {
+				case 0:
+					setActive (false);
+					break;
 				case 1:
 					break;
 				case 2:
@@ -176,6 +178,12 @@ namespace KBSGame
 		public override void setInput (Keys key)
 		{
 			if (key == Keys.Escape && currentState != STATE.main && currentState != STATE.levelloader) {
+				if (!isActive () && StaticVariables.controller.modalActive ())
+					return;
+
+				if (currentState == STATE.pause && !isActive ())
+					StaticVariables.controller.setModalGui (GUI.def);
+
 				switchActive ();
 			}
 		}
@@ -231,15 +239,10 @@ namespace KBSGame
                     }
                     if (i == 2)
                     {
-                        Image settings = Image.FromFile(StaticVariables.textFolder + "/menu_settings.png");
-                        g.DrawImage(settings, x, y, 150, 70);
-                    }
-                    if (i == 3)
-                    {
                         Image help = Image.FromFile(StaticVariables.textFolder + "/menu_help.png");
                         g.DrawImage(help, x, y, 150, 70);
                     }
-                    if (i == 4)
+                    if (i == 3)
                     {
                         Image quit = Image.FromFile(StaticVariables.textFolder + "/menu_quit.png");
                         g.DrawImage(quit, x, y, 150, 70);
@@ -256,7 +259,7 @@ namespace KBSGame
 
                     if (i == 0)
                     {
-                        Image start = Image.FromFile(StaticVariables.textFolder + "/menu_settings.png");
+                        Image start = Image.FromFile(StaticVariables.textFolder + "/menu_resume.png");
                         g.DrawImage(start, x, y, 150, 70);
                     }
                     if (i == 1)
@@ -290,15 +293,10 @@ namespace KBSGame
                     }
                     if (i == 1)
                     {
-                        Image settings = Image.FromFile(StaticVariables.textFolder + "/menu_settings.png");
-                        g.DrawImage(settings, x, y, 150, 70);
-                    }
-                    if (i == 2)
-                    {
                         Image help = Image.FromFile(StaticVariables.textFolder + "/menu_help.png");
                         g.DrawImage(help, x, y, 150, 70);
                     }
-                    if (i == 3)
+                    if (i == 2)
                     {
                         Image exit = Image.FromFile(StaticVariables.textFolder + "/menu_exit.png");
                         g.DrawImage(exit, x, y, 150, 70);
