@@ -126,6 +126,7 @@ namespace KBSGame
 				terrainTiles.Add(TileTypes[(int)terrain]);
 			}
 
+			player = null;
 			Entity focus = new Entity (ENTITIES.def, new PointF (size.Width / 2, size.Height / 2), 0);
 			setFocusEntity (focus);
 		}
