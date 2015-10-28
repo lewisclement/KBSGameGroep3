@@ -19,7 +19,6 @@ namespace KBSGame
         public override void onCollision()
         {
 			StaticVariables.controller.finish ();
-            Console.WriteLine("Finish");
         }
 	}
 }
