@@ -200,43 +200,144 @@ namespace KBSGame
             var g = Graphics.FromImage(buffer);
             g.Clear(Color.FromArgb(0));
 
-			StringFormat style = new StringFormat ();
-			style.LineAlignment = StringAlignment.Center;
-			Font font = new Font ("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
+            StringFormat style = new StringFormat();
+            style.LineAlignment = StringAlignment.Center;
+            Font font = new Font("Arial", StaticVariables.dpi / 2, FontStyle.Bold);
 
-			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, 0, width, yRes);
-			g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
-			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, hoverIndex * buttonHeight, width, buttonHeight);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, 0, width, yRes);
+            g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.SandyBrown)), 0, hoverIndex * buttonHeight, width, buttonHeight);
 
-			for (int i = 0; i < buttonList.Count; i++)
+            if (currentState == STATE.main)
             {
-				float fontSize = StaticVariables.dpi / 3;
-				float x = StaticVariables.dpi / 4;
-				float y = buttonHeight * i + buttonHeight/2;
+                Image gamename = Image.FromFile(StaticVariables.textFolder + "/gamename.png");
+                g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width *3, yRes / 3);
 
-				g.DrawString(buttonList[i].text, new Font("Arial", fontSize), new SolidBrush(Color.White), x, y, style);
+                for (int i = 0; i < buttonList.Count; i++)
+                {
+                    float fontSize = StaticVariables.dpi / 3;
+                    float x = StaticVariables.dpi / 4;
+                    float y = (buttonHeight * i + buttonHeight / 6);
+
+                    if (i == 0)
+                    {
+                        Image start = Image.FromFile(StaticVariables.textFolder + "/menu_start.png");
+                        g.DrawImage(start, x, y, 150, 70);
+                    }
+                    if (i == 1)
+                    {
+                        Image editor = Image.FromFile(StaticVariables.textFolder + "/menu_editor.png");
+                        g.DrawImage(editor, x, y, 150, 70);
+                    }
+                    if (i == 2)
+                    {
+                        Image settings = Image.FromFile(StaticVariables.textFolder + "/menu_settings.png");
+                        g.DrawImage(settings, x, y, 150, 70);
+                    }
+                    if (i == 3)
+                    {
+                        Image help = Image.FromFile(StaticVariables.textFolder + "/menu_help.png");
+                        g.DrawImage(help, x, y, 150, 70);
+                    }
+                    if (i == 4)
+                    {
+                        Image quit = Image.FromFile(StaticVariables.textFolder + "/menu_quit.png");
+                        g.DrawImage(quit, x, y, 150, 70);
+                    }
+                }
+            }
+            if (currentState == STATE.editor)
+            {
+                for (int i = 0; i < buttonList.Count; i++)
+                {
+                    float fontSize = StaticVariables.dpi / 3;
+                    float x = StaticVariables.dpi / 4;
+                    float y = buttonHeight * i + buttonHeight / 6;
+
+                    if (i == 0)
+                    {
+                        Image start = Image.FromFile(StaticVariables.textFolder + "/menu_settings.png");
+                        g.DrawImage(start, x, y, 150, 70);
+                    }
+                    if (i == 1)
+                    {
+                        Image editor = Image.FromFile(StaticVariables.textFolder + "/menu_help.png");
+                        g.DrawImage(editor, x, y, 150, 70);
+                    }
+                    if (i == 2)
+                    {
+                        Image editor = Image.FromFile(StaticVariables.textFolder + "/menu_exit.png");
+                        g.DrawImage(editor, x, y, 150, 70);
+                    }
+                }
             }
 
-			if (currentState == STATE.levelloader) {
-				for (int i = 0; i < files.Length; i++) {
-					float x = StaticVariables.dpi / 4;
-					int offsetY = StaticVariables.dpi * buttonList.Count;
-					float y = offsetY + i * 10;
-					font = new Font ("Arial", 10, FontStyle.Bold);
 
-					int index = (hoverPos.Y - offsetY) / 10;
-					if (index == i && hoverPos.X < width) {
-						if(index < files.Length)
-							g.FillRectangle (new SolidBrush (Color.FromArgb (40, Color.Black)), 0, y, width, 10);
-					}
+            if (currentState == STATE.pause)
+            {
+                Image gamename = Image.FromFile(StaticVariables.textFolder + "/pause.png");
+                g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width * 3, yRes / 3);
+                for (int i = 0; i < buttonList.Count; i++)
+                {
+                    float fontSize = StaticVariables.dpi / 3;
+                    float x = StaticVariables.dpi / 4;
+                    float y = buttonHeight * i + buttonHeight / 6;
 
-					String name = files [i].Name.Substring (0, files [i].Name.Length - 4);
-					g.DrawString (name, font, new SolidBrush (Color.White), x, y - 5);
-				}
-			}
+                    if (i == 0)
+                    {
+                        Image resume = Image.FromFile(StaticVariables.textFolder + "/menu_resume.png");
+                        g.DrawImage(resume, x, y, 150, 70);
+                    }
+                    if (i == 1)
+                    {
+                        Image settings = Image.FromFile(StaticVariables.textFolder + "/menu_settings.png");
+                        g.DrawImage(settings, x, y, 150, 70);
+                    }
+                    if (i == 2)
+                    {
+                        Image help = Image.FromFile(StaticVariables.textFolder + "/menu_help.png");
+                        g.DrawImage(help, x, y, 150, 70);
+                    }
+                    if (i == 3)
+                    {
+                        Image exit = Image.FromFile(StaticVariables.textFolder + "/menu_exit.png");
+                        g.DrawImage(exit, x, y, 150, 70);
+                    }
+                }
+            }
+            if (currentState == STATE.levelloader)
+                {
+                Image gamename = Image.FromFile(StaticVariables.textFolder + "/loadlevel.png");
+                g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width * 3, yRes / 3);
+                for (int i = 0; i < buttonList.Count; i++)
+                {
+                    float fontSize = StaticVariables.dpi / 3;
+                    float x = StaticVariables.dpi / 4;
+                    float y = buttonHeight * i + buttonHeight / 6;
+                    Image back = Image.FromFile(StaticVariables.textFolder + "/menu_back.png");
+                    g.DrawImage(back, x, y, 150, 70);
+                }
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        float x = StaticVariables.dpi / 4;
+                        int offsetY = StaticVariables.dpi * buttonList.Count;
+                        float y = (offsetY + i * 10);
+                        font = new Font("Tahoma", 9, FontStyle.Bold);
 
-			g.Dispose ();
-            return this.buffer;
+                    int index = (hoverPos.Y - offsetY) / 10;
+                        if (index == i && hoverPos.X < width)
+                        {
+                            if (index < files.Length)
+                                g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), 0, y - 2, width, 10);
+                        }
+
+                        String name = files[i].Name.Substring(0, files[i].Name.Length - 4);
+                        g.DrawString(name, font, new SolidBrush(Color.White), x, y - 5);
+
+                    }
+                }
+                g.Dispose();
+                return this.buffer;
         }
 
 		public override void resize (int ScreenresX, int ScreenresY, float drawRatio)
