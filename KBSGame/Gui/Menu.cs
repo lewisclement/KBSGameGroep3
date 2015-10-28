@@ -20,8 +20,7 @@ namespace KBSGame
 				this.text = text;
 			}
 		};
-
-		public enum STATE : int {main=0, pause, editor, levelloader}
+			
 		private enum IMAGES : int {start=0, resume, editor, help, back, exit, quit, title, count}
 
 		private List<List<Button>> menus;
@@ -29,7 +28,6 @@ namespace KBSGame
         private String menu;
 		private int width;
 		private int buttonHeight;
-		private STATE currentState;
 		private World world;
 
 		Image[] images;
@@ -93,7 +91,7 @@ namespace KBSGame
 			else
 				clickIndex = mousePos.Y / buttonHeight;
 
-			if (currentState == STATE.main) {
+			if (StaticVariables.currentState == STATE.main) {
 				switch (clickIndex) {
 				case 0:
 					DirectoryInfo d = new DirectoryInfo (StaticVariables.levelFolder);
@@ -115,7 +113,7 @@ namespace KBSGame
 				default:
 					break;
 				}
-			} else if (currentState == STATE.pause) {
+			} else if (StaticVariables.currentState == STATE.pause) {
 				switch (clickIndex) {
 				case 0:
 					StaticVariables.controller.disableModalGui ();
@@ -127,7 +125,7 @@ namespace KBSGame
 				default:
 					break;
 				}
-			} else if (currentState == STATE.editor) {
+			} else if (StaticVariables.currentState == STATE.editor) {
 				switch (clickIndex) {
 				case 0:
 					setActive (false);
@@ -141,13 +139,13 @@ namespace KBSGame
 				default:
 					break;
 				}
-			} else if (currentState == STATE.levelloader) {
+			} else if (StaticVariables.currentState == STATE.levelloader) {
 				switch (clickIndex) {
 				case 0:
 					changeState (STATE.main);
 					break;
 				default:
-					if (currentState == STATE.levelloader) {
+					if (StaticVariables.currentState == STATE.levelloader) {
 						int offsetY = StaticVariables.dpi * buttonList.Count;
 
 						int index = (hoverPos.Y - offsetY) / 10;
@@ -182,11 +180,11 @@ namespace KBSGame
 
 		public override void setInput (Keys key)
 		{
-			if (key == Keys.Escape && currentState != STATE.main && currentState != STATE.levelloader) {
+			if (key == Keys.Escape && StaticVariables.currentState != STATE.main && StaticVariables.currentState != STATE.levelloader) {
 				if (!isActive () && StaticVariables.controller.modalActive ())
 					return;
 
-				if (currentState == STATE.pause && !isActive ())
+				if (StaticVariables.currentState == STATE.pause && !isActive ())
 					StaticVariables.controller.setModalGui (GUI.def);
 
 				switchActive ();
@@ -221,7 +219,7 @@ namespace KBSGame
             g.DrawString(this.menu, font, new SolidBrush(Color.White), xRes / 2, StaticVariables.dpi / 4, style);
             g.FillRectangle(new SolidBrush(Color.FromArgb(180, Color.SandyBrown)), 0, hoverIndex * buttonHeight, width, buttonHeight);
 
-            if (currentState == STATE.main)
+            if (StaticVariables.currentState == STATE.main)
             {
 				g.DrawImage(images[(int)IMAGES.title], xRes / 2 - width / 2 - 100, 0, width *3, yRes / 3);
 
@@ -249,7 +247,7 @@ namespace KBSGame
                     }
                 }
             }
-            if (currentState == STATE.editor)
+            if (StaticVariables.currentState == STATE.editor)
             {
                 for (int i = 0; i < buttonList.Count; i++)
                 {
@@ -273,7 +271,7 @@ namespace KBSGame
             }
 
 
-            if (currentState == STATE.pause)
+            if (StaticVariables.currentState == STATE.pause)
             {
                 Image gamename = Image.FromFile(StaticVariables.textFolder + "/pause.png");
                 g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width * 3, yRes / 3);
@@ -297,7 +295,7 @@ namespace KBSGame
                     }
                 }
             }
-            if (currentState == STATE.levelloader)
+            if (StaticVariables.currentState == STATE.levelloader)
                 {
                 Image gamename = Image.FromFile(StaticVariables.textFolder + "/loadlevel.png");
                 g.DrawImage(gamename, xRes / 2 - width / 2 - 100, 0, width * 3, yRes / 3);
@@ -345,7 +343,7 @@ namespace KBSGame
 				world.setFocusEntity(world.getEntitiesByType (ENTITIES.plant)[40]); //Quick'n'Dirty
 			}
 
-			currentState = state;
+			StaticVariables.currentState = state;
 			buttonList = menus [(int)state];
 		}
 

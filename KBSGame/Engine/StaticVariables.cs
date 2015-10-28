@@ -26,6 +26,8 @@ namespace KBSGame
 	
 	public enum GUI : int {def=0, gameover, finish, guiinventory, editor, count};
 
+	public enum STATE : int {main=0, pause, editor, levelloader}
+
     
     public static class StaticVariables
 	{
@@ -38,6 +40,7 @@ namespace KBSGame
 		public static String spriteFolder = null;
         public static String textFolder = null;
 		public const Byte drawOrderSize = 16;
+		public static STATE currentState = STATE.main;
         
 		public static int dpi;
 

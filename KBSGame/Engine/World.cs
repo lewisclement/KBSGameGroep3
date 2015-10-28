@@ -99,13 +99,20 @@ namespace KBSGame
 				width = size.Width;
 				height = size.Height;
 
-			    player = (Player) objects.FirstOrDefault(e => e.getType() == ENTITIES.player);
-				if (player == null) {
-					Random rand = new Random ();
-					player = new Player (new PointF (rand.Next(0, width), rand.Next(0, height)), 50);
-					objects.Add (player);
-				}Console.WriteLine (player.getLocation ());
-                setFocusEntity (player);
+				if (StaticVariables.currentState == STATE.editor) {
+					player = null;
+					Entity focus = new Entity (ENTITIES.def, new PointF (size.Width / 2, size.Height / 2), 0);
+					setFocusEntity (focus);
+				} else {
+					player = (Player)objects.FirstOrDefault (e => e.getType () == ENTITIES.player);
+					if (player == null) {
+						Random rand = new Random ();
+						player = new Player (new PointF (rand.Next (0, width), rand.Next (0, height)), 50);
+						objects.Add (player);
+					}
+					Console.WriteLine (player.getLocation ());
+					setFocusEntity (player);
+				}
 				currentLevelPath = fileName;
 			} else {
 			    player = new Player(new PointF(120, 120), 50);
