@@ -217,7 +217,7 @@ namespace KBSGame
 		/// </summary>
 		private void renderEntityTab(Graphics g) 
 		{
-			for (int i = 0; i < entityList.Count; i++)
+            for (int i = 0; i < entityList.Count; i++)
 			{
 				Bitmap bmp = DrawEngine.sprites [entityList [i].getSpriteID ()].getBitmap ();
 				int x = xRes - width + margin + (i % rowLength) * StaticVariables.tileSize;
@@ -279,20 +279,18 @@ namespace KBSGame
 			int xEnd = 0;
 			int yEnd = 0;
 
-			Font headerFont = new Font ("Arial", lineHeight * 0.7f, FontStyle.Bold);
-			Font subFont = new Font ("Arial", lineHeight / 2);
-            Image worldsize = Image.FromFile(StaticVariables.textFolder + "/editor_worldtab.png");
-            g.DrawImage(worldsize, x - 20, y, 180, 30);
-
-            //g.DrawString ("World size", headerFont, new SolidBrush (Color.Black), x, y);
+            Font subFont = new Font("Tahoma", lineHeight / 2, FontStyle.Bold);
+            Image worldtab = Image.FromFile(StaticVariables.textFolder + "/editor_worldtab.png");
+            g.DrawImage(worldtab, x - 20, y, 180, 30);
 
 			y += lineHeight;
-			g.DrawString ("width/height", subFont, new SolidBrush (Color.Black), x, y);
+			g.DrawString ("width/height", subFont, new SolidBrush (Color.White), x, y);
 			y += lineHeight;
+            
 
 			//Hover over width box
 			xEnd = x + tabWidth / 3;
-			yEnd = (int)(y + lineHeight * 0.6);
+            yEnd = (int)(y + lineHeight * 0.6);
 			if (currentHover.Y > y && currentHover.Y < yEnd && currentHover.X > x && currentHover.X < xEnd)
 				g.FillRectangle (new SolidBrush (Color.FromArgb(40, Color.Black)), x, y, tabWidth / 3, (int)(lineHeight * 0.6));
 			//Draw width box
@@ -379,7 +377,7 @@ namespace KBSGame
 		private void renderSaveTab(Graphics g)
 		{
 
-		}
+        }
 
 		/// <summary>
 		/// Processes a click when save tab displayed
