@@ -281,7 +281,10 @@ namespace KBSGame
 
 			Font headerFont = new Font ("Arial", lineHeight * 0.7f, FontStyle.Bold);
 			Font subFont = new Font ("Arial", lineHeight / 2);
-			g.DrawString ("World size", headerFont, new SolidBrush (Color.Black), x, y);
+            Image worldsize = Image.FromFile(StaticVariables.textFolder + "/editor_worldtab.png");
+            g.DrawImage(worldsize, x - 20, y, 180, 30);
+
+            //g.DrawString ("World size", headerFont, new SolidBrush (Color.Black), x, y);
 
 			y += lineHeight;
 			g.DrawString ("width/height", subFont, new SolidBrush (Color.Black), x, y);
