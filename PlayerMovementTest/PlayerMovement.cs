@@ -73,12 +73,12 @@ namespace PlayerMovementTest
             // Set Player location
             p.setLocation(new Point(0, 1));
             // Add lilypad (walkable Entity) on location 0,2 (NonWalkable tile)
-            Entity lilypad = new Plant(new Point(0, 2), (int)SPRITES.waterlily, 50, false, 0, 0);
+            Entity lilypad = new Plant(new Point(0, 2), (int)SPRITES.waterlily, 50, false, 0);
             w.addEntity(lilypad);
             // Try to move one grid down to water tile with lilypad
-            p.move(w, new Point(0, 1));
+            p.move(w, new PointF(0, 1));
             // Check if player moved
-            Assert.AreEqual(new Point(0, 2), p.getLocation());
+            Assert.AreEqual(new PointF(0, 2), p.getLocation());
         }
 
         [TestMethod]
