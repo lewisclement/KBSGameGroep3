@@ -41,6 +41,9 @@ namespace KBSGame.gui
         int width = StaticVariables.dpi * 4;
         int hoverPos = -1, clickPos = -1;
 
+        //Determine where the mouse click happens and if it happens above one of the two buttons
+        //initiate a appropiate reaction.
+
         public override void setMouseClick(Point mousePos)
         {
 			mousePos = scaleToDrawRatio (mousePos);
@@ -63,6 +66,7 @@ namespace KBSGame.gui
                     break;
             }
         }
+        // 
 
         public override void setMouseHover(Point mousePos)
         {
@@ -72,6 +76,8 @@ namespace KBSGame.gui
             if (mousePos.X >= xRes / 2)
                     hoverPos = 1;
         }
+
+        //Set the menu active after reaching the finish entity.
 
 		public override void setActive (bool active)
 		{
