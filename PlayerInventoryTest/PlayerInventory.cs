@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using KBSGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -27,7 +28,7 @@ namespace PlayerInventoryTest
             // Initialize world
             this.w = new World(Size, Size);
             // Fill world with tiles of grass
-            w.FillWorld(TERRAIN.grass, new Size(Size, Size));
+            w.FillWorld(TERRAIN.grass_normal, new Size(Size, Size));
             // Fill third row with water
             for (int i = 0; i <= 2; i++)
                 w.setTerraintile(new Point(i, 2), (int)SPRITES.water);
@@ -79,7 +80,7 @@ namespace PlayerInventoryTest
         public void DropBananaOnWaterTileWithLilypad()
         {
             // Add lilypad on location 1, 2
-            Entity lilypad = new Plant(new Point(1, 2), (int)SPRITES.waterlily, 50, false, 0, 0);
+            Entity lilypad = new Plant(new Point(1, 2), (int)SPRITES.waterlily, 50, false, 0);
             w.addEntity(lilypad);
             // Add banana to players inventory
             p.AddItemToInventory(new Item(new Entity(ENTITIES.fruit, new PointF(0, 0), bananaId)));
@@ -92,7 +93,8 @@ namespace PlayerInventoryTest
             //Assert.AreEqual(p.Inventory[0].Entity.getSpriteID(), bananaId);
 
             // Check if banana is dropped on location 1, 2
-            List<Entity> entities = w.getEntitiesOnTerrainTile(new Point(1, 2));
+            List<Entity> entities = w.getEntitiesOnTerrainTile(new Point(1, 2))
+                .Where(e => e.getSpriteID() == bananaId).ToList();
             Assert.AreEqual(entities[0].getSpriteID(), bananaId);
         }
 

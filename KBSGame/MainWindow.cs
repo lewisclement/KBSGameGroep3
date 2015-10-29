@@ -6,8 +6,6 @@ namespace KBSGame
 {
 	public class MainWindow : Form
 	{
-        private int ScreenY;
-        private int ScreenX;
         private Timer timer = new Timer();
 
 		Controller control;
