@@ -178,6 +178,7 @@
     <Content Include="bin\Debug\text\menu_start.png" />
     <Content Include="bin\Debug\text\pause.png" />
     <Content Include="bin\Debug\worlds\DoorsTestFinish.xml" />
+    <Content Include="bin\Debug\worlds\Level 2.xml" />
     <Content Include="bin\Release\finish.png" />
     <Content Include="bin\Release\trap_closed.png" />
     <Content Include="bin\Release\trap_opened.png" />
@@ -188,7 +189,6 @@
   <ItemGroup>
     <Folder Include="Entities\flowers\" />
     <Folder Include="Entities\saplings\" />
-    <Folder Include="Entities\enemies\" />
   </ItemGroup>
   <ItemGroup />
 </Project>
