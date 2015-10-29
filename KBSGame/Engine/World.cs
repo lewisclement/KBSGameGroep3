@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,6 +20,7 @@ namespace KBSGame
 		private List<Entity> objects;
 		private Entity focusEntity;
 		private Player player;
+		private List<Enemy> enemies;
 
 		private String currentLevelPath = null;
 
@@ -39,6 +40,7 @@ namespace KBSGame
 			objects = new List<Entity>();
 			terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
+			enemies = new List<Enemy> ();
 			loadTileTypes ();
 		}
 
@@ -63,6 +65,7 @@ namespace KBSGame
 				objects = new List<Entity> ();
 				terrainTiles = new List<TerrainTile> ();
 				heightData = new List<Byte> ();
+				enemies = new List<Enemy> ();
 
 				LevelReader level = new LevelReader (fileName);
 				this.objects = level.getObjects ();
@@ -86,6 +89,11 @@ namespace KBSGame
 				Size size = level.getSize ();
 				width = size.Width;
 				height = size.Height;
+
+				List<Entity> enemyEntities = objects.FindAll (e => e.getType() == ENTITIES.enemy);
+				foreach (Enemy enemy in enemyEntities) {
+					enemies.Add ((Enemy)enemy);
+				}
 
 				if (StaticVariables.currentState == STATE.editor) {
 					player = null;
@@ -537,6 +545,11 @@ namespace KBSGame
 	    {
             player = new Player(location, 50);
         }
+
+		public Enemy[] getEnemies()
+		{
+			return enemies.ToArray ();
+		}
 
         /// <summary>
         /// Loads all tiletypes

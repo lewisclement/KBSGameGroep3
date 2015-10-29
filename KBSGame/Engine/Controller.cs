@@ -90,6 +90,14 @@ namespace KBSGame
 				movement /= 200.0f;
 
 				processInput ();
+
+				if (StaticVariables.world.getPlayer () != null) {
+					Enemy[] enemies = StaticVariables.world.getEnemies ();
+					foreach (Enemy enemy in enemies) {
+						enemy.processTick ();
+					}
+				}
+
 				lastTick = currentTick;
 			}
 			StaticVariables.controller.render();

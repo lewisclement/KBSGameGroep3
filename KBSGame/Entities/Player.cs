@@ -17,7 +17,7 @@ namespace KBSGame
 	    public int CurrentDirection;
 
 	    public Player(PointF location, Byte height)
-			: base(ENTITIES.player, location, (int)SPRITES.player, true, height, 10)
+			: base(ENTITIES.player, location, (int)SPRITES.player, false, height, 10)
 		{
 			Inventory = new List<Item>();
 	        CurrentDirection = (int) Direction.Up;
