@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using KBSGame.gui;
 
@@ -63,6 +64,10 @@ namespace KBSGame
 		{ 
 			var g = Graphics.FromImage (buffer);
 			g.Clear (Color.White);
+
+			g.InterpolationMode = InterpolationMode.NearestNeighbor;
+			g.CompositingQuality = CompositingQuality.HighSpeed;
+			g.SmoothingMode = SmoothingMode.HighSpeed;
 
 			drawTerrain (g);
 			drawEntities (g);
