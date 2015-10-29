@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace KBSGame
 {
-    public class Enemy : Entity
+    public class Peerbomb : Entity
     {
 		static int radius = 5;
 
-        public Enemy(PointF location, Byte height = 50, bool solid = true, Byte depth = 8, float boundingBox = 0.6f)
-            : base(ENTITIES.enemy, location, (int)SPRITES.tiki1, solid, height, depth, boundingBox)
+        public Peerbomb(PointF location, Byte height = 50, bool solid = true, Byte depth = 8, float boundingBox = 0.6f)
+            : base(ENTITIES.enemy, location, (int)SPRITES.peerbomb, solid, height, depth, boundingBox)
         {
 
         }

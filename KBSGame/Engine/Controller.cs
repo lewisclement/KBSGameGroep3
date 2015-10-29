@@ -92,8 +92,8 @@ namespace KBSGame
 				processInput ();
 
 				if (StaticVariables.world.getPlayer () != null) {
-					Enemy[] enemies = StaticVariables.world.getEnemies ();
-					foreach (Enemy enemy in enemies) {
+					Tiki1[] enemies = StaticVariables.world.getEnemies ();
+					foreach (Tiki1 enemy in enemies) {
 						enemy.processTick ();
 					}
 				}

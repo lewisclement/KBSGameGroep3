@@ -33,7 +33,6 @@
   <ItemGroup>
     <Compile Include="Engine\Controller.cs" />
     <Compile Include="Entities\Door.cs" />
-    <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\Trap.cs" />
     <Compile Include="Gui\GameOverMenu.cs" />
     <Compile Include="Entities\Finish.cs" />
@@ -58,6 +57,9 @@
     <Compile Include="Gui\FinishMenu.cs" />
     <Compile Include="Engine\LevelWriter.cs" />
     <Compile Include="Gui\EditorGui.cs" />
+    <Compile Include="Entities\enemies\Tiki1.cs" />
+    <Compile Include="Entities\enemies\Tiki2.cs" />
+    <Compile Include="Entities\enemies\Peerbomb.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -185,6 +187,7 @@
   <ItemGroup>
     <Folder Include="Entities\flowers\" />
     <Folder Include="Entities\saplings\" />
+    <Folder Include="Entities\enemies\" />
   </ItemGroup>
   <ItemGroup />
 </Project>

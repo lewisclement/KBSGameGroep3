@@ -84,7 +84,12 @@ namespace KBSGame
 						objects.Add(new Player(location, 50));
 						break;
                     case (int)ENTITIES.enemy:
-                        objects.Add(new Enemy(location));
+						if(SpriteID == (int)SPRITES.tiki1)
+                        	objects.Add(new Tiki1(location));
+						else if(SpriteID == (int)SPRITES.tiki2)
+							objects.Add(new Tiki2(location));
+						else if(SpriteID == (int)SPRITES.peerbomb)
+							objects.Add(new Peerbomb(location));
                         break;
 	    			case (int)ENTITIES.finish:
 						objects.Add(new Finish(location));
