@@ -121,7 +121,6 @@ namespace KBSGame
 		{
             // gets all tile data from xml file
 			XmlNodeList TerraintileList = reader.GetElementsByTagName(xmlVar.Tile);
-
 			List<int> terrainTiles = new List<int> ();
             // puts the data in a list
 			foreach (XmlNode TerrainList in TerraintileList)

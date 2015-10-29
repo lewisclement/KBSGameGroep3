@@ -15,7 +15,6 @@ namespace KBSGame
 		private HashSet<Keys> processedkeys;
 		private long lastTick = 0;
 		private float movement;
-
 		private int iteration = 0;
 
 		public Controller() {
@@ -129,7 +128,7 @@ namespace KBSGame
 						break;
 					}
 				else
-					switch (key) { //Player movement, moves focus of 
+					switch (key) { 
 					case Keys.Up:
 					StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (0.0f, -movement));
 						break;

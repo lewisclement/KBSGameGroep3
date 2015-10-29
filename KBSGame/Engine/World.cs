@@ -38,13 +38,7 @@ namespace KBSGame
 			objects = new List<Entity>();
 			terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-
 			loadTileTypes ();
-
-            //temporaryWorldGenerator ();
-
-            //LevelWriter levelWriter = new LevelWriter ();
-            //levelWriter.saveWorld (this, "testworld");
 		}
 
         /// <summary>
@@ -122,7 +116,6 @@ namespace KBSGame
 		{
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(size.Width, StaticVariables.maxWorldSize));
 			this.height = Math.Max(StaticVariables.minWorldSize, Math.Min(size.Height, StaticVariables.maxWorldSize));
-
 			terrainTiles = new List<TerrainTile> ();
 			objects = new List<Entity> ();
 
@@ -130,180 +123,9 @@ namespace KBSGame
 			{
 				terrainTiles.Add(TileTypes[(int)terrain]);
 			}
-
 			player = null;
 			Entity focus = new Entity (ENTITIES.def, new PointF (size.Width / 2, size.Height / 2), 0);
 			setFocusEntity (focus);
-		}
-
-		/// <summary>
-		/// This is a temporary world generator for as long as there isn't a world loader
-		/// </summary>
-		private void temporaryWorldGenerator()
-		{
-			for (int i = 0; i < width * height; i++) 
-			{
-				terrainTiles.Add (TileTypes [(int)TERRAIN.grass_normal]);
-				heightData.Add (50);
-
-			}
-
-			Random rand = new Random ((int)DateTime.Now.Ticks);
-
-			//Amount of dirt patches
-			for (int i = 0; i < width*height / 500; i++) {
-				int size = rand.Next (2, 4);
-				Point p = new Point (rand.Next (0, width), rand.Next (0, height));
-
-				for (int j = 0; j < 50; j++) {
-					int xOffset = rand.Next (-10, 10), yOffset = rand.Next (-10, 10);
-					if (p.X + xOffset < (int)Math.Ceiling((double)size / 2) || p.X + xOffset >= width - (int)Math.Ceiling((double)size / 2) ||
-						p.Y + yOffset < (int)Math.Ceiling((double)size / 2) || p.Y + yOffset >= height - (int)Math.Ceiling((double)size / 2))
-						continue;
-
-					for (int x = 0; x < size; x++) {
-						for (int y = 0; y < size; y++) {
-							terrainTiles [(p.X + xOffset + x) * height + p.Y + y + yOffset] = TileTypes [(int)TERRAIN.dirt];
-							heightData[(p.X + xOffset + x) * height + p.Y + y + yOffset] = 52;
-						}
-					}
-				}
-			}
-
-			//Amount of lakes
-			for (int i = 0; i < width*height / 500; i++) {
-				int size = rand.Next (2, 4);
-				Point p = new Point (rand.Next (0, width), rand.Next (0, height));
-
-				for (int j = 0; j < 10; j++) {
-					int xOffset = rand.Next (-5, 5), yOffset = rand.Next (-5, 5);
-					if (p.X + xOffset < (int)Math.Ceiling((double)size / 2) || p.X + xOffset >= width - (int)Math.Ceiling((double)size / 2) ||
-						p.Y + yOffset < (int)Math.Ceiling((double)size / 2) || p.Y + yOffset >= height - (int)Math.Ceiling((double)size / 2))
-						continue;
-
-					for (int x = 0; x < size; x++) {
-						for (int y = 0; y < size; y++) {
-							terrainTiles [(p.X + xOffset + x) * height + p.Y + y + yOffset] = TileTypes [(int)TERRAIN.water];
-						}
-					}
-				}
-			}
-
-			//Amount of rivers
-			for (int i = 0; i < Math.Ceiling((double)width*height/30000); i++) 
-			{
-				int size = rand.Next (2, 4);
-				int x = 0;
-				int y = rand.Next (0, height - size);
-
-				bool reached = false;
-				Point relative = new Point (1, 0);
-				while (!reached) {
-					relative.Y += rand.Next (0, 3) - 1;
-					if (relative.Y > 2)
-						relative.Y = 2;
-					if (relative.Y < -2)
-						relative.Y = -2;
-					y += relative.Y;
-
-					if (y < 0 || y == height)
-						break;
-
-					for (int X = 0; X < size; X++) {
-						for (int Y = 0; Y < size; Y++) {
-							if((x + X) * height + y + Y < terrainTiles.Count)
-								terrainTiles [(x + X) * height + y + Y] = TileTypes [(int)TERRAIN.water];
-						}
-					}
-
-					x++;
-					if (x == width)
-						reached = true;
-				}
-			}
-
-			for (int x = 1; x < width-1; x++) 
-			{
-				for (int y = 1; y < height-1; y++) {
-					int tileIndex = x * height + y;
-					if (terrainTiles[tileIndex].getID() == (int)TERRAIN.water) {
-						if (terrainTiles [tileIndex - 1].IsWalkable) {
-							terrainTiles [tileIndex - 1] = TileTypes [(int)TERRAIN.sand];
-						}
-						if (terrainTiles [(x-1) * height + y].IsWalkable) {
-							terrainTiles [(x-1) * height + y] = TileTypes [(int)TERRAIN.sand];
-						}
-						if (terrainTiles [tileIndex + 1].IsWalkable) {
-							terrainTiles [tileIndex + 1] = TileTypes [(int)TERRAIN.sand];
-						}
-						if (terrainTiles [(x+1) * height + y].IsWalkable) {
-							terrainTiles [(x+1) * height + y] = TileTypes [(int)TERRAIN.sand];
-						}
-						if (terrainTiles [(x-1) * height + y - 1].IsWalkable) {
-							terrainTiles [(x-1) * height + y - 1] = TileTypes [(int)TERRAIN.sand];
-						}
-						if (terrainTiles [(x-1) * height + y + 1].IsWalkable) {
-							terrainTiles [(x-1) * height + y + 1] = TileTypes [(int)TERRAIN.sand];
-						}
-						if (terrainTiles [(x+1) * height + y - 1].IsWalkable) {
-							terrainTiles [(x+1) * height + y - 1] = TileTypes [(int)TERRAIN.sand];
-						}
-						if (terrainTiles [(x+1) * height + y + 1].IsWalkable) {
-							terrainTiles [(x+1) * height + y + 1] = TileTypes [(int)TERRAIN.sand];
-						}
-					}
-				}
-			}
-
-			for(int x = 0; x < width; x++) {
-				for (int y = 0; y < height; y++) {
-					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
-						if (rand.Next (0, 5) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f + (rand.Next(-3, 3) / 10.0f), y + 0.5f - (rand.Next(0, 3) / 10.0f)), (int)SPRITES.tree1, 50, true));
-						if(rand.Next(0, 50) == 0)
-							objects.Add (new Entity(ENTITIES.fruit, new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9, 0.6f));
-					}
-
-					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass_normal) {
-						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.tree2, 50, true));
-						if(rand.Next(0, 100) == 0) {
-							int amountbushes = rand.Next (4, 10);
-							for (int i = 0; i < amountbushes; i++) {
-								float X = rand.Next (0, 40) / 10.0f - 2.0f;
-								float Y = rand.Next (0, 40) / 10.0f - 2.0f;
-								TerrainTile tile = getTerraintile (new PointF (x + X, y + Y));
-							}
-						}
-					}
-
-					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.sand) {
-						if(rand.Next(0, 50) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.tallgrass, 50, false));
-					}
-
-					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.water) {
-						if(rand.Next(0, 60) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.waterlily, 50, false, 0, 0.51f));
-					}
-				}
-			}
-
-			for (bool placed = false; !placed;) {
-				Point place = new Point (rand.Next (0, width), rand.Next (0, height));
-				if (getTerraintile (place).IsWalkable) {
-					objects.Add (new Player(place, 50));
-					placed = true;
-				}
-			}
-
-			for (bool placed = false; !placed;) {
-				Point place = new Point (rand.Next (0, width), rand.Next (0, height));
-				if (getTerraintile (place).IsWalkable) {
-					objects.Add (new Finish(place, (int)SPRITES.finish));
-					placed = true;
-				}
-			}
 		}
 
 		/// <summary>
@@ -373,7 +195,6 @@ namespace KBSGame
 			PointF offset = getViewOffset ();
 
 			entity.setLocation (new PointF(view.Left + relativeLocation.X + offset.X, view.Top + relativeLocation.Y + offset.Y));
-
 			objects.Add (entity);
 		}
 
@@ -410,7 +231,6 @@ namespace KBSGame
 					break;
 				}
 			}
-
 			return returnEntity;
 		}
 
@@ -422,12 +242,10 @@ namespace KBSGame
 		public List<Entity> getEntitiesByType(ENTITIES type)
 		{
 			List<Entity> returnEntities = new List<Entity> ();
-
 			foreach (Entity e in objects) {
 				if (e.getType () == type)
 					returnEntities.Add(e);
 			}
-
 			return returnEntities;
 		}
 
@@ -440,7 +258,6 @@ namespace KBSGame
 		public List<Entity> getEntitiesOnTerrainTile(PointF point, bool nonSolidOnly = false)
 		{
 			List<Entity> returnObjects = new List<Entity> ();
-		    
             // If nonSolidOnly, use the nonSolidObjects list, else go through all objects
 			foreach (Entity e in objects)
 		    {
@@ -466,7 +283,6 @@ namespace KBSGame
 		public bool checkCollision(Entity entity, PointF target, bool solid = true)
 		{
 			bool collision = false;
-
 			foreach (Entity e in objects) {
 				if (e == entity)
 					continue;
@@ -481,7 +297,6 @@ namespace KBSGame
 					break;
 				}
 			}
-
 			return collision;
 		}
 
@@ -494,7 +309,6 @@ namespace KBSGame
 		public bool checkCollision(Entity entity1, Entity entity2)
 		{
 			bool collision = false;
-
 			PointF loc1 = entity1.getLocation ();
 			PointF loc2 = entity2.getLocation ();
 			if (loc1.X > loc2.X - entity2.getBoundingBox() && loc1.X < loc2.X + entity2.getBoundingBox() && loc1.Y > loc2.Y - entity2.getBoundingBox() && loc1.Y < loc2.Y + entity2.getBoundingBox())
@@ -512,7 +326,6 @@ namespace KBSGame
 		{
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
 				return null;
-
 			return terrainTiles[(int) point.X*height + (int) point.Y];
 		}
 
@@ -534,7 +347,6 @@ namespace KBSGame
 
 			float addX = (point.X - (point.X + StaticVariables.tileSize * offset.X) % StaticVariables.tileSize) / StaticVariables.tileSize;
 			float addY = (point.Y - (point.Y + StaticVariables.tileSize * offset.Y) % StaticVariables.tileSize) / StaticVariables.tileSize;
-
 			int x = view.X + (int)Math.Ceiling(addX);
 			int y = view.Y + (int)Math.Ceiling(addY);
 
@@ -550,7 +362,6 @@ namespace KBSGame
 		{
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
 				return 0;
-
 			return heightData[(int) point.X*height + (int) point.Y];
 		}
 
@@ -563,7 +374,6 @@ namespace KBSGame
 				StaticVariables.viewHeight = height;
 
 			TerrainTile[] returnTiles = new TerrainTile[StaticVariables.viewWidth * StaticVariables.viewHeight];
-
 			//Get viewport
 			Rectangle view = getView ();
 
@@ -573,7 +383,6 @@ namespace KBSGame
 					returnTiles [index++] = terrainTiles[i * height + j];
 				}
 			}
-
 			return returnTiles;
 		}
 
@@ -600,7 +409,6 @@ namespace KBSGame
 				}
 				returnEntities[i] = x;                             
 			}
-
 			return returnEntities.ToArray();
 		}
 
@@ -683,7 +491,6 @@ namespace KBSGame
 				endY = height;
 				startY = height - StaticVariables.viewHeight;
 			}
-
 			return new Rectangle (startX, startY, StaticVariables.viewWidth, StaticVariables.viewHeight);
 		}
 

@@ -11,7 +11,6 @@ namespace KBSGame
 		public Sprite (int ID, String file)
 		{
 			this.ID = ID;
-
 			try {
 			bitmap = (Bitmap)Image.FromFile (file);
 			} catch(System.IO.FileNotFoundException e) {
@@ -20,7 +19,6 @@ namespace KBSGame
 
 				//When file not found, draw a placeholder
 				bitmap = new Bitmap (StaticVariables.tileSize, StaticVariables.tileSize);
-
 				var g = Graphics.FromImage (bitmap);
 				g.Clear (Color.White);
 				g.DrawLine (Pens.Black, 0, 0, StaticVariables.tileSize, StaticVariables.tileSize);
