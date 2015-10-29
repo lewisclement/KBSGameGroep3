@@ -11,7 +11,7 @@ namespace KBSGame
     {
 		static int radius = 5;
 
-        public Enemy(PointF location, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 0.6f)
+        public Enemy(PointF location, Byte height = 50, bool solid = true, Byte depth = 8, float boundingBox = 0.6f)
             : base(ENTITIES.enemy, location, (int)SPRITES.tiki1, solid, height, depth, boundingBox)
         {
 
@@ -29,9 +29,9 @@ namespace KBSGame
 			PointF relativeLocation = new PointF (0.0f, 0.0f);
 			if (player.X > location.X - radius && player.X < location.X + radius) {
 				if (player.X > location.X)
-					relativeLocation.X += 0.075f;
+					relativeLocation.X += 0.06f;
 				else if (player.X < location.X)
-					relativeLocation.X -= 0.075f;
+					relativeLocation.X -= 0.06f;
 
 				move (relativeLocation);
 			}
@@ -39,9 +39,9 @@ namespace KBSGame
 			relativeLocation = new PointF (0.0f, 0.0f);
 			if (player.Y > location.Y - radius && player.Y < location.Y + radius) {
 				if (player.Y > location.Y)
-					relativeLocation.Y += 0.075f;
+					relativeLocation.Y += 0.06f;
 				else if (player.Y < location.Y)
-					relativeLocation.Y -= 0.075f;
+					relativeLocation.Y -= 0.06f;
 
 				move (relativeLocation);
 			} 
