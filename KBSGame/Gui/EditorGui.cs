@@ -514,7 +514,6 @@ namespace KBSGame
 			currentHover = mousePos;
 		}
 
-
 		private void drawTabbar(Graphics g)
 		{
 			//Draw tabbar icons
@@ -568,7 +567,6 @@ namespace KBSGame
 				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
 		}
 
-
 		/// <summary>
 		/// Loads the entities used for placing in world
 		/// </summary>
@@ -617,6 +615,10 @@ namespace KBSGame
             entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut2, 50, false));
             entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut3, 50, false));
             entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut4, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.rock, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.mountain, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.cage, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.logpile, 50, false));
         }
 	}
 }

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace KBSGame
 {
+    /// <summary>
+    /// Extention of the Entity class.
+    /// </summary>
     public class Key : Entity
     {
         private static int KeyCount = 0;
@@ -18,6 +21,7 @@ namespace KBSGame
             Keyid = KeyCount++;
         }
 
+        //Simple getter to get the Key ID which connects to a certain doorID.
         public int getKeyid()
         {
             return Keyid;

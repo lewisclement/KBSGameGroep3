@@ -109,6 +109,10 @@ namespace KBSGame
 			this.location = point;
 		}
 
+        /// <summary>
+        /// Set DrawOrder which allows more depth for the player when standing on top of an entity.
+        /// </summary>
+        /// <param name="drawOrder"></param>
 		protected void setDrawOrder(Byte drawOrder)
 		{
 			if (drawOrder >= StaticVariables.drawOrderSize)
@@ -120,13 +124,12 @@ namespace KBSGame
 		public virtual void move(World sender, PointF relativeLocation)
 		{
 			//Entity checks
-
 			//Have world move the entity
-
 			location.X += relativeLocation.X;
 			location.Y += relativeLocation.Y;
 		}
 
+        //Reaction on Collision.
 		public virtual void onCollision()
         {
 		}

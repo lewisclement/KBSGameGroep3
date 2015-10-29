@@ -13,8 +13,7 @@ namespace KBSGame
 	public class Player : Entity
 	{
 		public List<Item> Inventory { get; private set; }
-	    public enum Direction { Up = 0, Down, Left, Right };
-
+	    public enum Direction { Up = 0, Down, Left, Right }
 	    public int CurrentDirection;
 
 	    public Player(PointF location, Byte height)
@@ -77,17 +76,13 @@ namespace KBSGame
 	            w.getEntitiesOnTerrainTile(getLocation(), true)
 	                .Where(e => e.getSpriteID() == (int) SPRITES.banana || e.getSpriteID() == (int) SPRITES.key)
 	                .ToList();
-
             // If there's nothing in the list of entities, return;
 	        if (EntitiesOnTile.Count == 0) return;
-
             // Add first item of list to inventory
 	        Inventory.Add(new Item(EntitiesOnTile[0]));
-
             // If key is picked up, unlock door
 	        if (EntitiesOnTile[0] is Key)
                 w.UnlockDoor((Key)EntitiesOnTile[0]);
-
 	        // Remove item from world
 	        w.getEntities().Remove(EntitiesOnTile[0]);
         }
@@ -100,7 +95,6 @@ namespace KBSGame
         public void DropItem(World world)
         {
             PointF dropLocation = GetLocationInFrontOfPlayer();
-
             // Check if item can be dropped on target from dropLocation
             bool isLand = world.getTerraintile(dropLocation).IsWalkable;
             bool hasSolidEntitiesOnTarget = world.checkCollision(this, dropLocation);
@@ -114,7 +108,6 @@ namespace KBSGame
             if (!Inventory.Any() || hasSolidEntitiesOnTarget || 
                 (!isLand && !hasWaterlilyOnTarget))
                 return;
-
             // If item is key, lock door
             if (Inventory[0].Entity is Key)
             {
