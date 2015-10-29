@@ -21,10 +21,12 @@ namespace World_AddEntity
         [TestMethod]
         public void testAddEntity()
         {
+
+            //Create new entity
             entityTest = new Entity(ENTITIES.def, new PointF(1,1), 22, false, 50, 8, 1);
-
+            //Add entitiy to the list in world
             w.getEntities().Add(entityTest);
-
+            //Check if the new entity is added
             Assert.AreEqual(w.getEntities()[0], entityTest);
             
         }
