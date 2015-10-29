@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml;
 using KBSGame.Entities;
 using System.IO;
+using System.Windows.Forms;
 
 namespace KBSGame
 {
@@ -58,7 +59,7 @@ namespace KBSGame
                 {
                     fileName = currentLevelPath;
                 }
-
+                
 				objects = new List<Entity> ();
 				terrainTiles = new List<TerrainTile> ();
 				heightData = new List<Byte> ();
@@ -105,8 +106,14 @@ namespace KBSGame
 			    player = new Player(new PointF(120, 120), 50);
 				FillWorld (TERRAIN.grass_normal, new Size(50, 50));
 			}
-            System.Media.SoundPlayer music = new System.Media.SoundPlayer(StaticVariables.musicFolder + ("/Icescape.wav"));
-            music.Play();
+            try {
+                System.Media.SoundPlayer music = new System.Media.SoundPlayer(StaticVariables.musicFolder + ("/Icescape.wav"));
+                music.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
