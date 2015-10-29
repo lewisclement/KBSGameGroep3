@@ -119,6 +119,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\music\Icescape.wav" />
+    <Content Include="bin\Debug\music\On_the_moon.wav" />
     <Content Include="bin\Debug\sprites\bamboo.png" />
     <Content Include="bin\Debug\sprites\cage.png" />
     <Content Include="bin\Debug\sprites\dark_dirt.png" />

@@ -63,7 +63,8 @@ namespace KBSGame
 		public static String levelFolder = null;
 		public static String spriteFolder = null;
         public static String textFolder = null;
-		public const Byte drawOrderSize = 16;
+        public static String musicFolder = null;
+        public const Byte drawOrderSize = 16;
 		public static STATE currentState = STATE.main;
 		public static int dpi;
 		public static Controller controller;

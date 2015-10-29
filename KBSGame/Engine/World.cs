@@ -105,6 +105,8 @@ namespace KBSGame
 			    player = new Player(new PointF(120, 120), 50);
 				FillWorld (TERRAIN.grass_normal, new Size(50, 50));
 			}
+            System.Media.SoundPlayer music = new System.Media.SoundPlayer(StaticVariables.musicFolder + ("/Icescape.wav"));
+            music.Play();
         }
 
         /// <summary>
