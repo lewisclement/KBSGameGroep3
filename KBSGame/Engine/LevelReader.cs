@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace KBSGame
 {
+	/// <summary>
+	/// Level reader.
+	/// </summary>
 	public class LevelReader
 	{
 		private XmlDocument reader;
@@ -27,13 +30,18 @@ namespace KBSGame
 				Console.WriteLine(ex.Message);
 			}
 		}
-
+		/// <summary>
+		/// Reads the objects from XML file and returns them.
+		/// </summary>
+		/// <returns>The objects.</returns>
 		public List<Entity> getObjects()
 		{
 			List<Entity> objects = new List<Entity> ();
-			XmlNodeList entityList = reader.GetElementsByTagName(xmlVar.Entity);
+            // filters the XMLNodeList on Entity
+            XmlNodeList entityList = reader.GetElementsByTagName(xmlVar.Entity);
 			foreach (XmlNode entity in entityList)
 			{
+                // Tries to get data from xml, and convert them to the neccesary data
 				try {
 					PointF location = new PointF();
 					location.X = float.Parse(entity["x"].InnerText);
@@ -69,7 +77,7 @@ namespace KBSGame
                     {
                         MessageBox.Show(ex.Message);
                     }
-
+                    // creates objects like players, enemys, finishes, traps, keys, doors, plants and default entities.
 					switch (Int32.Parse(entity[xmlVar.Type].InnerText))
 					{
 					case (int)ENTITIES.player:
@@ -105,13 +113,17 @@ namespace KBSGame
 
 			return objects;
 		}
-
+		/// <summary>
+		/// Gets the terrain tiles.
+		/// </summary>
+		/// <returns>The terrain tiles.</returns>
 		public List<int> getTerrainTiles()
 		{
+            // gets all tile data from xml file
 			XmlNodeList TerraintileList = reader.GetElementsByTagName(xmlVar.Tile);
 
 			List<int> terrainTiles = new List<int> ();
-
+            // puts the data in a list
 			foreach (XmlNode TerrainList in TerraintileList)
 			{
 				terrainTiles.Add(Int32.Parse(TerrainList[xmlVar.ID].InnerText));
@@ -119,7 +131,10 @@ namespace KBSGame
 
 			return terrainTiles;
 		}
-
+		/// <summary>
+		/// Gets the size.
+		/// </summary>
+		/// <returns>The size.</returns>
 		public Size getSize()
 		{
 			XmlNode size = reader.GetElementsByTagName("size")[0];

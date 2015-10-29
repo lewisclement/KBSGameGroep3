@@ -2,27 +2,47 @@ using System;
 
 namespace KBSGame
 {
-    public enum SPRITES : int {water=0, grass, sand, player, dirt, 
-								sapling1, sapling2, tallgrass, waterlily, key,
-								banana, finish, berrybush, trapOpened, trapClosed,
-								brick, clay, farmland, planks_birch, 
-								red_sand, sandstone, stone, stonebrick, stone_diorite, 
-								stone_granite, 
-								flower_allium, flower_blue_orchid, flower_dandelion, flower_houstonia, flower_oxeye_daisy, 
-								flower_rose, flower_tulip_orange, flower_tulip_pink, flower_tulip_red, flower_tulip_white, 
-								carrots_stage_0, carrots_stage_1, carrots_stage_2, carrots_stage_3, 
-								sapling_acacia, sapling_birch, sapling_jungle, sapling_oak, sapling_roofed_oak, sapling_spruce, 
-								wheat_stage_7, deadbush, icon_world,
-								save, load, doorClosed, doorOpened, peerbomb, tiki, tiki2, count
-    };
-	
-	public enum ENTITIES : int {def=0, player, finish, key, plant, fruit, trap,
-        carrots, flower, sapling, door, peerbomb, tiki, tiki2, enemy, count
+    public enum SPRITES : int
+    { 
+        //Tiles
+        water = 0, dirt, light_dirt, dark_dirt,
+        clay, red_sand, sand, sandstone,
+        grass_normal, grass_dark, grass_noisy, grass_path,
+        stone_cracked_light, stone_cracked_dark, stone_mossy_light, stone_mossy_dark, 
+        stone, stone_wall, stonebrick, stone_diorite,
+        lava, lava_stones, stone_granite,
+        //Trees and Plants
+        tree1, tree2, tree3,
+        sapling_acacia, sapling_jungle, sapling_oak, sapling_roofed_oak,
+        shrub1, shrub2, tallgrass, 
+        waterlily, bamboo,
+        flower_allium, flower_blue_orchid, flower_dandelion, flower_houstonia, flower_oxeye_daisy,
+        flower_rose, flower_tulip_orange, flower_tulip_pink, flower_tulip_red, flower_tulip_white,
+        //Objects
+        hut1, hut2, hut3, hut4, cage, logpile,
+        rock, mountain,
+        key, door_opened, door_closed,
+        trap_opened, trap_closed,
+        banana, tiki1, tiki2, peerbomb, player,
+        //Icons
+        finish, icon_world, folder, save, load, count
     };
 
-    public enum TERRAIN : int {water=0, grass, sand, dirt, brick, clay, farmland, planks_birch, 
-								red_sand, sandstone, stone, stonebrick, stone_diorite, 
-								stone_granite, count};
+    public enum ENTITIES : int
+    {
+        def = 0, player, finish, key, plant,
+        fruit, trap, carrots, flower, sapling,
+        door, peerbomb, tiki1, tiki2, enemy, count
+    };
+
+    public enum TERRAIN : int {
+        water = 0, dirt, light_dirt, dark_dirt,
+        clay, red_sand, sand, sandstone,
+        grass_normal, grass_dark, grass_noisy, grass_path,
+        stone_cracked_light, stone_cracked_dark, stone_mossy_light, stone_mossy_dark, 
+        stone, stone_wall, stonebrick, stone_diorite,
+        lava, lava_stones, stone_granite,
+        count };
 	
 	public enum GUI : int {def=0, gameover, finish, guiinventory, editor, count};
 

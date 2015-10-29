@@ -28,7 +28,7 @@ namespace PlayerInventoryTest
             // Initialize world
             this.w = new World(Size, Size);
             // Fill world with tiles of grass
-            w.FillWorld(TERRAIN.grass, new Size(Size, Size));
+            w.FillWorld(TERRAIN.grass_normal, new Size(Size, Size));
             // Fill third row with water
             for (int i = 0; i <= 2; i++)
                 w.setTerraintile(new Point(i, 2), (int)SPRITES.water);

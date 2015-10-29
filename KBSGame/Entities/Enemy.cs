@@ -10,7 +10,7 @@ namespace KBSGame
     class Enemy : Entity
     {
         public Enemy(PointF location, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 1.0f)
-            : base(ENTITIES.enemy, location, (int)SPRITES.tiki, solid, height, depth, boundingBox)
+            : base(ENTITIES.enemy, location, (int)SPRITES.tiki1, solid, height, depth, boundingBox)
         {
 
         }

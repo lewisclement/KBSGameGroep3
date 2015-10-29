@@ -109,7 +109,7 @@ namespace KBSGame
 				currentLevelPath = fileName;
 			} else {
 			    player = new Player(new PointF(120, 120), 50);
-				FillWorld (TERRAIN.grass, new Size(50, 50));
+				FillWorld (TERRAIN.grass_normal, new Size(50, 50));
 			}
         }
 
@@ -143,7 +143,7 @@ namespace KBSGame
 		{
 			for (int i = 0; i < width * height; i++) 
 			{
-				terrainTiles.Add (TileTypes [(int)TERRAIN.grass]);
+				terrainTiles.Add (TileTypes [(int)TERRAIN.grass_normal]);
 				heightData.Add (50);
 
 			}
@@ -259,22 +259,20 @@ namespace KBSGame
 				for (int y = 0; y < height; y++) {
 					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.dirt) {
 						if (rand.Next (0, 5) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f + (rand.Next(-3, 3) / 10.0f), y + 0.5f - (rand.Next(0, 3) / 10.0f)), (int)SPRITES.sapling1, 50, true));
+							objects.Add (new Plant(new PointF(x + 0.5f + (rand.Next(-3, 3) / 10.0f), y + 0.5f - (rand.Next(0, 3) / 10.0f)), (int)SPRITES.tree1, 50, true));
 						if(rand.Next(0, 50) == 0)
 							objects.Add (new Entity(ENTITIES.fruit, new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.banana, false, 50, 9, 0.6f));
 					}
 
-					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass) {
+					if (terrainTiles [x * height + y].getID () == (int)TERRAIN.grass_normal) {
 						if(rand.Next(0, 100) == 0)
-							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.sapling2, 50, true));
+							objects.Add (new Plant(new PointF(x + 0.5f, y + 0.5f), (int)SPRITES.tree2, 50, true));
 						if(rand.Next(0, 100) == 0) {
 							int amountbushes = rand.Next (4, 10);
 							for (int i = 0; i < amountbushes; i++) {
 								float X = rand.Next (0, 40) / 10.0f - 2.0f;
 								float Y = rand.Next (0, 40) / 10.0f - 2.0f;
 								TerrainTile tile = getTerraintile (new PointF (x + X, y + Y));
-								if(tile != null && tile.IsWalkable)
-									objects.Add (new Plant(new PointF(x + X, y + Y), (int)SPRITES.berrybush, 50, true, 10, 0.2f));
 							}
 						}
 					}
@@ -730,25 +728,35 @@ namespace KBSGame
 	    private void loadTileTypes() 
 		{
 			TileTypes = new TerrainTile[(int)TERRAIN.count];
+            TileTypes[(int)TERRAIN.water] = new TerrainTile((int)TERRAIN.water, (int)SPRITES.water, false);
 
-			TileTypes [(int)TERRAIN.grass] = new TerrainTile ((int)TERRAIN.grass, (int)SPRITES.grass);
-			TileTypes [(int)TERRAIN.water] = new TerrainTile ((int)TERRAIN.water, (int)SPRITES.water, false);
-			TileTypes [(int)TERRAIN.planks_birch] = new TerrainTile ((int)TERRAIN.planks_birch, (int)SPRITES.planks_birch);
+            //Sandy types
+            TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt, (int)SPRITES.dirt);
+            TileTypes [(int)TERRAIN.light_dirt] = new TerrainTile ((int)TERRAIN.light_dirt, (int)SPRITES.light_dirt);
+            TileTypes [(int)TERRAIN.dark_dirt] = new TerrainTile ((int)TERRAIN.dark_dirt, (int)SPRITES.dark_dirt);
+            TileTypes[(int)TERRAIN.clay] = new TerrainTile((int)TERRAIN.clay, (int)SPRITES.clay);
+            TileTypes[(int)TERRAIN.red_sand] = new TerrainTile((int)TERRAIN.red_sand, (int)SPRITES.red_sand);
+            TileTypes[(int)TERRAIN.sand] = new TerrainTile((int)TERRAIN.sand, (int)SPRITES.sand);
+            TileTypes[(int)TERRAIN.sandstone] = new TerrainTile((int)TERRAIN.sandstone, (int)SPRITES.sandstone);
 
-			//Sandy types
-			TileTypes [(int)TERRAIN.sand] = new TerrainTile ((int)TERRAIN.sand, (int)SPRITES.sand);
-			TileTypes [(int)TERRAIN.red_sand] = new TerrainTile ((int)TERRAIN.red_sand, (int)SPRITES.red_sand);
-			TileTypes [(int)TERRAIN.clay] = new TerrainTile ((int)TERRAIN.clay, (int)SPRITES.clay);
-			TileTypes [(int)TERRAIN.sandstone] = new TerrainTile ((int)TERRAIN.sandstone, (int)SPRITES.sandstone);
-			TileTypes [(int)TERRAIN.dirt] = new TerrainTile ((int)TERRAIN.dirt, (int)SPRITES.dirt);
-			TileTypes [(int)TERRAIN.farmland] = new TerrainTile ((int)TERRAIN.farmland, (int)SPRITES.farmland);
+            //Grassy types
+            TileTypes [(int)TERRAIN.grass_normal] = new TerrainTile ((int)TERRAIN.grass_normal, (int)SPRITES.grass_normal);
+            TileTypes [(int)TERRAIN.grass_dark] = new TerrainTile ((int)TERRAIN.grass_dark, (int)SPRITES.grass_dark);
+            TileTypes [(int)TERRAIN.grass_noisy] = new TerrainTile ((int)TERRAIN.grass_noisy, (int)SPRITES.grass_noisy);
+            TileTypes [(int)TERRAIN.grass_path] = new TerrainTile ((int)TERRAIN.grass_path, (int)SPRITES.grass_path);
 
 			//Rocky types
-			TileTypes [(int)TERRAIN.stone] = new TerrainTile ((int)TERRAIN.stone, (int)SPRITES.stone);
+            TileTypes [(int)TERRAIN.stone_cracked_light] = new TerrainTile ((int)TERRAIN.stone_cracked_light, (int)SPRITES.stone_cracked_light);
+            TileTypes [(int)TERRAIN.stone_cracked_dark] = new TerrainTile ((int)TERRAIN.stone_cracked_dark, (int)SPRITES.stone_cracked_dark);
+            TileTypes [(int)TERRAIN.stone_mossy_light] = new TerrainTile ((int)TERRAIN.stone_mossy_light, (int)SPRITES.stone_mossy_light);
+            TileTypes [(int)TERRAIN.stone_mossy_dark] = new TerrainTile ((int)TERRAIN.stone_mossy_dark, (int)SPRITES.stone_mossy_dark);
+            TileTypes [(int)TERRAIN.stone] = new TerrainTile ((int)TERRAIN.stone, (int)SPRITES.stone);
+            TileTypes [(int)TERRAIN.stone_wall] = new TerrainTile ((int)TERRAIN.stone_wall, (int)SPRITES.stone_wall);
+            TileTypes [(int)TERRAIN.stonebrick] = new TerrainTile ((int)TERRAIN.stonebrick, (int)SPRITES.stonebrick);
 			TileTypes [(int)TERRAIN.stone_diorite] = new TerrainTile ((int)TERRAIN.stone_diorite, (int)SPRITES.stone_diorite);
+            TileTypes [(int)TERRAIN.lava] = new TerrainTile ((int)TERRAIN.lava, (int)SPRITES.lava);
+            TileTypes [(int)TERRAIN.lava_stones] = new TerrainTile ((int)TERRAIN.lava_stones, (int)SPRITES.lava_stones);
 			TileTypes [(int)TERRAIN.stone_granite] = new TerrainTile ((int)TERRAIN.stone_granite, (int)SPRITES.stone_granite);
-			TileTypes [(int)TERRAIN.stonebrick] = new TerrainTile ((int)TERRAIN.stonebrick, (int)SPRITES.stonebrick);
-			TileTypes [(int)TERRAIN.brick] = new TerrainTile ((int)TERRAIN.brick, (int)SPRITES.brick);
 		}
 
         /// <summary>

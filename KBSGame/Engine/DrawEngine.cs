@@ -201,42 +201,50 @@ namespace KBSGame
 
 			sprites[(int)SPRITES.player] = new Sprite((int)SPRITES.player, StaticVariables.spriteFolder + "/player.png");
             sprites[(int)SPRITES.peerbomb] = new Sprite((int)SPRITES.peerbomb, StaticVariables.spriteFolder + "/peerbomb.png");
-            sprites[(int)SPRITES.tiki] = new Sprite((int)SPRITES.tiki, StaticVariables.spriteFolder + "/tiki.png");
+            sprites[(int)SPRITES.tiki1] = new Sprite((int)SPRITES.tiki1, StaticVariables.spriteFolder + "/tiki1.png");
             sprites[(int)SPRITES.tiki2] = new Sprite((int)SPRITES.tiki2, StaticVariables.spriteFolder + "/tiki2.png");
             sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.spriteFolder + "/banana.png");
 			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.spriteFolder + "/gold_key.png");
 			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.spriteFolder + "/finish.png");
-			sprites[(int)SPRITES.trapOpened] = new Sprite((int)SPRITES.trapOpened, StaticVariables.spriteFolder + "/trap_opened.png");
-			sprites[(int)SPRITES.trapClosed] = new Sprite((int)SPRITES.trapClosed, StaticVariables.spriteFolder + "/trap_closed.png");
+			sprites[(int)SPRITES.trap_opened] = new Sprite((int)SPRITES.trap_opened, StaticVariables.spriteFolder + "/trap_opened.png");
+			sprites[(int)SPRITES.trap_closed] = new Sprite((int)SPRITES.trap_closed, StaticVariables.spriteFolder + "/trap_closed.png");
 			sprites[(int)SPRITES.icon_world] = new Sprite((int)SPRITES.icon_world, StaticVariables.spriteFolder + "/icon_world.png");
 			sprites[(int)SPRITES.save] = new Sprite((int)SPRITES.save, StaticVariables.spriteFolder + "/save.png");
 			sprites[(int)SPRITES.load] = new Sprite((int)SPRITES.load, StaticVariables.spriteFolder + "/folder.png");
 
 			//Terrain
-			sprites[(int)SPRITES.water] = new Sprite((int)SPRITES.water, StaticVariables.spriteFolder + "/water_still.png");
-			sprites[(int)SPRITES.grass] = new Sprite((int)SPRITES.grass, StaticVariables.spriteFolder + "/grass_top.png");
-			sprites[(int)SPRITES.sand] = new Sprite((int)SPRITES.sand, StaticVariables.spriteFolder + "/sand.png");
-			sprites[(int)SPRITES.dirt] = new Sprite((int)SPRITES.dirt, StaticVariables.spriteFolder + "/dirt.png");
-			sprites[(int)SPRITES.clay] = new Sprite((int)SPRITES.clay, StaticVariables.spriteFolder + "/clay.png");
-			sprites[(int)SPRITES.brick] = new Sprite((int)SPRITES.brick, StaticVariables.spriteFolder + "/brick.png");
-			sprites[(int)SPRITES.farmland] = new Sprite((int)SPRITES.farmland, StaticVariables.spriteFolder + "/farmland_wet.png");
-			sprites[(int)SPRITES.planks_birch] = new Sprite((int)SPRITES.planks_birch, StaticVariables.spriteFolder + "/planks_birch.png");
-			sprites[(int)SPRITES.red_sand] = new Sprite((int)SPRITES.red_sand, StaticVariables.spriteFolder + "/red_sand.png");
-			sprites[(int)SPRITES.sandstone] = new Sprite((int)SPRITES.sandstone, StaticVariables.spriteFolder + "/sandstone.png");
-			sprites[(int)SPRITES.stone] = new Sprite((int)SPRITES.stone, StaticVariables.spriteFolder + "/stone.png");
-			sprites[(int)SPRITES.stonebrick] = new Sprite((int)SPRITES.stonebrick, StaticVariables.spriteFolder + "/stonebrick.png");
+			sprites[(int)SPRITES.water] = new Sprite((int)SPRITES.water, StaticVariables.spriteFolder + "/water.png");
+            sprites[(int)SPRITES.dirt] = new Sprite((int)SPRITES.dirt, StaticVariables.spriteFolder + "/dirt.png");
+            sprites[(int)SPRITES.light_dirt] = new Sprite((int)SPRITES.light_dirt, StaticVariables.spriteFolder + "/light_dirt.png");
+            sprites[(int)SPRITES.dark_dirt] = new Sprite((int)SPRITES.dark_dirt, StaticVariables.spriteFolder + "/dark_dirt.png");
+            sprites[(int)SPRITES.clay] = new Sprite((int)SPRITES.clay, StaticVariables.spriteFolder + "/clay.png");
+            sprites[(int)SPRITES.red_sand] = new Sprite((int)SPRITES.red_sand, StaticVariables.spriteFolder + "/red_sand.png");
+            sprites[(int)SPRITES.sand] = new Sprite((int)SPRITES.sand, StaticVariables.spriteFolder + "/sand.png");
+            sprites[(int)SPRITES.sandstone] = new Sprite((int)SPRITES.sandstone, StaticVariables.spriteFolder + "/sandstone.png");
+            sprites[(int)SPRITES.grass_normal] = new Sprite((int)SPRITES.grass_normal, StaticVariables.spriteFolder + "/grass_normal.png");
+            sprites[(int)SPRITES.grass_dark] = new Sprite((int)SPRITES.grass_dark, StaticVariables.spriteFolder + "/grass_dark.png");
+            sprites[(int)SPRITES.grass_noisy] = new Sprite((int)SPRITES.grass_noisy, StaticVariables.spriteFolder + "/grass_noisy.png");
+            sprites[(int)SPRITES.grass_path] = new Sprite((int)SPRITES.grass_path, StaticVariables.spriteFolder + "/grass_path.png");
+            sprites[(int)SPRITES.stone_cracked_light] = new Sprite((int)SPRITES.stone_cracked_light, StaticVariables.spriteFolder + "/stone_cracked_light.png");
+            sprites[(int)SPRITES.stone_cracked_dark] = new Sprite((int)SPRITES.stone_cracked_dark, StaticVariables.spriteFolder + "/stone_cracked_dark.png");
+            sprites[(int)SPRITES.stone_mossy_light] = new Sprite((int)SPRITES.stone_mossy_light, StaticVariables.spriteFolder + "/stone_mossy_light.png");
+            sprites[(int)SPRITES.stone_mossy_dark] = new Sprite((int)SPRITES.stone_mossy_dark, StaticVariables.spriteFolder + "/stone_mossy_dark.png");
+            sprites[(int)SPRITES.stone] = new Sprite((int)SPRITES.stone, StaticVariables.spriteFolder + "/stone.png");
+            sprites[(int)SPRITES.stone_wall] = new Sprite((int)SPRITES.stone_wall, StaticVariables.spriteFolder + "/stone_wall.png");
+            sprites[(int)SPRITES.stonebrick] = new Sprite((int)SPRITES.stonebrick, StaticVariables.spriteFolder + "/stonebrick.png");
 			sprites[(int)SPRITES.stone_diorite] = new Sprite((int)SPRITES.stone_diorite, StaticVariables.spriteFolder + "/stone_diorite.png");
-			sprites[(int)SPRITES.stone_granite] = new Sprite((int)SPRITES.stone_granite, StaticVariables.spriteFolder + "/stone_granite.png");
+            sprites[(int)SPRITES.lava] = new Sprite((int)SPRITES.lava, StaticVariables.spriteFolder + "/lava.png");
+            sprites[(int)SPRITES.lava_stones] = new Sprite((int)SPRITES.lava_stones, StaticVariables.spriteFolder + "/lava_stones.png");
+            sprites[(int)SPRITES.stone_granite] = new Sprite((int)SPRITES.stone_granite, StaticVariables.spriteFolder + "/stone_granite.png");
 
-			//Saplings
-			sprites[(int)SPRITES.sapling1] = new Sprite((int)SPRITES.sapling1, StaticVariables.spriteFolder + "/sapling1.png");
-			sprites[(int)SPRITES.sapling2] = new Sprite((int)SPRITES.sapling2, StaticVariables.spriteFolder + "/sapling2.png");
-			sprites[(int)SPRITES.sapling_acacia] = new Sprite((int)SPRITES.sapling_acacia, StaticVariables.spriteFolder + "/sapling_acacia.png");
-			sprites[(int)SPRITES.sapling_birch] = new Sprite((int)SPRITES.sapling_birch, StaticVariables.spriteFolder + "/sapling_birch.png");
+            //Trees
+            sprites[(int)SPRITES.tree1] = new Sprite((int)SPRITES.tree1, StaticVariables.spriteFolder + "/tree1.png");
+            sprites[(int)SPRITES.tree2] = new Sprite((int)SPRITES.tree2, StaticVariables.spriteFolder + "/tree2.png");
+            sprites[(int)SPRITES.tree3] = new Sprite((int)SPRITES.tree3, StaticVariables.spriteFolder + "/tree3.png");
+            sprites[(int)SPRITES.sapling_acacia] = new Sprite((int)SPRITES.sapling_acacia, StaticVariables.spriteFolder + "/sapling_acacia.png");
 			sprites[(int)SPRITES.sapling_jungle] = new Sprite((int)SPRITES.sapling_jungle, StaticVariables.spriteFolder + "/sapling_jungle.png");
 			sprites[(int)SPRITES.sapling_oak] = new Sprite((int)SPRITES.sapling_oak, StaticVariables.spriteFolder + "/sapling_oak.png");
 			sprites[(int)SPRITES.sapling_roofed_oak] = new Sprite((int)SPRITES.sapling_roofed_oak, StaticVariables.spriteFolder + "/sapling_roofed_oak.png");
-			sprites[(int)SPRITES.sapling_spruce] = new Sprite((int)SPRITES.sapling_spruce, StaticVariables.spriteFolder + "/sapling_spruce.png");
 
 			//Flowers
 			sprites[(int)SPRITES.flower_rose] = new Sprite((int)SPRITES.flower_rose, StaticVariables.spriteFolder + "/flower_rose.png");
@@ -250,20 +258,24 @@ namespace KBSGame
 			sprites[(int)SPRITES.flower_tulip_red] = new Sprite((int)SPRITES.flower_tulip_red, StaticVariables.spriteFolder + "/flower_tulip_red.png");
 			sprites[(int)SPRITES.flower_tulip_white] = new Sprite((int)SPRITES.flower_tulip_white, StaticVariables.spriteFolder + "/flower_tulip_white.png");
 
-			//Misc plants
-			sprites[(int)SPRITES.berrybush] = new Sprite((int)SPRITES.berrybush, StaticVariables.spriteFolder + "/berrybush.png");
+            //Misc plants
 			sprites[(int)SPRITES.waterlily] = new Sprite((int)SPRITES.waterlily, StaticVariables.spriteFolder + "/waterlily.png");
 			sprites[(int)SPRITES.tallgrass] = new Sprite((int)SPRITES.tallgrass, StaticVariables.spriteFolder + "/tallgrass.png");
-			sprites[(int)SPRITES.deadbush] = new Sprite((int)SPRITES.deadbush, StaticVariables.spriteFolder + "/deadbush.png");
-			sprites[(int)SPRITES.wheat_stage_7] = new Sprite((int)SPRITES.wheat_stage_7, StaticVariables.spriteFolder + "/wheat_stage_7.png");
-			sprites[(int)SPRITES.carrots_stage_0] = new Sprite((int)SPRITES.carrots_stage_0, StaticVariables.spriteFolder + "/carrots_stage_0.png");
-			sprites[(int)SPRITES.carrots_stage_1] = new Sprite((int)SPRITES.carrots_stage_1, StaticVariables.spriteFolder + "/carrots_stage_1.png");
-			sprites[(int)SPRITES.carrots_stage_2] = new Sprite((int)SPRITES.carrots_stage_2, StaticVariables.spriteFolder + "/carrots_stage_2.png");
-			sprites[(int)SPRITES.carrots_stage_3] = new Sprite((int)SPRITES.carrots_stage_3, StaticVariables.spriteFolder + "/carrots_stage_3.png");
+            sprites[(int)SPRITES.shrub1] = new Sprite((int)SPRITES.shrub1, StaticVariables.spriteFolder + "/shrub1.png");
+            sprites[(int)SPRITES.shrub2] = new Sprite((int)SPRITES.shrub2, StaticVariables.spriteFolder + "/shrub2.png");
+            sprites[(int)SPRITES.bamboo] = new Sprite((int)SPRITES.bamboo, StaticVariables.spriteFolder + "/bamboo.png");
 
-            //Door
-            sprites[(int)SPRITES.doorClosed] = new Sprite((int)SPRITES.doorClosed, StaticVariables.spriteFolder + "/door_closed.png");
-            sprites[(int)SPRITES.doorOpened] = new Sprite((int)SPRITES.doorOpened, StaticVariables.spriteFolder + "/door_opened.png");
+            //Objects
+            sprites[(int)SPRITES.rock] = new Sprite((int)SPRITES.rock, StaticVariables.spriteFolder + "/rock.png");
+            sprites[(int)SPRITES.mountain] = new Sprite((int)SPRITES.mountain, StaticVariables.spriteFolder + "/mountain.png");
+            sprites[(int)SPRITES.cage] = new Sprite((int)SPRITES.cage, StaticVariables.spriteFolder + "/cage.png");
+            sprites[(int)SPRITES.logpile] = new Sprite((int)SPRITES.logpile, StaticVariables.spriteFolder + "/logpile.png");
+            sprites[(int)SPRITES.hut1] = new Sprite((int)SPRITES.hut1, StaticVariables.spriteFolder + "/hut1.png");
+            sprites[(int)SPRITES.hut2] = new Sprite((int)SPRITES.hut2, StaticVariables.spriteFolder + "/hut2.png");
+            sprites[(int)SPRITES.hut3] = new Sprite((int)SPRITES.hut3, StaticVariables.spriteFolder + "/hut3.png");
+            sprites[(int)SPRITES.hut4] = new Sprite((int)SPRITES.hut4, StaticVariables.spriteFolder + "/hut4.png");
+            sprites[(int)SPRITES.door_opened] = new Sprite((int)SPRITES.door_opened, StaticVariables.spriteFolder + "/door_opened.png");
+            sprites[(int)SPRITES.door_closed] = new Sprite((int)SPRITES.door_closed, StaticVariables.spriteFolder + "/door_closed.png");
             return sprites;
 		}
 	}

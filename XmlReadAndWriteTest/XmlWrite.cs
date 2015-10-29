@@ -24,11 +24,11 @@ namespace XmlReadAndWriteTest
             // create world
             this.w = new World(10, 10);
             // fill world
-            this.w.FillWorld(TERRAIN.grass, new Size(10, 10));
+            this.w.FillWorld(TERRAIN.grass_normal, new Size(10, 10));
             // initialize player
             this.w.InitPlayer(new PointF(5, 5));
             this.p = w.getPlayer();
-            Trap trap = new Trap(new PointF(2,2),(int)SPRITES.trapOpened);
+            Trap trap = new Trap(new PointF(2,2),(int)SPRITES.trap_opened);
             w.addEntity(trap);
             LevelWriter.saveWorld(this.w, this.file);
             beforelist = new TerrainTile[w.getTerrain().Count];

@@ -553,7 +553,7 @@ namespace KBSGame
 				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
 
 			//Terrain icon
-			bmp = DrawEngine.sprites [(int)SPRITES.grass].getBitmap ();
+			bmp = DrawEngine.sprites [(int)SPRITES.grass_normal].getBitmap ();
 			y = margin + StaticVariables.tileSize;
 			g.DrawImage (tileIcon, xTile, y, StaticVariables.tileSize, StaticVariables.tileSize);
 			y += StaticVariables.tileSize * 0.2f;
@@ -602,18 +602,17 @@ namespace KBSGame
             entityList.Add (new Finish (new PointF (0, 0)));
 
 			entityList.Add (new Entity (ENTITIES.fruit, new PointF (0, 0), (int)SPRITES.banana));
-			entityList.Add (new Trap(new PointF(0,0),(int)SPRITES.trapOpened));
+			entityList.Add (new Trap(new PointF(0,0),(int)SPRITES.trap_opened));
 
 			///Plants
 			//Trees
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling1));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling2));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_acacia));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_birch));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.tree1));
+			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.tree2));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.tree3));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_acacia));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_jungle));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_oak));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_roofed_oak));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.sapling_spruce));
 
 			//Flowers
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_rose, 50, false));
@@ -628,16 +627,20 @@ namespace KBSGame
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.flower_tulip_white, 50, false));
 
 			//Misc plants
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.berrybush, 50, true, 10, 0.2f));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.tallgrass, 50, false));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.deadbush, 50, false));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.wheat_stage_7, 50, false));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_0, 50, false));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_1, 50, false));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_2, 50, false));
-			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.carrots_stage_3, 50, false));
 			entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.waterlily, 50, false));
-		}
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.shrub1, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.shrub2, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.bamboo, 50, false));
+
+            //Objects
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut1, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut2, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut3, 50, false));
+            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut4, 50, false));
+
+
+        }
 	}
 }
 
