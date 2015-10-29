@@ -20,7 +20,7 @@ namespace KBSGame
 		private List<Entity> objects;
 		private Entity focusEntity;
 		private Player player;
-		private List<Tiki1> enemies;
+		private List<Enemy> enemies;
 
 		private String currentLevelPath = null;
 
@@ -40,7 +40,7 @@ namespace KBSGame
 			objects = new List<Entity>();
 			terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
-			enemies = new List<Tiki1> ();
+			enemies = new List<Enemy> ();
 			loadTileTypes ();
 		}
 
@@ -65,7 +65,7 @@ namespace KBSGame
 				objects = new List<Entity> ();
 				terrainTiles = new List<TerrainTile> ();
 				heightData = new List<Byte> ();
-				enemies = new List<Tiki1> ();
+				enemies = new List<Enemy> ();
 
 				LevelReader level = new LevelReader (fileName);
 				this.objects = level.getObjects ();
@@ -91,8 +91,8 @@ namespace KBSGame
 				height = size.Height;
 
 				List<Entity> enemyEntities = objects.FindAll (e => e.getType() == ENTITIES.enemy);
-				foreach (Tiki1 enemy in enemyEntities) {
-					enemies.Add ((Tiki1)enemy);
+				foreach (Enemy enemy in enemyEntities) {
+					enemies.Add ((Enemy)enemy);
 				}
 
 				if (StaticVariables.currentState == STATE.editor) {
@@ -546,7 +546,7 @@ namespace KBSGame
             player = new Player(location, 50);
         }
 
-		public Tiki1[] getEnemies()
+		public Enemy[] getEnemies()
 		{
 			return enemies.ToArray ();
 		}

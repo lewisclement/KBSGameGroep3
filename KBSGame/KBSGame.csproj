@@ -57,9 +57,10 @@
     <Compile Include="Gui\FinishMenu.cs" />
     <Compile Include="Engine\LevelWriter.cs" />
     <Compile Include="Gui\EditorGui.cs" />
-    <Compile Include="Entities\enemies\Tiki1.cs" />
     <Compile Include="Entities\enemies\Tiki2.cs" />
     <Compile Include="Entities\enemies\Peerbomb.cs" />
+    <Compile Include="Entities\Enemy.cs" />
+    <Compile Include="Entities\enemies\Tiki1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
