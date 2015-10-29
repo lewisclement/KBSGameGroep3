@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace KBSGame.gui
 {
-    class FinishMenu : Gui
+    public class FinishMenu : Gui
     {
         private List<Button> buttonList;
 
