@@ -8,16 +8,13 @@ namespace KBSGame
 {
 	public class DrawEngine
 	{
-		public static Sprite[] sprites; 				//List of existing Sprites in game
+		public static Sprite[] sprites; 	    //List of existing Sprites in game
 		private World world;
 		private Bitmap buffer; 					//Back buffer to which the view is drawn
-
 		private int xRes, yRes; 				//Resolution of buffer
 		private int xDrawRes, yDrawRes;
-
 		private List<Gui> Interfaces;			//List of GUI
-		private Gui modalGui;				//Modal interface, blocking all other input/output
-
+		private Gui modalGui;				    //Modal interface, blocking all other input/output
 		private Graphics drawingArea; 			//Store in RAM to minimize createGraphics() calls
 
 		/// <summary>
@@ -31,7 +28,6 @@ namespace KBSGame
 		public DrawEngine (World world, Graphics drawingArea, int xResolution, int yResolution)
 		{
 			this.drawingArea = drawingArea;
-
 			xRes = xResolution;
 			yRes = yResolution;
 
@@ -39,13 +35,11 @@ namespace KBSGame
 			yDrawRes = yRes / 2;
 
 			setView(xDrawRes / StaticVariables.tileSize + 1, yDrawRes / StaticVariables.tileSize + 1);
-
 			buffer = new Bitmap (StaticVariables.viewWidth * StaticVariables.tileSize, StaticVariables.viewHeight * StaticVariables.tileSize);
 			this.world = world;
 
 			// Load sprites
 			sprites = getSprites();
-
 			Menu menu = new Menu ((int)GUI.def, xRes, yRes, xRes / xDrawRes, world);
 
 			Interfaces = new List<Gui> ();
@@ -82,7 +76,6 @@ namespace KBSGame
 				Bitmap render = gui.getRender ();
 				g.DrawImage (render, 0, 0, render.Width, render.Height);
 			}
-
 			drawingArea.DrawImage (buffer, 0, 0, xRes, yRes);
 			g.Dispose ();
 		}
@@ -181,11 +174,18 @@ namespace KBSGame
 			return Interfaces.Count;
 		}
 
+        /// <summary>
+        /// Pauses the background screen.
+        /// </summary>
+        /// <param name="gui"></param>
 		public void setModalGui(GUI gui)
 		{
 			modalGui = Interfaces [(int)gui];
 		}
 
+        /// <summary>
+        /// Removes the background screen.
+        /// </summary>
 		public void disableModalGui() 
 		{
 			modalGui = null;
@@ -274,8 +274,8 @@ namespace KBSGame
             sprites[(int)SPRITES.hut2] = new Sprite((int)SPRITES.hut2, StaticVariables.spriteFolder + "/hut2.png");
             sprites[(int)SPRITES.hut3] = new Sprite((int)SPRITES.hut3, StaticVariables.spriteFolder + "/hut3.png");
             sprites[(int)SPRITES.hut4] = new Sprite((int)SPRITES.hut4, StaticVariables.spriteFolder + "/hut4.png");
-            sprites[(int)SPRITES.door_opened] = new Sprite((int)SPRITES.door_closed, StaticVariables.spriteFolder + "/door_closed.png");
-            sprites[(int)SPRITES.door_closed] = new Sprite((int)SPRITES.door_opened, StaticVariables.spriteFolder + "/door_opened.png");
+            sprites[(int)SPRITES.door_opened] = new Sprite((int)SPRITES.door_opened, StaticVariables.spriteFolder + "/door_opened.png");
+            sprites[(int)SPRITES.door_closed] = new Sprite((int)SPRITES.door_closed, StaticVariables.spriteFolder + "/door_closed.png");
             return sprites;
 		}
 	}

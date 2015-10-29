@@ -41,18 +41,14 @@ namespace KBSGame
 		private int tabbarWidth = StaticVariables.tileSize + margin;
 		private int tabWidth;
 		private const int lineHeight = 20;
-
 		private Point currentHover;
 		private int selectedTab = 0;
 		private int selected = -1;
 		private int rowLength;
 		List<Entity> entityList;
 		TerrainTile[] terrainTiles;
-
-
 		//Save/load tabs
 		FileInfo[] files;
-
 		//World tab
 		Size worldSize;
 
@@ -108,7 +104,6 @@ namespace KBSGame
 		{
 			var g = Graphics.FromImage(buffer);
 			g.Clear(Color.FromArgb(0));
-
 			g.FillRectangle(new SolidBrush(Color.FromArgb(80, Color.Black)), xRes - width, 0, width, yRes);
 
 			switch (selectedTab) {
@@ -130,9 +125,7 @@ namespace KBSGame
 			default:
 				break;
 			}
-
 			drawTabbar (g);
-
 			g.Dispose ();
 			return this.buffer;
 		}
@@ -148,7 +141,6 @@ namespace KBSGame
 			if (currentHover.X < xRes - width) { //Pos in world
 				if (selected >= 0) {
 					PointF offset = world.getViewOffset ();
-
 					int x = (int)(currentHover.X - (currentHover.X + StaticVariables.tileSize * offset.X) % StaticVariables.tileSize);
 					int y = (int)(currentHover.Y - (currentHover.Y + StaticVariables.tileSize * offset.Y) % StaticVariables.tileSize);
 
@@ -199,15 +191,12 @@ namespace KBSGame
 		{
 			int xArea = xRes - width + margin;
 			int yArea = margin;
-
 			int x = pos.X - xArea;
 			int y = pos.Y - yArea - verticalPosition;
 
 			if (x > rowLength * StaticVariables.tileSize || y < 0)
 				return;
-
 			selected = x / StaticVariables.tileSize + (y / StaticVariables.tileSize) * rowLength;
-
 			if (selected > (int)TERRAIN.count)
 				selected = -1;
 		}
@@ -282,12 +271,10 @@ namespace KBSGame
             Font subFont = new Font("Tahoma", lineHeight / 2, FontStyle.Bold);
             Image worldtab = Image.FromFile(StaticVariables.textFolder + "/editor_worldtab.png");
             g.DrawImage(worldtab, x - 20, y, 180, 30);
-
 			y += lineHeight;
 			g.DrawString ("width/height", subFont, new SolidBrush (Color.White), x, y);
 			y += lineHeight;
             
-
 			//Hover over width box
 			xEnd = x + tabWidth / 3;
             yEnd = (int)(y + lineHeight * 0.6);
@@ -305,7 +292,6 @@ namespace KBSGame
 			g.FillRectangle (new SolidBrush (Color.FromArgb(40, Color.Black)), x + tabWidth / 3 + margin, y, tabWidth / 3, (int)(lineHeight * 0.6));
 			g.DrawString (worldSize.Height.ToString(), subFont, new SolidBrush (Color.White), x + tabWidth / 3 + margin, y);
 
-
 			y += lineHeight;
 			if (selected >= 0) {
 				xEnd = x + tabWidth / 2;
@@ -314,10 +300,8 @@ namespace KBSGame
 					g.FillRectangle (new SolidBrush (Color.Black), x, y, tabWidth / 2, lineHeight);
 				else
 					g.FillRectangle (new SolidBrush (Color.FromArgb(100, Color.Black)), x, y, tabWidth / 2, lineHeight);
-
-				g.DrawString ("Fill world", subFont, new SolidBrush (Color.White), x, y);
+				    g.DrawString ("Fill world", subFont, new SolidBrush (Color.White), x, y);
 			}
-
 			y += lineHeight;
 			renderTerrainSelector (g, y);
 		}
@@ -329,7 +313,6 @@ namespace KBSGame
 		private void worldTabClick(Point pos)
 		{
 			terrainSelectorClick (pos, margin + 4 * lineHeight);
-
 			int x = xRes - width + margin;
 			int y = margin + lineHeight * 2;
 
@@ -338,7 +321,6 @@ namespace KBSGame
 				//Clicked width box
 				if (pos.X > x && pos.X < x + tabWidth / 3) {
 					String input = Dialog.ShowDialog("Set world width", "World width in tiles:");
-
 					try {
 						worldSize.Width = Int32.Parse(input);
 						worldSize.Width = Math.Max(StaticVariables.minWorldSize, Math.Min(worldSize.Width, StaticVariables.maxWorldSize));
@@ -451,9 +433,7 @@ namespace KBSGame
 						x = (float)Math.Round (x, 1);
 						y = (float)Math.Round (y, 1);
                         
-                        
                         e = new Entity(e.getType(), new PointF(0, 0), e.getSpriteID(), e.getSolid(), e.getHeight(), e.getDrawOrder(), e.getBoundingBox());
-                        
 					    world.addEntityRelative (e, new PointF(x, y));
 					}
 					break;
@@ -482,7 +462,6 @@ namespace KBSGame
 					string fileName = Dialog.ShowDialog("Save level", "Level name");
 					if (fileName != null && fileName != "")
 						LevelWriter.saveWorld (world, fileName);
-
 					//selected = -1;
 					//selectedTab = 3;
 
@@ -534,7 +513,6 @@ namespace KBSGame
 			mousePos = scaleToDrawRatio (mousePos);
 			currentHover = mousePos;
 		}
-
 
 		private void drawTabbar(Graphics g)
 		{
@@ -589,7 +567,6 @@ namespace KBSGame
 				g.DrawRectangle (Pens.Black, x, y, StaticVariables.tileSize * 0.6f - Pens.Black.Width, StaticVariables.tileSize * 0.6f - Pens.Black.Width);
 		}
 
-
 		/// <summary>
 		/// Loads the entities used for placing in world
 		/// </summary>
@@ -634,12 +611,14 @@ namespace KBSGame
             entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.bamboo, 50, false));
 
             //Objects
-            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut1, 50, false));
-            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut2, 50, false));
-            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut3, 50, false));
-            entityList.Add (new Plant (new PointF (0, 0), (int)SPRITES.hut4, 50, false));
-
-
+			entityList.Add (new Entity (ENTITIES.hut, new PointF (0, 0), (int)SPRITES.hut1, false));
+			entityList.Add (new Entity (ENTITIES.hut, new PointF (0, 0), (int)SPRITES.hut2, false));
+			entityList.Add (new Entity (ENTITIES.hut, new PointF (0, 0), (int)SPRITES.hut3, false));
+			entityList.Add (new Entity (ENTITIES.hut, new PointF (0, 0), (int)SPRITES.hut4, false));
+			entityList.Add (new Entity (ENTITIES.rock, new PointF (0, 0), (int)SPRITES.rock, false));
+			entityList.Add (new Entity (ENTITIES.rock, new PointF (0, 0), (int)SPRITES.mountain, false));
+			entityList.Add (new Entity (ENTITIES.def, new PointF (0, 0), (int)SPRITES.cage, false));
+			entityList.Add (new Entity (ENTITIES.wood, new PointF (0, 0), (int)SPRITES.logpile, false));
         }
 	}
 }

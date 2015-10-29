@@ -15,7 +15,6 @@ namespace KBSGame
 		private HashSet<Keys> processedkeys;
 		private long lastTick = 0;
 		private float movement;
-
 		private int iteration = 0;
 
 		public Controller() {
@@ -39,7 +38,6 @@ namespace KBSGame
 			for (int i = 0; i < StaticVariables.renderer.getGuiCount (); i++) {
 				if (modalGuiID >= 0 && modalGuiID != i)
 					continue;
-
 				if (StaticVariables.renderer.getGui (i).isActive ())
 					StaticVariables.renderer.getGui (i).setMouseClick(point);
 			}
@@ -49,7 +47,6 @@ namespace KBSGame
 			for (int i = 0; i < StaticVariables.renderer.getGuiCount (); i++) {
 				if (modalGuiID >= 0 && modalGuiID != i)
 					continue;
-
 				if (StaticVariables.renderer.getGui (i).isActive ())
 					StaticVariables.renderer.getGui (i).setMouseHover(point);
 			}
@@ -60,20 +57,17 @@ namespace KBSGame
 				return;
 
 			modalGuiID = (int)gui;
-
 			StaticVariables.renderer.setModalGui (gui);
 		}
 
 		public void disableModalGui() {
 			modalGuiID = -1;
-
 			StaticVariables.renderer.disableModalGui ();
 		}
 
 		public bool modalActive()
 		{
 			bool returnBool = false;
-
 			if (modalGuiID >= 0)
 				returnBool = true;
 
@@ -95,13 +89,9 @@ namespace KBSGame
 				movement = currentTick - lastTick;
 				movement /= 200.0f;
 
-				Console.WriteLine (movement);
-
 				processInput ();
-
 				lastTick = currentTick;
 			}
-
 			StaticVariables.controller.render();
 			iteration++;
 		}
@@ -138,7 +128,7 @@ namespace KBSGame
 						break;
 					}
 				else
-					switch (key) {
+					switch (key) { 
 					case Keys.Up:
 					StaticVariables.world.getFocusEntity ().move (StaticVariables.world, new PointF (0.0f, -movement));
 						break;

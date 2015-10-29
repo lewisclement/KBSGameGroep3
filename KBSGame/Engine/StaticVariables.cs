@@ -2,6 +2,7 @@ using System;
 
 namespace KBSGame
 {
+    //Assigns an ID to every single thing for drawing purpose
     public enum SPRITES : int
     { 
         //Tiles
@@ -28,13 +29,15 @@ namespace KBSGame
         finish, icon_world, folder, save, load, count
     };
 
+    //Assigns an ID to every single entity.
     public enum ENTITIES : int
     {
         def = 0, player, finish, key, plant,
         fruit, trap, carrots, flower, sapling,
-        door, peerbomb, tiki1, tiki2, enemy, count
+        door, peerbomb, tiki1, tiki2, enemy, rock, hut, wood, count
     };
 
+    //Assigns an ID to every single terraintile.
     public enum TERRAIN : int {
         water = 0, dirt, light_dirt, dark_dirt,
         clay, red_sand, sand, sandstone,
@@ -44,11 +47,12 @@ namespace KBSGame
         lava, lava_stones, stone_granite,
         count };
 	
+    //Gives every menu it's own ID so it can set to active.
 	public enum GUI : int {def=0, gameover, finish, guiinventory, editor, count};
-
+    //The state the main menu can be in.
 	public enum STATE : int {main=0, pause, editor, levelloader}
 
-    
+    //Static class which contains every static data.
     public static class StaticVariables
 	{
 		public const int tileSize = 32;
@@ -59,16 +63,16 @@ namespace KBSGame
 		public static String levelFolder = null;
 		public static String spriteFolder = null;
         public static String textFolder = null;
-		public const Byte drawOrderSize = 16;
+        public static String musicFolder = null;
+        public const Byte drawOrderSize = 16;
 		public static STATE currentState = STATE.main;
-        
 		public static int dpi;
-
 		public static Controller controller;
 		public static DrawEngine renderer;
 		public static World world;
 	}
 
+    //Sets a static abbrevation to commonly used strings. 
 	public static class xmlVar
 	{
 		public const String Tile = "t";

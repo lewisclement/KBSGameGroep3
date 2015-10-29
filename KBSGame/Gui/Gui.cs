@@ -9,6 +9,7 @@ namespace KBSGame
 {
 	public class Gui
     {
+        //Declaration of attributes
         private int ID;
 		private Boolean active;
 		protected Bitmap buffer;
@@ -29,11 +30,9 @@ namespace KBSGame
 
 			xRes = ScreenresX;
 			yRes = ScreenresY;
-
 			aspectRatio = xRes / yRes;
 
 			buffer = new Bitmap (xRes, yRes);
-
 			this.active = false;
         }
 		/// <summary>
@@ -51,7 +50,6 @@ namespace KBSGame
 			g.DrawLine (boldPen, 20, 20, xRes - 20, yRes - 20);
 			g.DrawLine (boldPen, xRes - 20, 20, 20, yRes - 20);
 			g.DrawString("Placeholder Gui\n\rPlease extend class", new Font("Arial", 16), new SolidBrush(Color.Red), 30, 30);
-
             return this.buffer;
         }
 
@@ -93,7 +91,6 @@ namespace KBSGame
 
 			xRes = ScreenresX;
 			yRes = ScreenresY;
-
 			aspectRatio = xRes / yRes;
 
 			buffer = new Bitmap (xRes, yRes);
@@ -129,7 +126,6 @@ namespace KBSGame
 		{
 			point.X = (int)(point.X / drawRatio);
 			point.Y = (int)(point.Y / drawRatio);
-
 			return point;
 		}
     }

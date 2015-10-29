@@ -9,6 +9,7 @@ namespace KBSGame
 {
     public class GuiInventory : Gui
     {
+        //Declarating attributes
         const int SPACING = 8;
         const int HEIGHT = 48;
         const int WIDTH = 408;
@@ -22,6 +23,10 @@ namespace KBSGame
             sprites = s;
         }
 
+        /// <summary>
+        /// Paints the inventory of the player if the button I has been pressed.
+        /// </summary>
+        /// <returns></returns>
         public override Bitmap getRender()
         {
             Player player = world.getPlayer();
@@ -36,10 +41,8 @@ namespace KBSGame
             for(int i = 0; i < player.Inventory.Count; i++)
             {
                 int spriteID = player.Inventory[i].Entity.getSpriteID();
-                
                 g.DrawImage(sprites[spriteID].getBitmap(), SPACING + (i * (HEIGHT - SPACING)), SPACING, StaticVariables.tileSize, StaticVariables.tileSize);
             }
-
             return this.buffer;
         }
     }
