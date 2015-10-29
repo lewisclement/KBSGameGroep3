@@ -561,7 +561,7 @@ namespace KBSGame
             TileTypes [(int)TERRAIN.stone_wall] = new TerrainTile ((int)TERRAIN.stone_wall, (int)SPRITES.stone_wall);
             TileTypes [(int)TERRAIN.stonebrick] = new TerrainTile ((int)TERRAIN.stonebrick, (int)SPRITES.stonebrick);
 			TileTypes [(int)TERRAIN.stone_diorite] = new TerrainTile ((int)TERRAIN.stone_diorite, (int)SPRITES.stone_diorite);
-            TileTypes [(int)TERRAIN.lava] = new TerrainTile ((int)TERRAIN.lava, (int)SPRITES.lava);
+            TileTypes [(int)TERRAIN.lava] = new TerrainTile ((int)TERRAIN.lava, (int)SPRITES.lava, false);
             TileTypes [(int)TERRAIN.lava_stones] = new TerrainTile ((int)TERRAIN.lava_stones, (int)SPRITES.lava_stones);
 			TileTypes [(int)TERRAIN.stone_granite] = new TerrainTile ((int)TERRAIN.stone_granite, (int)SPRITES.stone_granite);
 		}
