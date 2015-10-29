@@ -13,20 +13,20 @@ namespace KBSGame.Entities
         public int Doorid;
 
         public Door(PointF location, bool solid = true, Byte height = 50, Byte depth = 8, float boundingBox = 0.6f)
-            : base(ENTITIES.door, location, (int)SPRITES.doorClosed, solid, height, depth, boundingBox)
+            : base(ENTITIES.door, location, (int)SPRITES.door_closed, solid, height, depth, boundingBox)
         {
             Doorid = DoorCount++;
         }
 
         public void UnlockDoor()
         {
-            spriteID = (int)SPRITES.doorOpened;
+            spriteID = (int)SPRITES.door_opened;
             setSolid(false);
         }
 
         public void LockDoor()
         {
-            spriteID = (int)SPRITES.doorClosed;
+            spriteID = (int)SPRITES.door_closed;
             setSolid(true);
         }
 

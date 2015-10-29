@@ -17,7 +17,7 @@ namespace KBSGame
 
         public override void onCollision()
         {
-            this.spriteID = (int)SPRITES.trapClosed;
+            this.spriteID = (int)SPRITES.trap_closed;
             StaticVariables.controller.gameover();
         }
     }

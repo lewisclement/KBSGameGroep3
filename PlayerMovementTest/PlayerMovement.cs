@@ -25,7 +25,7 @@ namespace PlayerMovementTest
             // Initialize world
             this.w = new World(Size, Size);
             // Fill world with tiles of grass
-            w.FillWorld(TERRAIN.grass, new Size(Size, Size));
+            w.FillWorld(TERRAIN.grass_normal, new Size(Size, Size));
             // Fill third row with water
             for (int i = 0; i <= 2; i++)
                 w.setTerraintile(new Point(i, 2), (int)SPRITES.water);
@@ -87,7 +87,7 @@ namespace PlayerMovementTest
             // Set Player location
             p.setLocation(new PointF(0, 1));
             // Add solid entity (tree) on location 1,1
-            Entity tree = new Plant(new PointF(1, 1), (int)SPRITES.sapling1, 50);
+            Entity tree = new Plant(new PointF(1, 1), (int)SPRITES.tree1, 50);
             w.addEntity(tree);
             // Try to move one grid to the right to tile with solid entity
             p.move(w, new PointF(1, 1));
