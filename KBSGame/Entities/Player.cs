@@ -24,6 +24,11 @@ namespace KBSGame
 	        CurrentDirection = (int) Direction.Up;
 		}
 
+        /// <summary>
+        /// Moves the player to the given relative location
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="relativeLocation"></param>
 		public override void move(World sender, PointF relativeLocation)
 		{
 			float moveLocationX = location.X + relativeLocation.X;
@@ -31,10 +36,6 @@ namespace KBSGame
 
 			PointF targetPoint = new PointF(moveLocationX, moveLocationY);
 			TerrainTile targetTile = sender.getTerraintile (targetPoint);
-		    //bool HasNonSolidEntities = sender.getEntitiesOnTerrainTile((targetPoint)).Any(e => e.getSolid() == false);
-
-			// Log current inventory
-			//Inventory.ForEach(Console.WriteLine);
 
 			// If terrain contains solid objects OR if tile has no walkable entity on a non-walkable tile
 			if (targetTile == null || sender.checkCollision(this, targetPoint) || !targetTile.IsWalkable && !sender.checkCollision(this, targetPoint, false))
@@ -42,7 +43,6 @@ namespace KBSGame
 
 			location.X = (float)Math.Round(moveLocationX, 1);
 			location.Y = (float)Math.Round(moveLocationY, 1);
-            //PickUpItems(sender);
 
             //Check if the player is moving on a entity and call oncolission of that entity
             List<Entity> entities = sender.getEntities();
@@ -56,11 +56,19 @@ namespace KBSGame
             }            
         }
 
+        /// <summary>
+        /// Add item to inventory
+        /// </summary>
+        /// <param name="i"></param>
 		public void AddItemToInventory(Item i)
 		{
 			Inventory.Add(i);
 		}
 
+        /// <summary>
+        /// Pickup first item on given tile
+        /// </summary>
+        /// <param name="w"></param>
 	    public void PickupItems(World w)
 	    {
 	        if (Inventory.Count >= 10) return;
@@ -69,23 +77,26 @@ namespace KBSGame
 	            w.getEntitiesOnTerrainTile(getLocation(), true)
 	                .Where(e => e.getSpriteID() == (int) SPRITES.banana || e.getSpriteID() == (int) SPRITES.key)
 	                .ToList();
-            // If there's nothing in the list, return;
+
+            // If there's nothing in the list of entities, return;
 	        if (EntitiesOnTile.Count == 0) return;
+
             // Add first item of list to inventory
 	        Inventory.Add(new Item(EntitiesOnTile[0]));
+
             // If key is picked up, unlock door
 	        if (EntitiesOnTile[0] is Key)
-	        {
                 w.UnlockDoor((Key)EntitiesOnTile[0]);
-	        }
-	        
 
 	        // Remove item from world
 	        w.getEntities().Remove(EntitiesOnTile[0]);
         }
 
 
-	    // Removes first item from inventory if exists
+	    /// <summary>
+        /// Drop first item in inventory back into the world
+        /// </summary>
+        /// <param name="world"></param>
         public void DropItem(World world)
         {
             PointF dropLocation = GetLocationInFrontOfPlayer();
@@ -117,6 +128,10 @@ namespace KBSGame
             Inventory.RemoveAt(0);
         }
 
+        /// <summary>
+        /// Gets the location in front of player
+        /// </summary>
+        /// <returns>PointF with location</returns>
 	    private PointF GetLocationInFrontOfPlayer()
 	    {
 	        switch (CurrentDirection)

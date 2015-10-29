@@ -20,14 +20,12 @@ namespace KBSGame.Entities
 
         public void UnlockDoor()
         {
-            Console.WriteLine("Unlocked door with ID: " + Doorid);
             spriteID = (int)SPRITES.doorOpened;
             setSolid(false);
         }
 
         public void LockDoor()
         {
-            Console.WriteLine("Locked door with ID: " + Doorid);
             spriteID = (int)SPRITES.doorClosed;
             setSolid(true);
         }

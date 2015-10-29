@@ -18,7 +18,7 @@ namespace KBSGame
 		private int width, height;
 		private List<Entity> objects;
 		private Entity focusEntity;
-		private Player player; //TEMPORARY UNTIL MAINLOOP IS CREATED
+		private Player player;
 
 		private String currentLevelPath = null;
 
@@ -39,11 +39,6 @@ namespace KBSGame
 			terrainTiles = new List<TerrainTile>();
 			heightData = new List<Byte> ();
 
-			// TEMPORARY
-			//player = new Player(new Point(this.width / 2, this.height / 2), 50);
-			//player.setHeight(50);
-			//objects.Add(player);
-
 			loadTileTypes ();
 
             //temporaryWorldGenerator ();
@@ -52,11 +47,9 @@ namespace KBSGame
             //levelWriter.saveWorld (this, "testworld");
 		}
 
-	    public void AddItemsToInventory(Player player)
-	    {
-           
-	    }
-
+        /// <summary>
+        /// Reload level
+        /// </summary>
 		public void reload()
 		{
 			loadLevel (currentLevelPath);
@@ -120,6 +113,11 @@ namespace KBSGame
 			}
         }
 
+        /// <summary>
+        /// Fill the world with given terraintile-spriteID
+        /// </summary>
+        /// <param name="terrain"></param>
+        /// <param name="size"></param>
 		public void FillWorld(TERRAIN terrain, Size size)
 		{
 			this.width = Math.Max(StaticVariables.minWorldSize, Math.Min(size.Width, StaticVariables.maxWorldSize));
@@ -418,6 +416,11 @@ namespace KBSGame
 			return returnEntity;
 		}
 
+        /// <summary>
+        /// Gets all entities by given ENTITIES type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>All entities with given type</returns>
 		public List<Entity> getEntitiesByType(ENTITIES type)
 		{
 			List<Entity> returnEntities = new List<Entity> ();
@@ -430,6 +433,12 @@ namespace KBSGame
 			return returnEntities;
 		}
 
+        /// <summary>
+        /// Gets all entities on given terraintile, optional nonsolid only objects
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="nonSolidOnly"></param>
+        /// <returns>All entities on given terraintile</returns>
 		public List<Entity> getEntitiesOnTerrainTile(PointF point, bool nonSolidOnly = false)
 		{
 			List<Entity> returnObjects = new List<Entity> ();
@@ -448,7 +457,14 @@ namespace KBSGame
 		    }
 			return returnObjects;
 		}
-
+        
+        /// <summary>
+        /// Checks for collision between an entity and a target point, optional check for solid only
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="target"></param>
+        /// <param name="solid"></param>
+        /// <returns>True on collision, false on no collision</returns>
 		public bool checkCollision(Entity entity, PointF target, bool solid = true)
 		{
 			bool collision = false;
@@ -471,6 +487,12 @@ namespace KBSGame
 			return collision;
 		}
 
+        /// <summary>
+        /// Checks for a collision between 2 objects
+        /// </summary>
+        /// <param name="entity1"></param>
+        /// <param name="entity2"></param>
+        /// <returns>True on collision, false on no collision </returns>
 		public bool checkCollision(Entity entity1, Entity entity2)
 		{
 			bool collision = false;
@@ -483,6 +505,11 @@ namespace KBSGame
 			return collision;
 		}
 
+        /// <summary>
+        /// Gets given terraintile
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns>Terraintile on given location</returns>
 		public TerrainTile getTerraintile(PointF point)
 		{
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
@@ -491,6 +518,11 @@ namespace KBSGame
 			return terrainTiles[(int) point.X*height + (int) point.Y];
 		}
 
+        /// <summary>
+        /// Sets terraintile on given location with TERRAIN id
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="terrainID"></param>
 		public void setTerraintile(PointF point, int terrainID)
 		{
 			TerrainTile tile = TileTypes[terrainID];
@@ -510,7 +542,12 @@ namespace KBSGame
 
 			terrainTiles [x * height + y] = TileTypes [terrainID];
 		}
-
+        
+        /// <summary>
+        /// Gets the height of the terraintile
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns>Byte with terraintileheight</returns>
 		public Byte getTerrainHeight(PointF point)
 		{
 			if (point.X * height + point.Y > terrainTiles.Count || point.X < 0 || point.Y < 0 || point.X > width-1 || point.Y > height-1)
@@ -569,6 +606,10 @@ namespace KBSGame
 			return returnEntities.ToArray();
 		}
 
+        /// <summary>
+        /// Locks door with matching key
+        /// </summary>
+        /// <param name="key"></param>
         public void LockDoor(Key key)
         {
             foreach (Entity e in objects)
@@ -581,6 +622,10 @@ namespace KBSGame
             }
         }
 
+        /// <summary>
+        /// Unlocks door with matching key
+        /// </summary>
+        /// <param name="key"></param>
         public void UnlockDoor(Key key)
 	    {
             foreach (Entity e in objects)
@@ -593,11 +638,19 @@ namespace KBSGame
 	        }
 	    }
 
+        /// <summary>
+        /// Gets the location of the focussed entity
+        /// </summary>
+        /// <returns>PointF with location of focussed entity</returns>
 	    public PointF getFocusCoordinates()
 		{
 			return focusEntity.getLocation();
 		}
 
+        /// <summary>
+        /// Sets the focussed entity
+        /// </summary>
+        /// <param name="entity"></param>
 		public void setFocusEntity(Entity entity)
 		{
 			focusEntity = entity;
@@ -653,16 +706,27 @@ namespace KBSGame
 			return new PointF (xCenter, yCenter);
 		}
 
+        /// <summary>
+        /// Gets size of the grid
+        /// </summary>
+        /// <returns>Size of the grid</returns>
 		public Size getSize()
 		{
 			return new Size (width, height);
 		}
 
+        /// <summary>
+        /// Manually initialize player on given location
+        /// </summary>
+        /// <param name="location"></param>
 	    public void InitPlayer(PointF location)
 	    {
             player = new Player(location, 50);
         }
 
+        /// <summary>
+        /// Loads all tiletypes
+        /// </summary>
 	    private void loadTileTypes() 
 		{
 			TileTypes = new TerrainTile[(int)TERRAIN.count];
@@ -687,6 +751,10 @@ namespace KBSGame
 			TileTypes [(int)TERRAIN.brick] = new TerrainTile ((int)TERRAIN.brick, (int)SPRITES.brick);
 		}
 
+        /// <summary>
+        /// Get all tiletypes
+        /// </summary>
+        /// <returns>All tiletypes</returns>
 		public TerrainTile[] getTileTypes()
 		{
 			return TileTypes;
