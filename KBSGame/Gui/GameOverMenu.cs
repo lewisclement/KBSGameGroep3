@@ -18,6 +18,11 @@ namespace KBSGame
         int width = StaticVariables.dpi * 4;
         int hoverPos = -1, clickPos = -1;
         World map;
+
+		Image tryAgain;
+		Image exit;
+		Image gameOver;
+
         /// <summary>
         /// Basic Menu constructor for screen resolution
         /// </summary>
@@ -32,6 +37,10 @@ namespace KBSGame
             xRes = ScreenresX;
             yRes = ScreenresY;
             buffer = new Bitmap(xRes, yRes);
+
+			tryAgain = Image.FromFile(StaticVariables.textFolder + "/gameover_try_again.png");;
+			exit = Image.FromFile(StaticVariables.textFolder + "/menu_exit.png");
+			gameOver = Image.FromFile(StaticVariables.textFolder + "/game_over.png");
         }
 
         /// <summary>
@@ -106,16 +115,13 @@ namespace KBSGame
                 //If statement is here to prevent having the same image being drawn inside the For-loop.
                 if(i == 0) //First button
                 {
-                Image tryagain = Image.FromFile(StaticVariables.textFolder + "/gameover_try_again.png");
-                g.DrawImage(tryagain, x, y, 300, 120);
+					g.DrawImage(tryAgain, x, y, 300, 120);
                 } else { //Second button - Could also be (i == 1)
-                Image quit = Image.FromFile(StaticVariables.textFolder + "/gameover_quit.png");
-                g.DrawImage(quit, x, y, 300, 120);
+					g.DrawImage(exit, x, y, 300, 120);
                 }
             }
             //Draws the Game Over text in the top center of the screen.
-            Image newImage = Image.FromFile(StaticVariables.textFolder + "/game_over.png");
-            g.DrawImage(newImage, xRes / 2 - width / 2, 0, width, yRes / 5);
+			g.DrawImage(gameOver, xRes / 2 - width / 2, 0, width, yRes / 5);
             return this.buffer;
         }
 
