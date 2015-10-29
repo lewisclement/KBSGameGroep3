@@ -274,8 +274,8 @@ namespace KBSGame
             sprites[(int)SPRITES.hut2] = new Sprite((int)SPRITES.hut2, StaticVariables.spriteFolder + "/hut2.png");
             sprites[(int)SPRITES.hut3] = new Sprite((int)SPRITES.hut3, StaticVariables.spriteFolder + "/hut3.png");
             sprites[(int)SPRITES.hut4] = new Sprite((int)SPRITES.hut4, StaticVariables.spriteFolder + "/hut4.png");
-            sprites[(int)SPRITES.door_opened] = new Sprite((int)SPRITES.door_closed, StaticVariables.spriteFolder + "/door_closed.png");
-            sprites[(int)SPRITES.door_closed] = new Sprite((int)SPRITES.door_opened, StaticVariables.spriteFolder + "/door_opened.png");
+            sprites[(int)SPRITES.door_opened] = new Sprite((int)SPRITES.door_opened, StaticVariables.spriteFolder + "/door_opened.png");
+            sprites[(int)SPRITES.door_closed] = new Sprite((int)SPRITES.door_closed, StaticVariables.spriteFolder + "/door_closed.png");
             return sprites;
 		}
 	}
