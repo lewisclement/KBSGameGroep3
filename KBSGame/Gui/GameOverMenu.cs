@@ -73,9 +73,11 @@ namespace KBSGame
                     map.reload();
                     setActive(false);
                     break;
-                //If the player pressed on the button "Quit", the game will quit.
+                //If the player pressed on the button "Quit", the game will quit to the main menu.
                 case 1:
-                    Application.Exit();
+                    setActive(false);
+                    StaticVariables.world.loadLevel("mainmenu");
+                    ((Menu)StaticVariables.renderer.getGui((int)GUI.def)).mainmenu();
                     break;
                 default:
                     break;
