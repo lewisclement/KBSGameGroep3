@@ -1,12 +1,12 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
- using System.Diagnostics;
- using System.Drawing;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
- using KBSGame.Entities;
+using KBSGame.Entities;
 
 namespace KBSGame
 {
@@ -105,16 +105,20 @@ namespace KBSGame
             bool isLand = world.getTerraintile(dropLocation).IsWalkable;
             bool hasSolidEntitiesOnTarget = world.checkCollision(this, dropLocation);
             List<Entity> entitiesOnTerrainTile = world.getEntitiesOnTerrainTile(location);
+	        List<Entity> entitiesOnTargetTerrainTile = world.getEntitiesOnTerrainTile(dropLocation);
+            bool hasWaterlilyOnTarget = entitiesOnTargetTerrainTile.Exists(e => e.getSpriteID() == (int) SPRITES.waterlily);
 
             // If no item exists in inventory or 
             //      there is a solid target on dropLocation or
             //      targettile is not land, return
-            if (!Inventory.Any() || hasSolidEntitiesOnTarget || !isLand)
+            if (!Inventory.Any() || hasSolidEntitiesOnTarget || 
+                (!isLand && !hasWaterlilyOnTarget))
                 return;
 
             // If item is key, lock door
             if (Inventory[0].Entity is Key)
             {
+                // If player is standing in a door, cancel action
                 if (entitiesOnTerrainTile.Exists(e => e is Door))
                     return;
                 world.LockDoor((Key)Inventory[0].Entity);
