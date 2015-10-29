@@ -34,7 +34,7 @@ namespace KBSGame
     {
         def = 0, player, finish, key, plant,
         fruit, trap, carrots, flower, sapling,
-        door, peerbomb, tiki1, tiki2, enemy, count
+        door, peerbomb, tiki1, tiki2, enemy, rock, hut, wood, count
     };
 
     //Assigns an ID to every single terraintile.
