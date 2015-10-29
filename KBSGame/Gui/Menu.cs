@@ -108,6 +108,9 @@ namespace KBSGame
 
 					changeState (STATE.editor);
 					break;
+                case 2: //When you press on help
+                    
+                    break;
 				case 3: //When you press on quit
 					Application.Exit ();
 					break;
