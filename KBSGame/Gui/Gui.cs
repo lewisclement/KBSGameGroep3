@@ -57,7 +57,7 @@ namespace KBSGame
 		/// Sets the input.
 		/// </summary>
 		/// <param name="mousePos">Mouse position.</param>
-		public virtual void setMouseClick(Point mousePos)
+		public virtual void setMouseClick(Point mousePos, bool leftClick)
         {
 
         }

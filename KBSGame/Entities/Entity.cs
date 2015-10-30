@@ -8,7 +8,9 @@ namespace KBSGame
 {
 	public class Entity        
 	{
+		private static int entityID = 0;
 		protected int ID = 0;
+
 		protected ENTITIES type = ENTITIES.def;
 		protected int spriteID;
 		protected PointF location;
@@ -26,7 +28,7 @@ namespace KBSGame
 			this.boundingBox = boundingBox;
 			this.spriteID = spriteID;
 			this.solid = solid;
-			this.ID = ID++;
+			this.ID = entityID++;
 		}
 		public Entity(int ID, PointF location, int spriteID, bool solid = false, Byte height = 50, Byte drawOrder = 8, float boundingBox = 1.0f)
 		{

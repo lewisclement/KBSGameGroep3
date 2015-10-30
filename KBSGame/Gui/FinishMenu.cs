@@ -46,7 +46,7 @@ namespace KBSGame.gui
         //Determine where the mouse click happens and if it happens above one of the two buttons
         //initiate a appropiate reaction.
 
-        public override void setMouseClick(Point mousePos)
+		public override void setMouseClick(Point mousePos, bool leftClick)
         {
 			mousePos = scaleToDrawRatio (mousePos);
             if ((mousePos.X < xRes / 2))
@@ -71,7 +71,7 @@ namespace KBSGame.gui
         }
         // 
 
-        public override void setMouseHover(Point mousePos)
+		public override void setMouseHover(Point mousePos)
         {
 			mousePos = scaleToDrawRatio (mousePos);
             if (mousePos.X < xRes / 2)

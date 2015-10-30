@@ -171,9 +171,16 @@ namespace KBSGame
 		/// Removes the item.
 		/// </summary>
 		/// <param name="e">E.</param>
-		public void RemoveItem(Entity e)
+		public void RemoveItem(int ID)
 		{
-			objects.Remove(e);
+			int i = 0;
+			foreach (Entity entity in objects) {
+				if (entity.getID () == ID) {
+					objects.RemoveAt (i);
+					return;
+				}
+				i++;
+			}
 		}
 
 		/// <summary>
@@ -291,6 +298,18 @@ namespace KBSGame
 		        }
 		    }
 			return returnObjects;
+		}
+
+		public List<Entity> getEntitiesOnTerrainTileRelative(PointF relativeLocation, bool nonSolidOnly = false)
+		{
+			Rectangle view = getView ();
+			PointF offset = getViewOffset ();
+
+			PointF point = new PointF (view.Left + relativeLocation.X + offset.X, view.Top + relativeLocation.Y + offset.Y);
+
+			Console.WriteLine (point);
+
+			return getEntitiesOnTerrainTile (point, nonSolidOnly);
 		}
         
         /// <summary>
