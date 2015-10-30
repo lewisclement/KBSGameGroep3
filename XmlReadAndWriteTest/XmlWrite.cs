@@ -28,8 +28,6 @@ namespace XmlReadAndWriteTest
             // initialize player
             this.w.InitPlayer(new PointF(5, 5));
             this.p = w.getPlayer();
-            Trap trap = new Trap(new PointF(2,2),(int)SPRITES.trap_opened);
-            w.addEntity(trap);
             LevelWriter.saveWorld(this.w, this.file);
             beforelist = new TerrainTile[w.getTerrain().Count];
             before = new Entity[w.getEntities().Count];
@@ -58,12 +56,23 @@ namespace XmlReadAndWriteTest
         [TestMethod]
         public void entityCheck()
         {
+            for (int i = 0; i < before.Length; i++)
+            {
+                Entity x = before[i];
+                while ((i - 1 >= 0) && (x.getLocation().Y < before[i - 1].getLocation().Y))
+                {
+                    before[i] = before[i - 1];
+                    i--;
+                }
+                before[i] = x;
+            }
             // checks if lists are equal
             for (int i = 0; i < this.w.getEntities().Count; i++)
             {
                 Assert.AreEqual(this.before[i].getID(), this.after[i].getID());
                 Assert.AreEqual(this.before[i].getSpriteID(), this.after[i].getSpriteID());
                 Assert.AreEqual(this.before[i].getLocation(), this.after[i].getLocation());
+                Assert.AreEqual(this.before[i].getType(), this.after[i].getType());
             }
         }
     }
