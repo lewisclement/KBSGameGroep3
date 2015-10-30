@@ -79,8 +79,6 @@
     <None Include="bin\Release\tallgrass.png" />
     <None Include="bin\Release\sapling2.png" />
     <None Include="bin\Release\banana.png" />
-    <None Include="bin\Debug\worlds\mainmenu.xml" />
-    <None Include="bin\Debug\worlds\testworld.xml" />
     <None Include="bin\Debug\sprites\banana.png" />
     <None Include="bin\Debug\sprites\dirt.png" />
     <None Include="bin\Debug\sprites\sand.png" />
@@ -114,7 +112,6 @@
     <None Include="bin\Debug\sprites\folder.png" />
     <None Include="bin\Debug\sprites\save.png" />
     <None Include="bin\Debug\sprites\icon_world.png" />
-    <None Include="bin\Debug\worlds\fatsoenlijkogendescenario.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">
@@ -177,8 +174,9 @@
     <Content Include="bin\Debug\text\menu_settings.png" />
     <Content Include="bin\Debug\text\menu_start.png" />
     <Content Include="bin\Debug\text\pause.png" />
-    <Content Include="bin\Debug\worlds\DoorsTestFinish.xml" />
+    <Content Include="bin\Debug\worlds\Level 1.xml" />
     <Content Include="bin\Debug\worlds\Level 2.xml" />
+    <Content Include="bin\Debug\worlds\main.xml" />
     <Content Include="bin\Release\finish.png" />
     <Content Include="bin\Release\trap_closed.png" />
     <Content Include="bin\Release\trap_opened.png" />

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,8 @@ namespace KBSGame.gui
     public class FinishMenu : Gui
     {
         World map;
-		public FinishMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
+        FileInfo[] files;
+        public FinishMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             this.map = map;
             xRes = ScreenresX;              
@@ -58,8 +60,9 @@ namespace KBSGame.gui
 				StaticVariables.world.loadLevel ("mainmenu");
 				((Menu) StaticVariables.renderer.getGui ((int)GUI.def)).mainmenu ();
                     break;
-                case 1:                
-                    map.reload();
+                case 1:
+                    DirectoryInfo d = new DirectoryInfo(StaticVariables.levelFolder);
+                    files = d.GetFiles("*.xml");
                     setActive(false);   
                     break;
                 default:
