@@ -29,7 +29,6 @@ namespace KBSGame
             if (e.getType() == ENTITIES.enemy)
             {
                 ((Enemy) e).Die();
-                Console.WriteLine("DIED");
             }
         }
     }

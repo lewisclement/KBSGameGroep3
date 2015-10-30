@@ -24,11 +24,13 @@ namespace KBSGame
 
 		public void gameover() {
 			StaticVariables.renderer.getGui ((int)GUI.gameover).setActive (true);
-		}
+            StaticVariables.renderer.getGui((int)GUI.guiinventory).setActive(false);
+        }
 
 		public void finish() {
 			StaticVariables.renderer.getGui ((int)GUI.finish).setActive (true);
-		}
+            StaticVariables.renderer.getGui((int)GUI.guiinventory).setActive(false);
+        }
 
 		public void render() {
 			StaticVariables.renderer.render ();
@@ -160,7 +162,8 @@ namespace KBSGame
 						StaticVariables.world.getPlayer ().DropItem (StaticVariables.world);
 						break;
 					case Keys.I:
-						StaticVariables.renderer.getGui ((int)GUI.guiinventory).switchActive ();
+                        if(StaticVariables.currentState == STATE.pause)
+						    StaticVariables.renderer.getGui ((int)GUI.guiinventory).switchActive ();
 						break;
 					default:
 						return;
