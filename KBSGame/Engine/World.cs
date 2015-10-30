@@ -67,6 +67,9 @@ namespace KBSGame
 				heightData = new List<Byte> ();
 				enemies = new List<Enemy> ();
 
+				Door.DoorCount = 0;
+				Key.KeyCount = 0;
+
 				LevelReader level = new LevelReader (fileName);
 				this.objects = level.getObjects ();
 
