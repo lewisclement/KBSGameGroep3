@@ -89,6 +89,10 @@ namespace KBSGame
 			if (modalGuiID < 0) {
 				long currentTick = System.DateTime.UtcNow.Ticks / 10000;
 				movement = currentTick - lastTick;
+
+				if(movement > 1000) //If no cycles for a second or more
+					movement = 100;
+
 				movement /= 200.0f;
 
 				processInput ();
