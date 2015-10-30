@@ -20,10 +20,17 @@ namespace KBSGame
         /// <summary>
         /// Method which interacts whenever a player hit the object with the onCollision() method.
         /// </summary>
-        public override void onCollision()
+        public override void onCollision(Entity e)
         {
-            this.spriteID = (int)SPRITES.trap_closed;
-            StaticVariables.controller.gameover();
+            if (this.spriteID != (int) SPRITES.trap_opened) return;
+            this.spriteID = (int) SPRITES.trap_closed;
+            if (e is Player)
+                StaticVariables.controller.gameover();
+            if (e.getType() == ENTITIES.enemy)
+            {
+                ((Enemy) e).Die();
+                Console.WriteLine("DIED");
+            }
         }
     }
 }
