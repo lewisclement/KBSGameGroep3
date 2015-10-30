@@ -205,6 +205,9 @@ namespace KBSGame
             sprites[(int)SPRITES.tiki2] = new Sprite((int)SPRITES.tiki2, StaticVariables.spriteFolder + "/tiki2.png");
             sprites[(int)SPRITES.banana] = new Sprite((int)SPRITES.banana, StaticVariables.spriteFolder + "/banana.png");
 			sprites[(int)SPRITES.key] = new Sprite((int)SPRITES.key, StaticVariables.spriteFolder + "/gold_key.png");
+			sprites[(int)SPRITES.key2] = new Sprite((int)SPRITES.key2, StaticVariables.spriteFolder + "/red_key.png");
+			sprites[(int)SPRITES.key3] = new Sprite((int)SPRITES.key3, StaticVariables.spriteFolder + "/blue_key.png");
+			sprites[(int)SPRITES.key4] = new Sprite((int)SPRITES.key4, StaticVariables.spriteFolder + "/green_key.png");
 			sprites[(int)SPRITES.finish] = new Sprite((int)SPRITES.finish, StaticVariables.spriteFolder + "/finish.png");
 			sprites[(int)SPRITES.trap_opened] = new Sprite((int)SPRITES.trap_opened, StaticVariables.spriteFolder + "/trap_opened.png");
 			sprites[(int)SPRITES.trap_closed] = new Sprite((int)SPRITES.trap_closed, StaticVariables.spriteFolder + "/trap_closed.png");
@@ -276,6 +279,13 @@ namespace KBSGame
             sprites[(int)SPRITES.hut4] = new Sprite((int)SPRITES.hut4, StaticVariables.spriteFolder + "/hut4.png");
             sprites[(int)SPRITES.door_opened] = new Sprite((int)SPRITES.door_opened, StaticVariables.spriteFolder + "/door_opened.png");
             sprites[(int)SPRITES.door_closed] = new Sprite((int)SPRITES.door_closed, StaticVariables.spriteFolder + "/door_closed.png");
+			sprites[(int)SPRITES.door_opened2] = new Sprite((int)SPRITES.door_opened2, StaticVariables.spriteFolder + "/door_opened_red.png");
+			sprites[(int)SPRITES.door_closed2] = new Sprite((int)SPRITES.door_closed2, StaticVariables.spriteFolder + "/door_closed_red.png");
+			sprites[(int)SPRITES.door_opened3] = new Sprite((int)SPRITES.door_opened3, StaticVariables.spriteFolder + "/door_opened_blue.png");
+			sprites[(int)SPRITES.door_closed3] = new Sprite((int)SPRITES.door_closed3, StaticVariables.spriteFolder + "/door_closed_blue.png");
+			sprites[(int)SPRITES.door_opened4] = new Sprite((int)SPRITES.door_opened4, StaticVariables.spriteFolder + "/door_opened_green.png");
+			sprites[(int)SPRITES.door_closed4] = new Sprite((int)SPRITES.door_closed4, StaticVariables.spriteFolder + "/door_closed_green.png");
+
             return sprites;
 		}
 	}

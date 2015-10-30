@@ -112,6 +112,15 @@
     <None Include="bin\Debug\sprites\folder.png" />
     <None Include="bin\Debug\sprites\save.png" />
     <None Include="bin\Debug\sprites\icon_world.png" />
+    <None Include="bin\Debug\sprites\blue_key.png" />
+    <None Include="bin\Debug\sprites\door_closed_blue.png" />
+    <None Include="bin\Debug\sprites\door_closed_green.png" />
+    <None Include="bin\Debug\sprites\door_closed_red.png" />
+    <None Include="bin\Debug\sprites\door_opened_blue.png" />
+    <None Include="bin\Debug\sprites\door_opened_green.png" />
+    <None Include="bin\Debug\sprites\door_opened_red.png" />
+    <None Include="bin\Debug\sprites\green_key.png" />
+    <None Include="bin\Debug\sprites\red_key.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainWindow.resx">

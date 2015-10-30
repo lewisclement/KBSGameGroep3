@@ -26,7 +26,11 @@ namespace KBSGame
         trap_opened, trap_closed,
         banana, tiki1, tiki2, peerbomb, player,
         //Icons
-        finish, icon_world, folder, save, load, count
+        finish, icon_world, folder, save, load, 
+
+		key2, key3, key4,
+		door_closed2, door_closed3, door_closed4,
+		door_opened2, door_opened3, door_opened4, count
     };
 
     //Assigns an ID to every single entity.

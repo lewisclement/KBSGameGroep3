@@ -12,7 +12,7 @@ namespace KBSGame
     /// </summary>
     public class Key : Entity
     {
-        private static int KeyCount = 0;
+        public static int KeyCount = 0;
         public int Keyid;
 
         public Key(PointF location, bool solid = false, byte height = 50, byte drawOrder = 8, float boundingBox = 1)

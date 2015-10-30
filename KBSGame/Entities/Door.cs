@@ -9,7 +9,7 @@ namespace KBSGame.Entities
 {
     public class Door : Entity
     {
-        private static int DoorCount = 0;
+        public static int DoorCount = 0;
         public int Doorid;
 
         public Door(PointF location, bool solid = true, Byte height = 50, Byte depth = 8, float boundingBox = 0.6f)
