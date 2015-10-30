@@ -176,6 +176,7 @@
     <Content Include="bin\Debug\text\pause.png" />
     <Content Include="bin\Debug\worlds\Level 1.xml" />
     <Content Include="bin\Debug\worlds\Level 2.xml" />
+    <Content Include="bin\Debug\worlds\Level 3.xml" />
     <Content Include="bin\Debug\worlds\mainmenu.xml" />
     <Content Include="bin\Release\finish.png" />
     <Content Include="bin\Release\trap_closed.png" />
