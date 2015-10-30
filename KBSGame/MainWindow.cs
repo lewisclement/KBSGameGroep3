@@ -46,9 +46,9 @@ namespace KBSGame
 			StaticVariables.renderer?.resize (this.CreateGraphics(), this.ClientSize.Width, this.ClientSize.Height);
 		}
 
-		protected override void OnClick(EventArgs e)
+		protected override void OnMouseDown(MouseEventArgs e)
 		{
-			control.mouseClick (PointToClient (Cursor.Position));
+			control.mouseClick (PointToClient (Cursor.Position), e.Button == MouseButtons.Left);
         }
 
 		protected override void OnMouseMove(MouseEventArgs e)

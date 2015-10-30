@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
+using System.Linq;
 using KBSGame.Entities;
 
 //Temporary dialog solution
@@ -412,7 +413,7 @@ namespace KBSGame
 		/// Sets the input.
 		/// </summary>
 		/// <param name="mousePos">Mouse position.</param>
-		public override void setMouseClick(Point mousePos)
+		public override void setMouseClick(Point mousePos, bool leftClick)
 		{
 			mousePos = scaleToDrawRatio (mousePos);
 
@@ -426,15 +427,22 @@ namespace KBSGame
 					break;
 				case 2:
 					if (selected >= 0) {
-						Entity e = entityList [selected];
-                        
 						float x = (mousePos.X - mousePos.X % (StaticVariables.tileSize / 10.0f)) / StaticVariables.tileSize;
 						float y = (mousePos.Y - mousePos.Y % (StaticVariables.tileSize / 10.0f)) / StaticVariables.tileSize;
 						x = (float)Math.Round (x, 1);
 						y = (float)Math.Round (y, 1);
-                        
-                        e = new Entity(e.getType(), new PointF(0, 0), e.getSpriteID(), e.getSolid(), e.getHeight(), e.getDrawOrder(), e.getBoundingBox());
-					    world.addEntityRelative (e, new PointF(x, y));
+
+						Entity e = entityList [selected];
+
+						if (leftClick) {
+							e = new Entity (e.getType (), new PointF (0, 0), e.getSpriteID (), e.getSolid (), e.getHeight (), e.getDrawOrder (), e.getBoundingBox ());
+							world.addEntityRelative (e, new PointF (x, y));
+						} else {
+							List<Entity> entities = world.getEntitiesOnTerrainTileRelative (new PointF (x, y));
+
+							if(entities.Count > 0)
+								world.RemoveItem (entities[0].getID());
+						}
 					}
 					break;
 				default:

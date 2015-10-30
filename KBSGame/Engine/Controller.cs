@@ -36,16 +36,16 @@ namespace KBSGame
 			StaticVariables.renderer.render ();
 		}
 
-		public void mouseClick(Point point) {
+		public void mouseClick(Point point, bool leftClick = true) {
 			for (int i = 0; i < StaticVariables.renderer.getGuiCount (); i++) {
 				if (modalGuiID >= 0 && modalGuiID != i)
 					continue;
 				if (StaticVariables.renderer.getGui (i).isActive ())
-					StaticVariables.renderer.getGui (i).setMouseClick(point);
+					StaticVariables.renderer.getGui (i).setMouseClick(point, leftClick);
 			}
 		}
 
-		public void mouseHover(Point point) {
+		public void mouseHover(Point point, bool leftClick = true) {
 			for (int i = 0; i < StaticVariables.renderer.getGuiCount (); i++) {
 				if (modalGuiID >= 0 && modalGuiID != i)
 					continue;

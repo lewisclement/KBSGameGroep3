@@ -47,7 +47,7 @@ namespace KBSGame
         /// Method checks if the user has clicked on the top or bottom button.
         /// </summary>
         /// <param name="mousePos"></param>
-        public override void setMouseClick(Point mousePos)
+		public override void setMouseClick(Point mousePos, bool leftClick)
         {
 			mousePos = scaleToDrawRatio (mousePos);
             //The two parameters for the buttons, clicking inbetween gives a respond back.
@@ -78,7 +78,7 @@ namespace KBSGame
         /// hoverPos gives another method the value to change colors when the mouse hovers within the parameters.
         /// </summary>
         /// <param name="mousePos"></param>
-        public override void setMouseHover(Point mousePos)
+		public override void setMouseHover(Point mousePos)
         {
 			mousePos = scaleToDrawRatio (mousePos);
             if (mousePos.X < xRes / 2 - width / 2 || mousePos.X > xRes / 2 + width / 2)

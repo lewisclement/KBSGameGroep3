@@ -84,7 +84,7 @@ namespace KBSGame
         /// This method checks where the mouse has been clicked on the screen, based on that a certain menu gets opened.
         /// </summary>
         /// <param name="mousePos"></param>
-		public override void setMouseClick(Point mousePos)
+		public override void setMouseClick(Point mousePos, bool leftClick)
         {
 			mousePos = scaleToDrawRatio (mousePos);
 			if (mousePos.X > width)
