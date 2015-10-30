@@ -14,7 +14,7 @@ namespace KBSGame
 		public Peerbomb(PointF location, Byte height = 50)
 			: base(location, height, true, 8, 0.6f)
         {
-
+			spriteID = (int)SPRITES.peerbomb;
         }
     }
 }
