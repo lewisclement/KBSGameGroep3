@@ -20,7 +20,7 @@ namespace XmlReadAndWriteTest
         {
             // initialise levelFolder
             StaticVariables.execFolder = AppDomain.CurrentDomain.BaseDirectory;
-            StaticVariables.levelFolder = StaticVariables.execFolder + "/worlds";
+            StaticVariables.levelFolder = StaticVariables.execFolder;
             // create world
             this.w = new World(10, 10);
             // fill world
