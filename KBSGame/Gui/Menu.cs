@@ -109,7 +109,7 @@ namespace KBSGame
 					changeState (STATE.editor);
 					break;
                 case 2: //When you press on help
-                    
+                        openHelp();
                     break;
 				case 3: //When you press on quit
 					Application.Exit ();
@@ -123,7 +123,10 @@ namespace KBSGame
 					StaticVariables.controller.disableModalGui ();
 					setActive (false);
 					break;
-				case 2:
+                case 1: //When you press on help
+                        openHelp();
+                        break;
+                    case 2:
 					StaticVariables.controller.disableModalGui ();
 					changeState (STATE.main);
 					break;
@@ -136,7 +139,8 @@ namespace KBSGame
 					setActive (false);
 					break;
 				case 1:
-					break;
+                        openHelp();
+                        break;
 				case 2:
 					editorGui.setActive (false);
 					changeState (STATE.main);

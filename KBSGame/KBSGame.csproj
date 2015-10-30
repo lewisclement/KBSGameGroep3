@@ -70,6 +70,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\Gebruikershandleiding Monkey Madness.pdf" />
     <None Include="bin\Release\grass_top.png" />
     <None Include="bin\Release\sand.png" />
     <None Include="bin\Release\water_still.png" />
