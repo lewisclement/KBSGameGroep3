@@ -130,7 +130,7 @@ namespace KBSGame
 		}
 
         //Reaction on Collision.
-		public virtual void onCollision()
+		public virtual void onCollision(Entity e = null)
         {
 		}
 	}

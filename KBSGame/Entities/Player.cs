@@ -50,7 +50,7 @@ namespace KBSGame
             {
                 if(sender.checkCollision(this, entities[i]) && entities[i].getType() != ENTITIES.player)
                 {
-                    entities[i].onCollision();
+                    entities[i].onCollision(this);
                 }
             }            
         }

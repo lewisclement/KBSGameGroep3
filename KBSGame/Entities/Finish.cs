@@ -16,9 +16,10 @@ namespace KBSGame
 
 		}
 
-        public override void onCollision()
+        public override void onCollision(Entity e)
         {
-			StaticVariables.controller.finish ();
+            if(e is Player)
+			    StaticVariables.controller.finish ();
         }
 	}
 }

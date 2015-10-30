@@ -10,6 +10,7 @@ namespace KBSGame
     public class Enemy : Entity
     {
 		static int radius = 5;
+        private bool IsAlive = true;
 
         public Enemy(PointF location, Byte height = 50, bool solid = true, Byte depth = 8, float boundingBox = 0.6f)
             : base(ENTITIES.enemy, location, (int)SPRITES.tiki1, solid, height, depth, boundingBox)
@@ -17,8 +18,9 @@ namespace KBSGame
 
         }
 
-        public override void onCollision()
+        public override void onCollision(Entity e)
         {
+            if (!IsAlive) return;
             StaticVariables.controller.gameover();
         }
 
@@ -26,6 +28,7 @@ namespace KBSGame
 		{
 			PointF player = StaticVariables.world.getPlayer ().getLocation();
 
+		    if (!IsAlive) return;
 			PointF relativeLocation = new PointF (0.0f, 0.0f);
 			if (player.X > location.X - radius && player.X < location.X + radius) {
 				if (player.X > location.X)
@@ -49,7 +52,8 @@ namespace KBSGame
 
 		private void move(PointF relativeLocation) 
 		{
-			World world = StaticVariables.world;
+            if (!IsAlive) return;
+            World world = StaticVariables.world;
 
 			float moveLocationX = location.X + relativeLocation.X;
 			float moveLocationY = location.Y + relativeLocation.Y;
@@ -58,7 +62,7 @@ namespace KBSGame
 			TerrainTile targetTile = world.getTerraintile (targetPoint);
 
 			if (world.checkCollision (this, StaticVariables.world.getPlayer ())) {
-				onCollision ();
+				onCollision(this);
 			}
 
 			// If terrain contains solid objects OR if tile has no walkable entity on a non-walkable tile
@@ -75,9 +79,14 @@ namespace KBSGame
 			{
 				if(world.checkCollision(this, entities[i]) && entities[i].getType() != ENTITIES.enemy)
 				{
-					entities[i].onCollision();
+					entities[i].onCollision(this);
 				}
 			}
 		}
+
+        public void Die()
+        {
+            IsAlive = false;
+        }
     }
 }
