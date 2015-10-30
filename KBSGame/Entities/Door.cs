@@ -16,17 +16,35 @@ namespace KBSGame.Entities
             : base(ENTITIES.door, location, (int)SPRITES.door_closed, solid, height, depth, boundingBox)
         {
             Doorid = DoorCount++;
+			if (Doorid == 1)
+				spriteID = (int)SPRITES.door_closed2;
+			if (Doorid == 2)
+				spriteID = (int)SPRITES.door_closed3;
+			if (Doorid == 3)
+				spriteID = (int)SPRITES.door_closed4;
         }
 
         public void UnlockDoor()
         {
             spriteID = (int)SPRITES.door_opened;
+			if (Doorid == 1)
+				spriteID = (int)SPRITES.door_opened2;
+			if (Doorid == 2)
+				spriteID = (int)SPRITES.door_opened3;
+			if (Doorid == 3)
+				spriteID = (int)SPRITES.door_opened4;
             setSolid(false);
         }
 
         public void LockDoor()
         {
             spriteID = (int)SPRITES.door_closed;
+			if (Doorid == 1)
+				spriteID = (int)SPRITES.door_closed2;
+			if (Doorid == 2)
+				spriteID = (int)SPRITES.door_closed3;
+			if (Doorid == 3)
+				spriteID = (int)SPRITES.door_closed4;
             setSolid(true);
         }
 

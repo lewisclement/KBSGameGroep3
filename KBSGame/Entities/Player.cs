@@ -74,7 +74,7 @@ namespace KBSGame
             // Get a list with nonSolid entities on terrain tile and filter for bananas or keys
 	        List<Entity> EntitiesOnTile =
 	            w.getEntitiesOnTerrainTile(getLocation(), true)
-	                .Where(e => e.getSpriteID() == (int) SPRITES.banana || e.getSpriteID() == (int) SPRITES.key)
+					.Where(e => e.getType() == ENTITIES.fruit || e.getType() == ENTITIES.key)
 	                .ToList();
             // If there's nothing in the list of entities, return;
 	        if (EntitiesOnTile.Count == 0) return;

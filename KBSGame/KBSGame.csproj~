@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{65872672-5274-4A12-88EC-F257192D894B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>KBSGame</RootNamespace>
+    <AssemblyName>KBSGame</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Compile Include="Engine\Controller.cs" />
+    <Compile Include="Entities\Door.cs" />
+    <Compile Include="Entities\Enemy.cs" />
+    <Compile Include="Entities\Trap.cs" />
+    <Compile Include="Gui\GameOverMenu.cs" />
+    <Compile Include="Entities\Finish.cs" />
+    <Compile Include="Gui\Gui.cs" />
+    <Compile Include="Entities\Item.cs" />
+    <Compile Include="Entities\Key.cs" />
+    <Compile Include="Gui\GuiInventory.cs" />
+    <Compile Include="Gui\Menu.cs" />
+    <Compile Include="Engine\DrawEngine.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Serialize.cs" />
+    <Compile Include="Engine\Sprite.cs" />
+    <Compile Include="Engine\StaticVariables.cs" />
+    <Compile Include="Engine\TerrainTile.cs" />
+    <Compile Include="Engine\World.cs" />
+    <Compile Include="Entities\Plant.cs" />
+    <Compile Include="Engine\LevelReader.cs" />
+    <Compile Include="Gui\FinishMenu.cs" />
+    <Compile Include="Engine\LevelWriter.cs" />
+    <Compile Include="Gui\EditorGui.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Release\grass_top.png" />
+    <None Include="bin\Release\sand.png" />
+    <None Include="bin\Release\water_still.png" />
+    <None Include="bin\Release\dirt.png" />
+    <None Include="bin\Release\sapling1.png" />
+    <None Include="bin\Release\waterlily.png" />
+    <None Include="bin\Release\tallgrass.png" />
+    <None Include="bin\Release\sapling2.png" />
+    <None Include="bin\Release\banana.png" />
+    <None Include="bin\Debug\worlds\mainmenu.xml" />
+    <None Include="bin\Debug\worlds\testworld.xml" />
+    <None Include="bin\Debug\sprites\banana.png" />
+    <None Include="bin\Debug\sprites\berrybush.png" />
+    <None Include="bin\Debug\sprites\dirt.png" />
+    <None Include="bin\Debug\sprites\grass_top.png" />
+    <None Include="bin\Debug\sprites\sand.png" />
+    <None Include="bin\Debug\sprites\sapling1.png" />
+    <None Include="bin\Debug\sprites\sapling2.png" />
+    <None Include="bin\Debug\sprites\tallgrass.png" />
+    <None Include="bin\Debug\sprites\trap_closed.png" />
+    <None Include="bin\Debug\sprites\water_still.png" />
+    <None Include="bin\Debug\sprites\waterlily.png" />
+    <None Include="bin\Debug\sprites\sandstone.png" />
+    <None Include="bin\Debug\sprites\red_sand.png" />
+    <None Include="bin\Debug\sprites\clay.png" />
+    <None Include="bin\Debug\sprites\sapling_jungle.png" />
+    <None Include="bin\Debug\sprites\sapling_spruce.png" />
+    <None Include="bin\Debug\sprites\sapling_acacia.png" />
+    <None Include="bin\Debug\sprites\sapling_birch.png" />
+    <None Include="bin\Debug\sprites\sapling_oak.png" />
+    <None Include="bin\Debug\sprites\sapling_roofed_oak.png" />
+    <None Include="bin\Debug\sprites\brick.png" />
+    <None Include="bin\Debug\sprites\stone_diorite.png" />
+    <None Include="bin\Debug\sprites\stone_granite.png" />
+    <None Include="bin\Debug\sprites\flower_dandelion.png" />
+    <None Include="bin\Debug\sprites\flower_oxeye_daisy.png" />
+    <None Include="bin\Debug\sprites\planks_birch.png" />
+    <None Include="bin\Debug\sprites\stonebrick.png" />
+    <None Include="bin\Debug\sprites\stone.png" />
+    <None Include="bin\Debug\sprites\wheat_stage_7.png" />
+    <None Include="bin\Debug\sprites\carrots_stage_0.png" />
+    <None Include="bin\Debug\sprites\carrots_stage_1.png" />
+    <None Include="bin\Debug\sprites\carrots_stage_2.png" />
+    <None Include="bin\Debug\sprites\carrots_stage_3.png" />
+    <None Include="bin\Debug\sprites\flower_blue_orchid.png" />
+    <None Include="bin\Debug\sprites\flower_tulip_orange.png" />
+    <None Include="bin\Debug\sprites\flower_tulip_red.png" />
+    <None Include="bin\Debug\sprites\flower_tulip_pink.png" />
+    <None Include="bin\Debug\sprites\flower_tulip_white.png" />
+    <None Include="bin\Debug\sprites\flower_houstonia.png" />
+    <None Include="bin\Debug\sprites\farmland_wet.png" />
+    <None Include="bin\Debug\sprites\deadbush.png" />
+    <None Include="bin\Debug\sprites\flower_rose.png" />
+    <None Include="bin\Debug\sprites\flower_allium.png" />
+    <None Include="bin\Debug\sprites\folder.png" />
+    <None Include="bin\Debug\sprites\save.png" />
+    <None Include="bin\Debug\sprites\icon_world.png" />
+    <None Include="bin\Debug\worlds\fatsoenlijkogendescenario.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\sprites\door_opened.png" />
+    <Content Include="bin\Debug\sprites\door_closed.png" />
+    <Content Include="bin\Debug\sprites\peerbomb.png" />
+    <Content Include="bin\Debug\sprites\player.png" />
+    <Content Include="bin\Debug\sprites\tiki.png" />
+    <Content Include="bin\Debug\sprites\tiki2.png" />
+<<<<<<< HEAD
+=======
+    <Content Include="bin\Debug\text\editor_entitytab.png" />
+    <Content Include="bin\Debug\text\editor_objecttab.png" />
+    <Content Include="bin\Debug\text\editor_tiletab.png" />
+    <Content Include="bin\Debug\text\editor_worldtab.png" />
+>>>>>>> Stash
+    <Content Include="bin\Debug\text\finished.png" />
+    <Content Include="bin\Debug\text\finished_home.png" />
+    <Content Include="bin\Debug\text\finished_nextlevel.png" />
+    <Content Include="bin\Debug\text\gameover_quit.png" />
+    <Content Include="bin\Debug\text\gameover_try_again.png" />
+    <Content Include="bin\Debug\text\game_over.png" />
+    <Content Include="bin\Debug\text\menu_back.png" />
+    <Content Include="bin\Debug\text\menu_help.png" />
+    <Content Include="bin\Debug\text\menu_quit.png" />
+    <Content Include="bin\Debug\text\menu_settings.png" />
+    <Content Include="bin\Debug\text\menu_start.png" />
+    <Content Include="bin\Debug\worlds\DoorsTestFinish.xml" />
+    <Content Include="bin\Release\finish.png" />
+    <Content Include="bin\Release\trap_closed.png" />
+    <Content Include="bin\Release\trap_opened.png" />
+    <Content Include="bin\Debug\sprites\finish.png" />
+    <Content Include="bin\Debug\sprites\gold_key.png" />
+    <Content Include="bin\Debug\sprites\trap_opened.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\flowers\" />
+    <Folder Include="Entities\saplings\" />
+  </ItemGroup>
+  <ItemGroup />
+</Project>

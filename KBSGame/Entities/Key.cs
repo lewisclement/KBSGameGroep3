@@ -19,6 +19,12 @@ namespace KBSGame
             : base(ENTITIES.key, location, (int) SPRITES.key, solid, height, drawOrder, boundingBox)
         {
             Keyid = KeyCount++;
+			if (Keyid == 1)
+				spriteID = (int)SPRITES.key2;
+			if (Keyid == 2)
+				spriteID = (int)SPRITES.key3;
+			if (Keyid == 3)
+				spriteID = (int)SPRITES.key4;
         }
 
         //Simple getter to get the Key ID which connects to a certain doorID.

@@ -1,0 +1,6 @@
+/home/lewis/Projects/lewisclement/KBSGameGroep321.git/KBSGame/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/lewis/Projects/lewisclement/KBSGameGroep321.git/KBSGame/obj/x86/Debug/KBSGame.MainWindow.resources
+/home/lewis/Projects/lewisclement/KBSGameGroep321.git/KBSGame/bin/Debug/KBSGame.exe.mdb
+/home/lewis/Projects/lewisclement/KBSGameGroep321.git/KBSGame/bin/Debug/KBSGame.exe
+/home/lewis/Projects/lewisclement/KBSGameGroep321.git/KBSGame/obj/x86/Debug/KBSGame.exe
+/home/lewis/Projects/lewisclement/KBSGameGroep321.git/KBSGame/obj/x86/Debug/KBSGame.exe.mdb
