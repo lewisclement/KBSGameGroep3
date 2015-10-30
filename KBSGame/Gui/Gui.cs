@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace KBSGame
 {
@@ -71,6 +72,17 @@ namespace KBSGame
 
 		}
 
+        public void openHelp()
+        {
+            try
+            {
+                System.Diagnostics.Process.Start(StaticVariables.execFolder + @"/Gebruikershandleiding Monkey Madness.pdf");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         /// <summary>
         /// Sets the input.
         /// </summary>
