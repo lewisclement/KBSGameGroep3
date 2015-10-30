@@ -13,6 +13,7 @@ namespace KBSGame.gui
     {
         World map;
         FileInfo[] files;
+
         public FinishMenu(int ID, int ScreenresX, int ScreenresY, float drawRatio, World map) : base(ID, ScreenresX, ScreenresY, drawRatio)
         {
             this.map = map;
@@ -60,13 +61,28 @@ namespace KBSGame.gui
 				StaticVariables.world.loadLevel ("mainmenu");
 				((Menu) StaticVariables.renderer.getGui ((int)GUI.def)).mainmenu ();
                     break;
-                case 1:
-                    DirectoryInfo d = new DirectoryInfo(StaticVariables.levelFolder);
-                    files = d.GetFiles("*.xml");
-                    setActive(false);   
-                    break;
-                default:
-                    break;
+			case 1:
+				DirectoryInfo d = new DirectoryInfo (StaticVariables.levelFolder);
+				files = d.GetFiles ("*.xml");
+				String worldName = StaticVariables.world.getWorldName ();
+
+				int index = 0;
+				foreach (FileInfo file in files) {
+					if (worldName == file.Name.Substring (0, file.Name.Length - 4)) {
+						String filenameNext = files [index + 1].Name;
+
+						if(file != null)
+							StaticVariables.world.loadLevel (filenameNext.Substring(0, filenameNext.Length - 4));
+
+						break;
+					}
+					index++;
+				}
+
+                setActive(false);   
+                break;
+            default:
+                break;
             }
         }
         // 

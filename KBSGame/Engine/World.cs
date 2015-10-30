@@ -158,6 +158,12 @@ namespace KBSGame
 
 		}
 
+		public String getWorldName()
+		{
+			String name = Path.GetFileName (currentLevelPath);
+			return name.Substring (0, name.Length - 4);;
+		}
+
 		/// <summary>
 		/// Gets the player.
 		/// </summary>
