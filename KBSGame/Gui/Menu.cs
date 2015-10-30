@@ -346,7 +346,7 @@ namespace KBSGame
 		{
             //If you are on the main menu, it draws a part of this map onto the background. (Our easter egg)
 			if (state == STATE.main) {
-				world.loadLevel ("main");
+				world.loadLevel ("mainmenu");
 				world.setFocusEntity(world.getEntitiesByType (ENTITIES.plant)[35]); //Sets focus on a plant on the map.
 			}
 			StaticVariables.currentState = state;
