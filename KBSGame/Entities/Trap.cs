@@ -12,7 +12,7 @@ namespace KBSGame
     /// </summary>
     public class Trap : Entity
     {
-        public Trap(PointF location, int spriteID, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 1.0f)
+        public Trap(PointF location, int spriteID, Byte height = 50, bool solid = false, Byte depth = 8, float boundingBox = 0.7f)
 			: base(ENTITIES.trap, location, spriteID, solid, height, depth, boundingBox)
 		{
         }
