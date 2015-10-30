@@ -64,7 +64,6 @@ namespace XmlReadAndWriteTest
                 Assert.AreEqual(this.before[i].getID(), this.after[i].getID());
                 Assert.AreEqual(this.before[i].getSpriteID(), this.after[i].getSpriteID());
                 Assert.AreEqual(this.before[i].getLocation(), this.after[i].getLocation());
-                Assert.AreEqual(this.before[i].getType(), this.after[i].getType());
             }
         }
     }
