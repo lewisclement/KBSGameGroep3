@@ -625,8 +625,8 @@ namespace KBSGame
 			entityList.Add (new Entity (ENTITIES.hut, new PointF (0, 0), (int)SPRITES.hut2, false));
 			entityList.Add (new Entity (ENTITIES.hut, new PointF (0, 0), (int)SPRITES.hut3, false));
 			entityList.Add (new Entity (ENTITIES.hut, new PointF (0, 0), (int)SPRITES.hut4, false));
-			entityList.Add (new Entity (ENTITIES.rock, new PointF (0, 0), (int)SPRITES.rock, false));
-			entityList.Add (new Entity (ENTITIES.rock, new PointF (0, 0), (int)SPRITES.mountain, false));
+			entityList.Add (new Entity (ENTITIES.rock, new PointF (0, 0), (int)SPRITES.rock, true));
+			entityList.Add (new Entity (ENTITIES.rock, new PointF (0, 0), (int)SPRITES.mountain, true));
 			entityList.Add (new Entity (ENTITIES.def, new PointF (0, 0), (int)SPRITES.cage, false));
 			entityList.Add (new Entity (ENTITIES.wood, new PointF (0, 0), (int)SPRITES.logpile, false));
         }

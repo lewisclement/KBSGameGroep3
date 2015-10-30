@@ -69,10 +69,13 @@ namespace KBSGame.gui
 				int index = 0;
 				foreach (FileInfo file in files) {
 					if (worldName == file.Name.Substring (0, file.Name.Length - 4)) {
-						String filenameNext = files [index + 1].Name;
-
-						if(file != null)
-							StaticVariables.world.loadLevel (filenameNext.Substring(0, filenameNext.Length - 4));
+						if (files.Length > index + 1) {
+							String filenameNext = files [index + 1].Name;
+							StaticVariables.world.loadLevel (filenameNext.Substring (0, filenameNext.Length - 4));
+						} else {
+							StaticVariables.world.loadLevel ("mainmenu");
+							((Menu)StaticVariables.renderer.getGui ((int)GUI.def)).mainmenu ();
+						}
 
 						break;
 					}
